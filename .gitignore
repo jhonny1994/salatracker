@@ -36,5 +36,11 @@ ios/.symlinks/
 ios/Flutter/Flutter.framework/
 ios/Flutter/Flutter.podspec
 
+# Flutter metadata
+.metadata
+
+# Opencode skills
+.opencode/
+
 # Secrets
 .env
