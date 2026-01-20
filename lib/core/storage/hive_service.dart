@@ -1,0 +1,62 @@
+import 'package:hive_ce_flutter/hive_flutter.dart';
+import 'package:salat_tracker/features/prayer/domain/models/prayer_day.dart';
+import 'package:salat_tracker/features/prayer/domain/models/prayer_entry.dart';
+import 'package:salat_tracker/features/prayer/domain/models/prayer_type.dart';
+import 'package:salat_tracker/features/settings/domain/models/app_theme_mode.dart';
+import 'package:salat_tracker/features/settings/domain/models/settings.dart';
+
+class HiveService {
+  static const settingsBoxName = 'settings';
+  static const prayerDaysBoxName = 'prayer_days';
+  static const metaBoxName = 'meta';
+  static const schemaVersionKey = 'schema_version';
+  static const schemaVersion = 1;
+
+  static Future<void> initialize() async {
+    await Hive.initFlutter();
+    _registerAdapters();
+    final metaBox = await Hive.openBox<int>(metaBoxName);
+    await _ensureSchemaVersion(metaBox);
+    await Hive.openBox<Settings>(settingsBoxName);
+    await Hive.openBox<PrayerDay>(prayerDaysBoxName);
+  }
+
+  static void _registerAdapters() {
+    if (!Hive.isAdapterRegistered(PrayerTypeAdapter().typeId)) {
+      Hive.registerAdapter(PrayerTypeAdapter());
+    }
+    if (!Hive.isAdapterRegistered(PrayerEntryAdapter().typeId)) {
+      Hive.registerAdapter(PrayerEntryAdapter());
+    }
+    if (!Hive.isAdapterRegistered(PrayerDayAdapter().typeId)) {
+      Hive.registerAdapter(PrayerDayAdapter());
+    }
+    if (!Hive.isAdapterRegistered(AppThemeModeAdapter().typeId)) {
+      Hive.registerAdapter(AppThemeModeAdapter());
+    }
+    if (!Hive.isAdapterRegistered(SettingsAdapter().typeId)) {
+      Hive.registerAdapter(SettingsAdapter());
+    }
+  }
+
+  static Future<void> _ensureSchemaVersion(Box<int> metaBox) async {
+    final storedVersion = metaBox.get(schemaVersionKey);
+    if (storedVersion == null) {
+      await metaBox.put(schemaVersionKey, schemaVersion);
+      return;
+    }
+    if (storedVersion != schemaVersion) {
+      await _migrateSchema(storedVersion, schemaVersion);
+      await metaBox.put(schemaVersionKey, schemaVersion);
+    }
+  }
+
+  static Future<void> _migrateSchema(int fromVersion, int toVersion) async {
+    for (var version = fromVersion; version < toVersion; version++) {
+      switch (version) {
+        case 0:
+          break;
+      }
+    }
+  }
+}

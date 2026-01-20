@@ -41,6 +41,7 @@ ios/Flutter/Flutter.podspec
 
 # Opencode skills
 .opencode/
+.agent/
 
 # Secrets
 .env

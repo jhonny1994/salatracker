@@ -1,28 +1,28 @@
 # Task List - سجل الصلاة
 
 ## 1) Project Initialization
-- Create Flutter project and lock package name (com.carbodex.salat_tracker)
-- Configure very_good_analysis and analysis rules
-- Set up feature-first folder structure
-- Add Riverpod + Freezed + build_runner
-- Establish navigation shell (bottom NavigationBar: Today, Calendar, Settings)
-- Set app version to 0.1.0+1 and minSdk 23
+- [x] Create Flutter project and lock package name (com.carbodex.salat_tracker)
+- [x] Configure very_good_analysis and analysis rules
+- [x] Set up feature-first folder structure
+- [x] Add Riverpod + Freezed + build_runner
+- [x] Establish navigation shell (bottom NavigationBar: Today, Calendar, Settings)
+- [x] Set app version to 0.1.0+1 and minSdk 23
 
 ## 2) Localization and Typography
-- Configure flutter_intl + intl_utils + Localizely
-- Use ARB naming: intl_en.arb, intl_ar.arb, intl_fr.arb
-- Derive supported locales from generated S.delegate
-- Add locale_names and map supportedLocales to localized display names
-- Bundle Cairo font assets and set as default TextTheme
-- Set display names: AR "سجل الصلاة", EN "Salat Tracker" (fallback for all others)
-- Set prayer names: AR "الفجر، الظهر، العصر، المغرب، العشاء"; EN "Fajr, Dhuhr, Asr, Maghrib, Isha"
-- Verify RTL Directionality and bidi text handling
+- [x] Configure flutter_intl + intl_utils + Localizely
+- [x] Use ARB naming: intl_en.arb, intl_ar.arb, intl_fr.arb
+- [x] Derive supported locales from generated S.delegate
+- [x] Add locale_names and map supportedLocales to localized display names
+- [x] Bundle Cairo font assets and set as default TextTheme
+- [x] Set display names: AR "سجل الصلاة", EN "Salat Tracker" (fallback for all others)
+- [x] Set prayer names: AR "الفجر، الظهر، العصر، المغرب، العشاء"; EN "Fajr, Dhuhr, Asr, Maghrib, Isha"
+- [x] Verify RTL Directionality and bidi text handling
 
 ## 3) Design System and Theme
-- Implement Material 3 theme with tokenized ColorScheme
-- Enforce light/dark parity in ThemeData
-- Apply design system component defaults (Card, ListTile, FilledButton)
-- Add status chip styles (complete/partial/not logged)
+- [x] Implement Material 3 theme with tokenized ColorScheme
+- [x] Enforce light/dark parity in ThemeData
+- [x] Apply design system component defaults (Card, ListTile, FilledButton)
+- [x] Add status chip styles (complete/partial/not logged)
 
 ## 4) Onboarding Flow
 - First-launch flow with prayer time setup
@@ -84,10 +84,10 @@
 - Calendar week start (default Sunday)
 
 ## 12) Analytics and Crash Reporting
-- Add sentry_flutter
-- Add flutter_dotenv and .env.example with SENTRY_DSN
-- Configure DSN per build flavor using env
-- PII scrubbing and minimal breadcrumbs
+- [x] Add sentry_flutter
+- [x] Add flutter_dotenv and .env.example with SENTRY_DSN
+- [x] Configure DSN per build flavor using env
+- [x] PII scrubbing and minimal breadcrumbs
 
 ## 13) CI/CD and Signing
 - GitHub Actions lint + tests
