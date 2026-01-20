@@ -1,12 +1,12 @@
 # Product Requirements Document - سجل الصلاة
 
 ## Summary
-سجل الصلاة is an offline-first prayer tracking app that gamifies daily commitment to the five prayers. It provides streaks, points, reminders, and a calendar history. The app is Arabic-first (RTL) with EN/FR support, designed with a calm, respectful UI.
+سجل الصلاة is an offline-first prayer tracking app that gamifies daily commitment to the five prayers. It provides streaks, points, reminders, and a calendar history. The app is Arabic-first (RTL) with English fallback and French UI strings, designed with a calm, respectful UI.
 
 ## App Identity
 - Package ID: com.carbodex.salat_tracker
-- Display names: AR "سجل الصلاة", EN/FR "Salat Tracker"
-- Prayer names: AR "الفجر، الظهر، العصر، المغرب، العشاء"; EN/FR "Fajr, Dhuhr, Asr, Maghrib, Isha"
+- Display names: AR "سجل الصلاة", EN "Salat Tracker" (fallback for all others)
+- Prayer names: AR "الفجر، الظهر، العصر، المغرب، العشاء"; EN "Fajr, Dhuhr, Asr, Maghrib, Isha"
 
 ## Goals
 - Increase daily prayer completion consistency

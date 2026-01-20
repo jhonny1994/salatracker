@@ -10,10 +10,12 @@
 
 ## 2) Localization and Typography
 - Configure flutter_intl + intl_utils + Localizely
+- Use ARB naming: intl_en.arb, intl_ar.arb, intl_fr.arb
+- Derive supported locales from generated S.delegate
 - Add locale_names and map supportedLocales to localized display names
 - Bundle Cairo font assets and set as default TextTheme
-- Set display names: AR "سجل الصلاة", EN/FR "Salat Tracker"
-- Set prayer names: AR "الفجر، الظهر، العصر، المغرب، العشاء"; EN/FR "Fajr, Dhuhr, Asr, Maghrib, Isha"
+- Set display names: AR "سجل الصلاة", EN "Salat Tracker" (fallback for all others)
+- Set prayer names: AR "الفجر، الظهر، العصر، المغرب، العشاء"; EN "Fajr, Dhuhr, Asr, Maghrib, Isha"
 - Verify RTL Directionality and bidi text handling
 
 ## 3) Design System and Theme

@@ -43,7 +43,6 @@ dev_dependencies:
   riverpod_generator: ^4.0.0+1
   very_good_analysis: ^10.0.0
 
-
 flutter:
   uses-material-design: true
 
@@ -61,4 +60,8 @@ flutter:
         - asset: assets/fonts/Cairo-Bold.ttf
           weight: 700
 
-
+flutter_intl:
+  enabled: true
+  main_locale: ar
+  arb_dir: lib/core/localization/gen/l10n
+  output_dir: lib/core/localization/gen/generated

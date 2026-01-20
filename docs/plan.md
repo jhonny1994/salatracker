@@ -1,13 +1,13 @@
 # Project Plan - سجل الصلاة
 
 ## Overview
-Offline-first Flutter app to gamify daily prayer completion with streaks, points, calendar history, and reminders. Arabic-first (RTL) with Cairo font, EN/FR available. Android-first, iOS-ready.
+Offline-first Flutter app to gamify daily prayer completion with streaks, points, calendar history, and reminders. Arabic-first (RTL) with Cairo font and English fallback for all other locales. Android-first, iOS-ready.
 
 ## Decisions Locked
 - App name: سجل الصلاة
-- App display names: AR "سجل الصلاة", EN/FR "Salat Tracker"
-- Prayer names: AR "الفجر، الظهر، العصر، المغرب، العشاء"; EN/FR "Fajr, Dhuhr, Asr, Maghrib, Isha"
-- Default locale: Arabic (RTL), EN/FR available
+- App display names: AR "سجل الصلاة", EN "Salat Tracker" (fallback for all others)
+- Prayer names: AR "الفجر، الظهر، العصر، المغرب، العشاء"; EN "Fajr, Dhuhr, Asr, Maghrib, Isha"
+- Default locale: Arabic (RTL), English fallback for all other locales; UI strings localized in ar/en/fr
 - Font: Cairo bundled locally
 - Architecture: feature-first + clean layers
 - State/models: Riverpod + Freezed

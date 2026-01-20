@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:salat_tracker/core/core.dart';
+import 'package:salat_tracker/core/localization/gen/generated/l10n.dart' show S;
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 Future<void> main() async {
@@ -22,13 +24,25 @@ class SalatTrackerApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp.router(
       title: 'Salat Tracker',
-      home: Scaffold(
-        body: Center(
-          child: Text('Salat Tracker'),
-        ),
-      ),
+      theme: AppTheme.light(),
+      darkTheme: AppTheme.dark(),
+      routerConfig: appRouter,
+      localizationsDelegates: AppLocalizationDelegate.localizationsDelegates,
+      supportedLocales: supportedLocales,
+      localeResolutionCallback: (locale, supported) {
+        if (locale == null) {
+          return const Locale('ar');
+        }
+        for (final supportedLocale in supported) {
+          if (supportedLocale.languageCode == locale.languageCode) {
+            return supportedLocale;
+          }
+        }
+        return const Locale('en');
+      },
+      onGenerateTitle: (context) => S.of(context).appTitle,
     );
   }
 }
