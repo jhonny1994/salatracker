@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_ce/hive.dart';
-import 'package:salat_tracker/features/prayer/domain/models/prayer_type.dart';
-import 'package:salat_tracker/features/settings/domain/models/app_theme_mode.dart';
+import 'package:salat_tracker/features/prayer/prayer.dart';
+import 'package:salat_tracker/features/settings/settings.dart';
 
 part 'settings.freezed.dart';
 part 'settings.g.dart';

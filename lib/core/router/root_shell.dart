@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:salat_tracker/core/localization/gen/generated/l10n.dart';
+import 'package:salat_tracker/core/core.dart';
 
 class RootShell extends StatelessWidget {
   const RootShell({required this.navigationShell, super.key});

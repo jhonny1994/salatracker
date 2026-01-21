@@ -1,6 +1,4 @@
-import 'package:salat_tracker/features/prayer/data/datasources/prayer_local_data_source.dart';
-import 'package:salat_tracker/features/prayer/domain/models/prayer_day.dart';
-import 'package:salat_tracker/features/prayer/domain/repositories/prayer_repository.dart';
+import 'package:salat_tracker/features/prayer/prayer.dart';
 
 class PrayerRepositoryImpl implements PrayerRepository {
   PrayerRepositoryImpl(this._localDataSource);

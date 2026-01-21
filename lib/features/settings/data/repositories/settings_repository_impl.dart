@@ -1,6 +1,4 @@
-import 'package:salat_tracker/features/settings/data/datasources/settings_local_data_source.dart';
-import 'package:salat_tracker/features/settings/domain/models/settings.dart';
-import 'package:salat_tracker/features/settings/domain/repositories/settings_repository.dart';
+import 'package:salat_tracker/features/settings/settings.dart';
 
 class SettingsRepositoryImpl implements SettingsRepository {
   SettingsRepositoryImpl(this._localDataSource);

@@ -1,5 +1,5 @@
 import 'package:hive_ce/hive.dart';
-import 'package:salat_tracker/features/prayer/domain/models/prayer_day.dart';
+import 'package:salat_tracker/features/prayer/prayer.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
 class PrayerLocalDataSource {

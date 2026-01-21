@@ -20,15 +20,40 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
-  static String m0(count) => "${count} من 5 صلوات مسجلة";
+  static String m0(time) => "سُجِّل في ${time}";
 
-  static String m1(count) => "${count} نقطة";
+  static String m1(count) => "${count} من 5 صلوات مسجلة";
 
-  static String m2(count) => "سلسلة ${count} يوم";
+  static String m2(count) => "${count} نقطة";
+
+  static String m3(count) => "سلسلة ${count} يوم";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "appTitle": MessageLookupByLibrary.simpleMessage("سجل الصلاة"),
+    "calendarCompleted": MessageLookupByLibrary.simpleMessage("مكتمل"),
+    "calendarLoggedAt": m0,
+    "calendarNoData": MessageLookupByLibrary.simpleMessage(
+      "لا توجد صلوات مسجلة لهذا اليوم",
+    ),
+    "calendarNoPrayers": MessageLookupByLibrary.simpleMessage(
+      "لا توجد صلوات مسجلة",
+    ),
+    "calendarPoints": MessageLookupByLibrary.simpleMessage("النقاط"),
+    "calendarPrayers": MessageLookupByLibrary.simpleMessage("الصلوات"),
+    "calendarStreamRetry": MessageLookupByLibrary.simpleMessage(
+      "سيتم إعادة المحاولة تلقائيًا",
+    ),
+    "errorLoadingCalendar": MessageLookupByLibrary.simpleMessage(
+      "فشل تحميل التقويم",
+    ),
+    "errorLoadingData": MessageLookupByLibrary.simpleMessage(
+      "خطأ في تحميل البيانات",
+    ),
+    "errorLoadingSettings": MessageLookupByLibrary.simpleMessage(
+      "فشل تحميل الإعدادات",
+    ),
+    "errorRetry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
     "navCalendar": MessageLookupByLibrary.simpleMessage("التقويم"),
     "navSettings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
     "navToday": MessageLookupByLibrary.simpleMessage("اليوم"),
@@ -37,7 +62,31 @@ class MessageLookup extends MessageLookupByLibrary {
     "prayerFajr": MessageLookupByLibrary.simpleMessage("الفجر"),
     "prayerIsha": MessageLookupByLibrary.simpleMessage("العشاء"),
     "prayerMaghrib": MessageLookupByLibrary.simpleMessage("المغرب"),
+    "settingsAbout": MessageLookupByLibrary.simpleMessage("حول"),
+    "settingsAppVersion": MessageLookupByLibrary.simpleMessage("إصدار التطبيق"),
+    "settingsAppearance": MessageLookupByLibrary.simpleMessage("المظهر"),
+    "settingsHaptics": MessageLookupByLibrary.simpleMessage("الاهتزاز اللمسي"),
+    "settingsHapticsSubtitle": MessageLookupByLibrary.simpleMessage(
+      "اهتزاز عند التفاعل",
+    ),
+    "settingsLanguage": MessageLookupByLibrary.simpleMessage("اللغة"),
+    "settingsLanguageArabic": MessageLookupByLibrary.simpleMessage("العربية"),
+    "settingsLanguageEnglish": MessageLookupByLibrary.simpleMessage("English"),
+    "settingsLanguageFrench": MessageLookupByLibrary.simpleMessage("Français"),
+    "settingsPreferences": MessageLookupByLibrary.simpleMessage("التفضيلات"),
+    "settingsPrivacyPolicy": MessageLookupByLibrary.simpleMessage(
+      "سياسة الخصوصية",
+    ),
+    "settingsShowPoints": MessageLookupByLibrary.simpleMessage("إظهار النقاط"),
+    "settingsShowPointsSubtitle": MessageLookupByLibrary.simpleMessage(
+      "عرض النقاط في الواجهة",
+    ),
+    "settingsTheme": MessageLookupByLibrary.simpleMessage("السمة"),
+    "settingsThemeDark": MessageLookupByLibrary.simpleMessage("داكن"),
+    "settingsThemeLight": MessageLookupByLibrary.simpleMessage("فاتح"),
+    "settingsThemeSystem": MessageLookupByLibrary.simpleMessage("النظام"),
     "tapToLog": MessageLookupByLibrary.simpleMessage("انقر للتسجيل"),
+    "today": MessageLookupByLibrary.simpleMessage("اليوم"),
     "todayComplete": MessageLookupByLibrary.simpleMessage(
       "جميع الصلوات مكتملة!",
     ),
@@ -47,9 +96,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "todayNone": MessageLookupByLibrary.simpleMessage(
       "لم يتم تسجيل أي صلاة بعد",
     ),
-    "todayPartial": m0,
-    "todayPoints": m1,
+    "todayPartial": m1,
+    "todayPoints": m2,
     "todayProgress": MessageLookupByLibrary.simpleMessage("تقدم اليوم"),
-    "todayStreak": m2,
+    "todayStreak": m3,
   };
 }

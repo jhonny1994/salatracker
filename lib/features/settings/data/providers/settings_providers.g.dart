@@ -104,3 +104,47 @@ final class SettingsRepositoryProvider
 
 String _$settingsRepositoryHash() =>
     r'f6c934ff287aa202ca3f6df8569d18e30ca6c102';
+
+@ProviderFor(SettingsNotifier)
+final settingsProvider = SettingsNotifierProvider._();
+
+final class SettingsNotifierProvider
+    extends $AsyncNotifierProvider<SettingsNotifier, Settings> {
+  SettingsNotifierProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'settingsProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$settingsNotifierHash();
+
+  @$internal
+  @override
+  SettingsNotifier create() => SettingsNotifier();
+}
+
+String _$settingsNotifierHash() => r'415fda7713e34e1c79775b2b7f363ea67f6f94a0';
+
+abstract class _$SettingsNotifier extends $AsyncNotifier<Settings> {
+  FutureOr<Settings> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<AsyncValue<Settings>, Settings>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<Settings>, Settings>,
+              AsyncValue<Settings>,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}

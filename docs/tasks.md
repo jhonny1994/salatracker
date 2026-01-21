@@ -71,13 +71,13 @@
 ## Phase 3: Core UX 🔄
 
 ### Today Screen
-- [/] Today screen UI skeleton
-- [ ] Prayer checklist with toggle
-- [ ] Completion percentage (primary metric)
-- [ ] Streak display (secondary metric)
-- [ ] Points chip (optional display)
-- [ ] Supportive summary copy
-- [ ] Smooth toggle animation (150ms)
+- [x] Today screen UI skeleton
+- [x] Prayer checklist with toggle
+- [x] Completion percentage (primary metric)
+- [x] Streak display (secondary metric)
+- [x] Points chip (optional display)
+- [x] Supportive summary copy
+- [x] Smooth toggle animation (150ms)
 
 ### Calendar
 - [ ] Month view with TableCalendar

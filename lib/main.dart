@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:salat_tracker/core/core.dart';
-import 'package:salat_tracker/core/localization/gen/generated/l10n.dart' show S;
 import 'package:salat_tracker/features/settings/settings.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
@@ -44,7 +44,12 @@ class SalatTrackerApp extends ConsumerWidget {
       darkTheme: AppTheme.dark(),
       themeMode: themeMode,
       routerConfig: router,
-      localizationsDelegates: AppLocalizationDelegate.localizationsDelegates,
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       supportedLocales: supportedLocales,
       locale: localeCode == null ? null : Locale(localeCode),
       localeResolutionCallback: (locale, supported) {

@@ -1,4 +1,4 @@
-import 'package:salat_tracker/features/prayer/domain/models/prayer_day.dart';
+import 'package:salat_tracker/features/prayer/prayer.dart';
 
 class PointsCalculator {
   const PointsCalculator();

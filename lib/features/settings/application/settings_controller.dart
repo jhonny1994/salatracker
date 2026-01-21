@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:salat_tracker/features/settings/data/providers/settings_providers.dart';
-import 'package:salat_tracker/features/settings/domain/models/app_theme_mode.dart';
-import 'package:salat_tracker/features/settings/domain/models/settings.dart';
+import 'package:salat_tracker/features/settings/settings.dart';
 
 part 'settings_controller.g.dart';
 

@@ -1,8 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:salat_tracker/features/prayer/data/providers/prayer_providers.dart';
-import 'package:salat_tracker/features/prayer/domain/models/prayer_day.dart';
-import 'package:salat_tracker/features/prayer/domain/models/prayer_entry.dart';
-import 'package:salat_tracker/features/prayer/domain/models/prayer_type.dart';
+import 'package:salat_tracker/features/prayer/prayer.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
 part 'today_controller.g.dart';

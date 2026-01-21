@@ -20,15 +20,40 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(count) => "${count} of 5 prayers logged";
+  static String m0(time) => "Logged at ${time}";
 
-  static String m1(count) => "${count} points";
+  static String m1(count) => "${count} of 5 prayers logged";
 
-  static String m2(count) => "${count} day streak";
+  static String m2(count) => "${count} points";
+
+  static String m3(count) => "${count} day streak";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "appTitle": MessageLookupByLibrary.simpleMessage("Salat Tracker"),
+    "calendarCompleted": MessageLookupByLibrary.simpleMessage("Completed"),
+    "calendarLoggedAt": m0,
+    "calendarNoData": MessageLookupByLibrary.simpleMessage(
+      "No prayers logged for this day",
+    ),
+    "calendarNoPrayers": MessageLookupByLibrary.simpleMessage(
+      "No prayers logged",
+    ),
+    "calendarPoints": MessageLookupByLibrary.simpleMessage("Points"),
+    "calendarPrayers": MessageLookupByLibrary.simpleMessage("Prayers"),
+    "calendarStreamRetry": MessageLookupByLibrary.simpleMessage(
+      "Stream will retry automatically",
+    ),
+    "errorLoadingCalendar": MessageLookupByLibrary.simpleMessage(
+      "Failed to load calendar",
+    ),
+    "errorLoadingData": MessageLookupByLibrary.simpleMessage(
+      "Error loading data",
+    ),
+    "errorLoadingSettings": MessageLookupByLibrary.simpleMessage(
+      "Failed to load settings",
+    ),
+    "errorRetry": MessageLookupByLibrary.simpleMessage("Retry"),
     "navCalendar": MessageLookupByLibrary.simpleMessage("Calendar"),
     "navSettings": MessageLookupByLibrary.simpleMessage("Settings"),
     "navToday": MessageLookupByLibrary.simpleMessage("Today"),
@@ -37,7 +62,31 @@ class MessageLookup extends MessageLookupByLibrary {
     "prayerFajr": MessageLookupByLibrary.simpleMessage("Fajr"),
     "prayerIsha": MessageLookupByLibrary.simpleMessage("Isha"),
     "prayerMaghrib": MessageLookupByLibrary.simpleMessage("Maghrib"),
+    "settingsAbout": MessageLookupByLibrary.simpleMessage("About"),
+    "settingsAppVersion": MessageLookupByLibrary.simpleMessage("App Version"),
+    "settingsAppearance": MessageLookupByLibrary.simpleMessage("Appearance"),
+    "settingsHaptics": MessageLookupByLibrary.simpleMessage("Haptic Feedback"),
+    "settingsHapticsSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Vibrate on interactions",
+    ),
+    "settingsLanguage": MessageLookupByLibrary.simpleMessage("Language"),
+    "settingsLanguageArabic": MessageLookupByLibrary.simpleMessage("العربية"),
+    "settingsLanguageEnglish": MessageLookupByLibrary.simpleMessage("English"),
+    "settingsLanguageFrench": MessageLookupByLibrary.simpleMessage("Français"),
+    "settingsPreferences": MessageLookupByLibrary.simpleMessage("Preferences"),
+    "settingsPrivacyPolicy": MessageLookupByLibrary.simpleMessage(
+      "Privacy Policy",
+    ),
+    "settingsShowPoints": MessageLookupByLibrary.simpleMessage("Show Points"),
+    "settingsShowPointsSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Display points in UI",
+    ),
+    "settingsTheme": MessageLookupByLibrary.simpleMessage("Theme"),
+    "settingsThemeDark": MessageLookupByLibrary.simpleMessage("Dark"),
+    "settingsThemeLight": MessageLookupByLibrary.simpleMessage("Light"),
+    "settingsThemeSystem": MessageLookupByLibrary.simpleMessage("System"),
     "tapToLog": MessageLookupByLibrary.simpleMessage("Tap to log"),
+    "today": MessageLookupByLibrary.simpleMessage("Today"),
     "todayComplete": MessageLookupByLibrary.simpleMessage(
       "All prayers completed!",
     ),
@@ -45,9 +94,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Keep going, you\'re doing great!",
     ),
     "todayNone": MessageLookupByLibrary.simpleMessage("No prayers logged yet"),
-    "todayPartial": m0,
-    "todayPoints": m1,
+    "todayPartial": m1,
+    "todayPoints": m2,
     "todayProgress": MessageLookupByLibrary.simpleMessage("Today\'s Progress"),
-    "todayStreak": m2,
+    "todayStreak": m3,
   };
 }

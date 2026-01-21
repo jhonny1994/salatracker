@@ -1,9 +1,6 @@
 import 'package:hive_ce_flutter/hive_flutter.dart';
-import 'package:salat_tracker/features/prayer/domain/models/prayer_day.dart';
-import 'package:salat_tracker/features/prayer/domain/models/prayer_entry.dart';
-import 'package:salat_tracker/features/prayer/domain/models/prayer_type.dart';
-import 'package:salat_tracker/features/settings/domain/models/app_theme_mode.dart';
-import 'package:salat_tracker/features/settings/domain/models/settings.dart';
+import 'package:salat_tracker/features/prayer/prayer.dart';
+import 'package:salat_tracker/features/settings/settings.dart';
 
 class HiveService {
   static const settingsBoxName = 'settings';

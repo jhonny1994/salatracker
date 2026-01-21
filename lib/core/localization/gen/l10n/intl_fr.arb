@@ -37,5 +37,41 @@
     }
   },
   "todayEncouragement": "Continuez, vous êtes formidable !",
-  "tapToLog": "Appuyez pour enregistrer"
+  "tapToLog": "Appuyez pour enregistrer",
+  "settingsAppearance": "Apparence",
+  "settingsTheme": "Thème",
+  "settingsThemeLight": "Clair",
+  "settingsThemeDark": "Sombre",
+  "settingsThemeSystem": "Système",
+  "settingsLanguage": "Langue",
+  "settingsLanguageEnglish": "English",
+  "settingsLanguageArabic": "العربية",
+  "settingsLanguageFrench": "Français",
+  "settingsPreferences": "Préférences",
+  "settingsHaptics": "Retour Haptique",
+  "settingsHapticsSubtitle": "Vibrer aux interactions",
+  "settingsShowPoints": "Afficher les Points",
+  "settingsShowPointsSubtitle": "Afficher les points dans l'interface",
+  "settingsAbout": "À propos",
+  "settingsAppVersion": "Version de l'Application",
+  "settingsPrivacyPolicy": "Politique de Confidentialité",
+  "errorLoadingSettings": "Échec du chargement des paramètres",
+  "errorRetry": "Réessayer",
+  "errorLoadingCalendar": "Échec du chargement du calendrier",
+  "calendarStreamRetry": "Nouvelle tentative automatique",
+  "calendarNoData": "Aucune prière enregistrée pour ce jour",
+  "calendarCompleted": "Complété",
+  "calendarPoints": "Points",
+  "calendarPrayers": "Prières",
+  "calendarNoPrayers": "Aucune prière enregistrée",
+  "calendarLoggedAt": "Enregistré à {time}",
+  "@calendarLoggedAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "today": "Aujourd'hui",
+  "errorLoadingData": "Erreur de chargement des données"
 }

@@ -37,5 +37,41 @@
     }
   },
   "todayEncouragement": "استمر، أنت تبلي حسنًا!",
-  "tapToLog": "انقر للتسجيل"
+  "tapToLog": "انقر للتسجيل",
+  "settingsAppearance": "المظهر",
+  "settingsTheme": "السمة",
+  "settingsThemeLight": "فاتح",
+  "settingsThemeDark": "داكن",
+  "settingsThemeSystem": "النظام",
+  "settingsLanguage": "اللغة",
+  "settingsLanguageEnglish": "English",
+  "settingsLanguageArabic": "العربية",
+  "settingsLanguageFrench": "Français",
+  "settingsPreferences": "التفضيلات",
+  "settingsHaptics": "الاهتزاز اللمسي",
+  "settingsHapticsSubtitle": "اهتزاز عند التفاعل",
+  "settingsShowPoints": "إظهار النقاط",
+  "settingsShowPointsSubtitle": "عرض النقاط في الواجهة",
+  "settingsAbout": "حول",
+  "settingsAppVersion": "إصدار التطبيق",
+  "settingsPrivacyPolicy": "سياسة الخصوصية",
+  "errorLoadingSettings": "فشل تحميل الإعدادات",
+  "errorRetry": "إعادة المحاولة",
+  "errorLoadingCalendar": "فشل تحميل التقويم",
+  "calendarStreamRetry": "سيتم إعادة المحاولة تلقائيًا",
+  "calendarNoData": "لا توجد صلوات مسجلة لهذا اليوم",
+  "calendarCompleted": "مكتمل",
+  "calendarPoints": "النقاط",
+  "calendarPrayers": "الصلوات",
+  "calendarNoPrayers": "لا توجد صلوات مسجلة",
+  "calendarLoggedAt": "سُجِّل في {time}",
+  "@calendarLoggedAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "today": "اليوم",
+  "errorLoadingData": "خطأ في تحميل البيانات"
 }

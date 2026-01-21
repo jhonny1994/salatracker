@@ -1,12 +1,7 @@
 import 'package:hive_ce/hive.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:salat_tracker/core/storage/hive_service.dart';
-import 'package:salat_tracker/features/prayer/data/datasources/prayer_local_data_source.dart';
-import 'package:salat_tracker/features/prayer/data/repositories/prayer_repository_impl.dart';
-import 'package:salat_tracker/features/prayer/domain/models/prayer_day.dart';
-import 'package:salat_tracker/features/prayer/domain/repositories/prayer_repository.dart';
-import 'package:salat_tracker/features/prayer/domain/services/points_calculator.dart';
-import 'package:salat_tracker/features/prayer/domain/services/streak_calculator.dart';
+import 'package:salat_tracker/core/core.dart';
+import 'package:salat_tracker/features/prayer/prayer.dart';
 
 part 'prayer_providers.g.dart';
 

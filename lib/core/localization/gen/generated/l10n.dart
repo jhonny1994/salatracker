@@ -173,6 +173,251 @@ class S {
   String get tapToLog {
     return Intl.message('انقر للتسجيل', name: 'tapToLog', desc: '', args: []);
   }
+
+  /// `المظهر`
+  String get settingsAppearance {
+    return Intl.message(
+      'المظهر',
+      name: 'settingsAppearance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `السمة`
+  String get settingsTheme {
+    return Intl.message('السمة', name: 'settingsTheme', desc: '', args: []);
+  }
+
+  /// `فاتح`
+  String get settingsThemeLight {
+    return Intl.message('فاتح', name: 'settingsThemeLight', desc: '', args: []);
+  }
+
+  /// `داكن`
+  String get settingsThemeDark {
+    return Intl.message('داكن', name: 'settingsThemeDark', desc: '', args: []);
+  }
+
+  /// `النظام`
+  String get settingsThemeSystem {
+    return Intl.message(
+      'النظام',
+      name: 'settingsThemeSystem',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `اللغة`
+  String get settingsLanguage {
+    return Intl.message('اللغة', name: 'settingsLanguage', desc: '', args: []);
+  }
+
+  /// `English`
+  String get settingsLanguageEnglish {
+    return Intl.message(
+      'English',
+      name: 'settingsLanguageEnglish',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `العربية`
+  String get settingsLanguageArabic {
+    return Intl.message(
+      'العربية',
+      name: 'settingsLanguageArabic',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Français`
+  String get settingsLanguageFrench {
+    return Intl.message(
+      'Français',
+      name: 'settingsLanguageFrench',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `التفضيلات`
+  String get settingsPreferences {
+    return Intl.message(
+      'التفضيلات',
+      name: 'settingsPreferences',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `الاهتزاز اللمسي`
+  String get settingsHaptics {
+    return Intl.message(
+      'الاهتزاز اللمسي',
+      name: 'settingsHaptics',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `اهتزاز عند التفاعل`
+  String get settingsHapticsSubtitle {
+    return Intl.message(
+      'اهتزاز عند التفاعل',
+      name: 'settingsHapticsSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `إظهار النقاط`
+  String get settingsShowPoints {
+    return Intl.message(
+      'إظهار النقاط',
+      name: 'settingsShowPoints',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `عرض النقاط في الواجهة`
+  String get settingsShowPointsSubtitle {
+    return Intl.message(
+      'عرض النقاط في الواجهة',
+      name: 'settingsShowPointsSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `حول`
+  String get settingsAbout {
+    return Intl.message('حول', name: 'settingsAbout', desc: '', args: []);
+  }
+
+  /// `إصدار التطبيق`
+  String get settingsAppVersion {
+    return Intl.message(
+      'إصدار التطبيق',
+      name: 'settingsAppVersion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `سياسة الخصوصية`
+  String get settingsPrivacyPolicy {
+    return Intl.message(
+      'سياسة الخصوصية',
+      name: 'settingsPrivacyPolicy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `فشل تحميل الإعدادات`
+  String get errorLoadingSettings {
+    return Intl.message(
+      'فشل تحميل الإعدادات',
+      name: 'errorLoadingSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `إعادة المحاولة`
+  String get errorRetry {
+    return Intl.message(
+      'إعادة المحاولة',
+      name: 'errorRetry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `فشل تحميل التقويم`
+  String get errorLoadingCalendar {
+    return Intl.message(
+      'فشل تحميل التقويم',
+      name: 'errorLoadingCalendar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `سيتم إعادة المحاولة تلقائيًا`
+  String get calendarStreamRetry {
+    return Intl.message(
+      'سيتم إعادة المحاولة تلقائيًا',
+      name: 'calendarStreamRetry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `لا توجد صلوات مسجلة لهذا اليوم`
+  String get calendarNoData {
+    return Intl.message(
+      'لا توجد صلوات مسجلة لهذا اليوم',
+      name: 'calendarNoData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `مكتمل`
+  String get calendarCompleted {
+    return Intl.message('مكتمل', name: 'calendarCompleted', desc: '', args: []);
+  }
+
+  /// `النقاط`
+  String get calendarPoints {
+    return Intl.message('النقاط', name: 'calendarPoints', desc: '', args: []);
+  }
+
+  /// `الصلوات`
+  String get calendarPrayers {
+    return Intl.message('الصلوات', name: 'calendarPrayers', desc: '', args: []);
+  }
+
+  /// `لا توجد صلوات مسجلة`
+  String get calendarNoPrayers {
+    return Intl.message(
+      'لا توجد صلوات مسجلة',
+      name: 'calendarNoPrayers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `سُجِّل في {time}`
+  String calendarLoggedAt(String time) {
+    return Intl.message(
+      'سُجِّل في $time',
+      name: 'calendarLoggedAt',
+      desc: '',
+      args: [time],
+    );
+  }
+
+  /// `اليوم`
+  String get today {
+    return Intl.message('اليوم', name: 'today', desc: '', args: []);
+  }
+
+  /// `خطأ في تحميل البيانات`
+  String get errorLoadingData {
+    return Intl.message(
+      'خطأ في تحميل البيانات',
+      name: 'errorLoadingData',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -1,4 +1,4 @@
-import 'package:salat_tracker/features/settings/domain/models/settings.dart';
+import 'package:salat_tracker/features/settings/settings.dart';
 
 abstract class SettingsRepository {
   Future<Settings> fetchSettings();
