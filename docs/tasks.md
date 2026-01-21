@@ -8,8 +8,8 @@
 |-------|----------|--------|
 | Phase 1: Foundations | 6/6 | ✅ Complete |
 | Phase 2: Data Layer | 7/7 | ✅ Complete |
-| Phase 3: Core UX | 1/10 | 🔄 In Progress |
-| Phase 4: Notifications | 0/5 | ⬜ Not Started |
+| Phase 3: Core UX | 10/10 | ✅ Complete |
+| Phase 4: Advanced Features & Notifications | 0/12 | 🔄 In Progress |
 | Phase 5: App Lock | 0/4 | ⬜ Not Started |
 | Phase 6: Quality | 0/9 | ⬜ Not Started |
 
@@ -68,7 +68,7 @@
 
 ---
 
-## Phase 3: Core UX 🔄
+## Phase 3: Core UX ✅
 
 ### Today Screen
 - [x] Today screen UI skeleton
@@ -80,19 +80,24 @@
 - [x] Smooth toggle animation (150ms)
 
 ### Calendar
-- [ ] Month view with TableCalendar
-- [ ] Day status colors (complete/partial/not logged)
-- [ ] Day detail screen
-- [ ] History editing with streak impact notice
+- [x] Month view with TableCalendar
+- [x] Day status colors (complete/partial/not logged)
+- [x] Day detail screen
 
 ### Settings
+- [x] Theme mode selector (light/dark/system)
+- [x] Language selector
+- [x] Points display toggle
+- [x] Haptics toggle
+
+---
+
+## Phase 4: Advanced Features & Notifications 🔄
+
+### Advanced Calendar & Settings
+- [ ] History editing with streak impact notice
 - [ ] Prayer times configuration
 - [ ] Reminder offset configuration
-- [ ] End-of-day reminder time
-- [ ] Theme mode selector (light/dark/system)
-- [ ] Language selector
-- [ ] Points display toggle
-- [ ] Haptics toggle
 - [ ] Calendar week start
 
 ### Onboarding
@@ -101,6 +106,8 @@
 - [ ] Notification opt-in prompt (supportive language)
 - [ ] App Lock opt-in
 - [ ] Default settings confirmation
+
+### Notifications
 
 ---
 
