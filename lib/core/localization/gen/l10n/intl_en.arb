@@ -3,5 +3,39 @@
   "appTitle": "Salat Tracker",
   "navToday": "Today",
   "navCalendar": "Calendar",
-  "navSettings": "Settings"
+  "navSettings": "Settings",
+  "prayerFajr": "Fajr",
+  "prayerDhuhr": "Dhuhr",
+  "prayerAsr": "Asr",
+  "prayerMaghrib": "Maghrib",
+  "prayerIsha": "Isha",
+  "todayProgress": "Today's Progress",
+  "todayComplete": "All prayers completed!",
+  "todayPartial": "{count} of 5 prayers logged",
+  "@todayPartial": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "todayNone": "No prayers logged yet",
+  "todayStreak": "{count} day streak",
+  "@todayStreak": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "todayPoints": "{count} points",
+  "@todayPoints": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "todayEncouragement": "Keep going, you're doing great!",
+  "tapToLog": "Tap to log"
 }

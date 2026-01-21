@@ -3,5 +3,39 @@
   "appTitle": "سجل الصلاة",
   "navToday": "اليوم",
   "navCalendar": "التقويم",
-  "navSettings": "الإعدادات"
+  "navSettings": "الإعدادات",
+  "prayerFajr": "الفجر",
+  "prayerDhuhr": "الظهر",
+  "prayerAsr": "العصر",
+  "prayerMaghrib": "المغرب",
+  "prayerIsha": "العشاء",
+  "todayProgress": "تقدم اليوم",
+  "todayComplete": "جميع الصلوات مكتملة!",
+  "todayPartial": "{count} من 5 صلوات مسجلة",
+  "@todayPartial": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "todayNone": "لم يتم تسجيل أي صلاة بعد",
+  "todayStreak": "سلسلة {count} يوم",
+  "@todayStreak": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "todayPoints": "{count} نقطة",
+  "@todayPoints": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "todayEncouragement": "استمر، أنت تبلي حسنًا!",
+  "tapToLog": "انقر للتسجيل"
 }

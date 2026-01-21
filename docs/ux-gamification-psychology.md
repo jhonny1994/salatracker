@@ -1,5 +1,7 @@
 # UX, Gamification, and Psychology Consolidated Guide - سجل الصلاة
 
+> **Part of:** [Documentation Ecosystem](README.md) | **Referenced by:** [prd.md](prd.md), [rules.md](rules.md), [tasks.md](tasks.md)
+
 ## Purpose
 Single reference for UI quality, gamification safety, and psychology alignment. This guide consolidates the previous research and visual guidance into a unified, implementable playbook.
 

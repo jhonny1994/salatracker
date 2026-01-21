@@ -73,6 +73,106 @@ class S {
   String get navSettings {
     return Intl.message('الإعدادات', name: 'navSettings', desc: '', args: []);
   }
+
+  /// `الفجر`
+  String get prayerFajr {
+    return Intl.message('الفجر', name: 'prayerFajr', desc: '', args: []);
+  }
+
+  /// `الظهر`
+  String get prayerDhuhr {
+    return Intl.message('الظهر', name: 'prayerDhuhr', desc: '', args: []);
+  }
+
+  /// `العصر`
+  String get prayerAsr {
+    return Intl.message('العصر', name: 'prayerAsr', desc: '', args: []);
+  }
+
+  /// `المغرب`
+  String get prayerMaghrib {
+    return Intl.message('المغرب', name: 'prayerMaghrib', desc: '', args: []);
+  }
+
+  /// `العشاء`
+  String get prayerIsha {
+    return Intl.message('العشاء', name: 'prayerIsha', desc: '', args: []);
+  }
+
+  /// `تقدم اليوم`
+  String get todayProgress {
+    return Intl.message(
+      'تقدم اليوم',
+      name: 'todayProgress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `جميع الصلوات مكتملة!`
+  String get todayComplete {
+    return Intl.message(
+      'جميع الصلوات مكتملة!',
+      name: 'todayComplete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{count} من 5 صلوات مسجلة`
+  String todayPartial(int count) {
+    return Intl.message(
+      '$count من 5 صلوات مسجلة',
+      name: 'todayPartial',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `لم يتم تسجيل أي صلاة بعد`
+  String get todayNone {
+    return Intl.message(
+      'لم يتم تسجيل أي صلاة بعد',
+      name: 'todayNone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `سلسلة {count} يوم`
+  String todayStreak(int count) {
+    return Intl.message(
+      'سلسلة $count يوم',
+      name: 'todayStreak',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `{count} نقطة`
+  String todayPoints(int count) {
+    return Intl.message(
+      '$count نقطة',
+      name: 'todayPoints',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `استمر، أنت تبلي حسنًا!`
+  String get todayEncouragement {
+    return Intl.message(
+      'استمر، أنت تبلي حسنًا!',
+      name: 'todayEncouragement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `انقر للتسجيل`
+  String get tapToLog {
+    return Intl.message('انقر للتسجيل', name: 'tapToLog', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

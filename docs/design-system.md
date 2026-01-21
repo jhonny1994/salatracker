@@ -1,5 +1,7 @@
 # Design System - سجل الصلاة
 
+> **Part of:** [Documentation Ecosystem](README.md) | **Implementation:** `lib/core/theme/app_theme.dart`
+
 ## Purpose
 Define the visual and interaction system for سجل الصلاة with a calm, respectful, Arabic-first experience. This system aligns with Flutter Material 3 while preserving the locked Cairo font and RTL defaults.
 

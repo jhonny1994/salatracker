@@ -1,5 +1,7 @@
 # Engineering Rules and Persona
 
+> **Part of:** [Documentation Ecosystem](README.md) | **Related:** [design-system.md](design-system.md), [ux-gamification-psychology.md](ux-gamification-psychology.md)
+
 ## Persona
 - Role: senior, enterprise-grade Flutter engineer.
 - Mindset: calm, precise, and respectful; prioritize clarity, stability, and long-term maintainability.
@@ -29,6 +31,8 @@
 - Generated intl files live under `lib/core/localization/gen/`.
 
 ## Gamification and Tone Rules
+> **Detailed guidance:** [ux-gamification-psychology.md](ux-gamification-psychology.md)
+
 - Completion percentage is primary; streaks are secondary.
 - Points are transparent and optional to display.
 - Reflective badges only; no push notifications for badges.
@@ -40,7 +44,7 @@
 - Commit only with user approval after phase completion.
 - Do not amend unless explicitly asked.
 - Never use destructive git commands without approval.
-- Ignore local metadata and secrets (`.env`, `.metadata`, `.opencode/`).
+- Ignore local metadata and secrets (`.env`, `.metadata`, `.opencode/`, `.agent/`).
 
 ## Flutter Performance Rules
 - Use `const` constructors for all stateless widgets and static children.
@@ -73,3 +77,7 @@
 
 ## Generalization Note
 These rules are written to be reusable across projects; apply them unless a project explicitly overrides them.
+
+---
+> **Visual specs:** [design-system.md](design-system.md) | **Tasks:** [tasks.md](tasks.md)
+

@@ -20,11 +20,34 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(count) => "${count} of 5 prayers logged";
+
+  static String m1(count) => "${count} points";
+
+  static String m2(count) => "${count} day streak";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "appTitle": MessageLookupByLibrary.simpleMessage("Salat Tracker"),
     "navCalendar": MessageLookupByLibrary.simpleMessage("Calendar"),
     "navSettings": MessageLookupByLibrary.simpleMessage("Settings"),
     "navToday": MessageLookupByLibrary.simpleMessage("Today"),
+    "prayerAsr": MessageLookupByLibrary.simpleMessage("Asr"),
+    "prayerDhuhr": MessageLookupByLibrary.simpleMessage("Dhuhr"),
+    "prayerFajr": MessageLookupByLibrary.simpleMessage("Fajr"),
+    "prayerIsha": MessageLookupByLibrary.simpleMessage("Isha"),
+    "prayerMaghrib": MessageLookupByLibrary.simpleMessage("Maghrib"),
+    "tapToLog": MessageLookupByLibrary.simpleMessage("Tap to log"),
+    "todayComplete": MessageLookupByLibrary.simpleMessage(
+      "All prayers completed!",
+    ),
+    "todayEncouragement": MessageLookupByLibrary.simpleMessage(
+      "Keep going, you\'re doing great!",
+    ),
+    "todayNone": MessageLookupByLibrary.simpleMessage("No prayers logged yet"),
+    "todayPartial": m0,
+    "todayPoints": m1,
+    "todayProgress": MessageLookupByLibrary.simpleMessage("Today\'s Progress"),
+    "todayStreak": m2,
   };
 }
