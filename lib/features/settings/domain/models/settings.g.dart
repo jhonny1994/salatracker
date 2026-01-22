@@ -17,7 +17,7 @@ class SettingsAdapter extends TypeAdapter<Settings> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Settings(
-      prayerTimes: (fields[0] as Map).cast<PrayerType, int>(),
+      prayerTimes: (fields[0] as Map).cast<PrayerType, TimeOfDay>(),
       offsets: (fields[1] as Map).cast<PrayerType, int>(),
       notificationsEnabled: fields[2] as bool,
       hapticsEnabled: fields[3] as bool,
@@ -25,13 +25,14 @@ class SettingsAdapter extends TypeAdapter<Settings> {
       themeMode: fields[5] as AppThemeMode,
       localeCode: fields[6] as String?,
       weekStart: (fields[7] as num).toInt(),
+      onboardingComplete: fields[8] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, Settings obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.prayerTimes)
       ..writeByte(1)
@@ -47,7 +48,9 @@ class SettingsAdapter extends TypeAdapter<Settings> {
       ..writeByte(6)
       ..write(obj.localeCode)
       ..writeByte(7)
-      ..write(obj.weekStart);
+      ..write(obj.weekStart)
+      ..writeByte(8)
+      ..write(obj.onboardingComplete);
   }
 
   @override

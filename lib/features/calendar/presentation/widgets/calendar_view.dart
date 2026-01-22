@@ -5,11 +5,16 @@ import 'package:salat_tracker/features/prayer/prayer.dart';
 import 'package:salat_tracker/shared/shared.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+/// The main calendar grid widget displaying monthly prayer status.
+///
+/// Uses table_calendar for the monthly grid with custom day cells.
 class CalendarView extends StatelessWidget {
+  /// Creates a [CalendarView].
   const CalendarView({
     required this.focusedDay,
     required this.selectedDay,
     required this.prayerDays,
+    required this.weekStart,
     required this.onDaySelected,
     super.key,
   });
@@ -17,6 +22,7 @@ class CalendarView extends StatelessWidget {
   final DateTime focusedDay;
   final DateTime selectedDay;
   final Map<DateTime, PrayerDay> prayerDays;
+  final int weekStart;
   final void Function(DateTime, DateTime) onDaySelected;
 
   @override
@@ -26,6 +32,7 @@ class CalendarView extends StatelessWidget {
 
     return TableCalendar<void>(
       firstDay: DateTime(2020),
+      startingDayOfWeek: StartingDayOfWeek.values[weekStart - 1],
       lastDay: DateTime(2100),
       focusedDay: focusedDay,
       selectedDayPredicate: (day) => isSameDay(selectedDay, day),

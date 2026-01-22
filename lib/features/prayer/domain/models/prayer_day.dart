@@ -6,6 +6,9 @@ import 'package:salat_tracker/shared/shared.dart';
 part 'prayer_day.freezed.dart';
 part 'prayer_day.g.dart';
 
+/// A single day's prayer tracking data.
+///
+/// Contains the list of prayer entries, completion status, and points earned.
 @freezed
 @HiveType(typeId: 3)
 abstract class PrayerDay with _$PrayerDay {

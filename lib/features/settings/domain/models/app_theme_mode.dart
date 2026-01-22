@@ -3,6 +3,9 @@ import 'package:hive_ce/hive.dart';
 
 part 'app_theme_mode.g.dart';
 
+/// Available theme modes for the application.
+///
+/// Persisted in Settings to control the visual appearance.
 @HiveType(typeId: 5)
 enum AppThemeMode {
   @HiveField(0)

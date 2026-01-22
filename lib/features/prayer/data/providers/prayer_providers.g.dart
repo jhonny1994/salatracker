@@ -8,9 +8,12 @@ part of 'prayer_providers.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
+/// Provider for the prayer local data source.
 
 @ProviderFor(prayerLocalDataSource)
 final prayerLocalDataSourceProvider = PrayerLocalDataSourceProvider._();
+
+/// Provider for the prayer local data source.
 
 final class PrayerLocalDataSourceProvider
     extends
@@ -20,6 +23,7 @@ final class PrayerLocalDataSourceProvider
           PrayerLocalDataSource
         >
     with $Provider<PrayerLocalDataSource> {
+  /// Provider for the prayer local data source.
   PrayerLocalDataSourceProvider._()
     : super(
         from: null,
@@ -57,8 +61,12 @@ final class PrayerLocalDataSourceProvider
 String _$prayerLocalDataSourceHash() =>
     r'7850bf43c221a37efe5f004857a82ddd00badbbf';
 
+/// Provider for the prayer repository.
+
 @ProviderFor(prayerRepository)
 final prayerRepositoryProvider = PrayerRepositoryProvider._();
+
+/// Provider for the prayer repository.
 
 final class PrayerRepositoryProvider
     extends
@@ -68,6 +76,7 @@ final class PrayerRepositoryProvider
           PrayerRepository
         >
     with $Provider<PrayerRepository> {
+  /// Provider for the prayer repository.
   PrayerRepositoryProvider._()
     : super(
         from: null,
@@ -103,8 +112,12 @@ final class PrayerRepositoryProvider
 
 String _$prayerRepositoryHash() => r'5812eea29c880da200393f05696f907f2e846861';
 
+/// Provider for the streak calculator service.
+
 @ProviderFor(streakCalculator)
 final streakCalculatorProvider = StreakCalculatorProvider._();
+
+/// Provider for the streak calculator service.
 
 final class StreakCalculatorProvider
     extends
@@ -114,6 +127,7 @@ final class StreakCalculatorProvider
           StreakCalculator
         >
     with $Provider<StreakCalculator> {
+  /// Provider for the streak calculator service.
   StreakCalculatorProvider._()
     : super(
         from: null,
@@ -149,8 +163,12 @@ final class StreakCalculatorProvider
 
 String _$streakCalculatorHash() => r'e1892636678b7c65ba9dedf916cfa1feb4c08fd1';
 
+/// Provider for the points calculator service.
+
 @ProviderFor(pointsCalculator)
 final pointsCalculatorProvider = PointsCalculatorProvider._();
+
+/// Provider for the points calculator service.
 
 final class PointsCalculatorProvider
     extends
@@ -160,6 +178,7 @@ final class PointsCalculatorProvider
           PointsCalculator
         >
     with $Provider<PointsCalculator> {
+  /// Provider for the points calculator service.
   PointsCalculatorProvider._()
     : super(
         from: null,

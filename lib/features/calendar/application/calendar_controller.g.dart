@@ -8,9 +8,18 @@ part of 'calendar_controller.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
+/// Provider exposing a reactive map of prayer days keyed by date.
+///
+/// Transforms the prayer days list into a map for efficient date lookups
+/// in calendar rendering.
 
 @ProviderFor(calendarDays)
 final calendarDaysProvider = CalendarDaysProvider._();
+
+/// Provider exposing a reactive map of prayer days keyed by date.
+///
+/// Transforms the prayer days list into a map for efficient date lookups
+/// in calendar rendering.
 
 final class CalendarDaysProvider
     extends
@@ -22,6 +31,10 @@ final class CalendarDaysProvider
     with
         $FutureModifier<Map<DateTime, PrayerDay>>,
         $StreamProvider<Map<DateTime, PrayerDay>> {
+  /// Provider exposing a reactive map of prayer days keyed by date.
+  ///
+  /// Transforms the prayer days list into a map for efficient date lookups
+  /// in calendar rendering.
   CalendarDaysProvider._()
     : super(
         from: null,
@@ -50,11 +63,24 @@ final class CalendarDaysProvider
 
 String _$calendarDaysHash() => r'b9a4164059c84f7e5e094accb2e1c896b23657e7';
 
+/// Controller managing the currently selected day in the calendar.
+///
+/// Tracks which day the user has selected for detailed viewing and logs
+/// analytics events for history navigation.
+
 @ProviderFor(SelectedDayController)
 final selectedDayControllerProvider = SelectedDayControllerProvider._();
 
+/// Controller managing the currently selected day in the calendar.
+///
+/// Tracks which day the user has selected for detailed viewing and logs
+/// analytics events for history navigation.
 final class SelectedDayControllerProvider
     extends $NotifierProvider<SelectedDayController, DateTime> {
+  /// Controller managing the currently selected day in the calendar.
+  ///
+  /// Tracks which day the user has selected for detailed viewing and logs
+  /// analytics events for history navigation.
   SelectedDayControllerProvider._()
     : super(
         from: null,
@@ -83,7 +109,12 @@ final class SelectedDayControllerProvider
 }
 
 String _$selectedDayControllerHash() =>
-    r'5f76e3f3cc7b35bb58693d1d590866ef94e7269e';
+    r'948ce047286fbd3fd714e3d5439f15bb816f2b37';
+
+/// Controller managing the currently selected day in the calendar.
+///
+/// Tracks which day the user has selected for detailed viewing and logs
+/// analytics events for history navigation.
 
 abstract class _$SelectedDayController extends $Notifier<DateTime> {
   DateTime build();

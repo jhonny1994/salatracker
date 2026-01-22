@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -12,6 +10,10 @@ import 'package:salat_tracker/features/settings/settings.dart';
 import 'package:salat_tracker/features/today/today.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
+/// Main dashboard screen showing today's prayer progress and timeline.
+///
+/// Handles the "Gamification" aspect with completion states,
+/// while delegating specific UI components to specialized widgets.
 class TodayScreen extends ConsumerStatefulWidget {
   const TodayScreen({super.key});
 
@@ -20,22 +22,7 @@ class TodayScreen extends ConsumerStatefulWidget {
 }
 
 class _TodayScreenState extends ConsumerState<TodayScreen> {
-  late ConfettiController _confettiController;
-  bool _hasShownConfetti = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _confettiController = ConfettiController(
-      duration: const Duration(seconds: 2),
-    );
-  }
-
-  @override
-  void dispose() {
-    _confettiController.dispose();
-    super.dispose();
-  }
+  bool _hasCelebrated = false;
 
   @override
   Widget build(BuildContext context) {
@@ -52,129 +39,110 @@ class _TodayScreenState extends ConsumerState<TodayScreen> {
         final totalPrayers = PrayerType.values.length;
         final isComplete = completedCount == totalPrayers;
 
-        if (isComplete && !_hasShownConfetti) {
-          _confettiController.play();
+        if (isComplete && !_hasCelebrated) {
           if (settings?.hapticsEnabled ?? true) {
-            unawaited(HapticFeedback.heavyImpact());
+            unawaited(HapticFeedback.mediumImpact());
           }
-          setState(() => _hasShownConfetti = true);
+          setState(() => _hasCelebrated = true);
         } else if (!isComplete) {
-          _hasShownConfetti = false;
+          _hasCelebrated = false;
         }
       }
     });
 
     return Scaffold(
-      body: Stack(
-        children: [
-          SafeArea(
-            child: todayState.when(
-              loading: () => const TodayLoadingState(),
-              error: (error, stack) => TodayErrorState(
-                onRetry: () => ref.invalidate(todayControllerProvider),
-              ),
-              data: (prayerDay) {
-                // Calculate progress for UI
-                final completedCount = prayerDay.entries
-                    .where((e) => e.isCompleted)
-                    .length;
-                final totalPrayers = PrayerType.values.length;
-                final completionPercentage = completedCount / totalPrayers;
+      body: SafeArea(
+        child: todayState.when(
+          loading: () => const TodayLoadingState(),
+          error: (error, stack) => TodayErrorState(
+            onRetry: () => ref.invalidate(todayControllerProvider),
+          ),
+          data: (prayerDay) {
+            // Calculate progress for UI
+            final completedCount = prayerDay.entries
+                .where((e) => e.isCompleted)
+                .length;
+            final totalPrayers = PrayerType.values.length;
+            final completionPercentage = completedCount / totalPrayers;
 
-                return CustomScrollView(
-                  slivers: [
-                    SliverToBoxAdapter(
-                      child: Padding(
-                        padding: const EdgeInsets.all(AppSpacing.xl),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            // Progress Card with animation
-                            TodayProgressCard(
-                                  completedCount: completedCount,
-                                  totalPrayers: totalPrayers,
-                                  completionPercentage: completionPercentage,
-                                  points: prayerDay.points,
-                                )
-                                .animate()
-                                .fadeIn(duration: AppDurations.smooth)
-                                .slideY(
-                                  begin: 0.1,
-                                  end: 0,
-                                  duration: AppDurations.smooth,
-                                  curve: Curves.easeOut,
-                                ),
-                            const Gap(AppSpacing.xxl),
-                            // Streak display
-                            const TodayStreakCard(),
-                            const Gap(AppSpacing.xxl),
-                            // Section title
-                            Text(
-                              l10n.navToday,
-                              style: theme.textTheme.titleLarge,
+            return CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.all(AppSpacing.xl),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        // Progress Card with animation
+                        TodayProgressCard(
+                              completedCount: completedCount,
+                              totalPrayers: totalPrayers,
+                              completionPercentage: completionPercentage,
+                              points: prayerDay.points,
+                            )
+                            .animate()
+                            .fadeIn(duration: AppDurations.smooth)
+                            .slideY(
+                              begin: 0.1,
+                              end: 0,
+                              duration: AppDurations.smooth,
+                              curve: Curves.easeOut,
                             ),
-                            const Gap(AppSpacing.md),
-                          ],
+                        const Gap(AppSpacing.xxl),
+                        // Streak display
+                        const TodayStreakCard(),
+                        const Gap(AppSpacing.xxl),
+                        // Section title
+                        Text(
+                          l10n.navToday,
+                          style: theme.textTheme.titleLarge,
                         ),
-                      ),
+                        const Gap(AppSpacing.md),
+                      ],
                     ),
-                    // Prayer list with staggered animation
-                    SliverPadding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AppSpacing.xl,
-                      ),
-                      sliver: SliverList.builder(
-                        itemCount: PrayerType.values.length,
-                        itemBuilder: (context, index) {
-                          final type = PrayerType.values[index];
-                          final isLogged = prayerDay.entries.any(
-                            (e) => e.type == type && e.isCompleted,
-                          );
-                          return PrayerListItem(
-                            key: ValueKey('prayer_${type.name}'),
-                            type: type,
-                            isLogged: isLogged,
-                            index: index,
-                          );
-                        },
-                      ),
-                    ),
-                    // Encouragement or celebration message
-                    SliverToBoxAdapter(
-                      child: Padding(
-                        padding: const EdgeInsets.all(AppSpacing.xl),
-                        child: completionPercentage == 1.0
-                            ? const TodayCelebrationCard()
-                            : Text(
-                                l10n.todayEncouragement,
-                                style: theme.textTheme.bodyMedium,
-                                textAlign: TextAlign.center,
-                              ),
-                      ),
-                    ),
-                    const SliverPadding(
-                      padding: EdgeInsets.only(bottom: 100),
-                    ),
-                  ],
-                );
-              },
-            ),
-          ),
-          // Confetti overlay
-          Align(
-            alignment: Alignment.topCenter,
-            child: ConfettiWidget(
-              confettiController: _confettiController,
-              blastDirectionality: BlastDirectionality.explosive,
-              colors: [
-                theme.colorScheme.primary,
-                theme.colorScheme.secondary,
-                theme.colorScheme.tertiary,
+                  ),
+                ),
+                // Prayer list with staggered animation
+                SliverPadding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.xl,
+                  ),
+                  sliver: SliverList.builder(
+                    itemCount: PrayerType.values.length,
+                    itemBuilder: (context, index) {
+                      final type = PrayerType.values[index];
+                      final isLogged = prayerDay.entries.any(
+                        (e) => e.type == type && e.isCompleted,
+                      );
+                      return PrayerListItem(
+                        key: ValueKey('prayer_${type.name}'),
+                        type: type,
+                        isLogged: isLogged,
+                        index: index,
+                      );
+                    },
+                  ),
+                ),
+                // Encouragement or celebration message
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.all(AppSpacing.xl),
+                    child: completionPercentage == 1.0
+                        ? const TodayCelebrationCard()
+                        : Text(
+                            l10n.todayEncouragement,
+                            style: theme.textTheme.bodyMedium,
+                            textAlign: TextAlign.center,
+                          ),
+                  ),
+                ),
+                const SliverPadding(
+                  padding: EdgeInsets.only(bottom: AppSpacing.xxxl * 3),
+                ),
               ],
-              numberOfParticles: 20,
-            ),
-          ),
-        ],
+            );
+          },
+        ),
       ),
     );
   }

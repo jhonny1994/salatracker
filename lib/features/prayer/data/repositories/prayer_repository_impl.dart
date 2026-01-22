@@ -1,5 +1,9 @@
 import 'package:salat_tracker/features/prayer/prayer.dart';
 
+/// Production implementation of [PrayerRepository].
+///
+/// Delegates data persistence to [_localDataSource] and provides a stream
+/// of updates for the domain layer.
 class PrayerRepositoryImpl implements PrayerRepository {
   PrayerRepositoryImpl(this._localDataSource);
 

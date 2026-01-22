@@ -1,6 +1,9 @@
 import 'package:hive_ce/hive.dart';
 import 'package:salat_tracker/features/settings/settings.dart';
 
+/// Local data source for settings using Hive.
+///
+/// Provides CRUD operations and reactive updates for app settings.
 class SettingsLocalDataSource {
   SettingsLocalDataSource(this._box);
 

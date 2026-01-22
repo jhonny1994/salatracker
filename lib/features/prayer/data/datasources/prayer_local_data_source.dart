@@ -2,6 +2,9 @@ import 'package:hive_ce/hive.dart';
 import 'package:salat_tracker/features/prayer/prayer.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
+/// Local data source for prayer data using Hive.
+///
+/// Provides persistence and reactive streams for prayer day records.
 class PrayerLocalDataSource {
   PrayerLocalDataSource(this._box);
 

@@ -62,6 +62,20 @@
 - Use Freezed for: immutable classes, copyWith, equality, JSON serialization.
 - Name union types descriptively (e.g., `Loading`, `Loaded`, `Error`).
 
+## Code Consistency & Standards (Strict)
+- **Layout & Spacing:**
+  - Use `Gap` widget for all spacing (No `SizedBox` for whitespace).
+  - content padding and spacing must use `AppSpacing` constants (No magic numbers).
+  - Icon sizes must use `AppIconSizes`.
+- **Component Decoupling:**
+  - **No Private Widgets:** Do not define private `_HelperWidgets` inside screen files. Extract them to `presentation/widgets/`.
+  - **Barrel Files:** Every feature's presentation layer must have a `widgets/widgets.dart` exporting its components.
+- **Widget Best Practices:**
+  - Use `super.key` and named parameters for all extracted widgets.
+  - Prefer `const` constructors everywhere possible.
+- **Code Quality:**
+  - **Zero Lint Tolerance:** Fix all analysis infos/warnings (no ignored rules without strict justification).
+
 ## DRY and Code Organization Rules
 - Extract shared utilities to `lib/shared/`.
 - Create extension methods for common operations (e.g., DateTimeX).

@@ -3,12 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/features/settings/settings.dart';
 
+/// Modal bottom sheet for selecting app language.
 class LanguageSelectionSheet extends ConsumerWidget {
+  /// Creates a [LanguageSelectionSheet].
   const LanguageSelectionSheet({
     required this.currentCode,
     super.key,
   });
 
+  /// Currently selected language code.
   final String? currentCode;
 
   @override

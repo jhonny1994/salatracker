@@ -5,6 +5,10 @@ import 'package:salat_tracker/features/prayer/prayer.dart';
 part 'prayer_entry.freezed.dart';
 part 'prayer_entry.g.dart';
 
+/// A single prayer's completion record.
+///
+/// Tracks the prayer type, scheduled time, completion status, and when
+/// it was checked off.
 @freezed
 @HiveType(typeId: 2)
 abstract class PrayerEntry with _$PrayerEntry {

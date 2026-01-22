@@ -3,8 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/features/calendar/calendar.dart';
+import 'package:salat_tracker/features/settings/settings.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
+/// Historical view of prayer performance.
+///
+/// Provides a monthly calendar view and detailed daily breakdown, allowing
+/// users to track their consistency over time.
 class CalendarScreen extends ConsumerWidget {
   const CalendarScreen({super.key});
 
@@ -37,6 +42,9 @@ class CalendarScreen extends ConsumerWidget {
               focusedDay: focusedDay,
               selectedDay: selectedDay,
               prayerDays: prayerDays,
+              weekStart:
+                  ref.watch(settingsProvider).asData?.value.weekStart ??
+                  DateTime.sunday,
               onDaySelected: (selected, focused) {
                 ref
                     .read(selectedDayControllerProvider.notifier)

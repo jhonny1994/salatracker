@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:salat_tracker/shared/shared.dart';
 
+/// Theme extension defining colors for prayer status chips.
+///
+/// Provides foreground and background colors for complete, partial,
+/// and missed prayer states in both light and dark themes.
 @immutable
 class StatusChipTheme extends ThemeExtension<StatusChipTheme> {
   const StatusChipTheme({
@@ -43,37 +48,43 @@ class StatusChipTheme extends ThemeExtension<StatusChipTheme> {
       return this;
     }
     return StatusChipTheme(
-      completeBackground: Color.lerp(
+      completeBackground:
+          Color.lerp(
             completeBackground,
             other.completeBackground,
             t,
           ) ??
           completeBackground,
-      completeForeground: Color.lerp(
+      completeForeground:
+          Color.lerp(
             completeForeground,
             other.completeForeground,
             t,
           ) ??
           completeForeground,
-      partialBackground: Color.lerp(
+      partialBackground:
+          Color.lerp(
             partialBackground,
             other.partialBackground,
             t,
           ) ??
           partialBackground,
-      partialForeground: Color.lerp(
+      partialForeground:
+          Color.lerp(
             partialForeground,
             other.partialForeground,
             t,
           ) ??
           partialForeground,
-      missedBackground: Color.lerp(
+      missedBackground:
+          Color.lerp(
             missedBackground,
             other.missedBackground,
             t,
           ) ??
           missedBackground,
-      missedForeground: Color.lerp(
+      missedForeground:
+          Color.lerp(
             missedForeground,
             other.missedForeground,
             t,
@@ -83,6 +94,10 @@ class StatusChipTheme extends ThemeExtension<StatusChipTheme> {
   }
 }
 
+/// Application theme configuration following Material Design 3.
+///
+/// Provides light and dark themes with custom color schemes,
+/// the Cairo font family, and status chip theme extension.
 class AppTheme {
   static const _fontFamily = 'Cairo';
   static const _lightBackground = Color(0xFFECFEFF);
@@ -177,7 +192,9 @@ class AppTheme {
       cardTheme: CardThemeData(
         color: colorScheme.surface,
         elevation: 1.5,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppRadius.lg),
+        ),
       ),
       listTileTheme: ListTileThemeData(
         iconColor: colorScheme.onSurfaceVariant,
@@ -188,7 +205,10 @@ class AppTheme {
           backgroundColor: colorScheme.primary,
           foregroundColor: colorScheme.onPrimary,
           textStyle: textTheme.labelLarge,
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.xl,
+            vertical: 14,
+          ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14),
           ),
@@ -203,7 +223,10 @@ class AppTheme {
         secondaryLabelStyle: textTheme.labelMedium?.copyWith(
           color: colorScheme.onSecondaryContainer,
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: AppSpacing.xs,
+        ),
         shape: const StadiumBorder(),
       ),
       extensions: [statusChipTheme],

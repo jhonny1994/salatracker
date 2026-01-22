@@ -1,7 +1,12 @@
 import 'package:hive_ce_flutter/hive_flutter.dart';
+import 'package:salat_tracker/core/storage/adapters/time_of_day_adapter.dart';
 import 'package:salat_tracker/features/prayer/prayer.dart';
 import 'package:salat_tracker/features/settings/settings.dart';
 
+/// Local storage service using Hive.
+///
+/// Manages box initialization, schema migration, and adapter registration.
+/// This service acts as the data abstraction layer for persistent storage.
 class HiveService {
   static const settingsBoxName = 'settings';
   static const prayerDaysBoxName = 'prayer_days';
@@ -21,6 +26,9 @@ class HiveService {
   static void _registerAdapters() {
     if (!Hive.isAdapterRegistered(PrayerTypeAdapter().typeId)) {
       Hive.registerAdapter(PrayerTypeAdapter());
+    }
+    if (!Hive.isAdapterRegistered(TimeOfDayAdapter().typeId)) {
+      Hive.registerAdapter(TimeOfDayAdapter());
     }
     if (!Hive.isAdapterRegistered(PrayerEntryAdapter().typeId)) {
       Hive.registerAdapter(PrayerEntryAdapter());

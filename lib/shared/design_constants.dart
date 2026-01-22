@@ -1,5 +1,5 @@
-/// Design system constants following Material 3 and mobile-design
-/// best practices
+/// Design system constants following Material 3 guidelines and established
+/// mobile design patterns for high-quality visual consistency.
 library;
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -114,6 +114,12 @@ abstract class AppIconSizes {
 
   /// 64px - Hero icons
   static const double hero = 64;
+
+  /// 100px - Display icons (onboarding, empty states)
+  static const double display = 100;
+
+  /// 120px - Large display icons (welcome screens)
+  static const double displayLarge = 120;
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

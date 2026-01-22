@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/features/prayer/prayer.dart';
 
+/// A calendar cell representing a single day with prayer completion status.
+///
+/// Displays visual indicators for complete, partial, or no prayers logged.
 class CalendarDayCell extends StatelessWidget {
+  /// Creates a [CalendarDayCell].
   const CalendarDayCell({
     required this.day,
     required this.prayerDay,
@@ -12,10 +16,19 @@ class CalendarDayCell extends StatelessWidget {
     super.key,
   });
 
+  /// The date this cell represents.
   final DateTime day;
+
+  /// Prayer data for this day, if any.
   final PrayerDay? prayerDay;
+
+  /// Theme for status colors.
   final StatusChipTheme? statusChipTheme;
+
+  /// Whether this cell represents today.
   final bool isToday;
+
+  /// Whether this cell is currently selected.
   final bool isSelected;
 
   @override

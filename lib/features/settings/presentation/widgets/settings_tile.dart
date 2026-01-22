@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
+/// A reusable settings list tile component with icon and optional trailing.
 class SettingsTile extends StatelessWidget {
+  /// Creates a [SettingsTile].
   const SettingsTile({
     required this.icon,
     required this.title,

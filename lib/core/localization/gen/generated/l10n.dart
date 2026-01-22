@@ -84,6 +84,11 @@ class S {
     return Intl.message('الظهر', name: 'prayerDhuhr', desc: '', args: []);
   }
 
+  /// `الجمعة`
+  String get prayerJumuah {
+    return Intl.message('الجمعة', name: 'prayerJumuah', desc: '', args: []);
+  }
+
   /// `العصر`
   String get prayerAsr {
     return Intl.message('العصر', name: 'prayerAsr', desc: '', args: []);
@@ -254,6 +259,26 @@ class S {
     );
   }
 
+  /// `الإشعارات`
+  String get settingsNotifications {
+    return Intl.message(
+      'الإشعارات',
+      name: 'settingsNotifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تفعيل تنبيهات أوقات الصلاة`
+  String get settingsNotificationsSubtitle {
+    return Intl.message(
+      'تفعيل تنبيهات أوقات الصلاة',
+      name: 'settingsNotificationsSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `الاهتزاز اللمسي`
   String get settingsHaptics {
     return Intl.message(
@@ -314,6 +339,26 @@ class S {
     return Intl.message(
       'سياسة الخصوصية',
       name: 'settingsPrivacyPolicy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `مواعيد الصلاة`
+  String get settingsPrayerSchedule {
+    return Intl.message(
+      'مواعيد الصلاة',
+      name: 'settingsPrayerSchedule',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ضبط مواعيد الصلاة يدويًا`
+  String get settingsPrayerScheduleSubtitle {
+    return Intl.message(
+      'ضبط مواعيد الصلاة يدويًا',
+      name: 'settingsPrayerScheduleSubtitle',
       desc: '',
       args: [],
     );
@@ -414,6 +459,286 @@ class S {
     return Intl.message(
       'خطأ في تحميل البيانات',
       name: 'errorLoadingData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تعديل التاريخ؟`
+  String get historyEditWarningTitle {
+    return Intl.message(
+      'تعديل التاريخ؟',
+      name: 'historyEditWarningTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تغيير السجلات السابقة قد يؤثر على السلسلة والنقاط.`
+  String get historyEditWarningBody {
+    return Intl.message(
+      'تغيير السجلات السابقة قد يؤثر على السلسلة والنقاط.',
+      name: 'historyEditWarningBody',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `إلغاء`
+  String get actionCancel {
+    return Intl.message('إلغاء', name: 'actionCancel', desc: '', args: []);
+  }
+
+  /// `استمرار`
+  String get actionContinue {
+    return Intl.message('استمرار', name: 'actionContinue', desc: '', args: []);
+  }
+
+  /// `وقت التنبيه`
+  String get settingsReminderOffset {
+    return Intl.message(
+      'وقت التنبيه',
+      name: 'settingsReminderOffset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تعديل وقت الإشعار`
+  String get settingsReminderOffsetSubtitle {
+    return Intl.message(
+      'تعديل وقت الإشعار',
+      name: 'settingsReminderOffsetSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{minutes} دقيقة`
+  String offsetMinutes(Object minutes) {
+    return Intl.message(
+      '$minutes دقيقة',
+      name: 'offsetMinutes',
+      desc: '',
+      args: [minutes],
+    );
+  }
+
+  /// `بداية الأسبوع`
+  String get settingsWeekStart {
+    return Intl.message(
+      'بداية الأسبوع',
+      name: 'settingsWeekStart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `الأحد`
+  String get weekStartSunday {
+    return Intl.message('الأحد', name: 'weekStartSunday', desc: '', args: []);
+  }
+
+  /// `الاثنين`
+  String get weekStartMonday {
+    return Intl.message('الاثنين', name: 'weekStartMonday', desc: '', args: []);
+  }
+
+  /// `السبت`
+  String get weekStartSaturday {
+    return Intl.message('السبت', name: 'weekStartSaturday', desc: '', args: []);
+  }
+
+  /// `وقت {prayer}`
+  String notificationTitle(Object prayer) {
+    return Intl.message(
+      'وقت $prayer',
+      name: 'notificationTitle',
+      desc: '',
+      args: [prayer],
+    );
+  }
+
+  /// `حان الآن وقت صلاة {prayer}`
+  String notificationBody(Object prayer) {
+    return Intl.message(
+      'حان الآن وقت صلاة $prayer',
+      name: 'notificationBody',
+      desc: '',
+      args: [prayer],
+    );
+  }
+
+  /// `تذكير يومي`
+  String get endOfDayTitle {
+    return Intl.message(
+      'تذكير يومي',
+      name: 'endOfDayTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `هل أتممت صلواتك اليوم؟`
+  String get endOfDayBody {
+    return Intl.message(
+      'هل أتممت صلواتك اليوم؟',
+      name: 'endOfDayBody',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `مرحباً بك في سجل الصلاة`
+  String get onboardingWelcomeTitle {
+    return Intl.message(
+      'مرحباً بك في سجل الصلاة',
+      name: 'onboardingWelcomeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تتبع صلواتك اليومية مع تذكيرات لطيفة.`
+  String get onboardingWelcomeBody {
+    return Intl.message(
+      'تتبع صلواتك اليومية مع تذكيرات لطيفة.',
+      name: 'onboardingWelcomeBody',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `حدد مواعيد الصلاة`
+  String get onboardingPrayerTimesTitle {
+    return Intl.message(
+      'حدد مواعيد الصلاة',
+      name: 'onboardingPrayerTimesTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `قم بتعيين وقت بدء كل صلاة.`
+  String get onboardingPrayerTimesBody {
+    return Intl.message(
+      'قم بتعيين وقت بدء كل صلاة.',
+      name: 'onboardingPrayerTimesBody',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ابقَ على المسار`
+  String get onboardingNotificationsTitle {
+    return Intl.message(
+      'ابقَ على المسار',
+      name: 'onboardingNotificationsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `هل تريد تذكيرات لطيفة؟`
+  String get onboardingNotificationsBody {
+    return Intl.message(
+      'هل تريد تذكيرات لطيفة؟',
+      name: 'onboardingNotificationsBody',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `احمِ خصوصيتك`
+  String get onboardingAppLockTitle {
+    return Intl.message(
+      'احمِ خصوصيتك',
+      name: 'onboardingAppLockTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `أمّن سجل صلاتك ببصمة أو رمز PIN.`
+  String get onboardingAppLockBody {
+    return Intl.message(
+      'أمّن سجل صلاتك ببصمة أو رمز PIN.',
+      name: 'onboardingAppLockBody',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `أنت جاهز`
+  String get onboardingConfirmTitle {
+    return Intl.message(
+      'أنت جاهز',
+      name: 'onboardingConfirmTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `راجع إعداداتك وابدأ التتبع.`
+  String get onboardingConfirmBody {
+    return Intl.message(
+      'راجع إعداداتك وابدأ التتبع.',
+      name: 'onboardingConfirmBody',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تخطي`
+  String get onboardingSkip {
+    return Intl.message('تخطي', name: 'onboardingSkip', desc: '', args: []);
+  }
+
+  /// `التالي`
+  String get onboardingNext {
+    return Intl.message('التالي', name: 'onboardingNext', desc: '', args: []);
+  }
+
+  /// `رجوع`
+  String get onboardingBack {
+    return Intl.message('رجوع', name: 'onboardingBack', desc: '', args: []);
+  }
+
+  /// `ابدأ الآن`
+  String get onboardingGetStarted {
+    return Intl.message(
+      'ابدأ الآن',
+      name: 'onboardingGetStarted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تفعيل الإشعارات`
+  String get onboardingEnableNotifications {
+    return Intl.message(
+      'تفعيل الإشعارات',
+      name: 'onboardingEnableNotifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تفعيل قفل التطبيق`
+  String get onboardingEnableAppLock {
+    return Intl.message(
+      'تفعيل قفل التطبيق',
+      name: 'onboardingEnableAppLock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ربما لاحقاً`
+  String get onboardingMaybeLater {
+    return Intl.message(
+      'ربما لاحقاً',
+      name: 'onboardingMaybeLater',
       desc: '',
       args: [],
     );

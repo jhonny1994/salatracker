@@ -8,9 +8,12 @@ part of 'settings_providers.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
+/// Provider for the settings local data source.
 
 @ProviderFor(settingsLocalDataSource)
 final settingsLocalDataSourceProvider = SettingsLocalDataSourceProvider._();
+
+/// Provider for the settings local data source.
 
 final class SettingsLocalDataSourceProvider
     extends
@@ -20,6 +23,7 @@ final class SettingsLocalDataSourceProvider
           SettingsLocalDataSource
         >
     with $Provider<SettingsLocalDataSource> {
+  /// Provider for the settings local data source.
   SettingsLocalDataSourceProvider._()
     : super(
         from: null,
@@ -57,8 +61,12 @@ final class SettingsLocalDataSourceProvider
 String _$settingsLocalDataSourceHash() =>
     r'81668d918d896f152b7ab486945bc4bddc92148d';
 
+/// Provider for the settings repository.
+
 @ProviderFor(settingsRepository)
 final settingsRepositoryProvider = SettingsRepositoryProvider._();
+
+/// Provider for the settings repository.
 
 final class SettingsRepositoryProvider
     extends
@@ -68,6 +76,7 @@ final class SettingsRepositoryProvider
           SettingsRepository
         >
     with $Provider<SettingsRepository> {
+  /// Provider for the settings repository.
   SettingsRepositoryProvider._()
     : super(
         from: null,
@@ -105,11 +114,24 @@ final class SettingsRepositoryProvider
 String _$settingsRepositoryHash() =>
     r'f6c934ff287aa202ca3f6df8569d18e30ca6c102';
 
+/// Notifier managing application settings state.
+///
+/// Provides methods to update theme, language, notifications, and other
+/// user preferences with persistence.
+
 @ProviderFor(SettingsNotifier)
 final settingsProvider = SettingsNotifierProvider._();
 
+/// Notifier managing application settings state.
+///
+/// Provides methods to update theme, language, notifications, and other
+/// user preferences with persistence.
 final class SettingsNotifierProvider
     extends $AsyncNotifierProvider<SettingsNotifier, Settings> {
+  /// Notifier managing application settings state.
+  ///
+  /// Provides methods to update theme, language, notifications, and other
+  /// user preferences with persistence.
   SettingsNotifierProvider._()
     : super(
         from: null,
@@ -129,7 +151,12 @@ final class SettingsNotifierProvider
   SettingsNotifier create() => SettingsNotifier();
 }
 
-String _$settingsNotifierHash() => r'415fda7713e34e1c79775b2b7f363ea67f6f94a0';
+String _$settingsNotifierHash() => r'30792551a52043c6d7fcdd6ec4c9280315f37f64';
+
+/// Notifier managing application settings state.
+///
+/// Provides methods to update theme, language, notifications, and other
+/// user preferences with persistence.
 
 abstract class _$SettingsNotifier extends $AsyncNotifier<Settings> {
   FutureOr<Settings> build();

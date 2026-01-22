@@ -8,13 +8,26 @@ part of 'app_router.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
+/// Main router configuration.
+///
+/// Uses [GoRouter] for navigational state and deep-link handling.
+/// Includes redirect guard for onboarding flow.
 
 @ProviderFor(appRouter)
 final appRouterProvider = AppRouterProvider._();
 
+/// Main router configuration.
+///
+/// Uses [GoRouter] for navigational state and deep-link handling.
+/// Includes redirect guard for onboarding flow.
+
 final class AppRouterProvider
     extends $FunctionalProvider<GoRouter, GoRouter, GoRouter>
     with $Provider<GoRouter> {
+  /// Main router configuration.
+  ///
+  /// Uses [GoRouter] for navigational state and deep-link handling.
+  /// Includes redirect guard for onboarding flow.
   AppRouterProvider._()
     : super(
         from: null,
@@ -48,4 +61,4 @@ final class AppRouterProvider
   }
 }
 
-String _$appRouterHash() => r'8331d551070433e79ce06d4d09ca51decd0063d0';
+String _$appRouterHash() => r'2e68737ca25ee8c7f4e43ffa87cdb5ca899f53aa';

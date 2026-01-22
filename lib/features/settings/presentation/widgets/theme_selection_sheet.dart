@@ -3,12 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/features/settings/settings.dart';
 
+/// Modal bottom sheet for selecting app theme mode.
 class ThemeSelectionSheet extends ConsumerWidget {
+  /// Creates a [ThemeSelectionSheet].
   const ThemeSelectionSheet({
     required this.currentMode,
     super.key,
   });
 
+  /// Currently selected theme mode.
   final AppThemeMode currentMode;
 
   @override

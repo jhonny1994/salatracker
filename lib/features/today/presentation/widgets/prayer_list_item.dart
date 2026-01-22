@@ -11,8 +11,12 @@ import 'package:salat_tracker/features/settings/settings.dart';
 import 'package:salat_tracker/features/today/today.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
-/// Extracted list item widget with const constructor for performance
+/// A list item representing a single prayer with toggle functionality.
+///
+/// Displays prayer name, scheduled time, status, and a toggle to mark
+/// completion.
 class PrayerListItem extends ConsumerWidget {
+  /// Creates a [PrayerListItem].
   const PrayerListItem({
     required this.type,
     required this.isLogged,
@@ -20,8 +24,13 @@ class PrayerListItem extends ConsumerWidget {
     super.key,
   });
 
+  /// The prayer type to display.
   final PrayerType type;
+
+  /// Whether this prayer has been logged.
   final bool isLogged;
+
+  /// Index for staggered animation.
   final int index;
 
   @override
@@ -74,9 +83,11 @@ class _PrayerTile extends StatelessWidget {
     final theme = Theme.of(context);
     final statusChipTheme = theme.extension<StatusChipTheme>();
 
+    final isJumuah =
+        type == PrayerType.dhuhr && DateTime.now().weekday == DateTime.friday;
     final prayerName = switch (type) {
       PrayerType.fajr => l10n.prayerFajr,
-      PrayerType.dhuhr => l10n.prayerDhuhr,
+      PrayerType.dhuhr => isJumuah ? l10n.prayerJumuah : l10n.prayerDhuhr,
       PrayerType.asr => l10n.prayerAsr,
       PrayerType.maghrib => l10n.prayerMaghrib,
       PrayerType.isha => l10n.prayerIsha,
@@ -125,7 +136,7 @@ class _PrayerTile extends StatelessWidget {
                         ? Icon(
                             Icons.check_rounded,
                             key: const ValueKey('check'),
-                            size: 22,
+                            size: AppIconSizes.lg,
                             color: statusChipTheme?.completeBackground,
                           )
                         : const SizedBox.shrink(key: ValueKey('empty')),

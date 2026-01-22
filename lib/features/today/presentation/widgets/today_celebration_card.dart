@@ -4,7 +4,11 @@ import 'package:gap/gap.dart';
 import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
+/// A celebration card shown when all prayers are completed.
+///
+/// Features a gentle shimmer animation to acknowledge achievement.
 class TodayCelebrationCard extends StatelessWidget {
+  /// Creates a [TodayCelebrationCard].
   const TodayCelebrationCard({super.key});
 
   @override

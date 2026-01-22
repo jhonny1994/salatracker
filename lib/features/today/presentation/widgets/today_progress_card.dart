@@ -4,7 +4,11 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
+/// Displays today's prayer completion progress with a circular indicator.
+///
+/// Shows percentage, prayer count, status message, and optional points.
 class TodayProgressCard extends StatelessWidget {
+  /// Creates a [TodayProgressCard].
   const TodayProgressCard({
     required this.completedCount,
     required this.totalPrayers,
@@ -13,9 +17,16 @@ class TodayProgressCard extends StatelessWidget {
     super.key,
   });
 
+  /// Number of prayers completed today.
   final int completedCount;
+
+  /// Total number of prayers for the day.
   final int totalPrayers;
+
+  /// Completion percentage (0.0 to 1.0).
   final double completionPercentage;
+
+  /// Points earned today.
   final int points;
 
   @override
@@ -99,7 +110,7 @@ class TodayProgressCard extends StatelessWidget {
                         size: AppIconSizes.sm,
                         color: theme.colorScheme.onPrimaryContainer,
                       ),
-                      const Gap(6),
+                      const Gap(AppSpacing.sm),
                       Text(
                         l10n.todayPoints(points),
                         style: theme.textTheme.labelLarge?.copyWith(

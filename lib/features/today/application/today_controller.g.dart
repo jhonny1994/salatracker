@@ -8,12 +8,24 @@ part of 'today_controller.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
+/// Controller managing today's prayer day state.
+///
+/// Provides the current day's prayer data and handles toggling prayer
+/// completion with analytics tracking.
 
 @ProviderFor(TodayController)
 final todayControllerProvider = TodayControllerProvider._();
 
+/// Controller managing today's prayer day state.
+///
+/// Provides the current day's prayer data and handles toggling prayer
+/// completion with analytics tracking.
 final class TodayControllerProvider
     extends $AsyncNotifierProvider<TodayController, PrayerDay> {
+  /// Controller managing today's prayer day state.
+  ///
+  /// Provides the current day's prayer data and handles toggling prayer
+  /// completion with analytics tracking.
   TodayControllerProvider._()
     : super(
         from: null,
@@ -33,7 +45,12 @@ final class TodayControllerProvider
   TodayController create() => TodayController();
 }
 
-String _$todayControllerHash() => r'c8ce5490f118020656085860f1eea35e7bf1149c';
+String _$todayControllerHash() => r'420927de360cbb9219d49584fa37a2e5825c7922';
+
+/// Controller managing today's prayer day state.
+///
+/// Provides the current day's prayer data and handles toggling prayer
+/// completion with analytics tracking.
 
 abstract class _$TodayController extends $AsyncNotifier<PrayerDay> {
   FutureOr<PrayerDay> build();

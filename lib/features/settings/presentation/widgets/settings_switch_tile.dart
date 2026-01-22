@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// A settings tile with a switch toggle control.
 class SettingsSwitchTile extends StatelessWidget {
+  /// Creates a [SettingsSwitchTile].
   const SettingsSwitchTile({
     required this.icon,
     required this.title,

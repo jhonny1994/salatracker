@@ -4,9 +4,12 @@ import 'package:gap/gap.dart';
 import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
+/// Error state for the Today screen with retry functionality.
 class TodayErrorState extends ConsumerWidget {
+  /// Creates a [TodayErrorState].
   const TodayErrorState({required this.onRetry, super.key});
 
+  /// Callback triggered when user taps the retry button.
   final VoidCallback onRetry;
 
   @override

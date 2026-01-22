@@ -4,9 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:salat_tracker/core/core.dart';
+import 'package:salat_tracker/features/settings/presentation/prayer_schedule_screen.dart';
 import 'package:salat_tracker/features/settings/settings.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
+/// Main settings screen allowing users to configure theme, language, and
+/// application preferences.
+///
+/// Follows the "Settings" pattern with grouped sections and platform-adaptive
+/// controls where appropriate.
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
@@ -48,7 +54,25 @@ class SettingsScreen extends ConsumerWidget {
                       l10n,
                     ),
                   ),
-                  const Divider(height: 1, indent: 56),
+                  const Divider(
+                    height: 1,
+                    indent: AppTouchTargets.comfortable,
+                  ),
+                  SettingsTile(
+                    icon: Icons.date_range,
+                    title: l10n.settingsWeekStart,
+                    subtitle: _getWeekStartLabel(settings.weekStart, l10n),
+                    onTap: () => _showWeekStartPicker(
+                      context,
+                      ref,
+                      settings.weekStart,
+                      l10n,
+                    ),
+                  ),
+                  const Divider(
+                    height: 1,
+                    indent: AppTouchTargets.comfortable,
+                  ),
                   SettingsTile(
                     icon: Icons.language,
                     title: l10n.settingsLanguage,
@@ -76,6 +100,33 @@ class SettingsScreen extends ConsumerWidget {
             Card(
               child: Column(
                 children: [
+                  SettingsTile(
+                    icon: Icons.access_time_filled,
+                    title: l10n.settingsPrayerSchedule,
+                    subtitle: l10n.settingsPrayerScheduleSubtitle,
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) => const PrayerScheduleScreen(),
+                      ),
+                    ),
+                  ),
+                  const Divider(
+                    height: 1,
+                    indent: AppTouchTargets.comfortable,
+                  ),
+                  SettingsSwitchTile(
+                    icon: Icons.notifications_active_outlined,
+                    title: l10n.settingsNotifications,
+                    subtitle: l10n.settingsNotificationsSubtitle,
+                    value: settings.notificationsEnabled,
+                    onChanged: (value) => ref
+                        .read(settingsProvider.notifier)
+                        .toggleNotifications(enabled: value),
+                  ),
+                  const Divider(
+                    height: 1,
+                    indent: AppTouchTargets.comfortable,
+                  ),
                   SettingsSwitchTile(
                     icon: Icons.vibration,
                     title: l10n.settingsHaptics,
@@ -85,7 +136,10 @@ class SettingsScreen extends ConsumerWidget {
                         .read(settingsProvider.notifier)
                         .updateHaptics(enabled: value),
                   ),
-                  const Divider(height: 1, indent: 56),
+                  const Divider(
+                    height: 1,
+                    indent: AppTouchTargets.comfortable,
+                  ),
                   SettingsSwitchTile(
                     icon: Icons.star_outline,
                     title: l10n.settingsShowPoints,
@@ -136,10 +190,17 @@ class SettingsScreen extends ConsumerWidget {
 
   String _getLanguageLabel(String? code, S l10n) {
     return switch (code) {
-      'en' => l10n.settingsLanguageEnglish,
-      'ar' => l10n.settingsLanguageArabic,
       'fr' => l10n.settingsLanguageFrench,
       _ => l10n.settingsLanguageEnglish,
+    };
+  }
+
+  String _getWeekStartLabel(int weekday, S l10n) {
+    return switch (weekday) {
+      DateTime.sunday => l10n.weekStartSunday,
+      DateTime.monday => l10n.weekStartMonday,
+      DateTime.saturday => l10n.weekStartSaturday,
+      _ => l10n.weekStartSunday,
     };
   }
 
@@ -153,6 +214,20 @@ class SettingsScreen extends ConsumerWidget {
       showModalBottomSheet<void>(
         context: context,
         builder: (context) => ThemeSelectionSheet(currentMode: current),
+      ),
+    );
+  }
+
+  void _showWeekStartPicker(
+    BuildContext context,
+    WidgetRef ref,
+    int current,
+    S l10n,
+  ) {
+    unawaited(
+      showModalBottomSheet<void>(
+        context: context,
+        builder: (context) => WeekStartSelectionSheet(currentStart: current),
       ),
     );
   }

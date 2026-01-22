@@ -6,6 +6,7 @@
   "navSettings": "Settings",
   "prayerFajr": "Fajr",
   "prayerDhuhr": "Dhuhr",
+  "prayerJumuah": "Jumu'ah",
   "prayerAsr": "Asr",
   "prayerMaghrib": "Maghrib",
   "prayerIsha": "Isha",
@@ -48,6 +49,8 @@
   "settingsLanguageArabic": "العربية",
   "settingsLanguageFrench": "Français",
   "settingsPreferences": "Preferences",
+  "settingsNotifications": "Notifications",
+  "settingsNotificationsSubtitle": "Enable prayer time alerts",
   "settingsHaptics": "Haptic Feedback",
   "settingsHapticsSubtitle": "Vibrate on interactions",
   "settingsShowPoints": "Show Points",
@@ -55,6 +58,8 @@
   "settingsAbout": "About",
   "settingsAppVersion": "App Version",
   "settingsPrivacyPolicy": "Privacy Policy",
+  "settingsPrayerSchedule": "Prayer Schedule",
+  "settingsPrayerScheduleSubtitle": "Set custom prayer times",
   "errorLoadingSettings": "Failed to load settings",
   "errorRetry": "Retry",
   "errorLoadingCalendar": "Failed to load calendar",
@@ -73,5 +78,57 @@
     }
   },
   "today": "Today",
-  "errorLoadingData": "Error loading data"
+  "errorLoadingData": "Error loading data",
+  "historyEditWarningTitle": "Edit History?",
+  "historyEditWarningBody": "Changing past records may affect your streak and points.",
+  "actionCancel": "Cancel",
+  "actionContinue": "Continue",
+  "settingsReminderOffset": "Reminder Offset",
+  "settingsReminderOffsetSubtitle": "Adjust when you get notified",
+  "offsetMinutes": "{minutes} min",
+  "@offsetMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsWeekStart": "Week Start",
+  "weekStartSunday": "Sunday",
+  "weekStartMonday": "Monday",
+  "notificationTitle": "Time for {prayer}",
+  "@notificationTitle": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationBody": "It is time for {prayer} prayer.",
+  "@notificationBody": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "endOfDayTitle": "Daily Reflection",
+  "endOfDayBody": "Did you complete all your prayers today?",
+  "onboardingWelcomeTitle": "Welcome to Salat Tracker",
+  "onboardingWelcomeBody": "Track your daily prayers with gentle reminders.",
+  "onboardingPrayerTimesTitle": "Set Your Prayer Times",
+  "onboardingPrayerTimesBody": "Configure when each prayer time begins.",
+  "onboardingNotificationsTitle": "Stay on Track",
+  "onboardingNotificationsBody": "Would you like friendly reminders?",
+  "onboardingAppLockTitle": "Protect Your Privacy",
+  "onboardingAppLockBody": "Secure your prayer log with biometrics or PIN.",
+  "onboardingConfirmTitle": "You're All Set",
+  "onboardingConfirmBody": "Review your settings and start tracking.",
+  "onboardingSkip": "Skip",
+  "onboardingNext": "Next",
+  "onboardingBack": "Back",
+  "onboardingGetStarted": "Get Started",
+  "onboardingEnableNotifications": "Enable Notifications",
+  "onboardingEnableAppLock": "Enable App Lock",
+  "onboardingMaybeLater": "Maybe Later"
 }

@@ -2,6 +2,7 @@ import 'package:hive_ce/hive.dart';
 
 part 'prayer_type.g.dart';
 
+/// The five daily Islamic prayers.
 @HiveType(typeId: 1)
 enum PrayerType {
   @HiveField(0)
@@ -18,10 +19,10 @@ enum PrayerType {
 
 extension PrayerTypeX on PrayerType {
   String get key => switch (this) {
-        PrayerType.fajr => 'fajr',
-        PrayerType.dhuhr => 'dhuhr',
-        PrayerType.asr => 'asr',
-        PrayerType.maghrib => 'maghrib',
-        PrayerType.isha => 'isha',
-      };
+    PrayerType.fajr => 'fajr',
+    PrayerType.dhuhr => 'dhuhr',
+    PrayerType.asr => 'asr',
+    PrayerType.maghrib => 'maghrib',
+    PrayerType.isha => 'isha',
+  };
 }

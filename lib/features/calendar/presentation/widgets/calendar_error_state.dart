@@ -3,7 +3,9 @@ import 'package:gap/gap.dart';
 import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
+/// Error state for the Calendar screen with informative message.
 class CalendarErrorState extends StatelessWidget {
+  /// Creates a [CalendarErrorState].
   const CalendarErrorState({super.key});
 
   @override

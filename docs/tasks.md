@@ -9,7 +9,7 @@
 | Phase 1: Foundations | 6/6 | ✅ Complete |
 | Phase 2: Data Layer | 7/7 | ✅ Complete |
 | Phase 3: Core UX | 10/10 | ✅ Complete |
-| Phase 4: Advanced Features & Notifications | 0/12 | 🔄 In Progress |
+| Phase 4: Advanced Features & Notifications | 13/13 | ✅ Complete |
 | Phase 5: App Lock | 0/4 | ⬜ Not Started |
 | Phase 6: Quality | 0/9 | ⬜ Not Started |
 
@@ -92,33 +92,29 @@
 
 ---
 
-## Phase 4: Advanced Features & Notifications 🔄
+## Phase 4: Advanced Features & Notifications ✅
 
 ### Advanced Calendar & Settings
-- [ ] History editing with streak impact notice
-- [ ] Prayer times configuration
-- [ ] Reminder offset configuration
-- [ ] Calendar week start
+- [x] History editing with streak impact notice
+- [x] Prayer times configuration (Manual Schedule)
+- [x] Reminder offset configuration
+- [x] Calendar week start
 
 ### Onboarding
-- [ ] First-launch detection
-- [ ] Prayer time setup flow
-- [ ] Notification opt-in prompt (supportive language)
-- [ ] App Lock opt-in
-- [ ] Default settings confirmation
+- [x] First-launch detection
+- [x] Prayer time setup flow
+- [x] Notification opt-in prompt (supportive language)
+- [x] App Lock opt-in
+- [x] Default settings confirmation
 
 ### Notifications
-
----
-
-## Phase 4: Notifications ⬜
-
-- [ ] Schedule per-prayer reminders with offsets
-- [ ] End-of-day reminder (Isha + 2 hours default)
-- [ ] Reschedule on timezone/settings changes
-- [ ] Handle notification permissions (Android 13+)
-- [ ] Deep-link from notification to Today screen
-- [ ] Supportive notification copy (validated by [ux-gamification-psychology.md](ux-gamification-psychology.md))
+- [x] Schedule per-prayer reminders
+- [x] End-of-day reminder (Isha + 2 hours default)
+- [x] Reschedule on timezone/settings changes
+- [x] Handle notification permissions (Android 13+)
+- [x] Wire up to SettingsController (Enable/Disable)
+- [x] Deep-link from notification to Today screen
+- [x] Supportive notification copy (validated by [ux-gamification-psychology.md](ux-gamification-psychology.md))
 
 ---
 

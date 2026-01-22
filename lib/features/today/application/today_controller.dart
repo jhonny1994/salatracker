@@ -1,9 +1,16 @@
+import 'dart:async';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/features/prayer/prayer.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
 part 'today_controller.g.dart';
 
+/// Controller managing today's prayer day state.
+///
+/// Provides the current day's prayer data and handles toggling prayer
+/// completion with analytics tracking.
 @riverpod
 class TodayController extends _$TodayController {
   @override
@@ -69,5 +76,20 @@ class TodayController extends _$TodayController {
 
     await repository.upsertDay(finalDay);
     state = AsyncData(finalDay);
+
+    // Track analytics (Fire and forget)
+    if (existingEntryIndex < 0) {
+      // Only track when logging (not unlogging)
+      final analytics = ref.read(analyticsProvider);
+
+      unawaited(
+        analytics.logEvent(
+          AnalyticsEvent.prayerLogged,
+          parameters: {
+            AnalyticsParam.prayerType: prayerType.name,
+          },
+        ),
+      );
+    }
   }
 }

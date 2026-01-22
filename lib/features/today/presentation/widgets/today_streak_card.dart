@@ -6,7 +6,11 @@ import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/features/prayer/prayer.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
+/// Displays the current prayer streak count.
+///
+/// Hidden when streak is zero to avoid shame language.
 class TodayStreakCard extends ConsumerWidget {
+  /// Creates a [TodayStreakCard].
   const TodayStreakCard({super.key});
 
   @override

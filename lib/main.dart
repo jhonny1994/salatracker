@@ -6,6 +6,10 @@ import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/features/settings/settings.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
+/// Application entry point.
+///
+/// Initializes core services (Storage, Sentry, Notifications) and runs the
+/// main [SalatTrackerApp] widget.
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
@@ -18,11 +22,23 @@ Future<void> main() async {
         ..sendDefaultPii = false
         ..environment = dotenv.env['SENTRY_ENV'] ?? 'development';
     },
-    appRunner: () => runApp(
-      const ProviderScope(
-        child: SalatTrackerApp(),
-      ),
-    ),
+    appRunner: () async {
+      // Initialize Notifications
+      final container = ProviderContainer();
+      try {
+        await container.read(notificationServiceProvider).initialize();
+      } on Object catch (e, stack) {
+        // Error logging handled by Sentry
+        await Sentry.captureException(e, stackTrace: stack);
+      }
+
+      runApp(
+        UncontrolledProviderScope(
+          container: container,
+          child: const SalatTrackerApp(),
+        ),
+      );
+    },
   );
 }
 
@@ -31,7 +47,7 @@ class SalatTrackerApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final settingsAsync = ref.watch(settingsControllerProvider);
+    final settingsAsync = ref.watch(settingsProvider);
     final settings = settingsAsync.value;
     final themeMode =
         settings?.themeMode.toFlutterThemeMode() ?? ThemeMode.system;

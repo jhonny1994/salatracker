@@ -1,5 +1,8 @@
 import 'package:salat_tracker/features/settings/settings.dart';
 
+/// Repository implementation for settings using local data source.
+///
+/// Delegates to [SettingsLocalDataSource] for all persistence operations.
 class SettingsRepositoryImpl implements SettingsRepository {
   SettingsRepositoryImpl(this._localDataSource);
 

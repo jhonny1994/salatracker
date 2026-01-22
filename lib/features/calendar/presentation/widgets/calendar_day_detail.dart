@@ -1,46 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:salat_tracker/core/core.dart';
+import 'package:salat_tracker/features/calendar/application/history_controller.dart';
 import 'package:salat_tracker/features/calendar/calendar.dart';
 import 'package:salat_tracker/features/prayer/prayer.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
-class CalendarDayDetail extends StatelessWidget {
+/// Displays detailed prayer status for a selected calendar day.
+///
+/// Allows toggling prayer completion for the selected day with confirmation
+/// dialog for historical edits.
+class CalendarDayDetail extends ConsumerWidget {
+  /// Creates a [CalendarDayDetail].
   const CalendarDayDetail({
     required this.day,
     required this.prayerDay,
     super.key,
   });
 
+  /// The date being displayed.
   final DateTime day;
+
+  /// Prayer data for this day, if any.
   final PrayerDay? prayerDay;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final l10n = S.of(context);
 
-    if (prayerDay == null) {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.event_available,
-              size: AppIconSizes.hero,
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
-            const Gap(AppSpacing.lg),
-            Text(
-              l10n.calendarNoData,
-              style: theme.textTheme.bodyLarge?.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
-              ),
-            ),
-          ],
-        ),
-      );
-    }
+    // If day is null, we treat it as empty but editable
+    final entries = prayerDay?.entries ?? [];
+    final completedCount = entries.where((e) => e.isCompleted).length;
+    final points = prayerDay?.points ?? 0;
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(AppSpacing.xl),
@@ -64,12 +57,12 @@ class CalendarDayDetail extends StatelessWidget {
                   CalendarStatItem(
                     icon: Icons.check_circle,
                     label: l10n.calendarCompleted,
-                    value: '${prayerDay!.entries.length}/5',
+                    value: '$completedCount/5',
                   ),
                   CalendarStatItem(
                     icon: Icons.star,
                     label: l10n.calendarPoints,
-                    value: '${prayerDay!.points}',
+                    value: '$points',
                   ),
                 ],
               ),
@@ -84,25 +77,88 @@ class CalendarDayDetail extends StatelessWidget {
           ),
           const Gap(AppSpacing.md),
 
-          if (prayerDay!.entries.isEmpty)
-            Text(l10n.calendarNoPrayers)
-          else
-            ...prayerDay!.entries.map(
-              (entry) => Padding(
-                padding: const EdgeInsets.only(bottom: AppSpacing.sm),
-                child: ListTile(
-                  leading: const Icon(Icons.check_circle, color: Colors.green),
-                  title: Text(entry.type.name.toUpperCase()),
-                  subtitle: Text(
-                    l10n.calendarLoggedAt(
-                      (entry.checkedAt ?? entry.scheduledAt).toFormattedTime,
-                    ),
-                  ),
-                ),
+          ...PrayerType.values.map((type) {
+            final entry = entries.firstWhere(
+              (e) => e.type == type,
+              orElse: () => PrayerEntry(
+                type: type,
+                scheduledAt: DateTime.now(), // Placeholder
+                isCompleted: false,
               ),
-            ),
+            );
+
+            final isJumuah =
+                type == PrayerType.dhuhr && day.weekday == DateTime.friday;
+            final name = isJumuah ? l10n.prayerJumuah : type.name.toUpperCase();
+            final isCompleted = entry.isCompleted;
+
+            return Padding(
+              padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+              child: ListTile(
+                leading: Icon(
+                  isCompleted
+                      ? Icons.check_circle
+                      : Icons.radio_button_unchecked,
+                  color: isCompleted
+                      ? theme.colorScheme.primary
+                      : theme.colorScheme.onSurfaceVariant,
+                ),
+                title: Text(
+                  name,
+                  style: isCompleted
+                      ? null
+                      : TextStyle(color: theme.colorScheme.onSurfaceVariant),
+                ),
+                subtitle: isCompleted && entry.checkedAt != null
+                    ? Text(
+                        l10n.calendarLoggedAt(entry.checkedAt!.toFormattedTime),
+                      )
+                    : null,
+                onTap: () => _handleTap(context, ref, type, isCompleted),
+              ),
+            );
+          }),
         ],
       ),
     );
+  }
+
+  Future<void> _handleTap(
+    BuildContext context,
+    WidgetRef ref,
+    PrayerType type,
+    bool currentStatus,
+  ) async {
+    final now = DateTime.now();
+    final today = now.dateOnly;
+    final isHistory = day.dateOnly.isBefore(today);
+
+    if (isHistory) {
+      final l10n = S.of(context);
+      final confirmed = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(l10n.historyEditWarningTitle),
+          content: Text(l10n.historyEditWarningBody),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: Text(l10n.actionCancel),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: Text(l10n.actionContinue),
+            ),
+          ],
+        ),
+      );
+
+      if (confirmed != true) return;
+    }
+
+    // Perform toggle
+    await ref
+        .read(historyControllerProvider.notifier)
+        .togglePrayer(date: day, prayerType: type);
   }
 }

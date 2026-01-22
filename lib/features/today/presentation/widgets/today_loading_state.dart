@@ -3,7 +3,9 @@ import 'package:gap/gap.dart';
 import 'package:salat_tracker/shared/shared.dart';
 import 'package:shimmer/shimmer.dart';
 
+/// Loading state for the Today screen with shimmer placeholders.
 class TodayLoadingState extends StatelessWidget {
+  /// Creates a [TodayLoadingState].
   const TodayLoadingState({super.key});
 
   @override
