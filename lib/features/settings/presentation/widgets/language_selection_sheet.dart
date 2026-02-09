@@ -16,27 +16,25 @@ class LanguageSelectionSheet extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = S.of(context);
-    final languages = {
-      'en': l10n.settingsLanguageEnglish,
-      'ar': l10n.settingsLanguageArabic,
-      'fr': l10n.settingsLanguageFrench,
-    };
+    final currentLocale = currentCode == null
+        ? Localizations.localeOf(context)
+        : Locale(currentCode!);
 
     return SafeArea(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: languages.entries.map((entry) {
+        children: supportedLocales.map((locale) {
+          final languageCode = locale.languageCode;
           return ListTile(
             leading: Icon(
-              entry.key == currentCode ? Icons.check : null,
+              languageCode == currentLocale.languageCode ? Icons.check : null,
               color: Theme.of(context).colorScheme.primary,
             ),
-            title: Text(entry.value),
+            title: Text(localizedLanguageName(context, locale)),
             onTap: () async {
               await ref
                   .read(settingsProvider.notifier)
-                  .updateLanguageCode(entry.key)
+                  .updateLanguageCode(languageCode)
                   .then((_) {
                     if (context.mounted) {
                       Navigator.pop(context);

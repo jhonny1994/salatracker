@@ -1,5 +1,7 @@
 import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:salat_tracker/core/storage/adapters/time_of_day_adapter.dart';
+import 'package:salat_tracker/features/badges/domain/models/badge_award.dart';
+import 'package:salat_tracker/features/badges/domain/models/badge_type.dart';
 import 'package:salat_tracker/features/prayer/prayer.dart';
 import 'package:salat_tracker/features/settings/settings.dart';
 
@@ -10,6 +12,7 @@ import 'package:salat_tracker/features/settings/settings.dart';
 class HiveService {
   static const settingsBoxName = 'settings';
   static const prayerDaysBoxName = 'prayer_days';
+  static const badgesBoxName = 'badge_awards';
   static const metaBoxName = 'meta';
   static const schemaVersionKey = 'schema_version';
   static const schemaVersion = 1;
@@ -21,6 +24,7 @@ class HiveService {
     await _ensureSchemaVersion(metaBox);
     await Hive.openBox<Settings>(settingsBoxName);
     await Hive.openBox<PrayerDay>(prayerDaysBoxName);
+    await Hive.openBox<BadgeAward>(badgesBoxName);
   }
 
   static void _registerAdapters() {
@@ -41,6 +45,12 @@ class HiveService {
     }
     if (!Hive.isAdapterRegistered(SettingsAdapter().typeId)) {
       Hive.registerAdapter(SettingsAdapter());
+    }
+    if (!Hive.isAdapterRegistered(BadgeTypeAdapter().typeId)) {
+      Hive.registerAdapter(BadgeTypeAdapter());
+    }
+    if (!Hive.isAdapterRegistered(BadgeAwardAdapter().typeId)) {
+      Hive.registerAdapter(BadgeAwardAdapter());
     }
   }
 

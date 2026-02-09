@@ -3,9 +3,15 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:salat_tracker/core/core.dart';
+import 'package:salat_tracker/features/badges/badges.dart';
+import 'package:salat_tracker/features/security/data/providers/security_providers.dart';
+import 'package:salat_tracker/features/security/presentation/widgets/pin_setup_dialog.dart';
+import 'package:salat_tracker/features/settings/data/providers/settings_providers.dart';
+import 'package:salat_tracker/features/settings/domain/models/app_theme_mode.dart';
 import 'package:salat_tracker/features/settings/presentation/prayer_schedule_screen.dart';
-import 'package:salat_tracker/features/settings/settings.dart';
+import 'package:salat_tracker/features/settings/presentation/widgets/widgets.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
 /// Main settings screen allowing users to configure theme, language, and
@@ -76,7 +82,10 @@ class SettingsScreen extends ConsumerWidget {
                   SettingsTile(
                     icon: Icons.language,
                     title: l10n.settingsLanguage,
-                    subtitle: _getLanguageLabel(settings.localeCode, l10n),
+                    subtitle: _getLanguageLabel(
+                      context,
+                      settings.localeCode,
+                    ),
                     onTap: () => _showLanguagePicker(
                       context,
                       ref,
@@ -114,6 +123,20 @@ class SettingsScreen extends ConsumerWidget {
                     height: 1,
                     indent: AppTouchTargets.comfortable,
                   ),
+                  SettingsTile(
+                    icon: Icons.emoji_events_outlined,
+                    title: l10n.settingsBadges,
+                    subtitle: l10n.settingsBadgesSubtitle,
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) => const BadgesScreen(),
+                      ),
+                    ),
+                  ),
+                  const Divider(
+                    height: 1,
+                    indent: AppTouchTargets.comfortable,
+                  ),
                   SettingsSwitchTile(
                     icon: Icons.notifications_active_outlined,
                     title: l10n.settingsNotifications,
@@ -122,6 +145,42 @@ class SettingsScreen extends ConsumerWidget {
                     onChanged: (value) => ref
                         .read(settingsProvider.notifier)
                         .toggleNotifications(enabled: value),
+                  ),
+                  const Divider(
+                    height: 1,
+                    indent: AppTouchTargets.comfortable,
+                  ),
+                  SettingsSwitchTile(
+                    icon: Icons.lock_outline,
+                    title: l10n.settingsAppLock,
+                    subtitle: l10n.settingsAppLockSubtitle,
+                    value: settings.appLockEnabled,
+                    onChanged: (value) async {
+                      if (value) {
+                        final pin = await showDialog<String>(
+                          context: context,
+                          builder: (_) => const PinSetupDialog(),
+                        );
+                        if (pin == null) {
+                          return;
+                        }
+
+                        final securityRepository = ref.read(
+                          securityRepositoryProvider,
+                        );
+                        await securityRepository.setPin(pin);
+                      }
+
+                      await ref
+                          .read(settingsProvider.notifier)
+                          .updateAppLockEnabled(enabled: value);
+
+                      if (!value) {
+                        ref
+                            .read(appLockControllerProvider.notifier)
+                            .unlockApp();
+                      }
+                    },
                   ),
                   const Divider(
                     height: 1,
@@ -165,12 +224,7 @@ class SettingsScreen extends ConsumerWidget {
             Card(
               child: Column(
                 children: [
-                  SettingsTile(
-                    icon: Icons.info_outline,
-                    title: l10n.settingsAppVersion,
-                    subtitle: '1.0.0',
-                    trailing: const SizedBox.shrink(),
-                  ),
+                  _buildVersionTile(l10n),
                 ],
               ),
             ),
@@ -188,11 +242,15 @@ class SettingsScreen extends ConsumerWidget {
     };
   }
 
-  String _getLanguageLabel(String? code, S l10n) {
-    return switch (code) {
-      'fr' => l10n.settingsLanguageFrench,
-      _ => l10n.settingsLanguageEnglish,
-    };
+  String _getLanguageLabel(BuildContext context, String? code) {
+    final locale = code == null
+        ? Localizations.localeOf(context)
+        : Locale(code);
+    final supported = supportedLocales.firstWhere(
+      (item) => item.languageCode == locale.languageCode,
+      orElse: () => const Locale('en'),
+    );
+    return localizedLanguageName(context, supported);
   }
 
   String _getWeekStartLabel(int weekday, S l10n) {
@@ -202,6 +260,25 @@ class SettingsScreen extends ConsumerWidget {
       DateTime.saturday => l10n.weekStartSaturday,
       _ => l10n.weekStartSunday,
     };
+  }
+
+  Widget _buildVersionTile(S l10n) {
+    return FutureBuilder<PackageInfo>(
+      future: PackageInfo.fromPlatform(),
+      builder: (context, snapshot) {
+        final info = snapshot.data;
+        final subtitle = info == null
+            ? '...'
+            : '${info.version}+${info.buildNumber}';
+
+        return SettingsTile(
+          icon: Icons.info_outline,
+          title: l10n.settingsAppVersion,
+          subtitle: subtitle,
+          trailing: const SizedBox.shrink(),
+        );
+      },
+    );
   }
 
   void _showThemePicker(

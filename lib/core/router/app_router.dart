@@ -5,6 +5,8 @@ import 'package:salat_tracker/core/notifications/notification_listener_widget.da
 import 'package:salat_tracker/core/router/root_shell.dart';
 import 'package:salat_tracker/features/calendar/calendar.dart';
 import 'package:salat_tracker/features/onboarding/onboarding.dart';
+import 'package:salat_tracker/features/security/data/providers/security_providers.dart';
+import 'package:salat_tracker/features/security/presentation/pages/app_lock_screen.dart';
 import 'package:salat_tracker/features/settings/settings.dart';
 import 'package:salat_tracker/features/today/today.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
@@ -19,12 +21,27 @@ part 'app_router.g.dart';
 GoRouter appRouter(Ref ref) {
   // Watch settings to react to onboarding completion
   final settingsAsync = ref.watch(settingsProvider);
+  // Watch lock state
+  final lockStatus = ref.watch(appLockControllerProvider);
 
   return GoRouter(
     initialLocation: '/today',
     observers: [SentryNavigatorObserver()],
     redirect: (context, state) {
-      // Check if onboarding is complete
+      // 1. Check App Lock status first
+      final isLocked = lockStatus == AppLockStatus.locked;
+      final onLockScreen = state.matchedLocation == '/lock';
+
+      if (isLocked) {
+        return onLockScreen ? null : '/lock';
+      }
+
+      if (onLockScreen && !isLocked) {
+        // If unlocked but still on lock screen, go to home
+        return '/today';
+      }
+
+      // 2. Check Onboarding status
       final settings = settingsAsync.asData?.value;
       final onboardingComplete = settings?.onboardingComplete ?? false;
       final isOnboarding = state.matchedLocation == '/onboarding';
@@ -42,6 +59,12 @@ GoRouter appRouter(Ref ref) {
       return null;
     },
     routes: [
+      // Lock Screen (highest priority, outside shell)
+      GoRoute(
+        path: '/lock',
+        builder: (context, state) => const AppLockScreen(),
+      ),
+
       // Onboarding route (outside shell)
       GoRoute(
         path: '/onboarding',

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:hive_ce/hive.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/features/prayer/prayer.dart';
@@ -22,6 +23,16 @@ SettingsRepository settingsRepository(Ref ref) {
   return SettingsRepositoryImpl(ref.read(settingsLocalDataSourceProvider));
 }
 
+/// Provider for the app version string from platform metadata.
+@riverpod
+Future<String> appVersion(Ref ref) async {
+  final info = await PackageInfo.fromPlatform();
+  if (info.buildNumber.isEmpty) {
+    return info.version;
+  }
+  return '${info.version}+${info.buildNumber}';
+}
+
 /// Notifier managing application settings state.
 ///
 /// Provides methods to update theme, language, notifications, and other
@@ -31,7 +42,13 @@ class SettingsNotifier extends _$SettingsNotifier {
   @override
   Future<Settings> build() async {
     final repository = ref.read(settingsRepositoryProvider);
-    return repository.fetchSettings();
+    final settings = await repository.fetchSettings();
+
+    if (settings.notificationsEnabled) {
+      await _scheduleForSettings(settings);
+    }
+
+    return settings;
   }
 
   Future<void> updateThemeMode(AppThemeMode mode) async {
@@ -88,7 +105,7 @@ class SettingsNotifier extends _$SettingsNotifier {
       await repository.saveSettings(updated);
 
       if (updated.notificationsEnabled) {
-        await _scheduleUpcomingPrayers();
+        await _scheduleForSettings(updated);
       }
 
       return updated;
@@ -109,7 +126,7 @@ class SettingsNotifier extends _$SettingsNotifier {
       await repository.saveSettings(updated);
 
       if (updated.notificationsEnabled) {
-        await _scheduleUpcomingPrayers();
+        await _scheduleForSettings(updated);
       }
 
       return updated;
@@ -121,6 +138,16 @@ class SettingsNotifier extends _$SettingsNotifier {
     state = await AsyncValue.guard(() async {
       final current = await future;
       final updated = current.copyWith(weekStart: weekday);
+      await repository.saveSettings(updated);
+      return updated;
+    });
+  }
+
+  Future<void> updateAppLockEnabled({required bool enabled}) async {
+    final repository = ref.read(settingsRepositoryProvider);
+    state = await AsyncValue.guard(() async {
+      final current = await future;
+      final updated = current.copyWith(appLockEnabled: enabled);
       await repository.saveSettings(updated);
       return updated;
     });
@@ -151,7 +178,10 @@ class SettingsNotifier extends _$SettingsNotifier {
     if (nativeState.hasValue &&
         (nativeState.value?.notificationsEnabled ?? false) == enabled) {
       if (enabled) {
-        await _scheduleUpcomingPrayers();
+        final current = state.asData?.value ?? Settings.defaults();
+        await _scheduleForSettings(
+          current.copyWith(notificationsEnabled: true),
+        );
       } else {
         await notificationService.cancelAll();
       }
@@ -168,75 +198,66 @@ class SettingsNotifier extends _$SettingsNotifier {
     );
   }
 
-  Future<void> _scheduleUpcomingPrayers() async {
+  Future<void> _scheduleForSettings(Settings currentSettings) async {
     final notificationService = ref.read(notificationServiceProvider);
+    await notificationService.cancelAll();
 
-    // Ensure we have the latest settings logic
-    final currentSettings = state.asData?.value ?? Settings.defaults();
     final times = currentSettings.prayerTimes;
 
     final now = DateTime.now();
-    // Schedule for today and tomorrow
-    for (var i = 0; i < 2; i++) {
-      final date = now.add(Duration(days: i));
 
-      for (final type in PrayerType.values) {
-        final time = times[type] ?? const TimeOfDay(hour: 0, minute: 0);
-        final offset = currentSettings.offsets[type] ?? 0;
+    for (final type in PrayerType.values) {
+      final time = times[type] ?? const TimeOfDay(hour: 0, minute: 0);
+      final offset = currentSettings.offsets[type] ?? 0;
+      final scheduledTime = DateTime(
+        now.year,
+        now.month,
+        now.day,
+        time.hour,
+        time.minute,
+      ).add(Duration(minutes: offset));
 
-        final scheduledTime = DateTime(
-          date.year,
-          date.month,
-          date.day,
-          time.hour,
-          time.minute,
-        ).add(Duration(minutes: offset));
+      final s = S.current;
+      final prayerName = _prayerName(type, s);
 
-        // Handle if time is in the past for today.
-        // But zonedSchedule needs a future time for the *first* trigger.
-        // If scheduledTime is passed, we check if we should add a day?
-        // No, we are iterating days.
-        // If i=1, it is future.
-        // But we want to ensure we schedule the NEXT valid instance.
-
-        if (scheduledTime.isBefore(now)) {
-          continue;
-        }
-
-        final s = S.current;
-        final prayerName = type.name;
-
-        await notificationService.schedulePrayer(
-          id: i * 10 + type.index, // Unique ID per day per prayer
-          title: s.notificationTitle(prayerName),
-          body: s.notificationBody(prayerName),
-          scheduledAt: scheduledTime,
-          payload: '/today',
-        );
-      }
-
-      // End of Day Reminder (Isha + 2h)
-      final ishaTime =
-          times[PrayerType.isha] ?? const TimeOfDay(hour: 20, minute: 30);
-      final ishaDateTime = DateTime(
-        date.year,
-        date.month,
-        date.day,
-        ishaTime.hour,
-        ishaTime.minute,
+      await notificationService.schedulePrayer(
+        id: type.index,
+        title: s.notificationTitle(prayerName),
+        body: s.notificationBody(prayerName),
+        scheduledAt: scheduledTime,
+        repeatsDaily: true,
+        payload: '/today',
       );
-      final reflectionTime = ishaDateTime.add(const Duration(hours: 2));
-
-      if (reflectionTime.isAfter(now)) {
-        await notificationService.schedulePrayer(
-          id: i * 10 + 9, // ID 9 or 19
-          title: S.current.endOfDayTitle,
-          body: S.current.endOfDayBody,
-          scheduledAt: reflectionTime,
-          payload: '/today',
-        );
-      }
     }
+
+    final ishaTime =
+        times[PrayerType.isha] ?? const TimeOfDay(hour: 20, minute: 30);
+    final reflectionTime = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      ishaTime.hour,
+      ishaTime.minute,
+    ).add(const Duration(hours: 2));
+
+    await notificationService.schedulePrayer(
+      id: 99,
+      title: S.current.endOfDayTitle,
+      body: S.current.endOfDayBody,
+      scheduledAt: reflectionTime,
+      repeatsDaily: true,
+      payload: '/today',
+    );
+  }
+
+  String _prayerName(PrayerType type, S s) {
+    return switch (type) {
+      PrayerType.fajr => s.prayerFajr,
+      PrayerType.dhuhr => s.prayerDhuhr,
+      PrayerType.asr => s.prayerAsr,
+      PrayerType.maghrib => s.prayerMaghrib,
+      PrayerType.isha => s.prayerIsha,
+    };
   }
 
   /// Marks onboarding as complete.

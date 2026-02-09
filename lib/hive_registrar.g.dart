@@ -3,6 +3,8 @@
 // Check in to version control
 
 import 'package:hive_ce/hive.dart';
+import 'package:salat_tracker/features/badges/domain/models/badge_award.dart';
+import 'package:salat_tracker/features/badges/domain/models/badge_type.dart';
 import 'package:salat_tracker/features/prayer/domain/models/prayer_day.dart';
 import 'package:salat_tracker/features/prayer/domain/models/prayer_entry.dart';
 import 'package:salat_tracker/features/prayer/domain/models/prayer_type.dart';
@@ -12,6 +14,8 @@ import 'package:salat_tracker/features/settings/domain/models/settings.dart';
 extension HiveRegistrar on HiveInterface {
   void registerAdapters() {
     registerAdapter(AppThemeModeAdapter());
+    registerAdapter(BadgeAwardAdapter());
+    registerAdapter(BadgeTypeAdapter());
     registerAdapter(PrayerDayAdapter());
     registerAdapter(PrayerEntryAdapter());
     registerAdapter(PrayerTypeAdapter());
@@ -22,6 +26,8 @@ extension HiveRegistrar on HiveInterface {
 extension IsolatedHiveRegistrar on IsolatedHiveInterface {
   void registerAdapters() {
     registerAdapter(AppThemeModeAdapter());
+    registerAdapter(BadgeAwardAdapter());
+    registerAdapter(BadgeTypeAdapter());
     registerAdapter(PrayerDayAdapter());
     registerAdapter(PrayerEntryAdapter());
     registerAdapter(PrayerTypeAdapter());

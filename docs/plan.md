@@ -16,7 +16,7 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 | **State** | Riverpod 3 + Freezed 3 |
 | **Storage** | Hive CE (no encryption for v1) |
 | **Notifications** | Per-prayer offsets + end-of-day (Isha +2h) |
-| **App Lock** | Biometrics + PIN; trigger on screen off |
+| **App Lock** | Biometrics + PIN; trigger only after screen-off/device-lock background->resume path |
 | **Analytics** | Sentry (free tier) |
 | **CI/CD** | Signed APK + AAB via GitHub Actions |
 | **Font** | Cairo (bundled) |
@@ -26,7 +26,7 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 | **minSdk** | Android 23 |
 | **Version** | 0.1.0+1 |
 
-## Implementation Phases
+## Implementation Phases (Production Finalization)
 
 ### Phase 1: Foundations ✅
 > **Status:** Complete
@@ -62,14 +62,13 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 
 ---
 
-### Phase 3: Core UX 🔄
-> **Status:** In Progress
+### Phase 3: Core UX ✅
+> **Status:** Complete
 
-- [/] Today screen: checklist + progress (percentage primary) + quick log + supportive summary
-- [ ] Calendar view: month grid with day status colors
-- [ ] Day detail + history editing with streak impact message
-- [ ] Settings: prayer times, offsets, language, theme, notifications, haptics
-- [ ] Add badges view (reflective, no push)
+- [x] Today screen: checklist + progress (percentage primary) + quick log + supportive summary
+- [x] Calendar view: month grid with day status colors
+- [x] Day detail + history editing with streak impact message
+- [x] Settings: prayer times, offsets, language, theme, notifications, haptics
 
 **Acceptance Criteria:**
 - User can log all 5 prayers
@@ -78,67 +77,114 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 
 ---
 
-### Phase 4: Notifications ⬜
-> **Status:** Not Started
+### Phase 4: Advanced Features + Notifications + Badges 🔄
+> **Status:** In Progress
 
-- [ ] Schedule 5 daily reminders with per-prayer offsets
-- [ ] End-of-day reminder at Isha + 2 hours (editable)
-- [ ] Handle permissions (Android 13+), timezone/DST rescheduling
-- [ ] Ensure notification tap deep-links to relevant prayer
-- [ ] Supportive copy only (validated by [ux-gamification-psychology.md](ux-gamification-psychology.md))
+#### Completed
+- [x] Schedule 5 daily reminders with per-prayer offsets
+- [x] End-of-day reminder at Isha + 2 hours (editable)
+- [x] Handle permissions (Android 13+), timezone/settings rescheduling
+- [x] Notification tap deep-links to Today screen
+- [x] Supportive copy only (validated by [ux-gamification-psychology.md](ux-gamification-psychology.md))
+
+#### Remaining
+- [ ] Validate timezone and DST-safe scheduling rules with tests
+- [ ] Ensure deterministic notification ID strategy to prevent duplicates
+- [ ] Verify reboot/package-update rescheduling consistency
+- [ ] Define reflective badge taxonomy (non-competitive)
+- [ ] Implement badge domain model and persistence
+- [ ] Implement badge evaluation engine and recomputation triggers
+- [ ] Add badges UI and EN/AR/FR localization
+- [ ] Add badge logic and UI tests
 
 **Acceptance Criteria:**
-- Notifications fire at correct times
-- Deep-link opens correct screen
-- Copy passes supportive tone review
+- Notifications fire correctly across timezone and DST changes
+- Scheduling remains stable across app restart/reboot/update
+- Badges are reflective (no pressure mechanics) and fully localized
 
 ---
 
-### Phase 5: App Lock ⬜
-> **Status:** Not Started
+### Phase 5: App Lock and Security Hardening 🔄
+> **Status:** In Progress
 
-- [ ] Onboarding prompt to enable/disable App Lock
-- [ ] Lock triggered only after device screen off/lock
-- [ ] Biometrics with PIN fallback
-- [ ] Best-effort iOS implementation and documented behavior
+#### Completed
+- [x] Security providers and app lock route wired into router redirect flow
+- [x] Biometrics + PIN UI foundation added (`local_auth`, `flutter_secure_storage`, `pinput`)
+
+#### Remaining
+- [ ] Move app lock enable flag to Settings model (preference domain)
+- [ ] Replace plaintext PIN storage with salted hash verification
+- [ ] Add safe migration for existing security state
+- [ ] Implement lifecycle observer for foreground/background transitions
+- [ ] Enforce lock only after screen-off/device-lock background->resume path
+- [ ] Wire onboarding app lock step to real setup flow (not placeholder)
+- [ ] Add lockout/backoff policy for repeated invalid PIN attempts
+- [ ] Add unit/widget/integration tests for lock behavior
+- [ ] Document best-effort iOS behavior and edge cases
 
 **Acceptance Criteria:**
-- Lock gate appears after screen off
-- Biometrics authentication works
-- PIN fallback functions correctly
+- Lock gate appears only after intended screen-off/device-lock path
+- PIN is never stored plaintext
+- Biometrics + PIN fallback works across cold start and resume scenarios
 
 ---
 
-### Phase 6: Quality and Release ⬜
+### Phase 6: Quality Engineering ⬜
 > **Status:** Not Started
 
-- [ ] Unit tests for streaks, points, data integrity
-- [ ] Notification scheduling tests
-- [ ] RTL layout checks and smoke tests
-- [ ] Supportive copy review (no shame language)
-- [ ] Sentry integration with PII scrubbing
-- [ ] GitHub Actions builds signed APK + signed AAB
-- [ ] Play Store readiness checklist and release notes
-- [ ] Brand assets prep (icon, splash, store media)
-- [ ] Follow [ux-gamification-psychology.md](ux-gamification-psychology.md) checklist
+- [ ] Unit tests: streak, points, repositories, security policy, notifications schedule
+- [ ] Widget tests: Today, Calendar details, Settings selectors, Onboarding + lock setup
+- [ ] Integration smoke tests: first launch -> onboarding -> logging -> calendar -> lock -> notification deep-link
+- [ ] RTL and localization verification (EN/AR/FR)
+- [ ] Enforce analyzer/format gates and coverage threshold in CI
+- [ ] Accessibility checks (contrast, touch targets, semantics)
+- [ ] Performance checks on core flows (no visible jank)
 
 **Acceptance Criteria:**
 - All tests pass
-- No shame language in UI
-- Signed builds upload successfully
+- No P0/P1 defects open in core flows
+- Quality gates are green in CI
+
+---
+
+### Phase 7: Release Engineering and Store Readiness ⬜
+> **Status:** Not Started
+
+- [ ] Add GitHub Actions CI workflow (format + analyze + tests)
+- [ ] Add signed APK and AAB build workflows
+- [ ] Add artifact retention and release tagging workflow
+- [ ] Validate signing, env wiring, and secret hygiene
+- [ ] Finalize icon/splash/store media and listing copy
+- [ ] Finalize privacy policy and in-app link
+- [ ] Prepare release notes and versioning process
+
+**Acceptance Criteria:**
+- Release candidate build is reproducible and signed
+- Store assets and policy links are complete
+
+---
+
+### Phase 8: Launch Audit and Go/No-Go ⬜
+> **Status:** Not Started
+
+- [ ] Run final doc-code parity audit (README/plan/tasks/prd/rules)
+- [ ] Security audit pass (PIN hashing, lifecycle lock correctness)
+- [ ] Notification audit pass (reliability, no duplicate scheduling)
+- [ ] Accessibility and performance audits pass
+- [ ] Conduct go/no-go review with objective release gates
+
+**Acceptance Criteria:**
+- No open P0/P1 defects
+- CI green on protected branch
+- Stakeholder signoff completed
 
 ---
 
 ## Phase Dependencies
 
 ```
-Phase 1 ─────────► Phase 2 ─────────► Phase 3
-(Foundations)     (Data)             (Core UX)
-                                          │
-                            ┌─────────────┼─────────────┐
-                            ▼             ▼             ▼
-                       Phase 4       Phase 5       Phase 6
-                    (Notifications)  (App Lock)   (Quality)
+Phase 1 ─────────► Phase 2 ─────────► Phase 3 ─────────► Phase 4 ─────────► Phase 5 ─────────► Phase 6 ─────────► Phase 7 ─────────► Phase 8
+(Foundations)     (Data)             (Core UX)          (Advanced/Notif/Badges) (App Lock/Security) (Quality)       (Release)        (Go/No-Go)
 ```
 
 ---

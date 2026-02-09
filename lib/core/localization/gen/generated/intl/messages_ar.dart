@@ -20,27 +20,58 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
-  static String m0(time) => "سُجِّل في ${time}";
+  static String m0(date) => "تم الحصول عليها في ${date}";
 
-  static String m1(prayer) => "حان الآن وقت صلاة ${prayer}";
+  static String m1(time) => "سُجِّل في ${time}";
 
-  static String m2(prayer) => "وقت ${prayer}";
+  static String m2(prayer) => "حان الآن وقت صلاة ${prayer}";
 
-  static String m3(minutes) => "${minutes} دقيقة";
+  static String m3(prayer) => "وقت ${prayer}";
 
-  static String m4(count) => "${count} من 5 صلوات مسجلة";
+  static String m4(minutes) => "${minutes} دقيقة";
 
-  static String m5(count) => "${count} نقطة";
+  static String m5(count) => "${count} من 5 صلوات مسجلة";
 
-  static String m6(count) => "سلسلة ${count} يوم";
+  static String m6(count) => "${count} نقطة";
+
+  static String m7(count) => "سلسلة ${count} يوم";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "actionCancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "actionContinue": MessageLookupByLibrary.simpleMessage("استمرار"),
     "appTitle": MessageLookupByLibrary.simpleMessage("سجل الصلاة"),
+    "badgeFirstPrayerDescription": MessageLookupByLibrary.simpleMessage(
+      "قمت بتسجيل أول صلاة لك.",
+    ),
+    "badgeFirstPrayerName": MessageLookupByLibrary.simpleMessage(
+      "أول صلاة مسجلة",
+    ),
+    "badgeMonthCompleteDescription": MessageLookupByLibrary.simpleMessage(
+      "حققت 90% إكمال خلال شهر.",
+    ),
+    "badgeMonthCompleteName": MessageLookupByLibrary.simpleMessage(
+      "إنجاز الشهر",
+    ),
+    "badgeSeasonChampionDescription": MessageLookupByLibrary.simpleMessage(
+      "حققت 80% إكمال خلال 3 أشهر.",
+    ),
+    "badgeSeasonChampionName": MessageLookupByLibrary.simpleMessage(
+      "بطل الموسم",
+    ),
+    "badgeWeekConsistencyDescription": MessageLookupByLibrary.simpleMessage(
+      "أكملت 7 أيام كاملة من الصلوات.",
+    ),
+    "badgeWeekConsistencyName": MessageLookupByLibrary.simpleMessage(
+      "أسبوع من الالتزام",
+    ),
+    "badgesEarnedOn": m0,
+    "badgesEmpty": MessageLookupByLibrary.simpleMessage(
+      "لا توجد شارات بعد. استمر في تسجيل صلواتك.",
+    ),
+    "badgesTitle": MessageLookupByLibrary.simpleMessage("الشارات"),
     "calendarCompleted": MessageLookupByLibrary.simpleMessage("مكتمل"),
-    "calendarLoggedAt": m0,
+    "calendarLoggedAt": m1,
     "calendarNoData": MessageLookupByLibrary.simpleMessage(
       "لا توجد صلوات مسجلة لهذا اليوم",
     ),
@@ -75,9 +106,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "navCalendar": MessageLookupByLibrary.simpleMessage("التقويم"),
     "navSettings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
     "navToday": MessageLookupByLibrary.simpleMessage("اليوم"),
-    "notificationBody": m1,
-    "notificationTitle": m2,
-    "offsetMinutes": m3,
+    "notificationBody": m2,
+    "notificationTitle": m3,
+    "offsetMinutes": m4,
     "onboardingAppLockBody": MessageLookupByLibrary.simpleMessage(
       "أمّن سجل صلاتك ببصمة أو رمز PIN.",
     ),
@@ -123,9 +154,36 @@ class MessageLookup extends MessageLookupByLibrary {
     "prayerIsha": MessageLookupByLibrary.simpleMessage("العشاء"),
     "prayerJumuah": MessageLookupByLibrary.simpleMessage("الجمعة"),
     "prayerMaghrib": MessageLookupByLibrary.simpleMessage("المغرب"),
+    "securityBiometricReason": MessageLookupByLibrary.simpleMessage(
+      "يرجى التحقق لفتح سجل الصلاة",
+    ),
+    "securityConfirmPinLabel": MessageLookupByLibrary.simpleMessage(
+      "تأكيد رمز PIN",
+    ),
+    "securityPinDigitsError": MessageLookupByLibrary.simpleMessage(
+      "يجب أن يتكون رمز PIN من 4 أرقام",
+    ),
+    "securityPinLabel": MessageLookupByLibrary.simpleMessage("رمز PIN"),
+    "securityPinMismatchError": MessageLookupByLibrary.simpleMessage(
+      "رمزا PIN غير متطابقين",
+    ),
+    "securitySetPinTitle": MessageLookupByLibrary.simpleMessage(
+      "عيّن رمز PIN مكوّن من 4 أرقام",
+    ),
+    "securityUnlockTitle": MessageLookupByLibrary.simpleMessage(
+      "افتح سجل الصلاة",
+    ),
     "settingsAbout": MessageLookupByLibrary.simpleMessage("حول"),
+    "settingsAppLock": MessageLookupByLibrary.simpleMessage("قفل التطبيق"),
+    "settingsAppLockSubtitle": MessageLookupByLibrary.simpleMessage(
+      "طلب فتح القفل بعد إطفاء الشاشة",
+    ),
     "settingsAppVersion": MessageLookupByLibrary.simpleMessage("إصدار التطبيق"),
     "settingsAppearance": MessageLookupByLibrary.simpleMessage("المظهر"),
+    "settingsBadges": MessageLookupByLibrary.simpleMessage("الشارات"),
+    "settingsBadgesSubtitle": MessageLookupByLibrary.simpleMessage(
+      "عرض إنجازاتك التحفيزية",
+    ),
     "settingsHaptics": MessageLookupByLibrary.simpleMessage("الاهتزاز اللمسي"),
     "settingsHapticsSubtitle": MessageLookupByLibrary.simpleMessage(
       "اهتزاز عند التفاعل",
@@ -174,10 +232,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "todayNone": MessageLookupByLibrary.simpleMessage(
       "لم يتم تسجيل أي صلاة بعد",
     ),
-    "todayPartial": m4,
-    "todayPoints": m5,
+    "todayPartial": m5,
+    "todayPoints": m6,
     "todayProgress": MessageLookupByLibrary.simpleMessage("تقدم اليوم"),
-    "todayStreak": m6,
+    "todayStreak": m7,
     "weekStartMonday": MessageLookupByLibrary.simpleMessage("الاثنين"),
     "weekStartSaturday": MessageLookupByLibrary.simpleMessage("السبت"),
     "weekStartSunday": MessageLookupByLibrary.simpleMessage("الأحد"),

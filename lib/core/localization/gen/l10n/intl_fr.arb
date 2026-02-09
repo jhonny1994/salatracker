@@ -55,11 +55,15 @@
   "settingsHapticsSubtitle": "Vibrer aux interactions",
   "settingsShowPoints": "Afficher les Points",
   "settingsShowPointsSubtitle": "Afficher les points dans l'interface",
+  "settingsAppLock": "Verrouillage de l'app",
+  "settingsAppLockSubtitle": "Exiger un déverrouillage après écran éteint",
   "settingsAbout": "À propos",
   "settingsAppVersion": "Version de l'Application",
   "settingsPrivacyPolicy": "Politique de Confidentialité",
   "settingsPrayerSchedule": "Horaires de prière",
   "settingsPrayerScheduleSubtitle": "Définir les horaires manuellement",
+  "settingsBadges": "Badges",
+  "settingsBadgesSubtitle": "Voir les jalons réflexifs",
   "errorLoadingSettings": "Échec du chargement des paramètres",
   "errorRetry": "Réessayer",
   "errorLoadingCalendar": "Échec du chargement du calendrier",
@@ -110,5 +114,30 @@
   "onboardingGetStarted": "Commencer",
   "onboardingEnableNotifications": "Activer les Notifications",
   "onboardingEnableAppLock": "Activer le Verrouillage",
-  "onboardingMaybeLater": "Plus tard"
+  "onboardingMaybeLater": "Plus tard",
+  "securitySetPinTitle": "Définir un PIN à 4 chiffres",
+  "securityPinLabel": "PIN",
+  "securityConfirmPinLabel": "Confirmer le PIN",
+  "securityPinDigitsError": "Le PIN doit contenir exactement 4 chiffres",
+  "securityPinMismatchError": "Les PIN ne correspondent pas",
+  "securityUnlockTitle": "Déverrouiller Salat Tracker",
+  "securityBiometricReason": "Authentifiez-vous pour déverrouiller Salat Tracker",
+  "badgesTitle": "Badges",
+  "badgesEmpty": "Aucun badge pour le moment. Continuez vos prières.",
+  "badgesEarnedOn": "Obtenu le {date}",
+  "@badgesEarnedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "badgeFirstPrayerName": "Première prière enregistrée",
+  "badgeFirstPrayerDescription": "Vous avez enregistré votre première prière.",
+  "badgeWeekConsistencyName": "Semaine de régularité",
+  "badgeWeekConsistencyDescription": "7 jours complets de prières validés.",
+  "badgeMonthCompleteName": "Mois accompli",
+  "badgeMonthCompleteDescription": "90% de complétion atteints sur un mois.",
+  "badgeSeasonChampionName": "Champion de saison",
+  "badgeSeasonChampionDescription": "80% de complétion atteints sur 3 mois."
 }

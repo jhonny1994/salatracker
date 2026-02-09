@@ -114,6 +114,44 @@ final class SettingsRepositoryProvider
 String _$settingsRepositoryHash() =>
     r'f6c934ff287aa202ca3f6df8569d18e30ca6c102';
 
+/// Provider for the app version string from platform metadata.
+
+@ProviderFor(appVersion)
+final appVersionProvider = AppVersionProvider._();
+
+/// Provider for the app version string from platform metadata.
+
+final class AppVersionProvider
+    extends $FunctionalProvider<AsyncValue<String>, String, FutureOr<String>>
+    with $FutureModifier<String>, $FutureProvider<String> {
+  /// Provider for the app version string from platform metadata.
+  AppVersionProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'appVersionProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$appVersionHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<String> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<String> create(Ref ref) {
+    return appVersion(ref);
+  }
+}
+
+String _$appVersionHash() => r'2f6edf06a27184d1660212effe8a19ad6cc3838f';
+
 /// Notifier managing application settings state.
 ///
 /// Provides methods to update theme, language, notifications, and other
@@ -151,7 +189,7 @@ final class SettingsNotifierProvider
   SettingsNotifier create() => SettingsNotifier();
 }
 
-String _$settingsNotifierHash() => r'30792551a52043c6d7fcdd6ec4c9280315f37f64';
+String _$settingsNotifierHash() => r'52b2a03159d6cf3c35de3ea2c1c0de30a8bae3f9';
 
 /// Notifier managing application settings state.
 ///

@@ -24,6 +24,7 @@ abstract class Settings with _$Settings {
     @HiveField(6) required String? localeCode,
     @HiveField(7) required int weekStart,
     @HiveField(8) required bool onboardingComplete,
+    @HiveField(9) required bool appLockEnabled,
   }) = _Settings;
 
   factory Settings.defaults() {
@@ -50,6 +51,7 @@ abstract class Settings with _$Settings {
       localeCode: null,
       weekStart: DateTime.sunday,
       onboardingComplete: false,
+      appLockEnabled: false,
     );
   }
 }

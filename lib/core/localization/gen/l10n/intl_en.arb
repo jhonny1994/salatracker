@@ -55,11 +55,15 @@
   "settingsHapticsSubtitle": "Vibrate on interactions",
   "settingsShowPoints": "Show Points",
   "settingsShowPointsSubtitle": "Display points in UI",
+  "settingsAppLock": "App Lock",
+  "settingsAppLockSubtitle": "Require unlock after screen off",
   "settingsAbout": "About",
   "settingsAppVersion": "App Version",
   "settingsPrivacyPolicy": "Privacy Policy",
   "settingsPrayerSchedule": "Prayer Schedule",
   "settingsPrayerScheduleSubtitle": "Set custom prayer times",
+  "settingsBadges": "Badges",
+  "settingsBadgesSubtitle": "View reflective milestones",
   "errorLoadingSettings": "Failed to load settings",
   "errorRetry": "Retry",
   "errorLoadingCalendar": "Failed to load calendar",
@@ -130,5 +134,30 @@
   "onboardingGetStarted": "Get Started",
   "onboardingEnableNotifications": "Enable Notifications",
   "onboardingEnableAppLock": "Enable App Lock",
-  "onboardingMaybeLater": "Maybe Later"
+  "onboardingMaybeLater": "Maybe Later",
+  "securitySetPinTitle": "Set a 4-digit PIN",
+  "securityPinLabel": "PIN",
+  "securityConfirmPinLabel": "Confirm PIN",
+  "securityPinDigitsError": "PIN must be exactly 4 digits",
+  "securityPinMismatchError": "PINs do not match",
+  "securityUnlockTitle": "Unlock Salat Tracker",
+  "securityBiometricReason": "Authenticate to unlock Salat Tracker",
+  "badgesTitle": "Badges",
+  "badgesEmpty": "No badges yet. Keep logging your prayers.",
+  "badgesEarnedOn": "Earned on {date}",
+  "@badgesEarnedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "badgeFirstPrayerName": "First Prayer Logged",
+  "badgeFirstPrayerDescription": "Logged your first prayer entry.",
+  "badgeWeekConsistencyName": "Week of Consistency",
+  "badgeWeekConsistencyDescription": "Completed 7 full prayer days.",
+  "badgeMonthCompleteName": "Month Complete",
+  "badgeMonthCompleteDescription": "Reached 90% completion in a month.",
+  "badgeSeasonChampionName": "Season Champion",
+  "badgeSeasonChampionDescription": "Reached 80% completion in 3 months."
 }

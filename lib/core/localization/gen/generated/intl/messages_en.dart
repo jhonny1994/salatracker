@@ -20,27 +20,58 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(time) => "Logged at ${time}";
+  static String m0(date) => "Earned on ${date}";
 
-  static String m1(prayer) => "It is time for ${prayer} prayer.";
+  static String m1(time) => "Logged at ${time}";
 
-  static String m2(prayer) => "Time for ${prayer}";
+  static String m2(prayer) => "It is time for ${prayer} prayer.";
 
-  static String m3(minutes) => "${minutes} min";
+  static String m3(prayer) => "Time for ${prayer}";
 
-  static String m4(count) => "${count} of 5 prayers logged";
+  static String m4(minutes) => "${minutes} min";
 
-  static String m5(count) => "${count} points";
+  static String m5(count) => "${count} of 5 prayers logged";
 
-  static String m6(count) => "${count} day streak";
+  static String m6(count) => "${count} points";
+
+  static String m7(count) => "${count} day streak";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "actionCancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "actionContinue": MessageLookupByLibrary.simpleMessage("Continue"),
     "appTitle": MessageLookupByLibrary.simpleMessage("Salat Tracker"),
+    "badgeFirstPrayerDescription": MessageLookupByLibrary.simpleMessage(
+      "Logged your first prayer entry.",
+    ),
+    "badgeFirstPrayerName": MessageLookupByLibrary.simpleMessage(
+      "First Prayer Logged",
+    ),
+    "badgeMonthCompleteDescription": MessageLookupByLibrary.simpleMessage(
+      "Reached 90% completion in a month.",
+    ),
+    "badgeMonthCompleteName": MessageLookupByLibrary.simpleMessage(
+      "Month Complete",
+    ),
+    "badgeSeasonChampionDescription": MessageLookupByLibrary.simpleMessage(
+      "Reached 80% completion in 3 months.",
+    ),
+    "badgeSeasonChampionName": MessageLookupByLibrary.simpleMessage(
+      "Season Champion",
+    ),
+    "badgeWeekConsistencyDescription": MessageLookupByLibrary.simpleMessage(
+      "Completed 7 full prayer days.",
+    ),
+    "badgeWeekConsistencyName": MessageLookupByLibrary.simpleMessage(
+      "Week of Consistency",
+    ),
+    "badgesEarnedOn": m0,
+    "badgesEmpty": MessageLookupByLibrary.simpleMessage(
+      "No badges yet. Keep logging your prayers.",
+    ),
+    "badgesTitle": MessageLookupByLibrary.simpleMessage("Badges"),
     "calendarCompleted": MessageLookupByLibrary.simpleMessage("Completed"),
-    "calendarLoggedAt": m0,
+    "calendarLoggedAt": m1,
     "calendarNoData": MessageLookupByLibrary.simpleMessage(
       "No prayers logged for this day",
     ),
@@ -75,9 +106,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "navCalendar": MessageLookupByLibrary.simpleMessage("Calendar"),
     "navSettings": MessageLookupByLibrary.simpleMessage("Settings"),
     "navToday": MessageLookupByLibrary.simpleMessage("Today"),
-    "notificationBody": m1,
-    "notificationTitle": m2,
-    "offsetMinutes": m3,
+    "notificationBody": m2,
+    "notificationTitle": m3,
+    "offsetMinutes": m4,
     "onboardingAppLockBody": MessageLookupByLibrary.simpleMessage(
       "Secure your prayer log with biometrics or PIN.",
     ),
@@ -125,9 +156,36 @@ class MessageLookup extends MessageLookupByLibrary {
     "prayerIsha": MessageLookupByLibrary.simpleMessage("Isha"),
     "prayerJumuah": MessageLookupByLibrary.simpleMessage("Jumu\'ah"),
     "prayerMaghrib": MessageLookupByLibrary.simpleMessage("Maghrib"),
+    "securityBiometricReason": MessageLookupByLibrary.simpleMessage(
+      "Authenticate to unlock Salat Tracker",
+    ),
+    "securityConfirmPinLabel": MessageLookupByLibrary.simpleMessage(
+      "Confirm PIN",
+    ),
+    "securityPinDigitsError": MessageLookupByLibrary.simpleMessage(
+      "PIN must be exactly 4 digits",
+    ),
+    "securityPinLabel": MessageLookupByLibrary.simpleMessage("PIN"),
+    "securityPinMismatchError": MessageLookupByLibrary.simpleMessage(
+      "PINs do not match",
+    ),
+    "securitySetPinTitle": MessageLookupByLibrary.simpleMessage(
+      "Set a 4-digit PIN",
+    ),
+    "securityUnlockTitle": MessageLookupByLibrary.simpleMessage(
+      "Unlock Salat Tracker",
+    ),
     "settingsAbout": MessageLookupByLibrary.simpleMessage("About"),
+    "settingsAppLock": MessageLookupByLibrary.simpleMessage("App Lock"),
+    "settingsAppLockSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Require unlock after screen off",
+    ),
     "settingsAppVersion": MessageLookupByLibrary.simpleMessage("App Version"),
     "settingsAppearance": MessageLookupByLibrary.simpleMessage("Appearance"),
+    "settingsBadges": MessageLookupByLibrary.simpleMessage("Badges"),
+    "settingsBadgesSubtitle": MessageLookupByLibrary.simpleMessage(
+      "View reflective milestones",
+    ),
     "settingsHaptics": MessageLookupByLibrary.simpleMessage("Haptic Feedback"),
     "settingsHapticsSubtitle": MessageLookupByLibrary.simpleMessage(
       "Vibrate on interactions",
@@ -176,10 +234,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Keep going, you\'re doing great!",
     ),
     "todayNone": MessageLookupByLibrary.simpleMessage("No prayers logged yet"),
-    "todayPartial": m4,
-    "todayPoints": m5,
+    "todayPartial": m5,
+    "todayPoints": m6,
     "todayProgress": MessageLookupByLibrary.simpleMessage("Today\'s Progress"),
-    "todayStreak": m6,
+    "todayStreak": m7,
     "weekStartMonday": MessageLookupByLibrary.simpleMessage("Monday"),
     "weekStartSunday": MessageLookupByLibrary.simpleMessage("Sunday"),
   };

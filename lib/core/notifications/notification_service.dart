@@ -30,9 +30,7 @@ class NotificationService {
     if (_initialized) return;
 
     // 1. Initialize Timezone
-    tz.initializeTimeZones();
-    final timeZoneName = await FlutterTimezone.getLocalTimezone();
-    tz.setLocalLocation(tz.getLocation(timeZoneName.toString()));
+    await refreshTimezone();
 
     // 2. Initialize Plugin
     const androidSettings = AndroidInitializationSettings(
@@ -93,18 +91,28 @@ class NotificationService {
     required String title,
     required String body,
     required DateTime scheduledAt,
+    bool repeatsDaily = false,
     String? payload,
   }) async {
     if (!_initialized) await initialize();
 
+    await refreshTimezone();
+
+    var target = scheduledAt;
+    if (repeatsDaily) {
+      while (target.isBefore(DateTime.now())) {
+        target = target.add(const Duration(days: 1));
+      }
+    }
+
     // Ensure scheduled time is in the future
-    if (scheduledAt.isBefore(DateTime.now())) return;
+    if (target.isBefore(DateTime.now())) return;
 
     await _plugin.zonedSchedule(
       id,
       title,
       body,
-      tz.TZDateTime.from(scheduledAt, tz.local),
+      tz.TZDateTime.from(target, tz.local),
       const NotificationDetails(
         android: AndroidNotificationDetails(
           'prayer_channel',
@@ -115,10 +123,16 @@ class NotificationService {
         ),
         iOS: DarwinNotificationDetails(),
       ),
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      matchDateTimeComponents: DateTimeComponents.time,
+      androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+      matchDateTimeComponents: repeatsDaily ? DateTimeComponents.time : null,
       payload: payload,
     );
+  }
+
+  Future<void> refreshTimezone() async {
+    tz.initializeTimeZones();
+    final timeZoneName = await FlutterTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(timeZoneName.toString()));
   }
 
   /// Cancels all scheduled notifications.

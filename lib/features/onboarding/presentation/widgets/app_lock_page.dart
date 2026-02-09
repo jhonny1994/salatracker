@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:salat_tracker/core/core.dart';
+import 'package:salat_tracker/features/security/data/providers/security_providers.dart';
+import 'package:salat_tracker/features/security/presentation/widgets/pin_setup_dialog.dart';
+import 'package:salat_tracker/features/settings/settings.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
 /// App Lock opt-in page.
 ///
 /// Note: Full app lock implementation is in Phase 5. This page provides
 /// the opt-in UI that will be wired up later.
-class AppLockPage extends StatelessWidget {
+class AppLockPage extends ConsumerWidget {
   /// Creates an [AppLockPage].
   const AppLockPage({
     required this.onNext,
@@ -22,7 +26,7 @@ class AppLockPage extends StatelessWidget {
   final VoidCallback onBack;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = S.of(context);
     final theme = Theme.of(context);
 
@@ -66,7 +70,23 @@ class AppLockPage extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: FilledButton.icon(
-              onPressed: onNext,
+              onPressed: () async {
+                final pin = await showDialog<String>(
+                  context: context,
+                  builder: (_) => const PinSetupDialog(),
+                );
+                if (pin == null) {
+                  return;
+                }
+
+                final securityRepository = ref.read(securityRepositoryProvider);
+                await securityRepository.setPin(pin);
+                await ref
+                    .read(settingsProvider.notifier)
+                    .updateAppLockEnabled(enabled: true);
+
+                onNext();
+              },
               icon: const Icon(Icons.fingerprint),
               label: Text(l10n.onboardingEnableAppLock),
             ),
@@ -77,7 +97,12 @@ class AppLockPage extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: TextButton(
-              onPressed: onNext,
+              onPressed: () async {
+                await ref
+                    .read(settingsProvider.notifier)
+                    .updateAppLockEnabled(enabled: false);
+                onNext();
+              },
               child: Text(l10n.onboardingMaybeLater),
             ),
           ),

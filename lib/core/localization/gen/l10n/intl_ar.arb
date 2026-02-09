@@ -55,11 +55,15 @@
   "settingsHapticsSubtitle": "اهتزاز عند التفاعل",
   "settingsShowPoints": "إظهار النقاط",
   "settingsShowPointsSubtitle": "عرض النقاط في الواجهة",
+  "settingsAppLock": "قفل التطبيق",
+  "settingsAppLockSubtitle": "طلب فتح القفل بعد إطفاء الشاشة",
   "settingsAbout": "حول",
   "settingsAppVersion": "إصدار التطبيق",
   "settingsPrivacyPolicy": "سياسة الخصوصية",
   "settingsPrayerSchedule": "مواعيد الصلاة",
   "settingsPrayerScheduleSubtitle": "ضبط مواعيد الصلاة يدويًا",
+  "settingsBadges": "الشارات",
+  "settingsBadgesSubtitle": "عرض إنجازاتك التحفيزية",
   "errorLoadingSettings": "فشل تحميل الإعدادات",
   "errorRetry": "إعادة المحاولة",
   "errorLoadingCalendar": "فشل تحميل التقويم",
@@ -110,5 +114,30 @@
   "onboardingGetStarted": "ابدأ الآن",
   "onboardingEnableNotifications": "تفعيل الإشعارات",
   "onboardingEnableAppLock": "تفعيل قفل التطبيق",
-  "onboardingMaybeLater": "ربما لاحقاً"
+  "onboardingMaybeLater": "ربما لاحقاً",
+  "securitySetPinTitle": "عيّن رمز PIN مكوّن من 4 أرقام",
+  "securityPinLabel": "رمز PIN",
+  "securityConfirmPinLabel": "تأكيد رمز PIN",
+  "securityPinDigitsError": "يجب أن يتكون رمز PIN من 4 أرقام",
+  "securityPinMismatchError": "رمزا PIN غير متطابقين",
+  "securityUnlockTitle": "افتح سجل الصلاة",
+  "securityBiometricReason": "يرجى التحقق لفتح سجل الصلاة",
+  "badgesTitle": "الشارات",
+  "badgesEmpty": "لا توجد شارات بعد. استمر في تسجيل صلواتك.",
+  "badgesEarnedOn": "تم الحصول عليها في {date}",
+  "@badgesEarnedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "badgeFirstPrayerName": "أول صلاة مسجلة",
+  "badgeFirstPrayerDescription": "قمت بتسجيل أول صلاة لك.",
+  "badgeWeekConsistencyName": "أسبوع من الالتزام",
+  "badgeWeekConsistencyDescription": "أكملت 7 أيام كاملة من الصلوات.",
+  "badgeMonthCompleteName": "إنجاز الشهر",
+  "badgeMonthCompleteDescription": "حققت 90% إكمال خلال شهر.",
+  "badgeSeasonChampionName": "بطل الموسم",
+  "badgeSeasonChampionDescription": "حققت 80% إكمال خلال 3 أشهر."
 }

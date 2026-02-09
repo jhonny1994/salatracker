@@ -319,6 +319,26 @@ class S {
     );
   }
 
+  /// `قفل التطبيق`
+  String get settingsAppLock {
+    return Intl.message(
+      'قفل التطبيق',
+      name: 'settingsAppLock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `طلب فتح القفل بعد إطفاء الشاشة`
+  String get settingsAppLockSubtitle {
+    return Intl.message(
+      'طلب فتح القفل بعد إطفاء الشاشة',
+      name: 'settingsAppLockSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `حول`
   String get settingsAbout {
     return Intl.message('حول', name: 'settingsAbout', desc: '', args: []);
@@ -359,6 +379,21 @@ class S {
     return Intl.message(
       'ضبط مواعيد الصلاة يدويًا',
       name: 'settingsPrayerScheduleSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `الشارات`
+  String get settingsBadges {
+    return Intl.message('الشارات', name: 'settingsBadges', desc: '', args: []);
+  }
+
+  /// `عرض إنجازاتك التحفيزية`
+  String get settingsBadgesSubtitle {
+    return Intl.message(
+      'عرض إنجازاتك التحفيزية',
+      name: 'settingsBadgesSubtitle',
       desc: '',
       args: [],
     );
@@ -739,6 +774,181 @@ class S {
     return Intl.message(
       'ربما لاحقاً',
       name: 'onboardingMaybeLater',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `عيّن رمز PIN مكوّن من 4 أرقام`
+  String get securitySetPinTitle {
+    return Intl.message(
+      'عيّن رمز PIN مكوّن من 4 أرقام',
+      name: 'securitySetPinTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `رمز PIN`
+  String get securityPinLabel {
+    return Intl.message(
+      'رمز PIN',
+      name: 'securityPinLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تأكيد رمز PIN`
+  String get securityConfirmPinLabel {
+    return Intl.message(
+      'تأكيد رمز PIN',
+      name: 'securityConfirmPinLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `يجب أن يتكون رمز PIN من 4 أرقام`
+  String get securityPinDigitsError {
+    return Intl.message(
+      'يجب أن يتكون رمز PIN من 4 أرقام',
+      name: 'securityPinDigitsError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `رمزا PIN غير متطابقين`
+  String get securityPinMismatchError {
+    return Intl.message(
+      'رمزا PIN غير متطابقين',
+      name: 'securityPinMismatchError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `افتح سجل الصلاة`
+  String get securityUnlockTitle {
+    return Intl.message(
+      'افتح سجل الصلاة',
+      name: 'securityUnlockTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `يرجى التحقق لفتح سجل الصلاة`
+  String get securityBiometricReason {
+    return Intl.message(
+      'يرجى التحقق لفتح سجل الصلاة',
+      name: 'securityBiometricReason',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `الشارات`
+  String get badgesTitle {
+    return Intl.message('الشارات', name: 'badgesTitle', desc: '', args: []);
+  }
+
+  /// `لا توجد شارات بعد. استمر في تسجيل صلواتك.`
+  String get badgesEmpty {
+    return Intl.message(
+      'لا توجد شارات بعد. استمر في تسجيل صلواتك.',
+      name: 'badgesEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تم الحصول عليها في {date}`
+  String badgesEarnedOn(String date) {
+    return Intl.message(
+      'تم الحصول عليها في $date',
+      name: 'badgesEarnedOn',
+      desc: '',
+      args: [date],
+    );
+  }
+
+  /// `أول صلاة مسجلة`
+  String get badgeFirstPrayerName {
+    return Intl.message(
+      'أول صلاة مسجلة',
+      name: 'badgeFirstPrayerName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `قمت بتسجيل أول صلاة لك.`
+  String get badgeFirstPrayerDescription {
+    return Intl.message(
+      'قمت بتسجيل أول صلاة لك.',
+      name: 'badgeFirstPrayerDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `أسبوع من الالتزام`
+  String get badgeWeekConsistencyName {
+    return Intl.message(
+      'أسبوع من الالتزام',
+      name: 'badgeWeekConsistencyName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `أكملت 7 أيام كاملة من الصلوات.`
+  String get badgeWeekConsistencyDescription {
+    return Intl.message(
+      'أكملت 7 أيام كاملة من الصلوات.',
+      name: 'badgeWeekConsistencyDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `إنجاز الشهر`
+  String get badgeMonthCompleteName {
+    return Intl.message(
+      'إنجاز الشهر',
+      name: 'badgeMonthCompleteName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `حققت 90% إكمال خلال شهر.`
+  String get badgeMonthCompleteDescription {
+    return Intl.message(
+      'حققت 90% إكمال خلال شهر.',
+      name: 'badgeMonthCompleteDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `بطل الموسم`
+  String get badgeSeasonChampionName {
+    return Intl.message(
+      'بطل الموسم',
+      name: 'badgeSeasonChampionName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `حققت 80% إكمال خلال 3 أشهر.`
+  String get badgeSeasonChampionDescription {
+    return Intl.message(
+      'حققت 80% إكمال خلال 3 أشهر.',
+      name: 'badgeSeasonChampionDescription',
       desc: '',
       args: [],
     );

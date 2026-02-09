@@ -56,10 +56,12 @@ This directory contains enterprise-grade documentation for the Salat Tracker app
 |-------|--------|-------------|
 | Phase 1 | ✅ Complete | Foundations (structure, routing, theme) |
 | Phase 2 | ✅ Complete | Data Layer (models, repositories, services) |
-| Phase 3 | 🔄 In Progress | Core UX (Today screen, prayer log) |
-| Phase 4 | ⬜ Not Started | Notifications |
-| Phase 5 | ⬜ Not Started | App Lock |
-| Phase 6 | ⬜ Not Started | Quality & Release |
+| Phase 3 | ✅ Complete | Core UX (Today, Calendar, Settings) |
+| Phase 4 | 🔄 In Progress | Advanced features, notifications hardening, badges |
+| Phase 5 | 🔄 In Progress | App Lock + security hardening |
+| Phase 6 | ⬜ Not Started | Quality engineering |
+| Phase 7 | ⬜ Not Started | Release engineering and store readiness |
+| Phase 8 | ⬜ Not Started | Launch audit and go/no-go |
 
 ## Locked Decisions
 
@@ -70,10 +72,12 @@ These decisions are **final** and documented in [plan.md](plan.md):
 - **State:** Riverpod 3 + Freezed 3
 - **Storage:** Hive CE (offline-first)
 - **Gamification:** Progress > Streaks, no shame language
+- **Badges:** Included in v1 (reflective, non-competitive)
+- **App Lock policy:** Trigger only after screen-off/device-lock path
 - **Theme:** Light/dark parity, Material 3, Cairo font
 
 ## Versioning
 
-- **Docs version:** 1.1.0
+- **Docs version:** 1.2.0
 - **App version:** 0.1.0+1
-- **Last updated:** 2026-01-20
+- **Last updated:** 2026-02-09
