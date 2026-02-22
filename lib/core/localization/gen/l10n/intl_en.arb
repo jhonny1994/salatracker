@@ -37,6 +37,17 @@
       }
     }
   },
+  "todayCompletionRatio": "{completed}/{total}",
+  "@todayCompletionRatio": {
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "todayEncouragement": "Keep going, you're doing great!",
   "tapToLog": "Tap to log",
   "settingsAppearance": "Appearance",
@@ -57,8 +68,11 @@
   "settingsShowPointsSubtitle": "Display points in UI",
   "settingsAppLock": "App Lock",
   "settingsAppLockSubtitle": "Require unlock after screen off",
+  "settingsResetPin": "Reset PIN",
+  "settingsResetPinSubtitle": "Set a new app lock PIN",
   "settingsAbout": "About",
   "settingsAppVersion": "App Version",
+  "settingsVersionLoading": "Loading...",
   "settingsPrivacyPolicy": "Privacy Policy",
   "settingsPrayerSchedule": "Prayer Schedule",
   "settingsPrayerScheduleSubtitle": "Set custom prayer times",
@@ -66,6 +80,7 @@
   "settingsBadgesSubtitle": "View reflective milestones",
   "errorLoadingSettings": "Failed to load settings",
   "errorRetry": "Retry",
+  "routerError": "Route error",
   "errorLoadingCalendar": "Failed to load calendar",
   "calendarStreamRetry": "Stream will retry automatically",
   "calendarNoData": "No prayers logged for this day",
@@ -78,6 +93,17 @@
     "placeholders": {
       "time": {
         "type": "String"
+      }
+    }
+  },
+  "calendarCompletionRatio": "{completed}/{total}",
+  "@calendarCompletionRatio": {
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
       }
     }
   },
@@ -116,6 +142,8 @@
       }
     }
   },
+  "notificationChannelName": "Prayer Notifications",
+  "notificationChannelDescription": "Notifications for prayer times",
   "endOfDayTitle": "Daily Reflection",
   "endOfDayBody": "Did you complete all your prayers today?",
   "onboardingWelcomeTitle": "Welcome to Salat Tracker",
@@ -135,13 +163,29 @@
   "onboardingEnableNotifications": "Enable Notifications",
   "onboardingEnableAppLock": "Enable App Lock",
   "onboardingMaybeLater": "Maybe Later",
-  "securitySetPinTitle": "Set a 4-digit PIN",
+  "securitySetPinTitle": "Set a 6-digit PIN",
+  "securityCurrentPinTitle": "Enter current PIN",
+  "securityCurrentPinLabel": "Current PIN",
   "securityPinLabel": "PIN",
   "securityConfirmPinLabel": "Confirm PIN",
-  "securityPinDigitsError": "PIN must be exactly 4 digits",
+  "securityPinDigitsError": "PIN must be exactly 6 digits",
   "securityPinMismatchError": "PINs do not match",
+  "securityCurrentPinError": "Current PIN is incorrect",
   "securityUnlockTitle": "Unlock Salat Tracker",
   "securityBiometricReason": "Authenticate to unlock Salat Tracker",
+  "settingsBiometricUnlock": "Biometric Unlock",
+  "settingsBiometricUnlockSubtitle": "Use biometrics before PIN on lock screen",
+  "settingsBiometricUnlockUnavailable": "Biometrics unavailable on this device",
+  "settingsCurrentTimezone": "Current Time Zone",
+  "settingsCurrentTimezoneUnavailable": "Time zone unavailable",
+  "securityLockoutSeconds": "Try again in {seconds}s",
+  "@securityLockoutSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "badgesTitle": "Badges",
   "badgesEmpty": "No badges yet. Keep logging your prayers.",
   "badgesEarnedOn": "Earned on {date}",

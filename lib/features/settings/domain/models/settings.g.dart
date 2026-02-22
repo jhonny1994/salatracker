@@ -27,13 +27,14 @@ class SettingsAdapter extends TypeAdapter<Settings> {
       weekStart: (fields[7] as num).toInt(),
       onboardingComplete: fields[8] as bool,
       appLockEnabled: fields[9] as bool,
+      biometricUnlockEnabled: fields[10] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, Settings obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.prayerTimes)
       ..writeByte(1)
@@ -53,7 +54,9 @@ class SettingsAdapter extends TypeAdapter<Settings> {
       ..writeByte(8)
       ..write(obj.onboardingComplete)
       ..writeByte(9)
-      ..write(obj.appLockEnabled);
+      ..write(obj.appLockEnabled)
+      ..writeByte(10)
+      ..write(obj.biometricUnlockEnabled);
   }
 
   @override

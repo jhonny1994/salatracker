@@ -28,7 +28,6 @@ class _TodayScreenState extends ConsumerState<TodayScreen> {
   Widget build(BuildContext context) {
     final todayState = ref.watch(todayControllerProvider);
     final l10n = S.of(context);
-    final theme = Theme.of(context);
     final settings = ref.watch(settingsProvider).asData?.value;
 
     ref.listen(todayControllerProvider, (previous, next) {
@@ -58,12 +57,16 @@ class _TodayScreenState extends ConsumerState<TodayScreen> {
             onRetry: () => ref.invalidate(todayControllerProvider),
           ),
           data: (prayerDay) {
-            // Calculate progress for UI
             final completedCount = prayerDay.entries
                 .where((e) => e.isCompleted)
                 .length;
             final totalPrayers = PrayerType.values.length;
             final completionPercentage = completedCount / totalPrayers;
+            final encouragementMessage = _buildEncouragementMessage(
+              l10n,
+              completedCount,
+              totalPrayers,
+            );
 
             return CustomScrollView(
               slivers: [
@@ -73,7 +76,10 @@ class _TodayScreenState extends ConsumerState<TodayScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        // Progress Card with animation
+                        const LocationContextBanner(
+                          padding: EdgeInsets.zero,
+                        ),
+                        const Gap(AppSpacing.lg),
                         TodayProgressCard(
                               completedCount: completedCount,
                               totalPrayers: totalPrayers,
@@ -88,21 +94,18 @@ class _TodayScreenState extends ConsumerState<TodayScreen> {
                               duration: AppDurations.smooth,
                               curve: Curves.easeOut,
                             ),
-                        const Gap(AppSpacing.xxl),
-                        // Streak display
+                        const Gap(AppSpacing.lg),
                         const TodayStreakCard(),
-                        const Gap(AppSpacing.xxl),
-                        // Section title
-                        Text(
-                          l10n.navToday,
-                          style: theme.textTheme.titleLarge,
+                        const Gap(AppSpacing.lg),
+                        AppSectionHeader(
+                          title: l10n.navToday,
+                          subtitle: encouragementMessage,
                         ),
                         const Gap(AppSpacing.md),
                       ],
                     ),
                   ),
                 ),
-                // Prayer list with staggered animation
                 SliverPadding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: AppSpacing.xl,
@@ -123,21 +126,19 @@ class _TodayScreenState extends ConsumerState<TodayScreen> {
                     },
                   ),
                 ),
-                // Encouragement or celebration message
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.all(AppSpacing.xl),
                     child: completionPercentage == 1.0
                         ? const TodayCelebrationCard()
-                        : Text(
-                            l10n.todayEncouragement,
-                            style: theme.textTheme.bodyMedium,
-                            textAlign: TextAlign.center,
+                        : AppInlineNotice(
+                            icon: Icons.favorite_border,
+                            message: encouragementMessage,
                           ),
                   ),
                 ),
                 const SliverPadding(
-                  padding: EdgeInsets.only(bottom: AppSpacing.xxxl * 3),
+                  padding: EdgeInsets.only(bottom: AppSpacing.xxl),
                 ),
               ],
             );
@@ -145,5 +146,19 @@ class _TodayScreenState extends ConsumerState<TodayScreen> {
         ),
       ),
     );
+  }
+
+  String _buildEncouragementMessage(
+    S l10n,
+    int completedCount,
+    int totalPrayers,
+  ) {
+    if (completedCount == 0) {
+      return l10n.todayNone;
+    }
+    if (completedCount >= totalPrayers) {
+      return l10n.todayComplete;
+    }
+    return l10n.todayPartial(completedCount);
   }
 }

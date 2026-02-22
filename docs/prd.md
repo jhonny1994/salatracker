@@ -44,6 +44,7 @@
 - End-of-day reminder default Isha + 2 hours (editable)
 - Notifications are opt-in during onboarding; tone is supportive, no shame language
 - App Lock enabled via onboarding, biometrics + PIN fallback
+- PIN UI uses OTP-style 6-digit cells for lock/setup/reset experiences
 - Language list read from supportedLocales
 - Localized language names via locale_names
 - Theme light/dark/system persisted with light/dark parity (no dark-mode bias)
@@ -85,6 +86,7 @@
 - Theme selector (light/dark/system)
 - Calendar week start (default Sunday)
 - App Lock controls (enable/disable, PIN change)
+- Current location/timezone context label (GPS/API resolved, localized when possible)
 - Bottom navigation between Today, Calendar, Settings
 
 ## Data Model
@@ -109,6 +111,8 @@
 ## Edge Cases Covered
 - Past time scheduling
 - Timezone/DST changes
+- Timezone id parsing anomalies (e.g. wrapped timezone payloads)
+- Offline location resolution fallback (cache -> device timezone -> UTC)
 - Duplicate reminders on settings changes
 - iOS screen-off detection limitations
 - Streak recalculation after edits
@@ -124,4 +128,3 @@
 
 ---
 > **Next:** [plan.md](plan.md) for implementation phases
-

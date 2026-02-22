@@ -2,10 +2,6 @@
 /// mobile design patterns for high-quality visual consistency.
 library;
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// SPACING (using 4px base unit, Material 3 aligned)
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 abstract class AppSpacing {
   /// 4px - Micro spacing
   static const double xs = 4;
@@ -29,10 +25,6 @@ abstract class AppSpacing {
   static const double xxxl = 32;
 }
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// TOUCH TARGETS (mobile-design: min 44pt iOS / 48dp Android)
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 abstract class AppTouchTargets {
   /// Minimum touch target size (48px per Android Material 3)
   static const double minimum = 48;
@@ -46,10 +38,6 @@ abstract class AppTouchTargets {
   /// Checkbox/radio size (44px per iOS HIG)
   static const double checkbox = 44;
 }
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// BORDER RADIUS
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 abstract class AppRadius {
   /// 4px - Minimal rounding
@@ -71,10 +59,6 @@ abstract class AppRadius {
   static const double xxl = 28;
 }
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// ANIMATION DURATIONS (mobile-design: 150-300ms for micro-animations)
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 abstract class AppDurations {
   /// 150ms - Fast micro-animations
   static const Duration fast = Duration(milliseconds: 150);
@@ -91,10 +75,6 @@ abstract class AppDurations {
   /// 800ms - Progress indicators
   static const Duration progress = Duration(milliseconds: 800);
 }
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// ICON SIZES
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 abstract class AppIconSizes {
   /// 16px - Small inline icons
@@ -121,10 +101,6 @@ abstract class AppIconSizes {
   /// 120px - Large display icons (welcome screens)
   static const double displayLarge = 120;
 }
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// ELEVATIONS
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 abstract class AppElevations {
   static const double none = 0;

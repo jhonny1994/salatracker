@@ -23,7 +23,7 @@ final class OnboardingControllerProvider
         argument: null,
         retry: null,
         name: r'onboardingControllerProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -45,7 +45,7 @@ final class OnboardingControllerProvider
 }
 
 String _$onboardingControllerHash() =>
-    r'6151412d73df7cc951fbf84f460cf0af60ef8ae9';
+    r'1a8eeee4d2519e1f3726dd6c96e911f4b63f5c3f';
 
 /// Manages the current step in the onboarding flow.
 
@@ -83,7 +83,7 @@ final class OnboardingPrayerTimesProvider
         argument: null,
         retry: null,
         name: r'onboardingPrayerTimesProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -105,7 +105,7 @@ final class OnboardingPrayerTimesProvider
 }
 
 String _$onboardingPrayerTimesHash() =>
-    r'6fe78b493293fcae4d7b27f37330b64bba7864bb';
+    r'693f2adb39a485ac674a282a951d728cea87fc41';
 
 /// Tracks temporary prayer times during onboarding before confirmation.
 

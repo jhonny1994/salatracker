@@ -17,28 +17,29 @@ class TodayCelebrationCard extends StatelessWidget {
     final l10n = S.of(context);
     final statusChipTheme = theme.extension<StatusChipTheme>();
 
-    return Card(
+    return AppSurfaceCard(
           color: statusChipTheme?.completeBackground,
-          child: Padding(
-            padding: const EdgeInsets.all(AppSpacing.xl),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.celebration_outlined,
-                  color: statusChipTheme?.completeForeground,
-                  size: AppIconSizes.xl,
-                ),
-                const Gap(AppSpacing.md),
-                Text(
+          padding: const EdgeInsets.all(AppSpacing.xl),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.celebration_outlined,
+                color: statusChipTheme?.completeForeground,
+                size: AppIconSizes.xl,
+              ),
+              const Gap(AppSpacing.md),
+              Flexible(
+                child: Text(
                   l10n.todayComplete,
                   style: theme.textTheme.titleMedium?.copyWith(
                     color: statusChipTheme?.completeForeground,
                     fontWeight: FontWeight.bold,
                   ),
+                  textAlign: TextAlign.center,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         )
         .animate(onPlay: (controller) => controller.repeat(reverse: true))

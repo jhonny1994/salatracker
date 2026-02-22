@@ -16,6 +16,7 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 | **State** | Riverpod 3 + Freezed 3 |
 | **Storage** | Hive CE (no encryption for v1) |
 | **Notifications** | Per-prayer offsets + end-of-day (Isha +2h) |
+| **Location Display** | GPS+API resolved context (`geolocator` + `timeapi.io` + `geocoding`) with cache/device/UTC fallback |
 | **App Lock** | Biometrics + PIN; trigger only after screen-off/device-lock background->resume path |
 | **Analytics** | Sentry (free tier) |
 | **CI/CD** | Signed APK + AAB via GitHub Actions |
@@ -85,17 +86,27 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 - [x] End-of-day reminder at Isha + 2 hours (editable)
 - [x] Handle permissions (Android 13+), timezone/settings rescheduling
 - [x] Notification tap deep-links to Today screen
+- [x] Show user-facing timezone label in Prayer Schedule (city + UTC offset when derivable)
+- [x] Add global compact location context banner on Today, Calendar, and Settings
 - [x] Supportive copy only (validated by [ux-gamification-psychology.md](ux-gamification-psychology.md))
 
 #### Remaining
 - [ ] Validate timezone and DST-safe scheduling rules with tests
-- [ ] Ensure deterministic notification ID strategy to prevent duplicates
+- [x] Ensure deterministic notification ID strategy to prevent duplicates
 - [ ] Verify reboot/package-update rescheduling consistency
-- [ ] Define reflective badge taxonomy (non-competitive)
-- [ ] Implement badge domain model and persistence
-- [ ] Implement badge evaluation engine and recomputation triggers
-- [ ] Add badges UI and EN/AR/FR localization
-- [ ] Add badge logic and UI tests
+- [x] Add timezone fallback chain for display (`city -> zone id -> UTC`)
+- [x] Add production fallback chain for resolution (`manual -> gps/api -> cache -> device -> UTC`)
+- [x] Define reflective badge taxonomy (non-competitive)
+- [x] Implement badge domain model and persistence
+- [x] Implement badge evaluation engine and recomputation triggers
+- [x] Add badges UI and EN/AR/FR localization
+- [x] Add badge UI widget tests
+
+#### Newly Completed
+- [x] Define reflective badge taxonomy via first-prayer, week-consistency,
+      month-complete, and season-champion badges
+- [x] Add automated tests for notification scheduling edge cases
+- [x] Add badge logic unit tests
 
 **Acceptance Criteria:**
 - Notifications fire correctly across timezone and DST changes
@@ -110,16 +121,20 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 #### Completed
 - [x] Security providers and app lock route wired into router redirect flow
 - [x] Biometrics + PIN UI foundation added (`local_auth`, `flutter_secure_storage`, `pinput`)
+- [x] Standardize PIN UX to OTP-style cells for lock, setup, and reset flows
 
 #### Remaining
-- [ ] Move app lock enable flag to Settings model (preference domain)
-- [ ] Replace plaintext PIN storage with salted hash verification
-- [ ] Add safe migration for existing security state
-- [ ] Implement lifecycle observer for foreground/background transitions
-- [ ] Enforce lock only after screen-off/device-lock background->resume path
-- [ ] Wire onboarding app lock step to real setup flow (not placeholder)
-- [ ] Add lockout/backoff policy for repeated invalid PIN attempts
-- [ ] Add unit/widget/integration tests for lock behavior
+- [x] Move app lock enable flag to Settings model (preference domain)
+- [x] Replace plaintext PIN storage with salted hash verification
+- [x] Add safe migration for existing security state
+- [x] Implement lifecycle observer for foreground/background transitions
+- [x] Enforce lock only after screen-off/device-lock background->resume path
+- [x] Wire onboarding app lock step to real setup flow (not placeholder)
+- [x] Add lockout/backoff policy for repeated invalid PIN attempts
+- [x] Add unit tests for lock behavior
+- [x] Add widget tests for lock behavior
+- [x] Add integration tests for lifecycle lock behavior
+- [x] Add settings credential reset flow
 - [ ] Document best-effort iOS behavior and edge cases
 
 **Acceptance Criteria:**
@@ -129,16 +144,23 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 
 ---
 
-### Phase 6: Quality Engineering ⬜
-> **Status:** Not Started
+### Phase 6: Quality Engineering 🔄
+> **Status:** In Progress
 
-- [ ] Unit tests: streak, points, repositories, security policy, notifications schedule
+- [x] Unit tests: streak, points, prayer repository, settings repository
+- [x] Unit tests: security policy and notifications schedule
 - [ ] Widget tests: Today, Calendar details, Settings selectors, Onboarding + lock setup
 - [ ] Integration smoke tests: first launch -> onboarding -> logging -> calendar -> lock -> notification deep-link
 - [ ] RTL and localization verification (EN/AR/FR)
-- [ ] Enforce analyzer/format gates and coverage threshold in CI
+- [x] Enforce analyzer/format gates in CI
+- [x] Enforce coverage threshold in CI
 - [ ] Accessibility checks (contrast, touch targets, semantics)
 - [ ] Performance checks on core flows (no visible jank)
+
+#### UI Re-Art Completion
+- [x] Introduce shared UI primitives and apply them across feature surfaces
+- [x] Re-art Today, Calendar, Settings, Onboarding, Security, and Badges UIs
+- [x] Complete RTL and localization parity pass for re-arted components
 
 **Acceptance Criteria:**
 - All tests pass
@@ -147,13 +169,14 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 
 ---
 
-### Phase 7: Release Engineering and Store Readiness ⬜
-> **Status:** Not Started
+### Phase 7: Release Engineering and Store Readiness 🔄
+> **Status:** In Progress
 
-- [ ] Add GitHub Actions CI workflow (format + analyze + tests)
-- [ ] Add signed APK and AAB build workflows
-- [ ] Add artifact retention and release tagging workflow
-- [ ] Validate signing, env wiring, and secret hygiene
+- [x] Add GitHub Actions CI workflow (format + analyze + tests)
+- [x] Add signed APK and AAB build workflows
+- [x] Add artifact retention and release tagging workflow
+- [x] Validate signing, env wiring, and secret hygiene
+- [x] Enforce no tracked `.env` file policy in CI/release workflows
 - [ ] Finalize icon/splash/store media and listing copy
 - [ ] Finalize privacy policy and in-app link
 - [ ] Prepare release notes and versioning process

@@ -34,10 +34,25 @@ class CalendarScreen extends ConsumerWidget {
         ],
       ),
       body: calendarState.when(
-        loading: () => const CalendarLoadingState(),
-        error: (error, _) => const CalendarErrorState(),
+        loading: () => const Column(
+          children: [
+            Gap(AppSpacing.md),
+            LocationContextBanner(),
+            Expanded(child: CalendarLoadingState()),
+          ],
+        ),
+        error: (error, _) => const Column(
+          children: [
+            Gap(AppSpacing.md),
+            LocationContextBanner(),
+            Expanded(child: CalendarErrorState()),
+          ],
+        ),
         data: (prayerDays) => Column(
           children: [
+            const Gap(AppSpacing.md),
+            const LocationContextBanner(),
+            const Gap(AppSpacing.sm),
             CalendarView(
               focusedDay: focusedDay,
               selectedDay: selectedDay,
@@ -51,7 +66,7 @@ class CalendarScreen extends ConsumerWidget {
                     .selectDay(selected);
               },
             ),
-            const Gap(AppSpacing.lg),
+            const Gap(AppSpacing.sm),
             Expanded(
               child: CalendarDayDetail(
                 day: selectedDay,

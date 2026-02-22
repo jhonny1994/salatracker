@@ -14,6 +14,7 @@ class HiveService {
   static const prayerDaysBoxName = 'prayer_days';
   static const badgesBoxName = 'badge_awards';
   static const metaBoxName = 'meta';
+  static const locationBoxName = 'location_context';
   static const schemaVersionKey = 'schema_version';
   static const schemaVersion = 1;
 
@@ -25,6 +26,7 @@ class HiveService {
     await Hive.openBox<Settings>(settingsBoxName);
     await Hive.openBox<PrayerDay>(prayerDaysBoxName);
     await Hive.openBox<BadgeAward>(badgesBoxName);
+    await Hive.openBox<String>(locationBoxName);
   }
 
   static void _registerAdapters() {

@@ -22,19 +22,25 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(date) => "Obtenu le ${date}";
 
-  static String m1(time) => "Enregistré à ${time}";
+  static String m1(completed, total) => "${completed}/${total}";
 
-  static String m2(prayer) => "C\'est l\'heure de la prière de ${prayer}";
+  static String m2(time) => "Enregistré à ${time}";
 
-  static String m3(prayer) => "L\'heure de ${prayer}";
+  static String m3(prayer) => "C\'est l\'heure de la prière de ${prayer}";
 
-  static String m4(minutes) => "${minutes} min";
+  static String m4(prayer) => "L\'heure de ${prayer}";
 
-  static String m5(count) => "${count} sur 5 prières enregistrées";
+  static String m5(minutes) => "${minutes} min";
 
-  static String m6(count) => "${count} points";
+  static String m6(seconds) => "Réessayez dans ${seconds}s";
 
-  static String m7(count) => "Série de ${count} jours";
+  static String m7(completed, total) => "${completed}/${total}";
+
+  static String m8(count) => "${count} sur 5 prières enregistrées";
+
+  static String m9(count) => "${count} points";
+
+  static String m10(count) => "Série de ${count} jours";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -71,7 +77,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "badgesTitle": MessageLookupByLibrary.simpleMessage("Badges"),
     "calendarCompleted": MessageLookupByLibrary.simpleMessage("Complété"),
-    "calendarLoggedAt": m1,
+    "calendarCompletionRatio": m1,
+    "calendarLoggedAt": m2,
     "calendarNoData": MessageLookupByLibrary.simpleMessage(
       "Aucune prière enregistrée pour ce jour",
     ),
@@ -108,9 +115,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "navCalendar": MessageLookupByLibrary.simpleMessage("Calendrier"),
     "navSettings": MessageLookupByLibrary.simpleMessage("Paramètres"),
     "navToday": MessageLookupByLibrary.simpleMessage("Aujourd\'hui"),
-    "notificationBody": m2,
-    "notificationTitle": m3,
-    "offsetMinutes": m4,
+    "notificationBody": m3,
+    "notificationChannelDescription": MessageLookupByLibrary.simpleMessage(
+      "Notifications pour les horaires de prière",
+    ),
+    "notificationChannelName": MessageLookupByLibrary.simpleMessage(
+      "Notifications de prière",
+    ),
+    "notificationTitle": m4,
+    "offsetMinutes": m5,
     "onboardingAppLockBody": MessageLookupByLibrary.simpleMessage(
       "Sécurisez votre journal de prière avec biométrie ou PIN.",
     ),
@@ -158,21 +171,32 @@ class MessageLookup extends MessageLookupByLibrary {
     "prayerIsha": MessageLookupByLibrary.simpleMessage("Isha"),
     "prayerJumuah": MessageLookupByLibrary.simpleMessage("Jumu\'ah"),
     "prayerMaghrib": MessageLookupByLibrary.simpleMessage("Maghrib"),
+    "routerError": MessageLookupByLibrary.simpleMessage("Erreur de route"),
     "securityBiometricReason": MessageLookupByLibrary.simpleMessage(
       "Authentifiez-vous pour déverrouiller Salat Tracker",
     ),
     "securityConfirmPinLabel": MessageLookupByLibrary.simpleMessage(
       "Confirmer le PIN",
     ),
+    "securityCurrentPinError": MessageLookupByLibrary.simpleMessage(
+      "Le PIN actuel est incorrect",
+    ),
+    "securityCurrentPinLabel": MessageLookupByLibrary.simpleMessage(
+      "PIN actuel",
+    ),
+    "securityCurrentPinTitle": MessageLookupByLibrary.simpleMessage(
+      "Entrez le PIN actuel",
+    ),
+    "securityLockoutSeconds": m6,
     "securityPinDigitsError": MessageLookupByLibrary.simpleMessage(
-      "Le PIN doit contenir exactement 4 chiffres",
+      "Le PIN doit contenir exactement 6 chiffres",
     ),
     "securityPinLabel": MessageLookupByLibrary.simpleMessage("PIN"),
     "securityPinMismatchError": MessageLookupByLibrary.simpleMessage(
       "Les PIN ne correspondent pas",
     ),
     "securitySetPinTitle": MessageLookupByLibrary.simpleMessage(
-      "Définir un PIN à 4 chiffres",
+      "Définir un PIN à 6 chiffres",
     ),
     "securityUnlockTitle": MessageLookupByLibrary.simpleMessage(
       "Déverrouiller Salat Tracker",
@@ -191,6 +215,21 @@ class MessageLookup extends MessageLookupByLibrary {
     "settingsBadges": MessageLookupByLibrary.simpleMessage("Badges"),
     "settingsBadgesSubtitle": MessageLookupByLibrary.simpleMessage(
       "Voir les jalons réflexifs",
+    ),
+    "settingsBiometricUnlock": MessageLookupByLibrary.simpleMessage(
+      "Déverrouillage biométrique",
+    ),
+    "settingsBiometricUnlockSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Utiliser la biométrie avant le PIN sur l\'écran verrouillé",
+    ),
+    "settingsBiometricUnlockUnavailable": MessageLookupByLibrary.simpleMessage(
+      "Biométrie indisponible sur cet appareil",
+    ),
+    "settingsCurrentTimezone": MessageLookupByLibrary.simpleMessage(
+      "Fuseau horaire actuel",
+    ),
+    "settingsCurrentTimezoneUnavailable": MessageLookupByLibrary.simpleMessage(
+      "Fuseau horaire indisponible",
     ),
     "settingsHaptics": MessageLookupByLibrary.simpleMessage("Retour Haptique"),
     "settingsHapticsSubtitle": MessageLookupByLibrary.simpleMessage(
@@ -222,6 +261,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "settingsReminderOffsetSubtitle": MessageLookupByLibrary.simpleMessage(
       "Ajuster l\'heure de notification",
     ),
+    "settingsResetPin": MessageLookupByLibrary.simpleMessage(
+      "Réinitialiser le PIN",
+    ),
+    "settingsResetPinSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Définir un nouveau PIN de verrouillage",
+    ),
     "settingsShowPoints": MessageLookupByLibrary.simpleMessage(
       "Afficher les Points",
     ),
@@ -232,6 +277,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "settingsThemeDark": MessageLookupByLibrary.simpleMessage("Sombre"),
     "settingsThemeLight": MessageLookupByLibrary.simpleMessage("Clair"),
     "settingsThemeSystem": MessageLookupByLibrary.simpleMessage("Système"),
+    "settingsVersionLoading": MessageLookupByLibrary.simpleMessage(
+      "Chargement...",
+    ),
     "settingsWeekStart": MessageLookupByLibrary.simpleMessage(
       "Début de la semaine",
     ),
@@ -242,18 +290,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "todayComplete": MessageLookupByLibrary.simpleMessage(
       "Toutes les prières complétées !",
     ),
+    "todayCompletionRatio": m7,
     "todayEncouragement": MessageLookupByLibrary.simpleMessage(
       "Continuez, vous êtes formidable !",
     ),
     "todayNone": MessageLookupByLibrary.simpleMessage(
       "Aucune prière enregistrée",
     ),
-    "todayPartial": m5,
-    "todayPoints": m6,
+    "todayPartial": m8,
+    "todayPoints": m9,
     "todayProgress": MessageLookupByLibrary.simpleMessage(
       "Progrès d\'aujourd\'hui",
     ),
-    "todayStreak": m7,
+    "todayStreak": m10,
     "weekStartMonday": MessageLookupByLibrary.simpleMessage("Lundi"),
     "weekStartSaturday": MessageLookupByLibrary.simpleMessage("Samedi"),
     "weekStartSunday": MessageLookupByLibrary.simpleMessage("Dimanche"),

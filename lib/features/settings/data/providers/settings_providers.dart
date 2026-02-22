@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -23,6 +24,84 @@ SettingsRepository settingsRepository(Ref ref) {
   return SettingsRepositoryImpl(ref.read(settingsLocalDataSourceProvider));
 }
 
+@riverpod
+NotificationSchedulePlanner notificationSchedulePlanner(Ref ref) {
+  return const NotificationSchedulePlanner();
+}
+
+final locationContextStoreProvider = Provider<LocationContextStore>((ref) {
+  final box = Hive.box<String>(HiveService.locationBoxName);
+  return LocationContextStore(box);
+});
+
+final locationContextResolverProvider = Provider<LocationContextResolver>(
+  (ref) => const LocationContextResolver(),
+);
+
+final locationContextNotifierProvider =
+    AsyncNotifierProvider<LocationContextNotifier, LocationContext>(
+      LocationContextNotifier.new,
+    );
+
+class LocationContextNotifier extends AsyncNotifier<LocationContext> {
+  @override
+  Future<LocationContext> build() async {
+    final store = ref.read(locationContextStoreProvider);
+    final settings = await ref.read(settingsProvider.future);
+    final localeCode = settings.localeCode ?? 'en';
+    final mode = store.readMode();
+    final manualTimezoneId = store.readManualTimezoneId();
+    final cached = store.readCachedContext();
+
+    final context = await ref
+        .read(locationContextResolverProvider)
+        .resolve(
+          localeCode: localeCode,
+          mode: mode,
+          manualTimezoneId: manualTimezoneId,
+          cached: cached,
+        );
+    await store.writeCachedContext(context);
+    return context;
+  }
+
+  Future<void> refresh({bool allowPermissionPrompt = true}) async {
+    final store = ref.read(locationContextStoreProvider);
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(() async {
+      final settings = await ref.read(settingsProvider.future);
+      final localeCode = settings.localeCode ?? 'en';
+      final mode = store.readMode();
+      final manualTimezoneId = store.readManualTimezoneId();
+      final cached = store.readCachedContext();
+      final context = await ref
+          .read(locationContextResolverProvider)
+          .resolve(
+            localeCode: localeCode,
+            mode: mode,
+            manualTimezoneId: manualTimezoneId,
+            cached: cached,
+            allowPermissionPrompt: allowPermissionPrompt,
+          );
+      await store.writeCachedContext(context);
+      return context;
+    });
+  }
+
+  Future<void> setMode(LocationMode mode) async {
+    final store = ref.read(locationContextStoreProvider);
+    await store.writeMode(mode);
+    await refresh();
+  }
+
+  Future<void> setManualTimezoneId(String timezoneId) async {
+    final store = ref.read(locationContextStoreProvider);
+    await store.writeMode(LocationMode.manual);
+    await store.writeManualTimezoneId(timezoneId);
+    await refresh();
+  }
+}
+
 /// Provider for the app version string from platform metadata.
 @riverpod
 Future<String> appVersion(Ref ref) async {
@@ -37,15 +116,19 @@ Future<String> appVersion(Ref ref) async {
 ///
 /// Provides methods to update theme, language, notifications, and other
 /// user preferences with persistence.
-@riverpod
+@Riverpod(keepAlive: true)
 class SettingsNotifier extends _$SettingsNotifier {
+  bool _didBootstrapNotifications = false;
+  bool _isSchedulingNotifications = false;
+
   @override
   Future<Settings> build() async {
     final repository = ref.read(settingsRepositoryProvider);
     final settings = await repository.fetchSettings();
 
-    if (settings.notificationsEnabled) {
-      await _scheduleForSettings(settings);
+    if (settings.notificationsEnabled && !_didBootstrapNotifications) {
+      _didBootstrapNotifications = true;
+      unawaited(_scheduleForSettings(settings));
     }
 
     return settings;
@@ -153,6 +236,16 @@ class SettingsNotifier extends _$SettingsNotifier {
     });
   }
 
+  Future<void> updateBiometricUnlockEnabled({required bool enabled}) async {
+    final repository = ref.read(settingsRepositoryProvider);
+    state = await AsyncValue.guard(() async {
+      final current = await future;
+      final updated = current.copyWith(biometricUnlockEnabled: enabled);
+      await repository.saveSettings(updated);
+      return updated;
+    });
+  }
+
   Future<void> toggleNotifications({required bool enabled}) async {
     final repository = ref.read(settingsRepositoryProvider);
     final notificationService = ref.read(notificationServiceProvider);
@@ -199,55 +292,57 @@ class SettingsNotifier extends _$SettingsNotifier {
   }
 
   Future<void> _scheduleForSettings(Settings currentSettings) async {
+    if (_isSchedulingNotifications) {
+      return;
+    }
+    _isSchedulingNotifications = true;
+
     final notificationService = ref.read(notificationServiceProvider);
-    await notificationService.cancelAll();
-
-    final times = currentSettings.prayerTimes;
-
-    final now = DateTime.now();
-
-    for (final type in PrayerType.values) {
-      final time = times[type] ?? const TimeOfDay(hour: 0, minute: 0);
-      final offset = currentSettings.offsets[type] ?? 0;
-      final scheduledTime = DateTime(
-        now.year,
-        now.month,
-        now.day,
-        time.hour,
-        time.minute,
-      ).add(Duration(minutes: offset));
-
-      final s = S.current;
-      final prayerName = _prayerName(type, s);
-
-      await notificationService.schedulePrayer(
-        id: type.index,
-        title: s.notificationTitle(prayerName),
-        body: s.notificationBody(prayerName),
-        scheduledAt: scheduledTime,
-        repeatsDaily: true,
-        payload: '/today',
-      );
+    final planner = ref.read(notificationSchedulePlannerProvider);
+    LocationContext? locationContext;
+    try {
+      locationContext = await ref.read(locationContextNotifierProvider.future);
+    } on Object {
+      locationContext = null;
     }
 
-    final ishaTime =
-        times[PrayerType.isha] ?? const TimeOfDay(hour: 20, minute: 30);
-    final reflectionTime = DateTime(
-      now.year,
-      now.month,
-      now.day,
-      ishaTime.hour,
-      ishaTime.minute,
-    ).add(const Duration(hours: 2));
+    try {
+      await notificationService.cancelAll();
+      await notificationService.refreshTimezone(
+        preferredTimezoneId: locationContext?.timezoneId,
+      );
+      final now = DateTime.now();
+      final schedule = planner.buildDailySchedule(
+        settings: currentSettings,
+        now: now,
+      );
 
-    await notificationService.schedulePrayer(
-      id: 99,
-      title: S.current.endOfDayTitle,
-      body: S.current.endOfDayBody,
-      scheduledAt: reflectionTime,
-      repeatsDaily: true,
-      payload: '/today',
-    );
+      for (final item in schedule) {
+        final s = S.current;
+        if (item.isEndOfDay) {
+          await notificationService.schedulePrayer(
+            id: item.id,
+            title: s.endOfDayTitle,
+            body: s.endOfDayBody,
+            scheduledAt: item.scheduledAt,
+            repeatsDaily: true,
+            payload: '/today',
+          );
+        } else {
+          final prayerName = _prayerName(item.prayerType!, s);
+          await notificationService.schedulePrayer(
+            id: item.id,
+            title: s.notificationTitle(prayerName),
+            body: s.notificationBody(prayerName),
+            scheduledAt: item.scheduledAt,
+            repeatsDaily: true,
+            payload: '/today',
+          );
+        }
+      }
+    } finally {
+      _isSchedulingNotifications = false;
+    }
   }
 
   String _prayerName(PrayerType type, S s) {

@@ -164,6 +164,16 @@ class S {
     );
   }
 
+  /// `{completed}/{total}`
+  String todayCompletionRatio(int completed, int total) {
+    return Intl.message(
+      '$completed/$total',
+      name: 'todayCompletionRatio',
+      desc: '',
+      args: [completed, total],
+    );
+  }
+
   /// `استمر، أنت تبلي حسنًا!`
   String get todayEncouragement {
     return Intl.message(
@@ -339,6 +349,26 @@ class S {
     );
   }
 
+  /// `إعادة تعيين رمز PIN`
+  String get settingsResetPin {
+    return Intl.message(
+      'إعادة تعيين رمز PIN',
+      name: 'settingsResetPin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تعيين رمز PIN جديد لقفل التطبيق`
+  String get settingsResetPinSubtitle {
+    return Intl.message(
+      'تعيين رمز PIN جديد لقفل التطبيق',
+      name: 'settingsResetPinSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `حول`
   String get settingsAbout {
     return Intl.message('حول', name: 'settingsAbout', desc: '', args: []);
@@ -349,6 +379,16 @@ class S {
     return Intl.message(
       'إصدار التطبيق',
       name: 'settingsAppVersion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `جار التحميل...`
+  String get settingsVersionLoading {
+    return Intl.message(
+      'جار التحميل...',
+      name: 'settingsVersionLoading',
       desc: '',
       args: [],
     );
@@ -419,6 +459,16 @@ class S {
     );
   }
 
+  /// `خطأ في المسار`
+  String get routerError {
+    return Intl.message(
+      'خطأ في المسار',
+      name: 'routerError',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `فشل تحميل التقويم`
   String get errorLoadingCalendar {
     return Intl.message(
@@ -481,6 +531,16 @@ class S {
       name: 'calendarLoggedAt',
       desc: '',
       args: [time],
+    );
+  }
+
+  /// `{completed}/{total}`
+  String calendarCompletionRatio(int completed, int total) {
+    return Intl.message(
+      '$completed/$total',
+      name: 'calendarCompletionRatio',
+      desc: '',
+      args: [completed, total],
     );
   }
 
@@ -601,6 +661,26 @@ class S {
       name: 'notificationBody',
       desc: '',
       args: [prayer],
+    );
+  }
+
+  /// `إشعارات الصلاة`
+  String get notificationChannelName {
+    return Intl.message(
+      'إشعارات الصلاة',
+      name: 'notificationChannelName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `إشعارات لمواقيت الصلاة`
+  String get notificationChannelDescription {
+    return Intl.message(
+      'إشعارات لمواقيت الصلاة',
+      name: 'notificationChannelDescription',
+      desc: '',
+      args: [],
     );
   }
 
@@ -779,11 +859,31 @@ class S {
     );
   }
 
-  /// `عيّن رمز PIN مكوّن من 4 أرقام`
+  /// `عيّن رمز PIN مكوّن من 6 أرقام`
   String get securitySetPinTitle {
     return Intl.message(
-      'عيّن رمز PIN مكوّن من 4 أرقام',
+      'عيّن رمز PIN مكوّن من 6 أرقام',
       name: 'securitySetPinTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `أدخل رمز PIN الحالي`
+  String get securityCurrentPinTitle {
+    return Intl.message(
+      'أدخل رمز PIN الحالي',
+      name: 'securityCurrentPinTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `رمز PIN الحالي`
+  String get securityCurrentPinLabel {
+    return Intl.message(
+      'رمز PIN الحالي',
+      name: 'securityCurrentPinLabel',
       desc: '',
       args: [],
     );
@@ -809,10 +909,10 @@ class S {
     );
   }
 
-  /// `يجب أن يتكون رمز PIN من 4 أرقام`
+  /// `يجب أن يتكون رمز PIN من 6 أرقام`
   String get securityPinDigitsError {
     return Intl.message(
-      'يجب أن يتكون رمز PIN من 4 أرقام',
+      'يجب أن يتكون رمز PIN من 6 أرقام',
       name: 'securityPinDigitsError',
       desc: '',
       args: [],
@@ -824,6 +924,16 @@ class S {
     return Intl.message(
       'رمزا PIN غير متطابقين',
       name: 'securityPinMismatchError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `رمز PIN الحالي غير صحيح`
+  String get securityCurrentPinError {
+    return Intl.message(
+      'رمز PIN الحالي غير صحيح',
+      name: 'securityCurrentPinError',
       desc: '',
       args: [],
     );
@@ -846,6 +956,66 @@ class S {
       name: 'securityBiometricReason',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `الفتح بالبصمة`
+  String get settingsBiometricUnlock {
+    return Intl.message(
+      'الفتح بالبصمة',
+      name: 'settingsBiometricUnlock',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `استخدام البصمة قبل رمز PIN في شاشة القفل`
+  String get settingsBiometricUnlockSubtitle {
+    return Intl.message(
+      'استخدام البصمة قبل رمز PIN في شاشة القفل',
+      name: 'settingsBiometricUnlockSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `البصمة غير متاحة على هذا الجهاز`
+  String get settingsBiometricUnlockUnavailable {
+    return Intl.message(
+      'البصمة غير متاحة على هذا الجهاز',
+      name: 'settingsBiometricUnlockUnavailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `المنطقة الزمنية الحالية`
+  String get settingsCurrentTimezone {
+    return Intl.message(
+      'المنطقة الزمنية الحالية',
+      name: 'settingsCurrentTimezone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `المنطقة الزمنية غير متاحة`
+  String get settingsCurrentTimezoneUnavailable {
+    return Intl.message(
+      'المنطقة الزمنية غير متاحة',
+      name: 'settingsCurrentTimezoneUnavailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `حاول مرة أخرى بعد {seconds} ثانية`
+  String securityLockoutSeconds(int seconds) {
+    return Intl.message(
+      'حاول مرة أخرى بعد $seconds ثانية',
+      name: 'securityLockoutSeconds',
+      desc: '',
+      args: [seconds],
     );
   }
 

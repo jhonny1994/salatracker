@@ -48,5 +48,9 @@
 		<key>NSUserNotificationsUsageDescription</key>
 		<string>We need permission to send you prayer time reminders and daily progress
 			notifications.</string>
+		<key>NSFaceIDUsageDescription</key>
+		<string>We use Face ID to securely unlock your prayer tracker.</string>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>We use your location to resolve your local prayer timezone accurately.</string>
 	</dict>
 </plist>

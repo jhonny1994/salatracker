@@ -14,11 +14,12 @@ Salat Tracker is an Arabic-first Flutter app (with EN/FR support) that helps use
 - **Today:** one-tap checklist for the five prayers, progress ring, streak, optional points.
 - **Calendar:** month overview with day states and day-level history editing.
 - **Settings:** prayer schedule, reminder offsets, language, theme, haptics, points visibility, week start.
+- **Location context:** localized city/timezone context with offline-safe fallback and manual override-ready architecture.
 - **Onboarding:** first-run setup for prayer times, reminder opt-in, and app personalization.
 
 ## Current Build Status
-- **Implemented and usable:** foundations, data layer, Today/Calendar/Settings UX, onboarding baseline, notification scheduling.
-- **In progress toward production:** notification hardening, reflective badges, app lock security hardening, full test and release automation.
+- **Implemented and usable:** foundations, data layer, Today/Calendar/Settings UX, onboarding baseline, notification scheduling, reflective badges, app lock security hardening.
+- **In progress toward production:** notification hardening, full test and release automation.
 - **Execution source of truth:** `docs/tasks.md` and `docs/plan.md`.
 
 ## Product Principles
@@ -34,6 +35,7 @@ Salat Tracker is an Arabic-first Flutter app (with EN/FR support) that helps use
 - Hive CE for local persistence
 - go_router for navigation
 - flutter_local_notifications + timezone for reminders
+- geolocator + geocoding + timeapi.io coordinate timezone resolution
 - sentry_flutter for crash reporting and analytics breadcrumbs
 
 ## Quick Start
@@ -70,8 +72,7 @@ docs/          # PRD, plan, tasks, design, rules, UX guidance
 - UX and gamification: `docs/ux-gamification-psychology.md`
 
 ## Road to v1.0.0
-- Finish reflective badges (domain + UI + localization + tests).
-- Complete app lock hardening (screen-off policy, hashing, lifecycle tests).
+- Refine animations and cross-platform UX polish.
 - Expand test coverage and enforce CI quality gates.
 - Finalize signed release pipelines and store-readiness assets.
 

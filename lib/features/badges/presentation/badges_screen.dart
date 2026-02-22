@@ -21,14 +21,10 @@ class BadgesScreen extends ConsumerWidget {
       body: awardsAsync.when(
         data: (awards) {
           if (awards.isEmpty) {
-            return Center(
-              child: Padding(
-                padding: const EdgeInsets.all(AppSpacing.xl),
-                child: Text(
-                  l10n.badgesEmpty,
-                  textAlign: TextAlign.center,
-                ),
-              ),
+            return AppEmptyState(
+              icon: Icons.emoji_events_outlined,
+              title: l10n.badgesTitle,
+              message: l10n.badgesEmpty,
             );
           }
 
@@ -40,14 +36,9 @@ class BadgesScreen extends ConsumerWidget {
           );
         },
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, _) => Center(
-          child: Padding(
-            padding: const EdgeInsets.all(AppSpacing.xl),
-            child: Text(
-              l10n.errorLoadingData,
-              textAlign: TextAlign.center,
-            ),
-          ),
+        error: (error, _) => AppEmptyState(
+          icon: Icons.error_outline,
+          title: l10n.errorLoadingData,
         ),
       ),
     );

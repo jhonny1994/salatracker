@@ -36,7 +36,7 @@ class CalendarDayDetail extends ConsumerWidget {
     final points = prayerDay?.points ?? 0;
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(AppSpacing.xl),
+      padding: const EdgeInsets.all(AppSpacing.lg),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -45,35 +45,32 @@ class CalendarDayDetail extends ConsumerWidget {
             day.toFormattedDate,
             style: theme.textTheme.titleLarge,
           ),
-          const Gap(AppSpacing.lg),
+          const Gap(AppSpacing.md),
 
           // Stats card
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(AppSpacing.lg),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  CalendarStatItem(
-                    icon: Icons.check_circle,
-                    label: l10n.calendarCompleted,
-                    value: '$completedCount/5',
-                  ),
-                  CalendarStatItem(
-                    icon: Icons.star,
-                    label: l10n.calendarPoints,
-                    value: '$points',
-                  ),
-                ],
-              ),
+          AppSurfaceCard(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                CalendarStatItem(
+                  icon: Icons.check_circle,
+                  label: l10n.calendarCompleted,
+                  value: l10n.calendarCompletionRatio(completedCount, 5),
+                ),
+                CalendarStatItem(
+                  icon: Icons.star,
+                  label: l10n.calendarPoints,
+                  value: '$points',
+                ),
+              ],
             ),
           ),
-          const Gap(AppSpacing.xl),
+          const Gap(AppSpacing.lg),
 
           // Prayer list
-          Text(
-            l10n.calendarPrayers,
-            style: theme.textTheme.titleMedium,
+          AppSectionHeader(
+            title: l10n.calendarPrayers,
+            subtitle: completedCount == 0 ? l10n.calendarNoPrayers : null,
           ),
           const Gap(AppSpacing.md),
 
@@ -89,7 +86,7 @@ class CalendarDayDetail extends ConsumerWidget {
 
             final isJumuah =
                 type == PrayerType.dhuhr && day.weekday == DateTime.friday;
-            final name = isJumuah ? l10n.prayerJumuah : type.name.toUpperCase();
+            final name = isJumuah ? l10n.prayerJumuah : _prayerName(type, l10n);
             final isCompleted = entry.isCompleted;
 
             return Padding(
@@ -114,6 +111,8 @@ class CalendarDayDetail extends ConsumerWidget {
                         l10n.calendarLoggedAt(entry.checkedAt!.toFormattedTime),
                       )
                     : null,
+                dense: true,
+                visualDensity: VisualDensity.compact,
                 onTap: () => _handleTap(context, ref, type, isCompleted),
               ),
             );
@@ -160,5 +159,15 @@ class CalendarDayDetail extends ConsumerWidget {
     await ref
         .read(historyControllerProvider.notifier)
         .togglePrayer(date: day, prayerType: type);
+  }
+
+  String _prayerName(PrayerType type, S l10n) {
+    return switch (type) {
+      PrayerType.fajr => l10n.prayerFajr,
+      PrayerType.dhuhr => l10n.prayerDhuhr,
+      PrayerType.asr => l10n.prayerAsr,
+      PrayerType.maghrib => l10n.prayerMaghrib,
+      PrayerType.isha => l10n.prayerIsha,
+    };
   }
 }

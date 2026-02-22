@@ -93,84 +93,78 @@ class _PrayerTile extends StatelessWidget {
       PrayerType.isha => l10n.prayerIsha,
     };
 
-    return Card(
+    return AppSurfaceCard(
       color: isLogged
           ? statusChipTheme?.completeBackground
           : theme.colorScheme.surface,
       elevation: isLogged ? AppElevations.none : AppElevations.low,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(AppRadius.lg),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.xl,
-            vertical: AppSpacing.lg,
-          ),
-          child: SizedBox(
-            height: AppTouchTargets.minimum,
-            child: Row(
-              children: [
-                AnimatedContainer(
-                  key: ValueKey('checkbox_${type.name}_$isLogged'),
-                  duration: AppDurations.normal,
-                  curve: Curves.easeOut,
-                  width: AppTouchTargets.checkbox,
-                  height: AppTouchTargets.checkbox,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: isLogged
-                        ? statusChipTheme?.completeForeground
-                        : theme.colorScheme.surfaceContainerHighest,
-                    border: isLogged
-                        ? null
-                        : Border.all(
-                            color: theme.colorScheme.outline.withValues(
-                              alpha: 0.3,
-                            ),
-                            width: 2,
-                          ),
-                  ),
-                  child: AnimatedSwitcher(
-                    duration: AppDurations.normal,
-                    child: isLogged
-                        ? Icon(
-                            Icons.check_rounded,
-                            key: const ValueKey('check'),
-                            size: AppIconSizes.lg,
-                            color: statusChipTheme?.completeBackground,
-                          )
-                        : const SizedBox.shrink(key: ValueKey('empty')),
-                  ),
-                ),
-                const Gap(AppSpacing.lg),
-                Expanded(
-                  child: Text(
-                    prayerName,
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      color: isLogged
-                          ? statusChipTheme?.completeForeground
-                          : theme.colorScheme.onSurface,
-                      fontWeight: isLogged ? FontWeight.w600 : FontWeight.w500,
-                    ),
-                  ),
-                ),
-                if (!isLogged)
-                  Text(
-                    l10n.tapToLog,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: theme.colorScheme.onSurfaceVariant,
-                    ),
-                  ),
-                if (isLogged)
-                  Icon(
-                    Icons.check_circle_rounded,
-                    color: statusChipTheme?.completeForeground,
-                    size: AppIconSizes.md,
-                    // Use a slightly larger size for the check circle
-                  ),
-              ],
+      onTap: onTap,
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.xl,
+        vertical: AppSpacing.lg,
+      ),
+      child: SizedBox(
+        height: AppTouchTargets.minimum,
+        child: Row(
+          children: [
+            AnimatedContainer(
+              key: ValueKey('checkbox_${type.name}_$isLogged'),
+              duration: AppDurations.normal,
+              curve: Curves.easeOut,
+              width: AppTouchTargets.checkbox,
+              height: AppTouchTargets.checkbox,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: isLogged
+                    ? statusChipTheme?.completeForeground
+                    : theme.colorScheme.surfaceContainerHighest,
+                border: isLogged
+                    ? null
+                    : Border.all(
+                        color: theme.colorScheme.outline.withValues(
+                          alpha: 0.3,
+                        ),
+                        width: 2,
+                      ),
+              ),
+              child: AnimatedSwitcher(
+                duration: AppDurations.normal,
+                child: isLogged
+                    ? Icon(
+                        Icons.check_rounded,
+                        key: const ValueKey('check'),
+                        size: AppIconSizes.lg,
+                        color: statusChipTheme?.completeBackground,
+                      )
+                    : const SizedBox.shrink(key: ValueKey('empty')),
+              ),
             ),
-          ),
+            const Gap(AppSpacing.lg),
+            Expanded(
+              child: Text(
+                prayerName,
+                style: theme.textTheme.titleMedium?.copyWith(
+                  color: isLogged
+                      ? statusChipTheme?.completeForeground
+                      : theme.colorScheme.onSurface,
+                  fontWeight: isLogged ? FontWeight.w600 : FontWeight.w500,
+                ),
+              ),
+            ),
+            if (!isLogged)
+              Text(
+                l10n.tapToLog,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+              ),
+            if (isLogged)
+              Icon(
+                Icons.check_circle_rounded,
+                color: statusChipTheme?.completeForeground,
+                size: AppIconSizes.md,
+              ),
+          ],
         ),
       ),
     );

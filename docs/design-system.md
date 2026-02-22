@@ -299,8 +299,9 @@ final theme = ThemeData(
 
 ### Settings Row
 - **Layout:** Title, optional description, trailing control
-- **Controls:** Switch, time picker, segmented button
+- **Controls:** Switch, time picker, segmented button, dropdown menu
 - **Density:** compact but readable for RTL
+- **Pattern:** Prefer inline controls (SegmentedButton, Dropdown) over modal bottom sheets to reduce interaction friction.
 
 ## Motion Guidance
 - **Page enter:** 200-250ms fade + slide (8-12dp)

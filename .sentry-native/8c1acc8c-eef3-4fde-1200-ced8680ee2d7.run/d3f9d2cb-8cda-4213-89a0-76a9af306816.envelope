@@ -1,0 +1,3 @@
+{"dsn":"https://02b56314683746cdf9d23fb4eb2bb341@o4507500079742976.ingest.de.sentry.io/4510731996299344"}
+{"type":"session","length":221}
+{"init":true,"sid":"8ae65872-829f-4725-2e05-87b0c77b57c6","status":"crashed","errors":1,"started":"2026-02-12T08:09:25.739130Z","duration":30.907897,"attrs":{"release":"salat_tracker@0.1.0+1","environment":"development"}}

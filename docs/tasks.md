@@ -20,10 +20,10 @@
 | Phase 1: Foundations | 6/6 | ✅ Complete |
 | Phase 2: Data Layer | 7/7 | ✅ Complete |
 | Phase 3: Core UX | 10/10 | ✅ Complete |
-| Phase 4: Advanced Features + Notifications + Badges | 13/20 | 🔄 In Progress |
-| Phase 5: App Lock & Security Hardening | 2/10 | 🔄 In Progress |
-| Phase 6: Quality Engineering | 0/16 | ⬜ Not Started |
-| Phase 7: Release Engineering & Store Readiness | 0/12 | ⬜ Not Started |
+| Phase 4: Advanced Features + Notifications + Badges | 25/27 | 🔄 In Progress |
+| Phase 5: App Lock & Security Hardening | 14/15 | 🔄 In Progress |
+| Phase 6: Quality Engineering | 9/16 | 🔄 In Progress |
+| Phase 7: Release Engineering & Store Readiness | 6/12 | 🔄 In Progress |
 | Phase 8: Launch Audit & Go/No-Go | 0/8 | ⬜ Not Started |
 
 ---
@@ -128,85 +128,102 @@
 - [x] Deep-link from notification to Today screen.
 - [x] Supportive notification copy (validated by [ux-gamification-psychology.md](ux-gamification-psychology.md)).
 - [ ] Validate timezone and DST-safe scheduling rules with tests.
-- [ ] Ensure deterministic notification ID strategy to prevent duplicates.
+- [x] Ensure deterministic notification ID strategy to prevent duplicates.
 - [ ] Verify reboot/package-update rescheduling consistency.
-- [ ] Add automated tests for scheduling edge cases.
+- [x] Add automated tests for scheduling edge cases.
+- [x] Add timezone-first display label in settings (permissionless).
+- [x] Implement display fallback chain: city from zone id -> zone id -> UTC.
+- [x] Implement resolver chain: manual -> GPS/API (`timeapi.io`) -> cache -> device timezone -> UTC.
+- [x] Localize city/country labels via geocoding locale (`en/ar/fr`) when available.
+- [x] Show compact location context banner across Today, Calendar, and Settings.
 
 ### Badges (v1 Required)
-- [ ] Define reflective badge taxonomy (non-competitive, no shame mechanics).
-- [ ] Implement badge domain model + persistence.
-- [ ] Implement badge evaluation engine (daily/weekly/monthly milestones).
-- [ ] Trigger badge recomputation on prayer/history changes.
-- [ ] Add badges UI screen (reflective history view).
-- [ ] Add EN/AR/FR localization keys for badges.
-- [ ] Add unit tests for badge awarding logic.
-- [ ] Add widget test for badge UI rendering and states.
+- [x] Define reflective badge taxonomy (non-competitive, no shame mechanics).
+- [x] Implement badge domain model + persistence.
+- [x] Implement badge evaluation engine (daily/weekly/monthly milestones).
+- [x] Trigger badge recomputation on prayer/history changes.
+- [x] Add badges UI screen (reflective history view).
+- [x] Add EN/AR/FR localization keys for badges.
+- [x] Add unit tests for badge awarding logic.
+- [x] Add widget test for badge UI rendering and states.
 
 ---
 
 ## Phase 5: App Lock & Security Hardening 🔄
 
 ### Security Data Model
-- [ ] Move app-lock enabled flag to Settings model (preference domain).
-- [ ] Keep PIN secret only in secure storage (secret domain).
-- [ ] Migrate existing state safely without data loss.
-- [ ] Replace plaintext PIN storage with salted hash verification.
-- [ ] Add lockout/backoff policy for repeated invalid PIN attempts.
+- [x] Move app-lock enabled flag to Settings model (preference domain).
+- [x] Keep PIN secret only in secure storage (secret domain).
+- [x] Migrate existing state safely without data loss.
+- [x] Replace plaintext PIN storage with salted hash verification.
+- [x] Add lockout/backoff policy for repeated invalid PIN attempts.
 
 ### Lifecycle Lock Policy
-- [ ] Implement lifecycle observer for foreground/background transitions.
-- [ ] Implement lock trigger only after screen-off/device-lock background->resume path.
-- [ ] Ensure no lock interruption during uninterrupted foreground usage.
+- [x] Implement lifecycle observer for foreground/background transitions.
+- [x] Implement lock trigger only after screen-off/device-lock background->resume path.
+- [x] Ensure no lock interruption during uninterrupted foreground usage.
 - [ ] Verify cold start, resume, and process-death behavior.
 
 ### UX Integration
-- [ ] Wire onboarding app-lock step to real setup (PIN and optional biometrics).
-- [ ] Add clear recovery paths when biometrics are unavailable/cancelled.
-- [ ] Add settings controls for lock enable/disable and credential reset.
+- [x] Wire onboarding app-lock step to real setup (PIN and optional biometrics).
+- [x] Add clear recovery paths when biometrics are unavailable/cancelled.
+- [x] Add settings controls for lock enable/disable and credential reset.
+- [x] Use OTP-style PIN UI for setup and current-PIN verification dialogs.
 
 ### Validation
-- [ ] Unit tests for security repository and lock policy decisions.
-- [ ] Widget tests for lock screen interactions.
-- [ ] Integration tests for lifecycle lock behavior.
+- [x] Unit tests for security repository and lock policy decisions.
+- [x] Widget tests for lock screen interactions.
+- [x] Integration tests for lifecycle lock behavior.
 
 ---
 
-## Phase 6: Quality Engineering ⬜
+## Phase 6: Quality Engineering 🔄
 
 ### Automated Testing
-- [ ] Unit tests: StreakCalculator.
-- [ ] Unit tests: PointsCalculator.
-- [ ] Unit tests: Prayer repository.
-- [ ] Unit tests: Settings repository.
-- [ ] Unit tests: notification scheduling logic.
-- [ ] Unit tests: security repository and lock policy.
+- [x] Unit tests: StreakCalculator.
+- [x] Unit tests: PointsCalculator.
+- [x] Unit tests: Prayer repository.
+- [x] Unit tests: Settings repository.
+- [x] Unit tests: notification scheduling logic.
+- [x] Unit tests: security repository and lock policy.
 - [ ] Widget tests: Today interactions (toggle/progress).
 - [ ] Widget tests: Calendar day detail and history edits.
 - [ ] Widget tests: Settings toggles and selectors.
 - [ ] Widget tests: Onboarding full path (including lock setup).
 - [ ] Integration smoke tests: first launch -> onboarding -> logging -> calendar -> lock -> notification deep-link.
 - [ ] RTL layout verification tests.
+- [x] Fix forward chevron direction for settings tiles in RTL.
 - [ ] EN/AR/FR localization completeness checks.
 
 ### Static Quality
-- [ ] Enforce formatting and analyzer clean state.
-- [ ] Zero critical analyzer/lint violations in release branch.
-- [ ] Coverage threshold gate defined and enforced in CI.
+- [x] Enforce formatting and analyzer clean state.
+- [x] Zero critical analyzer/lint violations in release branch.
+- [x] Coverage threshold gate defined and enforced in CI.
+
+### UI Re-Art Program (Minimalist Ecosystem)
+- [x] Implement shared UI primitives (`AppSectionHeader`, `AppSurfaceCard`, `AppMetricTile`, `AppEmptyState`, `AppInlineNotice`).
+- [x] Re-art Today screen and all Today widgets with unified visual grammar.
+- [x] Re-art Calendar screen and day-detail widgets with consistent hierarchy.
+- [x] Re-art Settings screen and settings widgets with dense-but-clear rhythm.
+- [x] Re-art Onboarding flow (all pages) with cohesive progressive narrative.
+- [x] Re-art Security and Badges UI to match trust-first reflective style.
+- [x] Verify no legacy UI islands remain after re-art.
+- [x] Run full RTL and localization parity QA for re-arted surfaces.
 
 ---
 
-## Phase 7: Release Engineering & Store Readiness ⬜
+## Phase 7: Release Engineering & Store Readiness 🔄
 
 ### CI/CD
-- [ ] Add CI workflow: format + analyze + tests.
-- [ ] Add build workflow: signed APK generation.
-- [ ] Add build workflow: signed AAB generation.
-- [ ] Add artifact retention and release tagging workflow.
+- [x] Add CI workflow: format + analyze + tests.
+- [x] Add build workflow: signed APK generation.
+- [x] Add build workflow: signed AAB generation.
+- [x] Add artifact retention and release tagging workflow.
 
 ### Security & Config Hygiene
-- [ ] Validate no secrets committed (.env policy + checks).
-- [ ] Verify Sentry environment wiring per build flavor.
-- [ ] Validate release signing configs and key management process.
+- [x] Validate no secrets committed (.env policy + checks).
+- [x] Verify Sentry environment wiring per build flavor.
+- [x] Validate release signing configs and key management process.
 
 ### Product Ops Readiness
 - [ ] App icon set finalized.

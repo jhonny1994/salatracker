@@ -163,12 +163,12 @@ class AppTheme {
     surfaceTint: Color(0xFF22D3EE),
   );
 
-  static ThemeData light() {
-    return _theme(_lightScheme, _lightBackground);
+  static ThemeData light({ColorScheme? dynamicScheme}) {
+    return _theme(dynamicScheme ?? _lightScheme, _lightBackground);
   }
 
-  static ThemeData dark() {
-    return _theme(_darkScheme, _darkBackground);
+  static ThemeData dark({ColorScheme? dynamicScheme}) {
+    return _theme(dynamicScheme ?? _darkScheme, _darkBackground);
   }
 
   static ThemeData _theme(ColorScheme colorScheme, Color backgroundColor) {

@@ -30,38 +30,36 @@ class TodayStreakCard extends ConsumerWidget {
           return const SizedBox.shrink();
         }
 
-        return Card(
+        return AppSurfaceCard(
               color: theme.colorScheme.primaryContainer,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.xl,
-                  vertical: AppSpacing.lg,
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(AppSpacing.sm),
-                      decoration: BoxDecoration(
-                        color: theme.colorScheme.primary.withValues(alpha: 0.2),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        Icons.local_fire_department_rounded,
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.xl,
+                vertical: AppSpacing.lg,
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(AppSpacing.sm),
+                    decoration: BoxDecoration(
+                      color: theme.colorScheme.primary.withValues(alpha: 0.2),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      Icons.local_fire_department_rounded,
+                      color: theme.colorScheme.onPrimaryContainer,
+                      size: AppIconSizes.lg,
+                    ),
+                  ),
+                  const Gap(AppSpacing.md),
+                  Expanded(
+                    child: Text(
+                      l10n.todayStreak(streak),
+                      style: theme.textTheme.titleMedium?.copyWith(
                         color: theme.colorScheme.onPrimaryContainer,
-                        size: AppIconSizes.lg,
                       ),
                     ),
-                    const Gap(AppSpacing.md),
-                    Expanded(
-                      child: Text(
-                        l10n.todayStreak(streak),
-                        style: theme.textTheme.titleMedium?.copyWith(
-                          color: theme.colorScheme.onPrimaryContainer,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             )
             .animate()

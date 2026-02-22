@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
+import 'package:salat_tracker/core/localization/gen/generated/l10n.dart';
 
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
@@ -69,7 +70,8 @@ class NotificationService {
             badge: true,
             sound: true,
           );
-      return result ?? false;
+      final granted = result ?? false;
+      return granted;
     } else if (Platform.isAndroid) {
       final androidImplementation = _plugin
           .resolvePlatformSpecificImplementation<
@@ -79,7 +81,8 @@ class NotificationService {
       if (androidImplementation != null) {
         final granted = await androidImplementation
             .requestNotificationsPermission();
-        return granted ?? false;
+        final result = granted ?? false;
+        return result;
       }
     }
     return false;
@@ -94,9 +97,9 @@ class NotificationService {
     bool repeatsDaily = false,
     String? payload,
   }) async {
-    if (!_initialized) await initialize();
-
-    await refreshTimezone();
+    if (!_initialized) {
+      await initialize();
+    }
 
     var target = scheduledAt;
     if (repeatsDaily) {
@@ -113,15 +116,15 @@ class NotificationService {
       title,
       body,
       tz.TZDateTime.from(target, tz.local),
-      const NotificationDetails(
+      NotificationDetails(
         android: AndroidNotificationDetails(
           'prayer_channel',
-          'Prayer Notifications',
-          channelDescription: 'Notifications for prayer times',
+          S.current.notificationChannelName,
+          channelDescription: S.current.notificationChannelDescription,
           importance: Importance.max,
           priority: Priority.high,
         ),
-        iOS: DarwinNotificationDetails(),
+        iOS: const DarwinNotificationDetails(),
       ),
       androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
       matchDateTimeComponents: repeatsDaily ? DateTimeComponents.time : null,
@@ -129,10 +132,62 @@ class NotificationService {
     );
   }
 
-  Future<void> refreshTimezone() async {
+  Future<void> refreshTimezone({String? preferredTimezoneId}) async {
     tz.initializeTimeZones();
-    final timeZoneName = await FlutterTimezone.getLocalTimezone();
-    tz.setLocalLocation(tz.getLocation(timeZoneName.toString()));
+    Object timeZoneData;
+    try {
+      timeZoneData = await FlutterTimezone.getLocalTimezone();
+    } on Object {
+      tz.setLocalLocation(tz.getLocation('UTC'));
+      return;
+    }
+
+    final candidates = _timezoneCandidates(
+      timeZoneData,
+      preferredTimezoneId: preferredTimezoneId,
+    );
+    for (final zone in candidates) {
+      try {
+        tz.setLocalLocation(tz.getLocation(zone));
+        return;
+      } on Object {
+        // Continue trying fallback candidates.
+      }
+    }
+
+    tz.setLocalLocation(tz.getLocation('UTC'));
+  }
+
+  List<String> _timezoneCandidates(
+    Object value, {
+    String? preferredTimezoneId,
+  }) {
+    final direct = value.toString().trim();
+    final list = <String>[];
+
+    void add(String candidate) {
+      final normalized = candidate.trim();
+      if (normalized.isEmpty) {
+        return;
+      }
+      if (!list.contains(normalized)) {
+        list.add(normalized);
+      }
+    }
+
+    if (preferredTimezoneId != null && preferredTimezoneId.trim().isNotEmpty) {
+      add(preferredTimezoneId);
+    }
+
+    add(direct);
+
+    final infoMatch = RegExp(r'TimezoneInfo\(([^,]+),').firstMatch(direct);
+    if (infoMatch != null) {
+      add(infoMatch.group(1)!);
+    }
+
+    add('UTC');
+    return list;
   }
 
   /// Cancels all scheduled notifications.

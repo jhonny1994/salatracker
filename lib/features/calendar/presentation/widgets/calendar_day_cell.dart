@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/features/prayer/prayer.dart';
+import 'package:salat_tracker/shared/design_constants.dart';
 
 /// A calendar cell representing a single day with prayer completion status.
 ///
@@ -48,14 +49,21 @@ class CalendarDayCell extends StatelessWidget {
       }
     }
 
+    final cellColor = isSelected ? theme.colorScheme.primary : backgroundColor;
+    final textColor = isSelected
+        ? theme.colorScheme.onPrimary
+        : theme.colorScheme.onSurface;
+
     return Container(
-      margin: const EdgeInsets.all(4),
+      margin: const EdgeInsets.all(AppSpacing.xs),
       decoration: BoxDecoration(
-        color: backgroundColor,
+        color: cellColor,
         shape: BoxShape.circle,
         border: isToday
             ? Border.all(
-                color: theme.colorScheme.primary,
+                color: isSelected
+                    ? theme.colorScheme.onPrimary
+                    : theme.colorScheme.primary,
                 width: 2,
               )
             : null,
@@ -64,9 +72,7 @@ class CalendarDayCell extends StatelessWidget {
         child: Text(
           '${day.day}',
           style: theme.textTheme.bodyMedium?.copyWith(
-            color: isSelected
-                ? theme.colorScheme.onPrimary
-                : theme.colorScheme.onSurface,
+            color: textColor,
             fontWeight: isSelected || isToday ? FontWeight.bold : null,
           ),
         ),

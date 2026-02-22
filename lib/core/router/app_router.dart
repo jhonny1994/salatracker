@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/core/notifications/notification_listener_widget.dart';
 import 'package:salat_tracker/core/router/root_shell.dart';
 import 'package:salat_tracker/features/calendar/calendar.dart';
 import 'package:salat_tracker/features/onboarding/onboarding.dart';
-import 'package:salat_tracker/features/security/data/providers/security_providers.dart';
-import 'package:salat_tracker/features/security/presentation/pages/app_lock_screen.dart';
+import 'package:salat_tracker/features/security/security.dart';
 import 'package:salat_tracker/features/settings/settings.dart';
 import 'package:salat_tracker/features/today/today.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
@@ -19,15 +20,17 @@ part 'app_router.g.dart';
 /// Includes redirect guard for onboarding flow.
 @Riverpod(keepAlive: true)
 GoRouter appRouter(Ref ref) {
-  // Watch settings to react to onboarding completion
-  final settingsAsync = ref.watch(settingsProvider);
-  // Watch lock state
-  final lockStatus = ref.watch(appLockControllerProvider);
+  final refreshNotifier = _RouterRefreshNotifier(ref);
+  ref.onDispose(refreshNotifier.dispose);
 
   return GoRouter(
     initialLocation: '/today',
     observers: [SentryNavigatorObserver()],
+    refreshListenable: refreshNotifier,
     redirect: (context, state) {
+      final settingsAsync = ref.read(settingsProvider);
+      final lockStatus = ref.read(appLockControllerProvider);
+
       // 1. Check App Lock status first
       final isLocked = lockStatus == AppLockStatus.locked;
       final onLockScreen = state.matchedLocation == '/lock';
@@ -107,11 +110,37 @@ GoRouter appRouter(Ref ref) {
       ),
     ],
     errorBuilder: (context, state) {
+      final l10n = S.of(context);
       return Scaffold(
         body: Center(
-          child: Text(state.error?.toString() ?? 'Route error'),
+          child: Text(state.error?.toString() ?? l10n.routerError),
         ),
       );
     },
   );
+}
+
+class _RouterRefreshNotifier extends ChangeNotifier {
+  _RouterRefreshNotifier(this._ref) {
+    _settingsSub = _ref.listen<AsyncValue<Settings>>(
+      settingsProvider,
+      (_, _) => notifyListeners(),
+    );
+
+    _lockSub = _ref.listen<AppLockStatus>(
+      appLockControllerProvider,
+      (_, _) => notifyListeners(),
+    );
+  }
+
+  final Ref _ref;
+  late final ProviderSubscription<AsyncValue<Settings>> _settingsSub;
+  late final ProviderSubscription<AppLockStatus> _lockSub;
+
+  @override
+  void dispose() {
+    _settingsSub.close();
+    _lockSub.close();
+    super.dispose();
+  }
 }

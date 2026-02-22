@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
 /// A statistic display item showing an icon, value, and label.
@@ -25,23 +24,10 @@ class CalendarStatItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Column(
-      children: [
-        Icon(icon, size: AppIconSizes.xl),
-        const Gap(AppSpacing.xs),
-        Text(
-          value,
-          style: theme.textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        Text(
-          label,
-          style: theme.textTheme.bodySmall,
-        ),
-      ],
+    return AppMetricTile(
+      icon: icon,
+      label: label,
+      value: value,
     );
   }
 }

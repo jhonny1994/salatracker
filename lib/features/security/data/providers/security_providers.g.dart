@@ -114,6 +114,102 @@ final class LocalAuthenticationProvider
 String _$localAuthenticationHash() =>
     r'd0bd2cc313c3ef614f8cb486f8d8413b2f57d9a9';
 
+@ProviderFor(secureKeyValueStore)
+final secureKeyValueStoreProvider = SecureKeyValueStoreProvider._();
+
+final class SecureKeyValueStoreProvider
+    extends
+        $FunctionalProvider<
+          SecureKeyValueStore,
+          SecureKeyValueStore,
+          SecureKeyValueStore
+        >
+    with $Provider<SecureKeyValueStore> {
+  SecureKeyValueStoreProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'secureKeyValueStoreProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$secureKeyValueStoreHash();
+
+  @$internal
+  @override
+  $ProviderElement<SecureKeyValueStore> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  SecureKeyValueStore create(Ref ref) {
+    return secureKeyValueStore(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(SecureKeyValueStore value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<SecureKeyValueStore>(value),
+    );
+  }
+}
+
+String _$secureKeyValueStoreHash() =>
+    r'b5f118bc83b61e1011df5036b63e9b658b4fe3de';
+
+@ProviderFor(biometricAuthService)
+final biometricAuthServiceProvider = BiometricAuthServiceProvider._();
+
+final class BiometricAuthServiceProvider
+    extends
+        $FunctionalProvider<
+          BiometricAuthService,
+          BiometricAuthService,
+          BiometricAuthService
+        >
+    with $Provider<BiometricAuthService> {
+  BiometricAuthServiceProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'biometricAuthServiceProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$biometricAuthServiceHash();
+
+  @$internal
+  @override
+  $ProviderElement<BiometricAuthService> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  BiometricAuthService create(Ref ref) {
+    return biometricAuthService(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(BiometricAuthService value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<BiometricAuthService>(value),
+    );
+  }
+}
+
+String _$biometricAuthServiceHash() =>
+    r'e2502eb1a3e45e86b867095e251e01140505fc2e';
+
 /// Provider for the security repository.
 
 @ProviderFor(securityRepository)
@@ -165,7 +261,46 @@ final class SecurityRepositoryProvider
 }
 
 String _$securityRepositoryHash() =>
-    r'e242177874f94487c4cc1a5643f3ed1f7826b9ce';
+    r'8fa278de49cec559362be96056c87ee4bf8fd349';
+
+/// Provider that exposes whether biometrics are available on device.
+
+@ProviderFor(biometricsAvailable)
+final biometricsAvailableProvider = BiometricsAvailableProvider._();
+
+/// Provider that exposes whether biometrics are available on device.
+
+final class BiometricsAvailableProvider
+    extends $FunctionalProvider<AsyncValue<bool>, bool, FutureOr<bool>>
+    with $FutureModifier<bool>, $FutureProvider<bool> {
+  /// Provider that exposes whether biometrics are available on device.
+  BiometricsAvailableProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'biometricsAvailableProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$biometricsAvailableHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<bool> create(Ref ref) {
+    return biometricsAvailable(ref);
+  }
+}
+
+String _$biometricsAvailableHash() =>
+    r'f8b8b186bf16d811f6617711ca99977e9994d155';
 
 /// Controller for managing the application lock state.
 

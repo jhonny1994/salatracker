@@ -37,6 +37,17 @@
       }
     }
   },
+  "todayCompletionRatio": "{completed}/{total}",
+  "@todayCompletionRatio": {
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "todayEncouragement": "Continuez, vous êtes formidable !",
   "tapToLog": "Appuyez pour enregistrer",
   "settingsAppearance": "Apparence",
@@ -57,8 +68,11 @@
   "settingsShowPointsSubtitle": "Afficher les points dans l'interface",
   "settingsAppLock": "Verrouillage de l'app",
   "settingsAppLockSubtitle": "Exiger un déverrouillage après écran éteint",
+  "settingsResetPin": "Réinitialiser le PIN",
+  "settingsResetPinSubtitle": "Définir un nouveau PIN de verrouillage",
   "settingsAbout": "À propos",
   "settingsAppVersion": "Version de l'Application",
+  "settingsVersionLoading": "Chargement...",
   "settingsPrivacyPolicy": "Politique de Confidentialité",
   "settingsPrayerSchedule": "Horaires de prière",
   "settingsPrayerScheduleSubtitle": "Définir les horaires manuellement",
@@ -66,6 +80,7 @@
   "settingsBadgesSubtitle": "Voir les jalons réflexifs",
   "errorLoadingSettings": "Échec du chargement des paramètres",
   "errorRetry": "Réessayer",
+  "routerError": "Erreur de route",
   "errorLoadingCalendar": "Échec du chargement du calendrier",
   "calendarStreamRetry": "Nouvelle tentative automatique",
   "calendarNoData": "Aucune prière enregistrée pour ce jour",
@@ -78,6 +93,17 @@
     "placeholders": {
       "time": {
         "type": "String"
+      }
+    }
+  },
+  "calendarCompletionRatio": "{completed}/{total}",
+  "@calendarCompletionRatio": {
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
       }
     }
   },
@@ -96,6 +122,8 @@
   "weekStartSaturday": "Samedi",
   "notificationTitle": "L'heure de {prayer}",
   "notificationBody": "C'est l'heure de la prière de {prayer}",
+  "notificationChannelName": "Notifications de prière",
+  "notificationChannelDescription": "Notifications pour les horaires de prière",
   "endOfDayTitle": "Réflexion quotidienne",
   "endOfDayBody": "Avez-vous terminé toutes vos prières aujourd'hui ?",
   "onboardingWelcomeTitle": "Bienvenue sur Salat Tracker",
@@ -115,13 +143,29 @@
   "onboardingEnableNotifications": "Activer les Notifications",
   "onboardingEnableAppLock": "Activer le Verrouillage",
   "onboardingMaybeLater": "Plus tard",
-  "securitySetPinTitle": "Définir un PIN à 4 chiffres",
+  "securitySetPinTitle": "Définir un PIN à 6 chiffres",
+  "securityCurrentPinTitle": "Entrez le PIN actuel",
+  "securityCurrentPinLabel": "PIN actuel",
   "securityPinLabel": "PIN",
   "securityConfirmPinLabel": "Confirmer le PIN",
-  "securityPinDigitsError": "Le PIN doit contenir exactement 4 chiffres",
+  "securityPinDigitsError": "Le PIN doit contenir exactement 6 chiffres",
   "securityPinMismatchError": "Les PIN ne correspondent pas",
+  "securityCurrentPinError": "Le PIN actuel est incorrect",
   "securityUnlockTitle": "Déverrouiller Salat Tracker",
   "securityBiometricReason": "Authentifiez-vous pour déverrouiller Salat Tracker",
+  "settingsBiometricUnlock": "Déverrouillage biométrique",
+  "settingsBiometricUnlockSubtitle": "Utiliser la biométrie avant le PIN sur l'écran verrouillé",
+  "settingsBiometricUnlockUnavailable": "Biométrie indisponible sur cet appareil",
+  "settingsCurrentTimezone": "Fuseau horaire actuel",
+  "settingsCurrentTimezoneUnavailable": "Fuseau horaire indisponible",
+  "securityLockoutSeconds": "Réessayez dans {seconds}s",
+  "@securityLockoutSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "badgesTitle": "Badges",
   "badgesEmpty": "Aucun badge pour le moment. Continuez vos prières.",
   "badgesEarnedOn": "Obtenu le {date}",

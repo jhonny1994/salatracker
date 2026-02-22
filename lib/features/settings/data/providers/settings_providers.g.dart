@@ -114,6 +114,55 @@ final class SettingsRepositoryProvider
 String _$settingsRepositoryHash() =>
     r'f6c934ff287aa202ca3f6df8569d18e30ca6c102';
 
+@ProviderFor(notificationSchedulePlanner)
+final notificationSchedulePlannerProvider =
+    NotificationSchedulePlannerProvider._();
+
+final class NotificationSchedulePlannerProvider
+    extends
+        $FunctionalProvider<
+          NotificationSchedulePlanner,
+          NotificationSchedulePlanner,
+          NotificationSchedulePlanner
+        >
+    with $Provider<NotificationSchedulePlanner> {
+  NotificationSchedulePlannerProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'notificationSchedulePlannerProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$notificationSchedulePlannerHash();
+
+  @$internal
+  @override
+  $ProviderElement<NotificationSchedulePlanner> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  NotificationSchedulePlanner create(Ref ref) {
+    return notificationSchedulePlanner(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(NotificationSchedulePlanner value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<NotificationSchedulePlanner>(value),
+    );
+  }
+}
+
+String _$notificationSchedulePlannerHash() =>
+    r'a73f14ba301800ecfff3a2369e141185c56aaa07';
+
 /// Provider for the app version string from platform metadata.
 
 @ProviderFor(appVersion)
@@ -176,7 +225,7 @@ final class SettingsNotifierProvider
         argument: null,
         retry: null,
         name: r'settingsProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -189,7 +238,7 @@ final class SettingsNotifierProvider
   SettingsNotifier create() => SettingsNotifier();
 }
 
-String _$settingsNotifierHash() => r'52b2a03159d6cf3c35de3ea2c1c0de30a8bae3f9';
+String _$settingsNotifierHash() => r'79061b4aef892c168feaa4a938f428697265f077';
 
 /// Notifier managing application settings state.
 ///

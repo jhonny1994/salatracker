@@ -25,6 +25,7 @@ abstract class Settings with _$Settings {
     @HiveField(7) required int weekStart,
     @HiveField(8) required bool onboardingComplete,
     @HiveField(9) required bool appLockEnabled,
+    @HiveField(10) required bool biometricUnlockEnabled,
   }) = _Settings;
 
   factory Settings.defaults() {
@@ -52,6 +53,7 @@ abstract class Settings with _$Settings {
       weekStart: DateTime.sunday,
       onboardingComplete: false,
       appLockEnabled: false,
+      biometricUnlockEnabled: true,
     );
   }
 }

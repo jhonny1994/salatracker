@@ -25,13 +25,32 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     super.dispose();
   }
 
-  void _goToPage(int index) {
-    unawaited(
-      _pageController.animateToPage(
-        index,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      ),
+  Future<void> _goToPage(int index) async {
+    ref.read(onboardingControllerProvider.notifier).setStepByIndex(index);
+
+    if (!mounted) {
+      return;
+    }
+
+    if (!_pageController.hasClients) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted && _pageController.hasClients) {
+          unawaited(
+            _pageController.animateToPage(
+              index,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+            ),
+          );
+        }
+      });
+      return;
+    }
+
+    await _pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
     );
   }
 
@@ -47,6 +66,17 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     final step = ref.watch(onboardingControllerProvider);
     final stepIndex = OnboardingStep.values.indexOf(step);
 
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted || !_pageController.hasClients) {
+        return;
+      }
+      final current =
+          _pageController.page?.round() ?? _pageController.initialPage;
+      if (current != stepIndex) {
+        _pageController.jumpToPage(stepIndex);
+      }
+    });
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -60,8 +90,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   return Expanded(
                     child: Container(
                       height: 4,
-                      margin: EdgeInsets.only(
-                        right: entry.key < OnboardingStep.values.length - 1
+                      margin: EdgeInsetsDirectional.only(
+                        end: entry.key < OnboardingStep.values.length - 1
                             ? AppSpacing.xs
                             : 0,
                       ),
@@ -84,35 +114,26 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
               child: PageView(
                 controller: _pageController,
                 physics: const NeverScrollableScrollPhysics(),
-                onPageChanged: (index) {
-                  // Sync controller with page
-                  final controller = ref.read(
-                    onboardingControllerProvider.notifier,
-                  );
-                  while (ref.read(onboardingControllerProvider).index < index) {
-                    controller.nextStep();
-                  }
-                  while (ref.read(onboardingControllerProvider).index > index) {
-                    controller.previousStep();
-                  }
-                },
+                onPageChanged: (index) => ref
+                    .read(onboardingControllerProvider.notifier)
+                    .setStepByIndex(index),
                 children: [
-                  WelcomePage(onNext: () => _goToPage(1)),
+                  WelcomePage(onNext: () => unawaited(_goToPage(1))),
                   PrayerTimesPage(
-                    onNext: () => _goToPage(2),
-                    onBack: () => _goToPage(0),
+                    onNext: () => unawaited(_goToPage(2)),
+                    onBack: () => unawaited(_goToPage(0)),
                   ),
                   NotificationsPage(
-                    onNext: () => _goToPage(3),
-                    onBack: () => _goToPage(1),
+                    onNext: () => unawaited(_goToPage(3)),
+                    onBack: () => unawaited(_goToPage(1)),
                   ),
                   AppLockPage(
-                    onNext: () => _goToPage(4),
-                    onBack: () => _goToPage(2),
+                    onNext: () => unawaited(_goToPage(4)),
+                    onBack: () => unawaited(_goToPage(2)),
                   ),
                   ConfirmationPage(
                     onComplete: _completeOnboarding,
-                    onBack: () => _goToPage(3),
+                    onBack: () => unawaited(_goToPage(3)),
                   ),
                 ],
               ),

@@ -14,47 +14,44 @@ class BadgeTile extends StatelessWidget {
     final l10n = S.of(context);
     final theme = Theme.of(context);
 
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        child: Row(
-          children: [
-            Container(
-              width: 48,
-              height: 48,
-              decoration: BoxDecoration(
-                color: theme.colorScheme.primaryContainer,
-                borderRadius: BorderRadius.circular(AppRadius.md),
-              ),
-              child: Icon(
-                _iconForType(award.type),
-                color: theme.colorScheme.onPrimaryContainer,
-              ),
+    return AppSurfaceCard(
+      child: Row(
+        children: [
+          Container(
+            width: 48,
+            height: 48,
+            decoration: BoxDecoration(
+              color: theme.colorScheme.primaryContainer,
+              borderRadius: BorderRadius.circular(AppRadius.md),
             ),
-            const Gap(AppSpacing.md),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    _nameForType(award.type, l10n),
-                    style: theme.textTheme.titleMedium,
-                  ),
-                  const Gap(AppSpacing.xs),
-                  Text(
-                    _descriptionForType(award.type, l10n),
-                    style: theme.textTheme.bodySmall,
-                  ),
-                  const Gap(AppSpacing.xs),
-                  Text(
-                    l10n.badgesEarnedOn(award.earnedAt.toFormattedDate),
-                    style: theme.textTheme.labelSmall,
-                  ),
-                ],
-              ),
+            child: Icon(
+              _iconForType(award.type),
+              color: theme.colorScheme.onPrimaryContainer,
             ),
-          ],
-        ),
+          ),
+          const Gap(AppSpacing.md),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  _nameForType(award.type, l10n),
+                  style: theme.textTheme.titleMedium,
+                ),
+                const Gap(AppSpacing.xs),
+                Text(
+                  _descriptionForType(award.type, l10n),
+                  style: theme.textTheme.bodySmall,
+                ),
+                const Gap(AppSpacing.xs),
+                Text(
+                  l10n.badgesEarnedOn(award.earnedAt.toFormattedDate),
+                  style: theme.textTheme.labelSmall,
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

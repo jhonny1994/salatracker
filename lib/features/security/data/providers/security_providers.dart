@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:salat_tracker/features/security/data/repositories/security_repository_impl.dart';
-import 'package:salat_tracker/features/security/domain/repositories/security_repository.dart';
+import 'package:salat_tracker/features/security/data/repositories/repositories.dart';
+import 'package:salat_tracker/features/security/data/services/services.dart';
+import 'package:salat_tracker/features/security/domain/domain.dart';
 import 'package:salat_tracker/features/settings/data/providers/settings_providers.dart';
 
 part 'security_providers.g.dart';
@@ -21,14 +24,30 @@ LocalAuthentication localAuthentication(Ref ref) {
   return LocalAuthentication();
 }
 
+@Riverpod(keepAlive: true)
+SecureKeyValueStore secureKeyValueStore(Ref ref) {
+  return FlutterSecureKeyValueStore(ref.watch(flutterSecureStorageProvider));
+}
+
+@Riverpod(keepAlive: true)
+BiometricAuthService biometricAuthService(Ref ref) {
+  return LocalAuthBiometricService(ref.watch(localAuthenticationProvider));
+}
+
 /// Provider for the security repository.
 @Riverpod(keepAlive: true)
 SecurityRepository securityRepository(Ref ref) {
   return SecurityRepositoryImpl(
-    secureStorage: ref.watch(flutterSecureStorageProvider),
-    localAuth: ref.watch(localAuthenticationProvider),
+    secureStorage: ref.watch(secureKeyValueStoreProvider),
+    biometricAuthService: ref.watch(biometricAuthServiceProvider),
     settingsRepository: ref.watch(settingsRepositoryProvider),
   );
+}
+
+/// Provider that exposes whether biometrics are available on device.
+@riverpod
+Future<bool> biometricsAvailable(Ref ref) async {
+  return ref.watch(securityRepositoryProvider).isBiometricsAvailable();
 }
 
 /// State of the app lock.

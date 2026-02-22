@@ -7,7 +7,7 @@ import 'package:salat_tracker/features/settings/settings.dart';
 part 'onboarding_providers.g.dart';
 
 /// Manages the current step in the onboarding flow.
-@riverpod
+@Riverpod(keepAlive: true)
 class OnboardingController extends _$OnboardingController {
   @override
   OnboardingStep build() => OnboardingStep.welcome;
@@ -28,6 +28,14 @@ class OnboardingController extends _$OnboardingController {
     }
   }
 
+  /// Sets the active step by index.
+  void setStepByIndex(int index) {
+    if (index < 0 || index >= OnboardingStep.values.length) {
+      return;
+    }
+    state = OnboardingStep.values[index];
+  }
+
   /// Completes onboarding and marks it as done in settings.
   Future<void> completeOnboarding() async {
     await ref.read(settingsProvider.notifier).markOnboardingComplete();
@@ -35,7 +43,7 @@ class OnboardingController extends _$OnboardingController {
 }
 
 /// Tracks temporary prayer times during onboarding before confirmation.
-@riverpod
+@Riverpod(keepAlive: true)
 class OnboardingPrayerTimes extends _$OnboardingPrayerTimes {
   @override
   Map<PrayerType, TimeOfDay> build() {

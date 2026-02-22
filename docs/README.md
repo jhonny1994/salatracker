@@ -10,6 +10,7 @@ This directory contains enterprise-grade documentation for the Salat Tracker app
 | [prd.md](prd.md) | Product requirements, user stories, scope | Define WHAT to build |
 | [plan.md](plan.md) | Implementation phases, locked decisions, roadmap | Define WHEN to build |
 | [design-system.md](design-system.md) | Visual specs, colors, typography, components | Define HOW it looks |
+| [ui-reart-plan.md](ui-reart-plan.md) | Full UI ecosystem re-art strategy | Define HOW it evolves |
 | [rules.md](rules.md) | Engineering standards, best practices, persona | Define HOW to code |
 | [tasks.md](tasks.md) | Detailed checklist, current status, progress | Track progress |
 | [ux-gamification-psychology.md](ux-gamification-psychology.md) | UX philosophy, gamification safety, tone | Validate decisions |
@@ -59,8 +60,8 @@ This directory contains enterprise-grade documentation for the Salat Tracker app
 | Phase 3 | ✅ Complete | Core UX (Today, Calendar, Settings) |
 | Phase 4 | 🔄 In Progress | Advanced features, notifications hardening, badges |
 | Phase 5 | 🔄 In Progress | App Lock + security hardening |
-| Phase 6 | ⬜ Not Started | Quality engineering |
-| Phase 7 | ⬜ Not Started | Release engineering and store readiness |
+| Phase 6 | 🔄 In Progress | Quality engineering |
+| Phase 7 | 🔄 In Progress | Release engineering and store readiness |
 | Phase 8 | ⬜ Not Started | Launch audit and go/no-go |
 
 ## Locked Decisions
@@ -74,10 +75,12 @@ These decisions are **final** and documented in [plan.md](plan.md):
 - **Gamification:** Progress > Streaks, no shame language
 - **Badges:** Included in v1 (reflective, non-competitive)
 - **App Lock policy:** Trigger only after screen-off/device-lock path
+- **PIN UX:** OTP-style 6-digit cells across lock/setup/reset
+- **Location display:** GPS + free coordinate timezone API + geocoding, with cache/device/UTC fallback chain (no IP-primary flow)
 - **Theme:** Light/dark parity, Material 3, Cairo font
 
 ## Versioning
 
-- **Docs version:** 1.2.0
+- **Docs version:** 1.4.0
 - **App version:** 0.1.0+1
-- **Last updated:** 2026-02-09
+- **Last updated:** 2026-02-22

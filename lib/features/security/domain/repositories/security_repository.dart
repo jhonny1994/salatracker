@@ -9,6 +9,11 @@ abstract class SecurityRepository {
   /// Verifies if the provided PIN matches the stored one.
   Future<bool> verifyPin(String pin);
 
+  /// Returns remaining lockout duration after too many invalid attempts.
+  ///
+  /// Returns `null` when there is no active lockout.
+  Future<Duration?> lockoutRemaining();
+
   /// Checks if a PIN is currently set.
   Future<bool> hasPin();
 
@@ -28,4 +33,7 @@ abstract class SecurityRepository {
 
   /// Checks if biometric authentication is available on the device.
   Future<bool> isBiometricsAvailable();
+
+  /// Checks if biometric unlock is enabled in settings.
+  Future<bool> isBiometricUnlockEnabled();
 }

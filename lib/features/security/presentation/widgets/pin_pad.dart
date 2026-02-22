@@ -15,6 +15,7 @@ class PinPad extends StatefulWidget {
     this.isError = false,
     this.onBio,
     this.bioAvailable = false,
+    this.enabled = true,
     super.key,
   });
 
@@ -23,6 +24,7 @@ class PinPad extends StatefulWidget {
   final bool isError;
   final VoidCallback? onBio;
   final bool bioAvailable;
+  final bool enabled;
 
   @override
   State<PinPad> createState() => _PinPadState();
@@ -46,6 +48,10 @@ class _PinPadState extends State<PinPad> {
   }
 
   void _onDigit(String digit) {
+    if (!widget.enabled) {
+      return;
+    }
+
     if (_controller.text.length < widget.length) {
       unawaited(HapticFeedback.lightImpact());
       _controller.text += digit;
@@ -59,6 +65,10 @@ class _PinPadState extends State<PinPad> {
   }
 
   void _onDelete() {
+    if (!widget.enabled) {
+      return;
+    }
+
     if (_controller.text.isNotEmpty) {
       unawaited(HapticFeedback.lightImpact());
       _controller.text = _controller.text.substring(
@@ -125,6 +135,7 @@ class _PinPadState extends State<PinPad> {
           onDelete: _onDelete,
           onBio: widget.onBio,
           bioAvailable: widget.bioAvailable,
+          enabled: widget.enabled,
         ),
       ],
     );
@@ -137,12 +148,14 @@ class _Keypad extends StatelessWidget {
     required this.onDelete,
     this.onBio,
     this.bioAvailable = false,
+    this.enabled = true,
   });
 
   final ValueChanged<String> onDigit;
   final VoidCallback onDelete;
   final VoidCallback? onBio;
   final bool bioAvailable;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -166,10 +179,12 @@ class _Keypad extends StatelessWidget {
                 height: 72,
                 child: bioAvailable && onBio != null
                     ? IconButton(
-                        onPressed: () {
-                          unawaited(HapticFeedback.lightImpact());
-                          onBio!();
-                        },
+                        onPressed: enabled
+                            ? () {
+                                unawaited(HapticFeedback.lightImpact());
+                                onBio!();
+                              }
+                            : null,
                         icon: const Icon(Icons.fingerprint, size: 32),
                         style: IconButton.styleFrom(
                           padding: const EdgeInsets.all(AppSpacing.md),
@@ -183,7 +198,7 @@ class _Keypad extends StatelessWidget {
                 width: 72,
                 height: 72,
                 child: IconButton(
-                  onPressed: onDelete,
+                  onPressed: enabled ? onDelete : null,
                   icon: const Icon(Icons.backspace_outlined),
                   style: IconButton.styleFrom(
                     padding: const EdgeInsets.all(AppSpacing.md),
@@ -213,7 +228,7 @@ class _Keypad extends StatelessWidget {
         shape: const CircleBorder(),
         clipBehavior: Clip.hardEdge,
         child: InkWell(
-          onTap: () => onDigit(digit),
+          onTap: enabled ? () => onDigit(digit) : null,
           customBorder: const CircleBorder(),
           child: Center(
             child: Text(

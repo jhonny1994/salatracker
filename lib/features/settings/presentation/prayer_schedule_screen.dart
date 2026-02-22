@@ -18,6 +18,7 @@ class PrayerScheduleScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = S.of(context);
     final settingsState = ref.watch(settingsProvider);
+    final locationState = ref.watch(locationContextNotifierProvider);
     final theme = Theme.of(context);
 
     return Scaffold(
@@ -30,10 +31,28 @@ class PrayerScheduleScreen extends ConsumerWidget {
         data: (settings) {
           return ListView.separated(
             padding: const EdgeInsets.all(AppSpacing.xl),
-            itemCount: PrayerType.values.length,
+            itemCount: PrayerType.values.length + 1,
             separatorBuilder: (context, index) => const Divider(height: 1),
             itemBuilder: (context, index) {
-              final type = PrayerType.values[index];
+              if (index == 0) {
+                final timezoneLabel = locationState.when(
+                  data: (value) => value.displayLabel,
+                  loading: () => '...',
+                  error: (_, _) => l10n.settingsCurrentTimezoneUnavailable,
+                );
+
+                return ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  leading: const Icon(Icons.public_outlined),
+                  title: Text(
+                    l10n.settingsCurrentTimezone,
+                    style: theme.textTheme.titleMedium,
+                  ),
+                  subtitle: Text(timezoneLabel),
+                );
+              }
+
+              final type = PrayerType.values[index - 1];
               final time =
                   settings.prayerTimes[type] ??
                   const TimeOfDay(hour: 0, minute: 0);
@@ -48,7 +67,9 @@ class PrayerScheduleScreen extends ConsumerWidget {
                   children: [
                     if (settings.offsets[type] != 0)
                       Padding(
-                        padding: const EdgeInsets.only(right: AppSpacing.sm),
+                        padding: const EdgeInsetsDirectional.only(
+                          end: AppSpacing.sm,
+                        ),
                         child: Text(
                           l10n.offsetMinutes(settings.offsets[type] ?? 0),
                           style: theme.textTheme.bodySmall?.copyWith(

@@ -37,6 +37,17 @@
       }
     }
   },
+  "todayCompletionRatio": "{completed}/{total}",
+  "@todayCompletionRatio": {
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "todayEncouragement": "استمر، أنت تبلي حسنًا!",
   "tapToLog": "انقر للتسجيل",
   "settingsAppearance": "المظهر",
@@ -57,8 +68,11 @@
   "settingsShowPointsSubtitle": "عرض النقاط في الواجهة",
   "settingsAppLock": "قفل التطبيق",
   "settingsAppLockSubtitle": "طلب فتح القفل بعد إطفاء الشاشة",
+  "settingsResetPin": "إعادة تعيين رمز PIN",
+  "settingsResetPinSubtitle": "تعيين رمز PIN جديد لقفل التطبيق",
   "settingsAbout": "حول",
   "settingsAppVersion": "إصدار التطبيق",
+  "settingsVersionLoading": "جار التحميل...",
   "settingsPrivacyPolicy": "سياسة الخصوصية",
   "settingsPrayerSchedule": "مواعيد الصلاة",
   "settingsPrayerScheduleSubtitle": "ضبط مواعيد الصلاة يدويًا",
@@ -66,6 +80,7 @@
   "settingsBadgesSubtitle": "عرض إنجازاتك التحفيزية",
   "errorLoadingSettings": "فشل تحميل الإعدادات",
   "errorRetry": "إعادة المحاولة",
+  "routerError": "خطأ في المسار",
   "errorLoadingCalendar": "فشل تحميل التقويم",
   "calendarStreamRetry": "سيتم إعادة المحاولة تلقائيًا",
   "calendarNoData": "لا توجد صلوات مسجلة لهذا اليوم",
@@ -78,6 +93,17 @@
     "placeholders": {
       "time": {
         "type": "String"
+      }
+    }
+  },
+  "calendarCompletionRatio": "{completed}/{total}",
+  "@calendarCompletionRatio": {
+    "placeholders": {
+      "completed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
       }
     }
   },
@@ -96,6 +122,8 @@
   "weekStartSaturday": "السبت",
   "notificationTitle": "وقت {prayer}",
   "notificationBody": "حان الآن وقت صلاة {prayer}",
+  "notificationChannelName": "إشعارات الصلاة",
+  "notificationChannelDescription": "إشعارات لمواقيت الصلاة",
   "endOfDayTitle": "تذكير يومي",
   "endOfDayBody": "هل أتممت صلواتك اليوم؟",
   "onboardingWelcomeTitle": "مرحباً بك في سجل الصلاة",
@@ -115,13 +143,29 @@
   "onboardingEnableNotifications": "تفعيل الإشعارات",
   "onboardingEnableAppLock": "تفعيل قفل التطبيق",
   "onboardingMaybeLater": "ربما لاحقاً",
-  "securitySetPinTitle": "عيّن رمز PIN مكوّن من 4 أرقام",
+  "securitySetPinTitle": "عيّن رمز PIN مكوّن من 6 أرقام",
+  "securityCurrentPinTitle": "أدخل رمز PIN الحالي",
+  "securityCurrentPinLabel": "رمز PIN الحالي",
   "securityPinLabel": "رمز PIN",
   "securityConfirmPinLabel": "تأكيد رمز PIN",
-  "securityPinDigitsError": "يجب أن يتكون رمز PIN من 4 أرقام",
+  "securityPinDigitsError": "يجب أن يتكون رمز PIN من 6 أرقام",
   "securityPinMismatchError": "رمزا PIN غير متطابقين",
+  "securityCurrentPinError": "رمز PIN الحالي غير صحيح",
   "securityUnlockTitle": "افتح سجل الصلاة",
   "securityBiometricReason": "يرجى التحقق لفتح سجل الصلاة",
+  "settingsBiometricUnlock": "الفتح بالبصمة",
+  "settingsBiometricUnlockSubtitle": "استخدام البصمة قبل رمز PIN في شاشة القفل",
+  "settingsBiometricUnlockUnavailable": "البصمة غير متاحة على هذا الجهاز",
+  "settingsCurrentTimezone": "المنطقة الزمنية الحالية",
+  "settingsCurrentTimezoneUnavailable": "المنطقة الزمنية غير متاحة",
+  "securityLockoutSeconds": "حاول مرة أخرى بعد {seconds} ثانية",
+  "@securityLockoutSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "badgesTitle": "الشارات",
   "badgesEmpty": "لا توجد شارات بعد. استمر في تسجيل صلواتك.",
   "badgesEarnedOn": "تم الحصول عليها في {date}",

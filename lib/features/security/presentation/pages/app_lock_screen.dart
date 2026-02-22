@@ -1,11 +1,11 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:salat_tracker/core/core.dart';
-import 'package:salat_tracker/features/security/data/providers/security_providers.dart';
-import 'package:salat_tracker/features/security/presentation/widgets/pin_pad.dart';
+import 'package:salat_tracker/features/security/security.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
 /// Screen displayed when the application is locked.
@@ -20,26 +20,44 @@ class AppLockScreen extends ConsumerStatefulWidget {
 class _AppLockScreenState extends ConsumerState<AppLockScreen> {
   bool _isError = false;
   bool _isBiometricsAvailable = false;
+  Duration? _lockoutRemaining;
+  Timer? _lockoutTimer;
 
   @override
   void initState() {
     super.initState();
     unawaited(_checkBiometrics());
+    unawaited(_refreshLockoutState());
     // Attempt biometrics immediately on load if available
     WidgetsBinding.instance.addPostFrameCallback((_) {
       unawaited(_attemptBiometrics());
     });
   }
 
+  @override
+  void dispose() {
+    _lockoutTimer?.cancel();
+    super.dispose();
+  }
+
   Future<void> _checkBiometrics() async {
+    final biometricEnabled = await _isBiometricUnlockEnabled();
     final repo = ref.read(securityRepositoryProvider);
-    final available = await repo.isBiometricsAvailable();
+    final available = biometricEnabled && await repo.isBiometricsAvailable();
     if (mounted) {
       setState(() => _isBiometricsAvailable = available);
     }
   }
 
   Future<void> _attemptBiometrics() async {
+    if (_lockoutRemaining != null) {
+      return;
+    }
+
+    if (!await _isBiometricUnlockEnabled()) {
+      return;
+    }
+
     final repo = ref.read(securityRepositoryProvider);
     if (!await repo.hasPin()) {
       if (mounted) {
@@ -58,7 +76,15 @@ class _AppLockScreenState extends ConsumerState<AppLockScreen> {
     }
   }
 
+  Future<bool> _isBiometricUnlockEnabled() async {
+    return ref.read(securityRepositoryProvider).isBiometricUnlockEnabled();
+  }
+
   Future<void> _verifyPin(String pin) async {
+    if (_lockoutRemaining != null) {
+      return;
+    }
+
     final repo = ref.read(securityRepositoryProvider);
     final isValid = await repo.verifyPin(pin);
 
@@ -67,11 +93,40 @@ class _AppLockScreenState extends ConsumerState<AppLockScreen> {
     } else {
       if (mounted) {
         setState(() => _isError = true);
+        await _refreshLockoutState();
+
         // Reset error state after animation
         Future.delayed(const Duration(milliseconds: 500), () {
           if (mounted) setState(() => _isError = false);
         });
       }
+    }
+  }
+
+  Future<void> _refreshLockoutState() async {
+    final repo = ref.read(securityRepositoryProvider);
+    final remaining = await repo.lockoutRemaining();
+
+    if (!mounted) {
+      return;
+    }
+
+    setState(() => _lockoutRemaining = remaining);
+
+    _lockoutTimer?.cancel();
+    if (remaining != null) {
+      _lockoutTimer = Timer.periodic(const Duration(seconds: 1), (timer) async {
+        final value = await repo.lockoutRemaining();
+        if (!mounted) {
+          timer.cancel();
+          return;
+        }
+
+        setState(() => _lockoutRemaining = value);
+        if (value == null) {
+          timer.cancel();
+        }
+      });
     }
   }
 
@@ -83,31 +138,57 @@ class _AppLockScreenState extends ConsumerState<AppLockScreen> {
       canPop: false, // Prevent going back from lock screen
       child: Scaffold(
         body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Spacer(),
-              const Icon(
-                Icons.lock_outline_rounded,
-                size: 64,
+          child: Padding(
+            padding: const EdgeInsets.all(AppSpacing.xl),
+            child: AppSurfaceCard(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.lg,
+                vertical: AppSpacing.xxl,
               ),
-              const Gap(AppSpacing.md),
-              Text(
-                l10n.securityUnlockTitle,
-                style: Theme.of(context).textTheme.titleLarge,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(
+                      Icons.lock_outline_rounded,
+                      size: 64,
+                    ),
+                    const Gap(AppSpacing.md),
+                    Text(
+                      l10n.securityUnlockTitle,
+                      style: Theme.of(context).textTheme.titleLarge,
+                      textAlign: TextAlign.center,
+                    ),
+                    const Gap(AppSpacing.xxl),
+                    PinPad(
+                          length: 6,
+                          onCompleted: _verifyPin,
+                          isError: _isError,
+                          bioAvailable: _isBiometricsAvailable,
+                          onBio: _attemptBiometrics,
+                          enabled: _lockoutRemaining == null,
+                        )
+                        .animate(target: _isError ? 1 : 0)
+                        .shake(
+                          duration: 500.ms,
+                          hz: 4,
+                          curve: Curves.easeInOut,
+                        ),
+                    if (_lockoutRemaining != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: AppSpacing.md),
+                        child: AppInlineNotice(
+                          icon: Icons.timer_outlined,
+                          message: l10n.securityLockoutSeconds(
+                            _lockoutRemaining!.inSeconds,
+                          ),
+                          color: Theme.of(context).colorScheme.error,
+                        ),
+                      ),
+                  ],
+                ),
               ),
-              const Spacer(),
-              PinPad(
-                    length: 4,
-                    onCompleted: _verifyPin,
-                    isError: _isError,
-                    bioAvailable: _isBiometricsAvailable,
-                    onBio: _attemptBiometrics,
-                  )
-                  .animate(target: _isError ? 1 : 0)
-                  .shake(duration: 500.ms, hz: 4, curve: Curves.easeInOut),
-              const Gap(AppSpacing.xxl),
-            ],
+            ),
           ),
         ),
       ),

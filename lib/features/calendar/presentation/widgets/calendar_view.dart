@@ -29,6 +29,7 @@ class CalendarView extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final statusChipTheme = theme.extension<StatusChipTheme>();
+    final isRtl = Directionality.of(context) == TextDirection.rtl;
 
     return TableCalendar<void>(
       firstDay: DateTime(2020),
@@ -58,11 +59,11 @@ class CalendarView extends StatelessWidget {
         titleCentered: true,
         titleTextStyle: theme.textTheme.titleLarge!,
         leftChevronIcon: Icon(
-          Icons.chevron_left,
+          isRtl ? Icons.chevron_right : Icons.chevron_left,
           color: theme.colorScheme.onSurface,
         ),
         rightChevronIcon: Icon(
-          Icons.chevron_right,
+          isRtl ? Icons.chevron_left : Icons.chevron_right,
           color: theme.colorScheme.onSurface,
         ),
       ),

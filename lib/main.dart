@@ -1,9 +1,10 @@
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:salat_tracker/core/core.dart';
-import 'package:salat_tracker/features/security/presentation/widgets/app_lock_lifecycle_gate.dart';
+import 'package:salat_tracker/features/security/security.dart';
 import 'package:salat_tracker/features/settings/settings.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
@@ -57,31 +58,35 @@ class SalatTrackerApp extends ConsumerWidget {
     final router = ref.watch(appRouterProvider);
 
     return AppLockLifecycleGate(
-      child: MaterialApp.router(
-        theme: AppTheme.light(),
-        darkTheme: AppTheme.dark(),
-        themeMode: themeMode,
-        routerConfig: router,
-        localizationsDelegates: const [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: supportedLocales,
-        locale: localeCode == null ? null : Locale(localeCode),
-        localeResolutionCallback: (locale, supported) {
-          if (locale == null) {
-            return const Locale('ar');
-          }
-          for (final supportedLocale in supported) {
-            if (supportedLocale.languageCode == locale.languageCode) {
-              return supportedLocale;
-            }
-          }
-          return const Locale('en');
+      child: DynamicColorBuilder(
+        builder: (lightDynamic, darkDynamic) {
+          return MaterialApp.router(
+            theme: AppTheme.light(dynamicScheme: lightDynamic),
+            darkTheme: AppTheme.dark(dynamicScheme: darkDynamic),
+            themeMode: themeMode,
+            routerConfig: router,
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: supportedLocales,
+            locale: localeCode == null ? null : Locale(localeCode),
+            localeResolutionCallback: (locale, supported) {
+              if (locale == null) {
+                return const Locale('ar');
+              }
+              for (final supportedLocale in supported) {
+                if (supportedLocale.languageCode == locale.languageCode) {
+                  return supportedLocale;
+                }
+              }
+              return const Locale('en');
+            },
+            onGenerateTitle: (context) => S.of(context).appTitle,
+          );
         },
-        onGenerateTitle: (context) => S.of(context).appTitle,
       ),
     );
   }

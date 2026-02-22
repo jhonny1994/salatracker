@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:salat_tracker/features/security/data/providers/security_providers.dart';
+import 'package:salat_tracker/features/security/security.dart';
 import 'package:salat_tracker/features/settings/settings.dart';
 
 /// Observes app lifecycle and triggers app lock after background resume.
@@ -48,10 +48,8 @@ class _AppLockLifecycleGateState extends ConsumerState<AppLockLifecycleGate>
   }
 
   Future<void> _lockIfNeededAfterResume() async {
-    final settings = ref.read(settingsProvider).asData?.value;
-    if (settings == null ||
-        !settings.onboardingComplete ||
-        !settings.appLockEnabled) {
+    final settings = await ref.read(settingsProvider.future);
+    if (!settings.onboardingComplete || !settings.appLockEnabled) {
       return;
     }
 
