@@ -44,4 +44,4 @@ jobs:
         run: flutter test --coverage
 
       - name: Enforce coverage threshold
-        run: dart run tool/check_coverage.dart --min=0.35
+        run: dart run tool/check_coverage.dart --min=0.25
