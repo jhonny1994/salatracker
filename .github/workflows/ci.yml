@@ -37,6 +37,9 @@ jobs:
       - name: Analyze
         run: flutter analyze
 
+      - name: Create mock .env for tests
+        run: touch .env
+
       - name: Run tests
         run: flutter test --coverage
 

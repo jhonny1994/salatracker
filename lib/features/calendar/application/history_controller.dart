@@ -39,7 +39,7 @@ class HistoryController extends _$HistoryController {
 
     // Find existing entry
     final existingEntryIndex = currentDay.entries.indexWhere(
-      (PrayerEntry e) => e.type == prayerType,
+      (e) => e.type == prayerType,
     );
 
     List<PrayerEntry> updatedEntries;
@@ -67,7 +67,7 @@ class HistoryController extends _$HistoryController {
 
     final isComplete =
         updatedEntries.length == PrayerType.values.length &&
-        updatedEntries.every((PrayerEntry e) => e.isCompleted);
+        updatedEntries.every((e) => e.isCompleted);
 
     final updatedDay = currentDay.copyWith(
       entries: updatedEntries,

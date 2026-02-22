@@ -49,7 +49,7 @@ class NotificationService {
     );
 
     await _plugin.initialize(
-      initSettings,
+      settings: initSettings,
       onDidReceiveNotificationResponse: (details) {
         _onNotificationClick.add(details.payload);
       },
@@ -112,11 +112,11 @@ class NotificationService {
     if (target.isBefore(DateTime.now())) return;
 
     await _plugin.zonedSchedule(
-      id,
-      title,
-      body,
-      tz.TZDateTime.from(target, tz.local),
-      NotificationDetails(
+      id: id,
+      title: title,
+      body: body,
+      scheduledDate: tz.TZDateTime.from(target, tz.local),
+      notificationDetails: NotificationDetails(
         android: AndroidNotificationDetails(
           'prayer_channel',
           S.current.notificationChannelName,

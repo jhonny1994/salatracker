@@ -425,7 +425,7 @@ class SettingsScreen extends ConsumerWidget {
     unawaited(
       showDialog<void>(
         context: context,
-        builder: (BuildContext dialogContext) {
+        builder: (dialogContext) {
           return AlertDialog(
             title: Text(title),
             content: SingleChildScrollView(
@@ -473,7 +473,7 @@ class SettingsScreen extends ConsumerWidget {
     unawaited(
       showDialog<void>(
         context: context,
-        builder: (BuildContext dialogContext) {
+        builder: (dialogContext) {
           return AlertDialog(
             title: Text(title),
             content: Column(

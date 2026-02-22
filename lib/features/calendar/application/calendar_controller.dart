@@ -15,7 +15,7 @@ part 'calendar_controller.g.dart';
 Stream<Map<DateTime, PrayerDay>> calendarDays(Ref ref) {
   final repository = ref.watch(prayerRepositoryProvider);
 
-  return repository.watchDays().map((List<PrayerDay> days) {
+  return repository.watchDays().map((days) {
     // Convert list to map keyed by normalized date
     return <DateTime, PrayerDay>{
       for (final day in days) day.date.dateOnly: day,

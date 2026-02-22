@@ -12,7 +12,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:salat_tracker/main.dart';
 
 void main() {
-  testWidgets('App builds', (WidgetTester tester) async {
+  testWidgets('App builds', (tester) async {
     await tester.pumpWidget(
       const ProviderScope(
         child: SalatTrackerApp(),
