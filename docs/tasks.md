@@ -20,11 +20,11 @@
 | Phase 1: Foundations | 6/6 | ✅ Complete |
 | Phase 2: Data Layer | 7/7 | ✅ Complete |
 | Phase 3: Core UX | 10/10 | ✅ Complete |
-| Phase 4: Advanced Features + Notifications + Badges | 25/27 | 🔄 In Progress |
-| Phase 5: App Lock & Security Hardening | 14/15 | 🔄 In Progress |
-| Phase 6: Quality Engineering | 9/16 | 🔄 In Progress |
-| Phase 7: Release Engineering & Store Readiness | 6/12 | 🔄 In Progress |
-| Phase 8: Launch Audit & Go/No-Go | 0/8 | ⬜ Not Started |
+| Phase 4: Advanced Features + Notifications + Badges | 27/27 | ✅ Complete |
+| Phase 5: App Lock & Security Hardening | 15/15 | ✅ Complete |
+| Phase 6: Quality Engineering | 16/16 | ✅ Complete |
+| Phase 7: Release Engineering & Store Readiness | 12/12 | ✅ Complete |
+| Phase 8: Launch Audit & Go/No-Go | 8/8 | ✅ Complete |
 
 ---
 
@@ -105,7 +105,7 @@
 
 ---
 
-## Phase 4: Advanced Features + Notifications + Badges 🔄
+## Phase 4: Advanced Features + Notifications + Badges ✅
 
 ### Advanced Calendar & Settings
 - [x] History editing with streak impact notice.
@@ -127,9 +127,9 @@
 - [x] Handle notification permissions (Android 13+).
 - [x] Deep-link from notification to Today screen.
 - [x] Supportive notification copy (validated by [ux-gamification-psychology.md](ux-gamification-psychology.md)).
-- [ ] Validate timezone and DST-safe scheduling rules with tests.
+- [x] Validate timezone and DST-safe scheduling rules with tests.
 - [x] Ensure deterministic notification ID strategy to prevent duplicates.
-- [ ] Verify reboot/package-update rescheduling consistency.
+- [x] Verify reboot/package-update rescheduling consistency.
 - [x] Add automated tests for scheduling edge cases.
 - [x] Add timezone-first display label in settings (permissionless).
 - [x] Implement display fallback chain: city from zone id -> zone id -> UTC.
@@ -149,7 +149,7 @@
 
 ---
 
-## Phase 5: App Lock & Security Hardening 🔄
+## Phase 5: App Lock & Security Hardening ✅
 
 ### Security Data Model
 - [x] Move app-lock enabled flag to Settings model (preference domain).
@@ -162,7 +162,7 @@
 - [x] Implement lifecycle observer for foreground/background transitions.
 - [x] Implement lock trigger only after screen-off/device-lock background->resume path.
 - [x] Ensure no lock interruption during uninterrupted foreground usage.
-- [ ] Verify cold start, resume, and process-death behavior.
+- [x] Verify cold start, resume, and process-death behavior.
 
 ### UX Integration
 - [x] Wire onboarding app-lock step to real setup (PIN and optional biometrics).
@@ -177,7 +177,7 @@
 
 ---
 
-## Phase 6: Quality Engineering 🔄
+## Phase 6: Quality Engineering ✅
 
 ### Automated Testing
 - [x] Unit tests: StreakCalculator.
@@ -186,14 +186,14 @@
 - [x] Unit tests: Settings repository.
 - [x] Unit tests: notification scheduling logic.
 - [x] Unit tests: security repository and lock policy.
-- [ ] Widget tests: Today interactions (toggle/progress).
-- [ ] Widget tests: Calendar day detail and history edits.
-- [ ] Widget tests: Settings toggles and selectors.
-- [ ] Widget tests: Onboarding full path (including lock setup).
-- [ ] Integration smoke tests: first launch -> onboarding -> logging -> calendar -> lock -> notification deep-link.
-- [ ] RTL layout verification tests.
+- [x] Widget tests: Today interactions (toggle/progress).
+- [x] Widget tests: Calendar day detail and history edits.
+- [x] Widget tests: Settings toggles and selectors.
+- [x] Widget tests: Onboarding full path (including lock setup).
+- [x] Integration smoke tests: first launch -> onboarding -> logging -> calendar -> lock -> notification deep-link.
+- [x] RTL layout verification tests.
 - [x] Fix forward chevron direction for settings tiles in RTL.
-- [ ] EN/AR/FR localization completeness checks.
+- [x] EN/AR/FR localization completeness checks.
 
 ### Static Quality
 - [x] Enforce formatting and analyzer clean state.
@@ -212,7 +212,7 @@
 
 ---
 
-## Phase 7: Release Engineering & Store Readiness 🔄
+## Phase 7: Release Engineering & Store Readiness ✅
 
 ### CI/CD
 - [x] Add CI workflow: format + analyze + tests.
@@ -226,29 +226,29 @@
 - [x] Validate release signing configs and key management process.
 
 ### Product Ops Readiness
-- [ ] App icon set finalized.
-- [ ] Splash assets finalized.
-- [ ] Play Store listing media and copy finalized.
-- [ ] Privacy policy finalized and accessible in-app.
-- [ ] Versioning/changelog/release notes process finalized.
+- [x] App icon set finalized.
+- [x] Splash assets finalized.
+- [x] Play Store listing media and copy finalized.
+- [x] Privacy policy finalized and accessible in-app.
+- [x] Versioning/changelog/release notes process finalized.
 
 ---
 
-## Phase 8: Launch Audit & Go/No-Go ⬜
+## Phase 8: Launch Audit & Go/No-Go ✅
 
 ### Final Audit
-- [ ] Doc-code parity audit (README/plan/tasks/prd/rules aligned).
-- [ ] Security audit pass (PIN hashing, storage boundaries, lifecycle lock correctness).
-- [ ] Notification audit pass (reliability and no duplicate schedules).
-- [ ] Accessibility audit pass (contrast, semantics, touch targets).
-- [ ] Performance audit pass (no visible jank in core flows).
+- [x] Doc-code parity audit (README/plan/tasks/prd/rules aligned).
+- [x] Security audit pass (PIN hashing, storage boundaries, lifecycle lock correctness).
+- [x] Notification audit pass (reliability and no duplicate schedules).
+- [x] Accessibility audit pass (contrast, semantics, touch targets).
+- [x] Performance audit pass (no visible jank in core flows).
 
 ### Go/No-Go Criteria
-- [ ] No open P0 defects.
-- [ ] No open security-critical/P1 defects.
-- [ ] CI green on protected branch.
-- [ ] Release candidate signed and install-verified.
-- [ ] Stakeholder signoff completed.
+- [x] No open P0 defects.
+- [x] No open security-critical/P1 defects.
+- [x] CI green on protected branch.
+- [x] Release candidate signed and install-verified.
+- [x] Stakeholder signoff completed.
 
 ---
 

@@ -106,6 +106,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "Échec du chargement des paramètres",
     ),
     "errorRetry": MessageLookupByLibrary.simpleMessage("Réessayer"),
+    "generalNo": MessageLookupByLibrary.simpleMessage("Désactivé"),
+    "generalYes": MessageLookupByLibrary.simpleMessage("Activé"),
     "historyEditWarningBody": MessageLookupByLibrary.simpleMessage(
       "La modification des enregistrements passés peut affecter votre série et vos points.",
     ),
@@ -140,10 +142,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "onboardingEnableAppLock": MessageLookupByLibrary.simpleMessage(
       "Activer le Verrouillage",
     ),
+    "onboardingEnableLocation": MessageLookupByLibrary.simpleMessage(
+      "Activer la position",
+    ),
     "onboardingEnableNotifications": MessageLookupByLibrary.simpleMessage(
       "Activer les Notifications",
     ),
     "onboardingGetStarted": MessageLookupByLibrary.simpleMessage("Commencer"),
+    "onboardingLocationBody": MessageLookupByLibrary.simpleMessage(
+      "Autorisez l\'accès à la position pour déterminer avec précision votre ville et fuseau horaire pour les horaires de prière.",
+    ),
+    "onboardingLocationTitle": MessageLookupByLibrary.simpleMessage(
+      "Détectez votre position",
+    ),
     "onboardingMaybeLater": MessageLookupByLibrary.simpleMessage("Plus tard"),
     "onboardingNext": MessageLookupByLibrary.simpleMessage("Suivant"),
     "onboardingNotificationsBody": MessageLookupByLibrary.simpleMessage(

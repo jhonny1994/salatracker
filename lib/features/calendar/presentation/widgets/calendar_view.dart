@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/features/calendar/calendar.dart';
 import 'package:salat_tracker/features/prayer/prayer.dart';
@@ -29,7 +30,7 @@ class CalendarView extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final statusChipTheme = theme.extension<StatusChipTheme>();
-    final isRtl = Directionality.of(context) == TextDirection.rtl;
+    final isRtl = Directionality.of(context).name == 'rtl';
 
     return TableCalendar<void>(
       firstDay: DateTime(2020),
@@ -68,6 +69,14 @@ class CalendarView extends StatelessWidget {
         ),
       ),
       calendarBuilders: CalendarBuilders<void>(
+        headerTitleBuilder: (context, day) {
+          final locale = Localizations.localeOf(context).languageCode;
+          final month = DateFormat.MMMM(locale).format(day);
+          return Text(
+            '$month ${day.year}',
+            style: theme.textTheme.titleLarge,
+          );
+        },
         defaultBuilder: (context, day, focusedDay) => CalendarDayCell(
           day: day,
           prayerDay: prayerDays[day.dateOnly],

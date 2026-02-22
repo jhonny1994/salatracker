@@ -119,21 +119,25 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                     .setStepByIndex(index),
                 children: [
                   WelcomePage(onNext: () => unawaited(_goToPage(1))),
-                  PrayerTimesPage(
+                  LocationPage(
                     onNext: () => unawaited(_goToPage(2)),
                     onBack: () => unawaited(_goToPage(0)),
                   ),
-                  NotificationsPage(
+                  PrayerTimesPage(
                     onNext: () => unawaited(_goToPage(3)),
                     onBack: () => unawaited(_goToPage(1)),
                   ),
-                  AppLockPage(
+                  NotificationsPage(
                     onNext: () => unawaited(_goToPage(4)),
                     onBack: () => unawaited(_goToPage(2)),
                   ),
+                  AppLockPage(
+                    onNext: () => unawaited(_goToPage(5)),
+                    onBack: () => unawaited(_goToPage(3)),
+                  ),
                   ConfirmationPage(
                     onComplete: _completeOnboarding,
-                    onBack: () => unawaited(_goToPage(3)),
+                    onBack: () => unawaited(_goToPage(4)),
                   ),
                 ],
               ),

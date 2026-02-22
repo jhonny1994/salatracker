@@ -1,80 +1,57 @@
-# Salat Tracker - سجل الصلاة
+<div align="center">
+  <h1>سجل الصلاة<br>Salat Tracker</h1>
+  <p><strong>A calm, respectful, offline-first experience designed for consistency, reflection, and privacy.</strong></p>
+  <p>
+    <a href="#features">Features</a> •
+    <a href="#philosophy">Philosophy</a> •
+    <a href="#privacy">Privacy</a> •
+    <a href="#developers">For Developers</a>
+  </p>
+</div>
 
-Track the five daily prayers with a calm, respectful, offline-first experience designed for consistency, reflection, and privacy.
+<br>
 
-Salat Tracker is an Arabic-first Flutter app (with EN/FR support) that helps users log prayers, review progress over time, and receive supportive reminders without pressure mechanics.
+Salat Tracker is an **Arabic-first** application (with full English and French support) that helps users log their daily prayers, review their progress over time, and receive supportive environmental reminders—**all without pressure mechanics or manipulation.**
 
-## Why This Product
-- **Progress-first motivation:** completion percentage is primary, streaks are secondary.
-- **Respectful tone:** no shame-based copy, no manipulative loops.
-- **Offline-first reliability:** core experience works without network.
-- **Privacy-minded:** local data storage with app lock support in progress.
+## 🕊️ Philosophy
+Unlike modern habit trackers that rely on psychological anxiety or "shame language," Salat Tracker operates strictly on the principles of **intrinsic motivation and respect**.
+* **Progress over Streaks:** Your daily completion percentage is the primary metric. Streaks are tracked, but never punished.
+* **Reflective Gamification:** We provide supportive milestones and points, but there are no leaderboards and no manipulative notification loops.
+* **Calm Interface:** Powered by Material Design 3 and Dynamic Color (Material You), ensuring a serene integration with your device's native aesthetics.
 
-## Core Experience
-- **Today:** one-tap checklist for the five prayers, progress ring, streak, optional points.
-- **Calendar:** month overview with day states and day-level history editing.
-- **Settings:** prayer schedule, reminder offsets, language, theme, haptics, points visibility, week start.
-- **Location context:** localized city/timezone context with offline-safe fallback and manual override-ready architecture.
-- **Onboarding:** first-run setup for prayer times, reminder opt-in, and app personalization.
+## ✨ Core Features
+* **Today Dashboard:** A one-tap checklist for the five daily prayers (`Fajr`, `Dhuhr`, `Asr`, `Maghrib`, `Isha`), complete with a beautiful, animated progress ring and supportive contextual notes.
+* **Calendar Reflection:** A comprehensive monthly overview highlighting your consistency. Supports retrospective day-editing.
+* **Smart Reminders:** Completely customizable notification offsets for each prayer, plus a supportive end-of-day reflection reminder, automatically synchronized with your local timezone coordinates.
+* **Premium UX:** Highly polished touch interactions including tactile micro-animations on cards, slick bottom navigation, and native Material 3 dialogs.
 
-## Current Build Status
-- **Implemented and usable:** foundations, data layer, Today/Calendar/Settings UX, onboarding baseline, notification scheduling, reflective badges, app lock security hardening.
-- **In progress toward production:** notification hardening, full test and release automation.
-- **Execution source of truth:** `docs/tasks.md` and `docs/plan.md`.
+## 🔒 Privacy & Architecture
+* **Offline-First:** Your data is yours. The core experience operates entirely offline using internal resilient storage.
+* **Lock & Key:** Contains built-in App Lock (PIN and Biometric Unlock) to ensure your prayer history remains completely private, locking immediately upon device screen-off.
+* **No Telemetry:** We utilize `sentry` for strict crash reporting (if you opt-in), but all logs are completely PII-scrubbed. No behavioral tracking.
 
-## Product Principles
-- **Arabic-first, RTL-correct** with Cairo typography.
-- **Light/dark parity** with Material 3 design tokens.
-- **Reflective gamification** (no leaderboards, no shame language).
-- **Business-grade quality target** with explicit go/no-go criteria.
+---
 
-## Tech Stack
-- Flutter (Material 3)
-- Riverpod 3 + riverpod_generator
-- Freezed + JSON serialization
-- Hive CE for local persistence
-- go_router for navigation
-- flutter_local_notifications + timezone for reminders
-- geolocator + geocoding + timeapi.io coordinate timezone resolution
-- sentry_flutter for crash reporting and analytics breadcrumbs
+## 💻 For Developers & Contributors
+This repository contains a full production-grade Flutter application adhering to strict Clean Architecture boundaries and high-tier Material 3 design tokens.
 
-## Quick Start
-1. Install Flutter SDK and verify with `flutter doctor`.
-2. Create local env file: copy `.env.example` to `.env`.
-3. Set environment values:
-   - `SENTRY_DSN`
-   - `SENTRY_ENV`
-4. Install dependencies: `flutter pub get`.
-5. Run app: `flutter run`.
+### Quick Start
+1. Ensure the Flutter SDK (`>=3.10.7`) is installed and run `flutter doctor`.
+2. Duplicate `.env.example` -> `.env` and fill in any required development variables (e.g., Sentry DSNs).
+3. Install dependencies: `flutter pub get`.
+4. Generate models and localization: `dart run build_runner build` and `flutter pub run intl_utils:generate`.
+5. Run the app: `flutter run`.
 
-## Configuration
-- Package ID: `com.carbodex.salat_tracker`
-- Version: `0.1.0+1`
-- Android minSdk: `23`
-- Locales: Arabic, English, French
-- Font: Cairo (bundled)
+### Technical Foundation
+* **State Management:** Riverpod 3 + code generation.
+* **Persistence:** Hive CE for high-speed local data.
+* **Localization:** Fully integrated `intl` + `flutter_localizations` with enforced AR/EN/FR parity.
+* **Navigation:** Type-safe routing via `go_router`.
 
-## Repository Structure
-```text
-lib/
-  core/        # routing, theme, localization, notifications, storage
-  features/    # today, calendar, settings, onboarding, prayer, security
-  shared/      # shared constants and extensions
-docs/          # PRD, plan, tasks, design, rules, UX guidance
-```
-
-## Documentation Hub
-- Product requirements: `docs/prd.md`
-- Delivery plan: `docs/plan.md`
-- Execution checklist: `docs/tasks.md`
-- Engineering rules: `docs/rules.md`
-- Design system: `docs/design-system.md`
-- UX and gamification: `docs/ux-gamification-psychology.md`
-
-## Road to v1.0.0
-- Refine animations and cross-platform UX polish.
-- Expand test coverage and enforce CI quality gates.
-- Finalize signed release pipelines and store-readiness assets.
-
-## License
-Proprietary/internal project unless otherwise specified by repository owner.
+### Engineering Documentation
+For full architectural details, requirements, and design specifications, refer to the `docs/` hub:
+- 📖 [Delivery Plan](docs/plan.md)
+- ✅ [Execution Tasks](docs/tasks.md)
+- 🎨 [Design System](docs/design-system.md)
+- 🧠 [UX & Gamification Psychology](docs/ux-gamification-psychology.md)
+- 📜 [Engineering Rules](docs/rules.md)

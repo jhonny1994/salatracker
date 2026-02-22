@@ -1,6 +1,8 @@
 {
   "@@locale": "en",
   "appTitle": "Salat Tracker",
+  "generalYes": "Enabled",
+  "generalNo": "Disabled",
   "navToday": "Today",
   "navCalendar": "Calendar",
   "navSettings": "Settings",
@@ -124,6 +126,7 @@
     }
   },
   "settingsWeekStart": "Week Start",
+  "weekStartSaturday": "Saturday",
   "weekStartSunday": "Sunday",
   "weekStartMonday": "Monday",
   "notificationTitle": "Time for {prayer}",
@@ -148,6 +151,9 @@
   "endOfDayBody": "Did you complete all your prayers today?",
   "onboardingWelcomeTitle": "Welcome to Salat Tracker",
   "onboardingWelcomeBody": "Track your daily prayers with gentle reminders.",
+  "onboardingLocationTitle": "Detect Your Location",
+  "onboardingLocationBody": "Allow location access to accurately determine your city and timezone for prayer schedules.",
+  "onboardingEnableLocation": "Enable Location",
   "onboardingPrayerTimesTitle": "Set Your Prayer Times",
   "onboardingPrayerTimesBody": "Configure when each prayer time begins.",
   "onboardingNotificationsTitle": "Stay on Track",

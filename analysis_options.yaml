@@ -1,6 +1,8 @@
 include: package:very_good_analysis/analysis_options.yaml
 
 analyzer:
+  errors:
+    asset_does_not_exist: ignore
   plugins:
     - riverpod_lint
   exclude:

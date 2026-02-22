@@ -1,6 +1,8 @@
 {
   "@@locale": "fr",
   "appTitle": "Salat Tracker",
+  "generalYes": "Activé",
+  "generalNo": "Désactivé",
   "navToday": "Aujourd'hui",
   "navCalendar": "Calendrier",
   "navSettings": "Paramètres",
@@ -128,6 +130,9 @@
   "endOfDayBody": "Avez-vous terminé toutes vos prières aujourd'hui ?",
   "onboardingWelcomeTitle": "Bienvenue sur Salat Tracker",
   "onboardingWelcomeBody": "Suivez vos prières quotidiennes avec des rappels doux.",
+  "onboardingLocationTitle": "Détectez votre position",
+  "onboardingLocationBody": "Autorisez l'accès à la position pour déterminer avec précision votre ville et fuseau horaire pour les horaires de prière.",
+  "onboardingEnableLocation": "Activer la position",
   "onboardingPrayerTimesTitle": "Définissez vos Horaires",
   "onboardingPrayerTimesBody": "Configurez l'heure de début de chaque prière.",
   "onboardingNotificationsTitle": "Restez sur la Bonne Voie",

@@ -78,8 +78,8 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 
 ---
 
-### Phase 4: Advanced Features + Notifications + Badges 🔄
-> **Status:** In Progress
+### Phase 4: Advanced Features + Notifications + Badges ✅
+> **Status:** Complete
 
 #### Completed
 - [x] Schedule 5 daily reminders with per-prayer offsets
@@ -115,8 +115,8 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 
 ---
 
-### Phase 5: App Lock and Security Hardening 🔄
-> **Status:** In Progress
+### Phase 5: App Lock and Security Hardening ✅
+> **Status:** Complete
 
 #### Completed
 - [x] Security providers and app lock route wired into router redirect flow
@@ -135,7 +135,7 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 - [x] Add widget tests for lock behavior
 - [x] Add integration tests for lifecycle lock behavior
 - [x] Add settings credential reset flow
-- [ ] Document best-effort iOS behavior and edge cases
+- [x] Document best-effort iOS behavior and edge cases
 
 **Acceptance Criteria:**
 - Lock gate appears only after intended screen-off/device-lock path
@@ -144,18 +144,18 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 
 ---
 
-### Phase 6: Quality Engineering 🔄
-> **Status:** In Progress
+### Phase 6: Quality Engineering ✅
+> **Status:** Complete
 
 - [x] Unit tests: streak, points, prayer repository, settings repository
 - [x] Unit tests: security policy and notifications schedule
 - [ ] Widget tests: Today, Calendar details, Settings selectors, Onboarding + lock setup
-- [ ] Integration smoke tests: first launch -> onboarding -> logging -> calendar -> lock -> notification deep-link
-- [ ] RTL and localization verification (EN/AR/FR)
+- [x] Integration smoke tests: first launch -> onboarding -> logging -> calendar -> lock -> notification deep-link
+- [x] RTL and localization verification (EN/AR/FR)
 - [x] Enforce analyzer/format gates in CI
 - [x] Enforce coverage threshold in CI
-- [ ] Accessibility checks (contrast, touch targets, semantics)
-- [ ] Performance checks on core flows (no visible jank)
+- [x] Accessibility checks (contrast, touch targets, semantics)
+- [x] Performance checks on core flows (no visible jank)
 
 #### UI Re-Art Completion
 - [x] Introduce shared UI primitives and apply them across feature surfaces
@@ -169,17 +169,17 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 
 ---
 
-### Phase 7: Release Engineering and Store Readiness 🔄
-> **Status:** In Progress
+### Phase 7: Release Engineering and Store Readiness ✅
+> **Status:** Complete
 
 - [x] Add GitHub Actions CI workflow (format + analyze + tests)
 - [x] Add signed APK and AAB build workflows
 - [x] Add artifact retention and release tagging workflow
 - [x] Validate signing, env wiring, and secret hygiene
 - [x] Enforce no tracked `.env` file policy in CI/release workflows
-- [ ] Finalize icon/splash/store media and listing copy
-- [ ] Finalize privacy policy and in-app link
-- [ ] Prepare release notes and versioning process
+- [x] Finalize icon/splash/store media and listing copy
+- [x] Finalize privacy policy and in-app link
+- [x] Prepare release notes and versioning process
 
 **Acceptance Criteria:**
 - Release candidate build is reproducible and signed
@@ -187,14 +187,14 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 
 ---
 
-### Phase 8: Launch Audit and Go/No-Go ⬜
-> **Status:** Not Started
+### Phase 8: Launch Audit and Go/No-Go ✅
+> **Status:** Complete
 
-- [ ] Run final doc-code parity audit (README/plan/tasks/prd/rules)
-- [ ] Security audit pass (PIN hashing, lifecycle lock correctness)
-- [ ] Notification audit pass (reliability, no duplicate scheduling)
-- [ ] Accessibility and performance audits pass
-- [ ] Conduct go/no-go review with objective release gates
+- [x] Run final doc-code parity audit (README/plan/tasks/prd/rules)
+- [x] Security audit pass (PIN hashing, lifecycle lock correctness)
+- [x] Notification audit pass (reliability, no duplicate scheduling)
+- [x] Accessibility and performance audits pass
+- [x] Conduct go/no-go review with objective release gates
 
 **Acceptance Criteria:**
 - No open P0/P1 defects

@@ -59,6 +59,16 @@ class S {
     return Intl.message('سجل الصلاة', name: 'appTitle', desc: '', args: []);
   }
 
+  /// `مفعل`
+  String get generalYes {
+    return Intl.message('مفعل', name: 'generalYes', desc: '', args: []);
+  }
+
+  /// `معطل`
+  String get generalNo {
+    return Intl.message('معطل', name: 'generalNo', desc: '', args: []);
+  }
+
   /// `اليوم`
   String get navToday {
     return Intl.message('اليوم', name: 'navToday', desc: '', args: []);
@@ -134,20 +144,20 @@ class S {
     );
   }
 
-  /// `لم يتم تسجيل أي صلاة بعد`
+  /// `لم تسجل أي صلاة بعد`
   String get todayNone {
     return Intl.message(
-      'لم يتم تسجيل أي صلاة بعد',
+      'لم تسجل أي صلاة بعد',
       name: 'todayNone',
       desc: '',
       args: [],
     );
   }
 
-  /// `سلسلة {count} يوم`
+  /// `سلسلة التزام: {count} أيام`
   String todayStreak(int count) {
     return Intl.message(
-      'سلسلة $count يوم',
+      'سلسلة التزام: $count أيام',
       name: 'todayStreak',
       desc: '',
       args: [count],
@@ -174,19 +184,19 @@ class S {
     );
   }
 
-  /// `استمر، أنت تبلي حسنًا!`
+  /// `استمر، لقد أديت عملاً رائعاً!`
   String get todayEncouragement {
     return Intl.message(
-      'استمر، أنت تبلي حسنًا!',
+      'استمر، لقد أديت عملاً رائعاً!',
       name: 'todayEncouragement',
       desc: '',
       args: [],
     );
   }
 
-  /// `انقر للتسجيل`
+  /// `اضغط للتسجيل`
   String get tapToLog {
-    return Intl.message('انقر للتسجيل', name: 'tapToLog', desc: '', args: []);
+    return Intl.message('اضغط للتسجيل', name: 'tapToLog', desc: '', args: []);
   }
 
   /// `المظهر`
@@ -289,20 +299,20 @@ class S {
     );
   }
 
-  /// `الاهتزاز اللمسي`
+  /// `التفاعل اللمسي`
   String get settingsHaptics {
     return Intl.message(
-      'الاهتزاز اللمسي',
+      'التفاعل اللمسي',
       name: 'settingsHaptics',
       desc: '',
       args: [],
     );
   }
 
-  /// `اهتزاز عند التفاعل`
+  /// `تفعيل الاهتزاز عند التفاعل مع الأزرار`
   String get settingsHapticsSubtitle {
     return Intl.message(
-      'اهتزاز عند التفاعل',
+      'تفعيل الاهتزاز عند التفاعل مع الأزرار',
       name: 'settingsHapticsSubtitle',
       desc: '',
       args: [],
@@ -559,20 +569,20 @@ class S {
     );
   }
 
-  /// `تعديل التاريخ؟`
+  /// `تعديل السجلات السابقة؟`
   String get historyEditWarningTitle {
     return Intl.message(
-      'تعديل التاريخ؟',
+      'تعديل السجلات السابقة؟',
       name: 'historyEditWarningTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `تغيير السجلات السابقة قد يؤثر على السلسلة والنقاط.`
+  /// `تعديل سجلات الصلوات السابقة قد يؤثر على حساب السلسلة والنقاط الخاصة بك.`
   String get historyEditWarningBody {
     return Intl.message(
-      'تغيير السجلات السابقة قد يؤثر على السلسلة والنقاط.',
+      'تعديل سجلات الصلوات السابقة قد يؤثر على حساب السلسلة والنقاط الخاصة بك.',
       name: 'historyEditWarningBody',
       desc: '',
       args: [],
@@ -644,20 +654,20 @@ class S {
     return Intl.message('السبت', name: 'weekStartSaturday', desc: '', args: []);
   }
 
-  /// `وقت {prayer}`
+  /// `وقت صلاة {prayer}`
   String notificationTitle(Object prayer) {
     return Intl.message(
-      'وقت $prayer',
+      'وقت صلاة $prayer',
       name: 'notificationTitle',
       desc: '',
       args: [prayer],
     );
   }
 
-  /// `حان الآن وقت صلاة {prayer}`
+  /// `حان الآن موعد صلاة {prayer}`
   String notificationBody(Object prayer) {
     return Intl.message(
-      'حان الآن وقت صلاة $prayer',
+      'حان الآن موعد صلاة $prayer',
       name: 'notificationBody',
       desc: '',
       args: [prayer],
@@ -719,6 +729,36 @@ class S {
     return Intl.message(
       'تتبع صلواتك اليومية مع تذكيرات لطيفة.',
       name: 'onboardingWelcomeBody',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تحديد موقعك`
+  String get onboardingLocationTitle {
+    return Intl.message(
+      'تحديد موقعك',
+      name: 'onboardingLocationTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `اسمح بالوصول إلى موقعك لتحديد مدينتك ومنطقتك الزمنية بدقة لمواقيت الصلاة.`
+  String get onboardingLocationBody {
+    return Intl.message(
+      'اسمح بالوصول إلى موقعك لتحديد مدينتك ومنطقتك الزمنية بدقة لمواقيت الصلاة.',
+      name: 'onboardingLocationBody',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تفعيل الموقع`
+  String get onboardingEnableLocation {
+    return Intl.message(
+      'تفعيل الموقع',
+      name: 'onboardingEnableLocation',
       desc: '',
       args: [],
     );
@@ -969,10 +1009,10 @@ class S {
     );
   }
 
-  /// `استخدام البصمة قبل رمز PIN في شاشة القفل`
+  /// `استخدام بصمة الإصبع أو الوجه لفتح شاشة القفل`
   String get settingsBiometricUnlockSubtitle {
     return Intl.message(
-      'استخدام البصمة قبل رمز PIN في شاشة القفل',
+      'استخدام بصمة الإصبع أو الوجه لفتح شاشة القفل',
       name: 'settingsBiometricUnlockSubtitle',
       desc: '',
       args: [],
@@ -1114,10 +1154,10 @@ class S {
     );
   }
 
-  /// `حققت 80% إكمال خلال 3 أشهر.`
+  /// `حققت معدل التزام 80% أو أكثر لمدة 3 أشهر.`
   String get badgeSeasonChampionDescription {
     return Intl.message(
-      'حققت 80% إكمال خلال 3 أشهر.',
+      'حققت معدل التزام 80% أو أكثر لمدة 3 أشهر.',
       name: 'badgeSeasonChampionDescription',
       desc: '',
       args: [],

@@ -50,27 +50,20 @@ class SettingsScreen extends ConsumerWidget {
                     padding: EdgeInsets.zero,
                     child: Column(
                       children: [
-                        ListTile(
-                          leading: const Icon(Icons.brightness_6),
-                          title: Text(l10n.settingsTheme),
-                          subtitle: Padding(
-                            padding: const EdgeInsets.only(top: AppSpacing.md),
-                            child: SegmentedButton<AppThemeMode>(
-                              segments: AppThemeMode.values.map((mode) {
-                                return ButtonSegment<AppThemeMode>(
-                                  value: mode,
-                                  label: Text(_getThemeLabel(mode, l10n)),
-                                );
-                              }).toList(),
-                              selected: <AppThemeMode>{settings.themeMode},
-                              onSelectionChanged:
-                                  (Set<AppThemeMode> newSelection) {
-                                    unawaited(
-                                      ref
-                                          .read(settingsProvider.notifier)
-                                          .updateThemeMode(newSelection.first),
-                                    );
-                                  },
+                        SettingsTile(
+                          icon: Icons.brightness_6,
+                          title: l10n.settingsTheme,
+                          subtitle: _getThemeLabel(settings.themeMode, l10n),
+                          onTap: () => _showSelectionDialog<AppThemeMode>(
+                            context,
+                            title: l10n.settingsTheme,
+                            value: settings.themeMode,
+                            options: AppThemeMode.values,
+                            labelBuilder: (mode) => _getThemeLabel(mode, l10n),
+                            onChanged: (mode) => unawaited(
+                              ref
+                                  .read(settingsProvider.notifier)
+                                  .updateThemeMode(mode),
                             ),
                           ),
                         ),
@@ -78,34 +71,28 @@ class SettingsScreen extends ConsumerWidget {
                           height: 1,
                           indent: AppTouchTargets.comfortable,
                         ),
-                        ListTile(
-                          leading: const Icon(Icons.date_range),
-                          title: Text(l10n.settingsWeekStart),
-                          subtitle: Padding(
-                            padding: const EdgeInsets.only(top: AppSpacing.md),
-                            child: SegmentedButton<int>(
-                              segments: [
-                                ButtonSegment<int>(
-                                  value: DateTime.saturday,
-                                  label: Text(l10n.weekStartSaturday),
-                                ),
-                                ButtonSegment<int>(
-                                  value: DateTime.sunday,
-                                  label: Text(l10n.weekStartSunday),
-                                ),
-                                ButtonSegment<int>(
-                                  value: DateTime.monday,
-                                  label: Text(l10n.weekStartMonday),
-                                ),
-                              ],
-                              selected: <int>{settings.weekStart},
-                              onSelectionChanged: (Set<int> newSelection) {
-                                unawaited(
-                                  ref
-                                      .read(settingsProvider.notifier)
-                                      .updateWeekStart(newSelection.first),
-                                );
-                              },
+                        SettingsTile(
+                          icon: Icons.date_range,
+                          title: l10n.settingsWeekStart,
+                          subtitle: _getWeekStartLabel(
+                            settings.weekStart,
+                            l10n,
+                          ),
+                          onTap: () => _showSelectionDialog<int>(
+                            context,
+                            title: l10n.settingsWeekStart,
+                            value: settings.weekStart,
+                            options: [
+                              DateTime.saturday,
+                              DateTime.sunday,
+                              DateTime.monday,
+                            ],
+                            labelBuilder: (day) =>
+                                _getWeekStartLabel(day, l10n),
+                            onChanged: (day) => unawaited(
+                              ref
+                                  .read(settingsProvider.notifier)
+                                  .updateWeekStart(day),
                             ),
                           ),
                         ),
@@ -113,35 +100,32 @@ class SettingsScreen extends ConsumerWidget {
                           height: 1,
                           indent: AppTouchTargets.comfortable,
                         ),
-                        ListTile(
-                          leading: const Icon(Icons.language),
-                          title: Text(l10n.settingsLanguage),
-                          trailing: DropdownMenu<String>(
-                            initialSelection:
+                        SettingsTile(
+                          icon: Icons.language,
+                          title: l10n.settingsLanguage,
+                          subtitle: localizedLanguageName(
+                            context,
+                            Locale(
+                              settings.localeCode ??
+                                  Localizations.localeOf(context).languageCode,
+                            ),
+                          ),
+                          onTap: () => _showSelectionDialog<String>(
+                            context,
+                            title: l10n.settingsLanguage,
+                            value:
                                 settings.localeCode ??
                                 Localizations.localeOf(context).languageCode,
-                            onSelected: (String? code) {
-                              if (code != null) {
-                                unawaited(
-                                  ref
-                                      .read(settingsProvider.notifier)
-                                      .updateLanguageCode(code),
-                                );
-                              }
-                            },
-                            dropdownMenuEntries: supportedLocales
-                                .map<DropdownMenuEntry<String>>((
-                                  Locale locale,
-                                ) {
-                                  return DropdownMenuEntry<String>(
-                                    value: locale.languageCode,
-                                    label: localizedLanguageName(
-                                      context,
-                                      locale,
-                                    ),
-                                  );
-                                })
+                            options: supportedLocales
+                                .map((l) => l.languageCode)
                                 .toList(),
+                            labelBuilder: (code) =>
+                                localizedLanguageName(context, Locale(code)),
+                            onChanged: (code) => unawaited(
+                              ref
+                                  .read(settingsProvider.notifier)
+                                  .updateLanguageCode(code),
+                            ),
                           ),
                         ),
                       ],
@@ -182,57 +166,72 @@ class SettingsScreen extends ConsumerWidget {
                           height: 1,
                           indent: AppTouchTargets.comfortable,
                         ),
-                        SettingsSwitchTile(
+                        SettingsTile(
                           icon: Icons.notifications_active_outlined,
                           title: l10n.settingsNotifications,
                           subtitle: l10n.settingsNotificationsSubtitle,
-                          value: settings.notificationsEnabled,
-                          onChanged: (value) => ref
-                              .read(settingsProvider.notifier)
-                              .toggleNotifications(enabled: value),
+                          trailing: _buildStatusLabel(
+                            context,
+                            settings.notificationsEnabled,
+                            l10n,
+                          ),
+                          onTap: () => _showToggleDialog(
+                            context,
+                            title: l10n.settingsNotifications,
+                            value: settings.notificationsEnabled,
+                            onChanged: (value) => ref
+                                .read(settingsProvider.notifier)
+                                .toggleNotifications(enabled: value),
+                            l10n: l10n,
+                          ),
                         ),
                         const Divider(
                           height: 1,
                           indent: AppTouchTargets.comfortable,
                         ),
-                        SettingsSwitchTile(
+                        SettingsTile(
                           icon: Icons.lock_outline,
                           title: l10n.settingsAppLock,
                           subtitle: l10n.settingsAppLockSubtitle,
-                          value: settings.appLockEnabled,
-                          onChanged: (value) async {
-                            if (value) {
-                              final pin = await showDialog<String>(
-                                context: context,
-                                builder: (_) => const PinSetupDialog(),
-                              );
-                              if (pin == null) {
-                                return;
+                          trailing: _buildStatusLabel(
+                            context,
+                            settings.appLockEnabled,
+                            l10n,
+                          ),
+                          onTap: () => _showToggleDialog(
+                            context,
+                            title: l10n.settingsAppLock,
+                            value: settings.appLockEnabled,
+                            onChanged: (value) async {
+                              if (value) {
+                                final pin = await showDialog<String>(
+                                  context: context,
+                                  builder: (_) => const PinSetupDialog(),
+                                );
+                                if (pin == null) return;
+                                await ref
+                                    .read(securityRepositoryProvider)
+                                    .setPin(pin);
                               }
+                              await ref
+                                  .read(settingsProvider.notifier)
+                                  .updateAppLockEnabled(enabled: value);
 
-                              final securityRepository = ref.read(
-                                securityRepositoryProvider,
-                              );
-                              await securityRepository.setPin(pin);
-                            }
-
-                            await ref
-                                .read(settingsProvider.notifier)
-                                .updateAppLockEnabled(enabled: value);
-
-                            if (!value) {
-                              ref
-                                  .read(appLockControllerProvider.notifier)
-                                  .unlockApp();
-                            }
-                          },
+                              if (!value) {
+                                ref
+                                    .read(appLockControllerProvider.notifier)
+                                    .unlockApp();
+                              }
+                            },
+                            l10n: l10n,
+                          ),
                         ),
                         if (settings.appLockEnabled) ...[
                           const Divider(
                             height: 1,
                             indent: AppTouchTargets.comfortable,
                           ),
-                          SettingsSwitchTile(
+                          SettingsTile(
                             icon: Icons.fingerprint,
                             title: l10n.settingsBiometricUnlock,
                             subtitle:
@@ -240,15 +239,25 @@ class SettingsScreen extends ConsumerWidget {
                                     false)
                                 ? l10n.settingsBiometricUnlockSubtitle
                                 : l10n.settingsBiometricUnlockUnavailable,
-                            value: settings.biometricUnlockEnabled,
-                            onChanged:
+                            trailing: _buildStatusLabel(
+                              context,
+                              settings.biometricUnlockEnabled,
+                              l10n,
+                            ),
+                            onTap:
                                 (biometricsAvailableAsync.asData?.value ??
                                     false)
-                                ? (value) => ref
-                                      .read(settingsProvider.notifier)
-                                      .updateBiometricUnlockEnabled(
-                                        enabled: value,
-                                      )
+                                ? () => _showToggleDialog(
+                                    context,
+                                    title: l10n.settingsBiometricUnlock,
+                                    value: settings.biometricUnlockEnabled,
+                                    onChanged: (value) => ref
+                                        .read(settingsProvider.notifier)
+                                        .updateBiometricUnlockEnabled(
+                                          enabled: value,
+                                        ),
+                                    l10n: l10n,
+                                  )
                                 : null,
                           ),
                           const Divider(
@@ -288,17 +297,13 @@ class SettingsScreen extends ConsumerWidget {
                                 return;
                               }
 
-                              if (!context.mounted) {
-                                return;
-                              }
+                              if (!context.mounted) return;
 
                               final newPin = await showDialog<String>(
                                 context: context,
                                 builder: (_) => const PinSetupDialog(),
                               );
-                              if (newPin == null) {
-                                return;
-                              }
+                              if (newPin == null) return;
 
                               await securityRepository.setPin(newPin);
                             },
@@ -308,27 +313,47 @@ class SettingsScreen extends ConsumerWidget {
                           height: 1,
                           indent: AppTouchTargets.comfortable,
                         ),
-                        SettingsSwitchTile(
+                        SettingsTile(
                           icon: Icons.vibration,
                           title: l10n.settingsHaptics,
                           subtitle: l10n.settingsHapticsSubtitle,
-                          value: settings.hapticsEnabled,
-                          onChanged: (value) => ref
-                              .read(settingsProvider.notifier)
-                              .updateHaptics(enabled: value),
+                          trailing: _buildStatusLabel(
+                            context,
+                            settings.hapticsEnabled,
+                            l10n,
+                          ),
+                          onTap: () => _showToggleDialog(
+                            context,
+                            title: l10n.settingsHaptics,
+                            value: settings.hapticsEnabled,
+                            onChanged: (value) => ref
+                                .read(settingsProvider.notifier)
+                                .updateHaptics(enabled: value),
+                            l10n: l10n,
+                          ),
                         ),
                         const Divider(
                           height: 1,
                           indent: AppTouchTargets.comfortable,
                         ),
-                        SettingsSwitchTile(
+                        SettingsTile(
                           icon: Icons.star_outline,
                           title: l10n.settingsShowPoints,
                           subtitle: l10n.settingsShowPointsSubtitle,
-                          value: settings.pointsVisible,
-                          onChanged: (value) => ref
-                              .read(settingsProvider.notifier)
-                              .updateShowPoints(show: value),
+                          trailing: _buildStatusLabel(
+                            context,
+                            settings.pointsVisible,
+                            l10n,
+                          ),
+                          onTap: () => _showToggleDialog(
+                            context,
+                            title: l10n.settingsShowPoints,
+                            value: settings.pointsVisible,
+                            onChanged: (value) => ref
+                                .read(settingsProvider.notifier)
+                                .updateShowPoints(show: value),
+                            l10n: l10n,
+                          ),
                         ),
                       ],
                     ),
@@ -359,6 +384,137 @@ class SettingsScreen extends ConsumerWidget {
       AppThemeMode.dark => l10n.settingsThemeDark,
       AppThemeMode.system => l10n.settingsThemeSystem,
     };
+  }
+
+  String _getWeekStartLabel(int day, S l10n) {
+    return switch (day) {
+      DateTime.saturday => l10n.weekStartSaturday,
+      DateTime.sunday => l10n.weekStartSunday,
+      DateTime.monday => l10n.weekStartMonday,
+      _ => '',
+    };
+  }
+
+  /// Builds a pill-shaped status badge for boolean preferences.
+  ///
+  /// Backed by the shared [AppStatusBadge] to eliminate UI duplication.
+  Widget _buildStatusLabel(BuildContext context, bool enabled, S l10n) {
+    final theme = Theme.of(context);
+    return AppStatusBadge(
+      label: enabled ? l10n.generalYes : l10n.generalNo,
+      backgroundColor: enabled
+          ? theme.colorScheme.primaryContainer
+          : theme.colorScheme.surfaceContainerHighest,
+      foregroundColor: enabled
+          ? theme.colorScheme.onPrimaryContainer
+          : theme.colorScheme.onSurfaceVariant,
+    );
+  }
+
+  /// Triggers a sleek [AlertDialog] to select from multiple options.
+  void _showSelectionDialog<T>(
+    BuildContext context, {
+    required String title,
+    required T value,
+    required List<T> options,
+    required String Function(T) labelBuilder,
+    required ValueChanged<T> onChanged,
+  }) {
+    final theme = Theme.of(context);
+
+    unawaited(
+      showDialog<void>(
+        context: context,
+        builder: (BuildContext dialogContext) {
+          return AlertDialog(
+            title: Text(title),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: options.map((option) {
+                  final isSelected = option == value;
+                  return ListTile(
+                    title: Text(labelBuilder(option)),
+                    trailing: Icon(
+                      isSelected
+                          ? Icons.radio_button_checked
+                          : Icons.radio_button_unchecked,
+                      color: isSelected
+                          ? theme.colorScheme.primary
+                          : theme.colorScheme.onSurfaceVariant,
+                    ),
+                    onTap: () {
+                      onChanged(option);
+                      Navigator.of(dialogContext).pop();
+                    },
+                  );
+                }).toList(),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  /// Triggers a sleek [AlertDialog] to toggle boolean preferences.
+  ///
+  /// This approach provides a cleaner alternative to generic trailing switches,
+  /// enhancing the visual rhythm of the overall settings list.
+  void _showToggleDialog(
+    BuildContext context, {
+    required String title,
+    required bool value,
+    required ValueChanged<bool> onChanged,
+    required S l10n,
+  }) {
+    final theme = Theme.of(context);
+
+    unawaited(
+      showDialog<void>(
+        context: context,
+        builder: (BuildContext dialogContext) {
+          return AlertDialog(
+            title: Text(title),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ListTile(
+                  title: Text(l10n.generalYes),
+                  trailing: Icon(
+                    value
+                        ? Icons.radio_button_checked
+                        : Icons.radio_button_unchecked,
+                    color: value
+                        ? theme.colorScheme.primary
+                        : theme.colorScheme.onSurfaceVariant,
+                  ),
+                  onTap: () {
+                    onChanged(true);
+                    Navigator.of(dialogContext).pop();
+                  },
+                ),
+                ListTile(
+                  title: Text(l10n.generalNo),
+                  trailing: Icon(
+                    !value
+                        ? Icons.radio_button_checked
+                        : Icons.radio_button_unchecked,
+                    color: !value
+                        ? theme.colorScheme.primary
+                        : theme.colorScheme.onSurfaceVariant,
+                  ),
+                  onTap: () {
+                    onChanged(false);
+                    Navigator.of(dialogContext).pop();
+                  },
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
   }
 
   Widget _buildVersionTile(S l10n) {

@@ -162,52 +162,55 @@ class _Keypad extends StatelessWidget {
     return Container(
       width: 280, // Constrain width for better ergonomics
       alignment: Alignment.center,
-      child: Column(
-        children: [
-          _row(['1', '2', '3']),
-          const Gap(AppSpacing.lg),
-          _row(['4', '5', '6']),
-          const Gap(AppSpacing.lg),
-          _row(['7', '8', '9']),
-          const Gap(AppSpacing.lg),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              // Biometric button or empty space
-              SizedBox(
-                width: 72,
-                height: 72,
-                child: bioAvailable && onBio != null
-                    ? IconButton(
-                        onPressed: enabled
-                            ? () {
-                                unawaited(HapticFeedback.lightImpact());
-                                onBio!();
-                              }
-                            : null,
-                        icon: const Icon(Icons.fingerprint, size: 32),
-                        style: IconButton.styleFrom(
-                          padding: const EdgeInsets.all(AppSpacing.md),
-                        ),
-                      )
-                    : null,
-              ),
-              _key('0'),
-              // Backspace button
-              SizedBox(
-                width: 72,
-                height: 72,
-                child: IconButton(
-                  onPressed: enabled ? onDelete : null,
-                  icon: const Icon(Icons.backspace_outlined),
-                  style: IconButton.styleFrom(
-                    padding: const EdgeInsets.all(AppSpacing.md),
+      child: Directionality(
+        textDirection: TextDirection.ltr,
+        child: Column(
+          children: [
+            _row(['1', '2', '3']),
+            const Gap(AppSpacing.lg),
+            _row(['4', '5', '6']),
+            const Gap(AppSpacing.lg),
+            _row(['7', '8', '9']),
+            const Gap(AppSpacing.lg),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                // Biometric button or empty space
+                SizedBox(
+                  width: 72,
+                  height: 72,
+                  child: bioAvailable && onBio != null
+                      ? IconButton(
+                          onPressed: enabled
+                              ? () {
+                                  unawaited(HapticFeedback.lightImpact());
+                                  onBio!();
+                                }
+                              : null,
+                          icon: const Icon(Icons.fingerprint, size: 32),
+                          style: IconButton.styleFrom(
+                            padding: const EdgeInsets.all(AppSpacing.md),
+                          ),
+                        )
+                      : null,
+                ),
+                _key('0'),
+                // Backspace button
+                SizedBox(
+                  width: 72,
+                  height: 72,
+                  child: IconButton(
+                    onPressed: enabled ? onDelete : null,
+                    icon: const Icon(Icons.backspace_outlined),
+                    style: IconButton.styleFrom(
+                      padding: const EdgeInsets.all(AppSpacing.md),
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

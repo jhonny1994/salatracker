@@ -45,3 +45,4 @@ ios/Flutter/Flutter.podspec
 
 # Secrets
 .env
+*.keystore

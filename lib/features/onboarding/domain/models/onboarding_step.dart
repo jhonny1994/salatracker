@@ -3,6 +3,9 @@ enum OnboardingStep {
   /// Welcome and introduction.
   welcome,
 
+  /// Location permission request.
+  location,
+
   /// Prayer times configuration.
   prayerTimes,
 

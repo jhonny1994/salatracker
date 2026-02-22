@@ -39,8 +39,8 @@ class LocationContextBanner extends ConsumerWidget {
             Expanded(
               child: Text(
                 '${l10n.settingsCurrentTimezone}: $subtitle',
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+                overflow: TextOverflow.visible,
                 style: theme.textTheme.bodyMedium,
               ),
             ),

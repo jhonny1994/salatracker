@@ -26,9 +26,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(time) => "سُجِّل في ${time}";
 
-  static String m3(prayer) => "حان الآن وقت صلاة ${prayer}";
+  static String m3(prayer) => "حان الآن موعد صلاة ${prayer}";
 
-  static String m4(prayer) => "وقت ${prayer}";
+  static String m4(prayer) => "وقت صلاة ${prayer}";
 
   static String m5(minutes) => "${minutes} دقيقة";
 
@@ -40,7 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m9(count) => "${count} نقطة";
 
-  static String m10(count) => "سلسلة ${count} يوم";
+  static String m10(count) => "سلسلة التزام: ${count} أيام";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -60,7 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "إنجاز الشهر",
     ),
     "badgeSeasonChampionDescription": MessageLookupByLibrary.simpleMessage(
-      "حققت 80% إكمال خلال 3 أشهر.",
+      "حققت معدل التزام 80% أو أكثر لمدة 3 أشهر.",
     ),
     "badgeSeasonChampionName": MessageLookupByLibrary.simpleMessage(
       "بطل الموسم",
@@ -104,11 +104,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "فشل تحميل الإعدادات",
     ),
     "errorRetry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
+    "generalNo": MessageLookupByLibrary.simpleMessage("معطل"),
+    "generalYes": MessageLookupByLibrary.simpleMessage("مفعل"),
     "historyEditWarningBody": MessageLookupByLibrary.simpleMessage(
-      "تغيير السجلات السابقة قد يؤثر على السلسلة والنقاط.",
+      "تعديل سجلات الصلوات السابقة قد يؤثر على حساب السلسلة والنقاط الخاصة بك.",
     ),
     "historyEditWarningTitle": MessageLookupByLibrary.simpleMessage(
-      "تعديل التاريخ؟",
+      "تعديل السجلات السابقة؟",
     ),
     "navCalendar": MessageLookupByLibrary.simpleMessage("التقويم"),
     "navSettings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
@@ -136,10 +138,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "onboardingEnableAppLock": MessageLookupByLibrary.simpleMessage(
       "تفعيل قفل التطبيق",
     ),
+    "onboardingEnableLocation": MessageLookupByLibrary.simpleMessage(
+      "تفعيل الموقع",
+    ),
     "onboardingEnableNotifications": MessageLookupByLibrary.simpleMessage(
       "تفعيل الإشعارات",
     ),
     "onboardingGetStarted": MessageLookupByLibrary.simpleMessage("ابدأ الآن"),
+    "onboardingLocationBody": MessageLookupByLibrary.simpleMessage(
+      "اسمح بالوصول إلى موقعك لتحديد مدينتك ومنطقتك الزمنية بدقة لمواقيت الصلاة.",
+    ),
+    "onboardingLocationTitle": MessageLookupByLibrary.simpleMessage(
+      "تحديد موقعك",
+    ),
     "onboardingMaybeLater": MessageLookupByLibrary.simpleMessage("ربما لاحقاً"),
     "onboardingNext": MessageLookupByLibrary.simpleMessage("التالي"),
     "onboardingNotificationsBody": MessageLookupByLibrary.simpleMessage(
@@ -212,7 +223,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "الفتح بالبصمة",
     ),
     "settingsBiometricUnlockSubtitle": MessageLookupByLibrary.simpleMessage(
-      "استخدام البصمة قبل رمز PIN في شاشة القفل",
+      "استخدام بصمة الإصبع أو الوجه لفتح شاشة القفل",
     ),
     "settingsBiometricUnlockUnavailable": MessageLookupByLibrary.simpleMessage(
       "البصمة غير متاحة على هذا الجهاز",
@@ -223,9 +234,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "settingsCurrentTimezoneUnavailable": MessageLookupByLibrary.simpleMessage(
       "المنطقة الزمنية غير متاحة",
     ),
-    "settingsHaptics": MessageLookupByLibrary.simpleMessage("الاهتزاز اللمسي"),
+    "settingsHaptics": MessageLookupByLibrary.simpleMessage("التفاعل اللمسي"),
     "settingsHapticsSubtitle": MessageLookupByLibrary.simpleMessage(
-      "اهتزاز عند التفاعل",
+      "تفعيل الاهتزاز عند التفاعل مع الأزرار",
     ),
     "settingsLanguage": MessageLookupByLibrary.simpleMessage("اللغة"),
     "settingsLanguageArabic": MessageLookupByLibrary.simpleMessage("العربية"),
@@ -269,18 +280,16 @@ class MessageLookup extends MessageLookupByLibrary {
       "جار التحميل...",
     ),
     "settingsWeekStart": MessageLookupByLibrary.simpleMessage("بداية الأسبوع"),
-    "tapToLog": MessageLookupByLibrary.simpleMessage("انقر للتسجيل"),
+    "tapToLog": MessageLookupByLibrary.simpleMessage("اضغط للتسجيل"),
     "today": MessageLookupByLibrary.simpleMessage("اليوم"),
     "todayComplete": MessageLookupByLibrary.simpleMessage(
       "جميع الصلوات مكتملة!",
     ),
     "todayCompletionRatio": m7,
     "todayEncouragement": MessageLookupByLibrary.simpleMessage(
-      "استمر، أنت تبلي حسنًا!",
+      "استمر، لقد أديت عملاً رائعاً!",
     ),
-    "todayNone": MessageLookupByLibrary.simpleMessage(
-      "لم يتم تسجيل أي صلاة بعد",
-    ),
+    "todayNone": MessageLookupByLibrary.simpleMessage("لم تسجل أي صلاة بعد"),
     "todayPartial": m8,
     "todayPoints": m9,
     "todayProgress": MessageLookupByLibrary.simpleMessage("تقدم اليوم"),

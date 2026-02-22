@@ -93,32 +93,9 @@ class TodayProgressCard extends StatelessWidget {
           if (points > 0) ...[
             const Gap(AppSpacing.md),
             Center(
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.lg,
-                  vertical: AppSpacing.sm,
-                ),
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.primaryContainer,
-                  borderRadius: BorderRadius.circular(AppRadius.xl),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      Icons.star_rounded,
-                      size: AppIconSizes.sm,
-                      color: theme.colorScheme.onPrimaryContainer,
-                    ),
-                    const Gap(AppSpacing.sm),
-                    Text(
-                      l10n.todayPoints(points),
-                      style: theme.textTheme.labelLarge?.copyWith(
-                        color: theme.colorScheme.onPrimaryContainer,
-                      ),
-                    ),
-                  ],
-                ),
+              child: AppStatusBadge(
+                label: l10n.todayPoints(points),
+                icon: Icons.star_rounded,
               ),
             ),
           ],

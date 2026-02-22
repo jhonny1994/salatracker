@@ -1,6 +1,8 @@
 {
   "@@locale": "ar",
   "appTitle": "سجل الصلاة",
+  "generalYes": "مفعل",
+  "generalNo": "معطل",
   "navToday": "اليوم",
   "navCalendar": "التقويم",
   "navSettings": "الإعدادات",
@@ -20,8 +22,8 @@
       }
     }
   },
-  "todayNone": "لم يتم تسجيل أي صلاة بعد",
-  "todayStreak": "سلسلة {count} يوم",
+  "todayNone": "لم تسجل أي صلاة بعد",
+  "todayStreak": "سلسلة التزام: {count} أيام",
   "@todayStreak": {
     "placeholders": {
       "count": {
@@ -48,8 +50,8 @@
       }
     }
   },
-  "todayEncouragement": "استمر، أنت تبلي حسنًا!",
-  "tapToLog": "انقر للتسجيل",
+  "todayEncouragement": "استمر، لقد أديت عملاً رائعاً!",
+  "tapToLog": "اضغط للتسجيل",
   "settingsAppearance": "المظهر",
   "settingsTheme": "السمة",
   "settingsThemeLight": "فاتح",
@@ -62,8 +64,8 @@
   "settingsPreferences": "التفضيلات",
   "settingsNotifications": "الإشعارات",
   "settingsNotificationsSubtitle": "تفعيل تنبيهات أوقات الصلاة",
-  "settingsHaptics": "الاهتزاز اللمسي",
-  "settingsHapticsSubtitle": "اهتزاز عند التفاعل",
+  "settingsHaptics": "التفاعل اللمسي",
+  "settingsHapticsSubtitle": "تفعيل الاهتزاز عند التفاعل مع الأزرار",
   "settingsShowPoints": "إظهار النقاط",
   "settingsShowPointsSubtitle": "عرض النقاط في الواجهة",
   "settingsAppLock": "قفل التطبيق",
@@ -109,8 +111,8 @@
   },
   "today": "اليوم",
   "errorLoadingData": "خطأ في تحميل البيانات",
-  "historyEditWarningTitle": "تعديل التاريخ؟",
-  "historyEditWarningBody": "تغيير السجلات السابقة قد يؤثر على السلسلة والنقاط.",
+  "historyEditWarningTitle": "تعديل السجلات السابقة؟",
+  "historyEditWarningBody": "تعديل سجلات الصلوات السابقة قد يؤثر على حساب السلسلة والنقاط الخاصة بك.",
   "actionCancel": "إلغاء",
   "actionContinue": "استمرار",
   "settingsReminderOffset": "وقت التنبيه",
@@ -120,14 +122,17 @@
   "weekStartSunday": "الأحد",
   "weekStartMonday": "الاثنين",
   "weekStartSaturday": "السبت",
-  "notificationTitle": "وقت {prayer}",
-  "notificationBody": "حان الآن وقت صلاة {prayer}",
+  "notificationTitle": "وقت صلاة {prayer}",
+  "notificationBody": "حان الآن موعد صلاة {prayer}",
   "notificationChannelName": "إشعارات الصلاة",
   "notificationChannelDescription": "إشعارات لمواقيت الصلاة",
   "endOfDayTitle": "تذكير يومي",
   "endOfDayBody": "هل أتممت صلواتك اليوم؟",
   "onboardingWelcomeTitle": "مرحباً بك في سجل الصلاة",
   "onboardingWelcomeBody": "تتبع صلواتك اليومية مع تذكيرات لطيفة.",
+  "onboardingLocationTitle": "تحديد موقعك",
+  "onboardingLocationBody": "اسمح بالوصول إلى موقعك لتحديد مدينتك ومنطقتك الزمنية بدقة لمواقيت الصلاة.",
+  "onboardingEnableLocation": "تفعيل الموقع",
   "onboardingPrayerTimesTitle": "حدد مواعيد الصلاة",
   "onboardingPrayerTimesBody": "قم بتعيين وقت بدء كل صلاة.",
   "onboardingNotificationsTitle": "ابقَ على المسار",
@@ -154,7 +159,7 @@
   "securityUnlockTitle": "افتح سجل الصلاة",
   "securityBiometricReason": "يرجى التحقق لفتح سجل الصلاة",
   "settingsBiometricUnlock": "الفتح بالبصمة",
-  "settingsBiometricUnlockSubtitle": "استخدام البصمة قبل رمز PIN في شاشة القفل",
+  "settingsBiometricUnlockSubtitle": "استخدام بصمة الإصبع أو الوجه لفتح شاشة القفل",
   "settingsBiometricUnlockUnavailable": "البصمة غير متاحة على هذا الجهاز",
   "settingsCurrentTimezone": "المنطقة الزمنية الحالية",
   "settingsCurrentTimezoneUnavailable": "المنطقة الزمنية غير متاحة",
@@ -183,5 +188,5 @@
   "badgeMonthCompleteName": "إنجاز الشهر",
   "badgeMonthCompleteDescription": "حققت 90% إكمال خلال شهر.",
   "badgeSeasonChampionName": "بطل الموسم",
-  "badgeSeasonChampionDescription": "حققت 80% إكمال خلال 3 أشهر."
+  "badgeSeasonChampionDescription": "حققت معدل التزام 80% أو أكثر لمدة 3 أشهر."
 }

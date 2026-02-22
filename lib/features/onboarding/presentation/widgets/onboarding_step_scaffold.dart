@@ -21,7 +21,7 @@ class OnboardingStepScaffold extends StatelessWidget {
   final String title;
   final String body;
   final String primaryLabel;
-  final VoidCallback onPrimary;
+  final VoidCallback? onPrimary;
   final Widget? content;
   final String? secondaryLabel;
   final VoidCallback? onSecondary;

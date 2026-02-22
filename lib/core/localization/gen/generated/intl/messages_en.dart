@@ -104,6 +104,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "Failed to load settings",
     ),
     "errorRetry": MessageLookupByLibrary.simpleMessage("Retry"),
+    "generalNo": MessageLookupByLibrary.simpleMessage("Disabled"),
+    "generalYes": MessageLookupByLibrary.simpleMessage("Enabled"),
     "historyEditWarningBody": MessageLookupByLibrary.simpleMessage(
       "Changing past records may affect your streak and points.",
     ),
@@ -138,10 +140,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "onboardingEnableAppLock": MessageLookupByLibrary.simpleMessage(
       "Enable App Lock",
     ),
+    "onboardingEnableLocation": MessageLookupByLibrary.simpleMessage(
+      "Enable Location",
+    ),
     "onboardingEnableNotifications": MessageLookupByLibrary.simpleMessage(
       "Enable Notifications",
     ),
     "onboardingGetStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
+    "onboardingLocationBody": MessageLookupByLibrary.simpleMessage(
+      "Allow location access to accurately determine your city and timezone for prayer schedules.",
+    ),
+    "onboardingLocationTitle": MessageLookupByLibrary.simpleMessage(
+      "Detect Your Location",
+    ),
     "onboardingMaybeLater": MessageLookupByLibrary.simpleMessage("Maybe Later"),
     "onboardingNext": MessageLookupByLibrary.simpleMessage("Next"),
     "onboardingNotificationsBody": MessageLookupByLibrary.simpleMessage(
@@ -286,6 +297,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "todayProgress": MessageLookupByLibrary.simpleMessage("Today\'s Progress"),
     "todayStreak": m10,
     "weekStartMonday": MessageLookupByLibrary.simpleMessage("Monday"),
+    "weekStartSaturday": MessageLookupByLibrary.simpleMessage("Saturday"),
     "weekStartSunday": MessageLookupByLibrary.simpleMessage("Sunday"),
   };
 }

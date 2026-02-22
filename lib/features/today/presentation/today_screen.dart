@@ -131,10 +131,7 @@ class _TodayScreenState extends ConsumerState<TodayScreen> {
                     padding: const EdgeInsets.all(AppSpacing.xl),
                     child: completionPercentage == 1.0
                         ? const TodayCelebrationCard()
-                        : AppInlineNotice(
-                            icon: Icons.favorite_border,
-                            message: encouragementMessage,
-                          ),
+                        : const SizedBox.shrink(),
                   ),
                 ),
                 const SliverPadding(

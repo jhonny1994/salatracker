@@ -88,22 +88,12 @@ class PrayerScheduleScreen extends ConsumerWidget {
                       ),
                     ),
                     const Gap(AppSpacing.sm),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AppSpacing.md,
-                        vertical: AppSpacing.xs,
-                      ),
-                      decoration: BoxDecoration(
-                        color: theme.colorScheme.surfaceContainerHighest,
-                        borderRadius: BorderRadius.circular(AppRadius.md),
-                      ),
-                      child: Text(
-                        time.format(context),
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          color: theme.colorScheme.onSurfaceVariant,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                    AppStatusBadge(
+                      label: time.format(context),
+                      isPill: false,
+                      backgroundColor:
+                          theme.colorScheme.surfaceContainerHighest,
+                      foregroundColor: theme.colorScheme.onSurfaceVariant,
                     ),
                   ],
                 ),
