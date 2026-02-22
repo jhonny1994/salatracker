@@ -28,8 +28,15 @@ jobs:
           test -n "$SENTRY_DSN" || (echo "Missing SENTRY_DSN" && exit 1)
           test -n "$SENTRY_ENV" || (echo "Missing SENTRY_ENV" && exit 1)
 
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Validate no committed env file
-        run: dart run tool/check_no_committed_env.dart
+        run: |
+          if git ls-files --error-unmatch .env 2>/dev/null; then
+            echo "ERROR: .env is tracked in git. Remove it from git history." && exit 1
+          fi
+          echo "No tracked .env file detected."
 
   build-release-artifacts:
     runs-on: ubuntu-latest
