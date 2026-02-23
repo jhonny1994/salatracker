@@ -1,6 +1,5 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:salat_tracker/core/core.dart';
@@ -14,15 +13,17 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 /// main [SalatTrackerApp] widget.
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load();
   await HiveService.initialize();
 
   await SentryFlutter.init(
     (options) {
       options
-        ..dsn = dotenv.env['SENTRY_DSN']
+        ..dsn = const String.fromEnvironment('SENTRY_DSN')
         ..sendDefaultPii = false
-        ..environment = dotenv.env['SENTRY_ENV'] ?? 'development';
+        ..environment = const String.fromEnvironment(
+          'SENTRY_ENV',
+          defaultValue: 'development',
+        );
     },
     appRunner: () async {
       // Initialize Notifications

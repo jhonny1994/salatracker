@@ -221,7 +221,7 @@
 - [x] Add artifact retention and release tagging workflow.
 
 ### Security & Config Hygiene
-- [x] Validate no secrets committed (.env policy + checks).
+- [x] Validate no secrets committed (`--dart-define` compile-time injection policy).
 - [x] Verify Sentry environment wiring per build flavor.
 - [x] Validate release signing configs and key management process.
 

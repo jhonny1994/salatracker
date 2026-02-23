@@ -22,14 +22,11 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Validate no committed env file
-        run: dart run tool/check_no_committed_env.dart
-
       - name: Generate localization
-        run: flutter pub run intl_utils:generate
+        run: dart run intl_utils:generate
 
       - name: Generate code
-        run: flutter pub run build_runner build --delete-conflicting-outputs
+        run: dart run build_runner build --delete-conflicting-outputs
 
       - name: Check formatting
         run: dart format --set-exit-if-changed .
@@ -37,10 +34,9 @@ jobs:
       - name: Analyze
         run: flutter analyze
 
-      - name: Create mock .env for tests
-        run: touch .env
-
       - name: Run tests
+        # Secrets are empty strings in CI — Sentry is disabled unless explicitly
+        # configured via --dart-define, which is intentional for test runs.
         run: flutter test --coverage
 
       - name: Enforce coverage threshold

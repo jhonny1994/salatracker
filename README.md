@@ -35,12 +35,20 @@ Unlike modern habit trackers that rely on psychological anxiety or "shame langua
 ## 💻 For Developers & Contributors
 This repository contains a full production-grade Flutter application adhering to strict Clean Architecture boundaries and high-tier Material 3 design tokens.
 
-### Quick Start
+### **Quick Start:**
+
 1. Ensure the Flutter SDK (`>=3.10.7`) is installed and run `flutter doctor`.
-2. Duplicate `.env.example` -> `.env` and fill in any required development variables (e.g., Sentry DSNs).
-3. Install dependencies: `flutter pub get`.
-4. Generate models and localization: `dart run build_runner build` and `flutter pub run intl_utils:generate`.
-5. Run the app: `flutter run`.
+2. Install dependencies: `flutter pub get`.
+3. Generate models and localization: `dart run build_runner build` and `flutter pub run intl_utils:generate`.
+4. Run the app: `flutter run`
+   *(Optional)* For local development secrets, create a `config.json` file in the root directory:
+   ```json
+   {
+     "SENTRY_DSN": "your_dsn_here",
+     "SENTRY_ENV": "development"
+   }
+   ```
+   Launch via: `flutter run --dart-define-from-file=config.json`
 
 ### Technical Foundation
 * **State Management:** Riverpod 3 + code generation.

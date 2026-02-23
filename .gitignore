@@ -44,5 +44,5 @@ ios/Flutter/Flutter.podspec
 .agent/
 
 # Secrets
-.env
+config.json
 *.keystore

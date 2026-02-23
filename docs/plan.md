@@ -176,7 +176,7 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 - [x] Add signed APK and AAB build workflows
 - [x] Add artifact retention and release tagging workflow
 - [x] Validate signing, env wiring, and secret hygiene
-- [x] Enforce no tracked `.env` file policy in CI/release workflows
+- [x] Enforce compile-time secrets injection via `--dart-define` in CI/release workflows
 - [x] Finalize icon/splash/store media and listing copy
 - [x] Finalize privacy policy and in-app link
 - [x] Prepare release notes and versioning process
