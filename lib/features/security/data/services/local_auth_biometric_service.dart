@@ -20,7 +20,6 @@ class LocalAuthBiometricService implements BiometricAuthService {
   Future<bool> authenticate({required String localizedReason}) {
     return _localAuth.authenticate(
       localizedReason: localizedReason,
-      biometricOnly: true,
       persistAcrossBackgrounding: true,
     );
   }

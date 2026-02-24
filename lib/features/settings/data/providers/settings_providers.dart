@@ -164,16 +164,6 @@ class SettingsNotifier extends _$SettingsNotifier {
     });
   }
 
-  Future<void> updateShowPoints({required bool show}) async {
-    final repository = ref.read(settingsRepositoryProvider);
-    state = await AsyncValue.guard(() async {
-      final current = await future;
-      final updated = current.copyWith(pointsVisible: show);
-      await repository.saveSettings(updated);
-      return updated;
-    });
-  }
-
   Future<void> updatePrayerTime({
     required PrayerType type,
     required TimeOfDay time,

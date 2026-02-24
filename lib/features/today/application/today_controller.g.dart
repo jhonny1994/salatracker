@@ -45,7 +45,7 @@ final class TodayControllerProvider
   TodayController create() => TodayController();
 }
 
-String _$todayControllerHash() => r'420927de360cbb9219d49584fa37a2e5825c7922';
+String _$todayControllerHash() => r'18165b002044023db2b707cf5f4ece256259f16a';
 
 /// Controller managing today's prayer day state.
 ///

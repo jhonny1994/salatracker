@@ -332,29 +332,6 @@ class SettingsScreen extends ConsumerWidget {
                             l10n: l10n,
                           ),
                         ),
-                        const Divider(
-                          height: 1,
-                          indent: AppTouchTargets.comfortable,
-                        ),
-                        SettingsTile(
-                          icon: Icons.star_outline,
-                          title: l10n.settingsShowPoints,
-                          subtitle: l10n.settingsShowPointsSubtitle,
-                          trailing: _buildStatusLabel(
-                            context,
-                            settings.pointsVisible,
-                            l10n,
-                          ),
-                          onTap: () => _showToggleDialog(
-                            context,
-                            title: l10n.settingsShowPoints,
-                            value: settings.pointsVisible,
-                            onChanged: (value) => ref
-                                .read(settingsProvider.notifier)
-                                .updateShowPoints(show: value),
-                            l10n: l10n,
-                          ),
-                        ),
                       ],
                     ),
                   ),

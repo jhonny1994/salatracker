@@ -61,7 +61,7 @@ final class CalendarDaysProvider
   }
 }
 
-String _$calendarDaysHash() => r'b9a4164059c84f7e5e094accb2e1c896b23657e7';
+String _$calendarDaysHash() => r'73cdca944fa6aa035bd0e2926404059aecc966ff';
 
 /// Controller managing the currently selected day in the calendar.
 ///

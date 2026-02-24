@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/features/security/security.dart';
+import 'package:salat_tracker/features/settings/settings.dart';
 
 void main() {
   testWidgets(
@@ -13,6 +14,9 @@ void main() {
         overrides: [
           securityRepositoryProvider.overrideWithValue(
             _FakeSecurityRepository(lockout: const Duration(seconds: 30)),
+          ),
+          settingsRepositoryProvider.overrideWithValue(
+            _FakeSettingsRepository(),
           ),
         ],
       );
@@ -36,6 +40,9 @@ void main() {
         securityRepositoryProvider.overrideWithValue(
           _FakeSecurityRepository(validPin: '123456'),
         ),
+        settingsRepositoryProvider.overrideWithValue(
+          _FakeSettingsRepository(),
+        ),
       ],
     );
     addTearDown(container.dispose);
@@ -57,7 +64,10 @@ void main() {
     await tester.tap(find.text('6'));
     await tester.pumpAndSettle();
 
-    expect(container.read(appLockControllerProvider), AppLockStatus.unlocked);
+    expect(
+      container.read(appLockControllerProvider).value,
+      AppLockStatus.unlocked,
+    );
   });
 }
 
@@ -111,4 +121,15 @@ class _FakeSecurityRepository implements SecurityRepository {
 
   @override
   Future<bool> verifyPin(String pin) async => pin == validPin;
+}
+
+class _FakeSettingsRepository implements SettingsRepository {
+  @override
+  Future<Settings> fetchSettings() async => Settings.defaults();
+
+  @override
+  Future<void> saveSettings(Settings settings) async {}
+
+  @override
+  Stream<Settings> watchSettings() => Stream.value(Settings.defaults());
 }

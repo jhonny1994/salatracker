@@ -28,10 +28,12 @@ GoRouter appRouter(Ref ref) {
     observers: [SentryNavigatorObserver()],
     refreshListenable: refreshNotifier,
     redirect: (context, state) {
+      final lockAsync = ref.read(appLockControllerProvider);
       final settingsAsync = ref.read(settingsProvider);
-      final lockStatus = ref.read(appLockControllerProvider);
 
       // 1. Check App Lock status first
+      // Default to locked while loading (safe: prevents content flash)
+      final lockStatus = lockAsync.value ?? AppLockStatus.locked;
       final isLocked = lockStatus == AppLockStatus.locked;
       final onLockScreen = state.matchedLocation == '/lock';
 
@@ -127,7 +129,7 @@ class _RouterRefreshNotifier extends ChangeNotifier {
       (_, _) => notifyListeners(),
     );
 
-    _lockSub = _ref.listen<AppLockStatus>(
+    _lockSub = _ref.listen<AsyncValue<AppLockStatus>>(
       appLockControllerProvider,
       (_, _) => notifyListeners(),
     );
@@ -135,7 +137,7 @@ class _RouterRefreshNotifier extends ChangeNotifier {
 
   final Ref _ref;
   late final ProviderSubscription<AsyncValue<Settings>> _settingsSub;
-  late final ProviderSubscription<AppLockStatus> _lockSub;
+  late final ProviderSubscription<AsyncValue<AppLockStatus>> _lockSub;
 
   @override
   void dispose() {

@@ -53,7 +53,7 @@ final class HistoryControllerProvider
   }
 }
 
-String _$historyControllerHash() => r'dff7ce60c6bf45490e4af6879430e779af275dc4';
+String _$historyControllerHash() => r'dc7764a63485ad42c04aad1ca827a34720c2458b';
 
 /// Controller for managing historical prayer data edits.
 ///

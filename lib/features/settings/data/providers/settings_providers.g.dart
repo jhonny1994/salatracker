@@ -238,7 +238,7 @@ final class SettingsNotifierProvider
   SettingsNotifier create() => SettingsNotifier();
 }
 
-String _$settingsNotifierHash() => r'79061b4aef892c168feaa4a938f428697265f077';
+String _$settingsNotifierHash() => r'7ff6c5bc9571048a667adc95c053289ffb97c18c';
 
 /// Notifier managing application settings state.
 ///

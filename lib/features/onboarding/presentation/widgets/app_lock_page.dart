@@ -7,8 +7,7 @@ import 'package:salat_tracker/features/settings/settings.dart';
 
 /// App Lock opt-in page.
 ///
-/// Note: Full app lock implementation is in Phase 5. This page provides
-/// the opt-in UI that will be wired up later.
+/// After PIN setup, checks for biometric availability and offers enrollment.
 class AppLockPage extends ConsumerWidget {
   /// Creates an [AppLockPage].
   const AppLockPage({
@@ -23,6 +22,56 @@ class AppLockPage extends ConsumerWidget {
   /// Callback when user taps Back.
   final VoidCallback onBack;
 
+  Future<void> _enableAppLock(BuildContext context, WidgetRef ref) async {
+    final pin = await showDialog<String>(
+      context: context,
+      builder: (_) => const PinSetupDialog(),
+    );
+    if (pin == null) {
+      return;
+    }
+
+    final securityRepository = ref.read(securityRepositoryProvider);
+    await securityRepository.setPin(pin);
+    await ref
+        .read(settingsProvider.notifier)
+        .updateAppLockEnabled(enabled: true);
+
+    // Check biometric availability and offer enrollment
+    if (context.mounted) {
+      final biometricsAvailable = await securityRepository
+          .isBiometricsAvailable();
+      if (biometricsAvailable && context.mounted) {
+        final enableBiometrics = await showDialog<bool>(
+          context: context,
+          builder: (context) => AlertDialog(
+            icon: const Icon(Icons.fingerprint),
+            title: Text(S.of(context).settingsBiometricUnlock),
+            content: Text(S.of(context).securityBiometricReason),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text(S.of(context).onboardingMaybeLater),
+              ),
+              FilledButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: Text(S.of(context).generalYes),
+              ),
+            ],
+          ),
+        );
+
+        if (enableBiometrics ?? false) {
+          await ref
+              .read(settingsProvider.notifier)
+              .updateBiometricUnlockEnabled(enabled: true);
+        }
+      }
+    }
+
+    onNext();
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = S.of(context);
@@ -31,22 +80,7 @@ class AppLockPage extends ConsumerWidget {
       title: l10n.onboardingAppLockTitle,
       body: l10n.onboardingAppLockBody,
       primaryLabel: l10n.onboardingEnableAppLock,
-      onPrimary: () async {
-        final pin = await showDialog<String>(
-          context: context,
-          builder: (_) => const PinSetupDialog(),
-        );
-        if (pin == null) {
-          return;
-        }
-
-        final securityRepository = ref.read(securityRepositoryProvider);
-        await securityRepository.setPin(pin);
-        await ref
-            .read(settingsProvider.notifier)
-            .updateAppLockEnabled(enabled: true);
-        onNext();
-      },
+      onPrimary: () => _enableAppLock(context, ref),
       secondaryLabel: l10n.onboardingMaybeLater,
       onSecondary: () async {
         await ref

@@ -62,12 +62,12 @@ void main() {
       final sub = repository.watchSettings().listen(updates.add);
 
       await repository.saveSettings(
-        Settings.defaults().copyWith(pointsVisible: false),
+        Settings.defaults().copyWith(hapticsEnabled: false),
       );
       await Future<void>.delayed(const Duration(milliseconds: 10));
 
       expect(updates, isNotEmpty);
-      expect(updates.last.pointsVisible, isFalse);
+      expect(updates.last.hapticsEnabled, isFalse);
       await sub.cancel();
     });
   });

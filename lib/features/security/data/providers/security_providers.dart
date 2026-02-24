@@ -57,21 +57,31 @@ enum AppLockStatus {
 }
 
 /// Controller for managing the application lock state.
+///
+/// On cold start, checks whether app lock is enabled and a PIN exists.
+/// If both conditions are met, the initial state is [AppLockStatus.locked],
+/// which causes the router to redirect to the lock screen immediately.
 @Riverpod(keepAlive: true)
 class AppLockController extends _$AppLockController {
   @override
-  AppLockStatus build() {
-    return AppLockStatus
-        .unlocked; // Default to unlocked initially to avoid blocking startup
+  Future<AppLockStatus> build() async {
+    final repo = ref.read(securityRepositoryProvider);
+    final isEnabled = await repo.isAppLockEnabled();
+    final hasPin = await repo.hasPin();
+
+    if (isEnabled && hasPin) {
+      return AppLockStatus.locked;
+    }
+    return AppLockStatus.unlocked;
   }
 
   /// Locks the application immediately.
   void lockApp() {
-    state = AppLockStatus.locked;
+    state = const AsyncData(AppLockStatus.locked);
   }
 
   /// Unlocks the application.
   void unlockApp() {
-    state = AppLockStatus.unlocked;
+    state = const AsyncData(AppLockStatus.unlocked);
   }
 }

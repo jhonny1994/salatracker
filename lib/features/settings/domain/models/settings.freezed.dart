@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Settings {
 
-@HiveField(0) Map<PrayerType, TimeOfDay> get prayerTimes;@HiveField(1) Map<PrayerType, int> get offsets;@HiveField(2) bool get notificationsEnabled;@HiveField(3) bool get hapticsEnabled;@HiveField(4) bool get pointsVisible;@HiveField(5) AppThemeMode get themeMode;@HiveField(6) String? get localeCode;@HiveField(7) int get weekStart;@HiveField(8) bool get onboardingComplete;@HiveField(9) bool get appLockEnabled;@HiveField(10) bool get biometricUnlockEnabled;
+@HiveField(0) Map<PrayerType, TimeOfDay> get prayerTimes;@HiveField(1) Map<PrayerType, int> get offsets;@HiveField(2) bool get notificationsEnabled;@HiveField(3) bool get hapticsEnabled;@HiveField(5) AppThemeMode get themeMode;@HiveField(6) String? get localeCode;@HiveField(7) int get weekStart;@HiveField(8) bool get onboardingComplete;@HiveField(9) bool get appLockEnabled;@HiveField(10) bool get biometricUnlockEnabled;
 /// Create a copy of Settings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $SettingsCopyWith<Settings> get copyWith => _$SettingsCopyWithImpl<Settings>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Settings&&const DeepCollectionEquality().equals(other.prayerTimes, prayerTimes)&&const DeepCollectionEquality().equals(other.offsets, offsets)&&(identical(other.notificationsEnabled, notificationsEnabled) || other.notificationsEnabled == notificationsEnabled)&&(identical(other.hapticsEnabled, hapticsEnabled) || other.hapticsEnabled == hapticsEnabled)&&(identical(other.pointsVisible, pointsVisible) || other.pointsVisible == pointsVisible)&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.localeCode, localeCode) || other.localeCode == localeCode)&&(identical(other.weekStart, weekStart) || other.weekStart == weekStart)&&(identical(other.onboardingComplete, onboardingComplete) || other.onboardingComplete == onboardingComplete)&&(identical(other.appLockEnabled, appLockEnabled) || other.appLockEnabled == appLockEnabled)&&(identical(other.biometricUnlockEnabled, biometricUnlockEnabled) || other.biometricUnlockEnabled == biometricUnlockEnabled));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Settings&&const DeepCollectionEquality().equals(other.prayerTimes, prayerTimes)&&const DeepCollectionEquality().equals(other.offsets, offsets)&&(identical(other.notificationsEnabled, notificationsEnabled) || other.notificationsEnabled == notificationsEnabled)&&(identical(other.hapticsEnabled, hapticsEnabled) || other.hapticsEnabled == hapticsEnabled)&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.localeCode, localeCode) || other.localeCode == localeCode)&&(identical(other.weekStart, weekStart) || other.weekStart == weekStart)&&(identical(other.onboardingComplete, onboardingComplete) || other.onboardingComplete == onboardingComplete)&&(identical(other.appLockEnabled, appLockEnabled) || other.appLockEnabled == appLockEnabled)&&(identical(other.biometricUnlockEnabled, biometricUnlockEnabled) || other.biometricUnlockEnabled == biometricUnlockEnabled));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(prayerTimes),const DeepCollectionEquality().hash(offsets),notificationsEnabled,hapticsEnabled,pointsVisible,themeMode,localeCode,weekStart,onboardingComplete,appLockEnabled,biometricUnlockEnabled);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(prayerTimes),const DeepCollectionEquality().hash(offsets),notificationsEnabled,hapticsEnabled,themeMode,localeCode,weekStart,onboardingComplete,appLockEnabled,biometricUnlockEnabled);
 
 @override
 String toString() {
-  return 'Settings(prayerTimes: $prayerTimes, offsets: $offsets, notificationsEnabled: $notificationsEnabled, hapticsEnabled: $hapticsEnabled, pointsVisible: $pointsVisible, themeMode: $themeMode, localeCode: $localeCode, weekStart: $weekStart, onboardingComplete: $onboardingComplete, appLockEnabled: $appLockEnabled, biometricUnlockEnabled: $biometricUnlockEnabled)';
+  return 'Settings(prayerTimes: $prayerTimes, offsets: $offsets, notificationsEnabled: $notificationsEnabled, hapticsEnabled: $hapticsEnabled, themeMode: $themeMode, localeCode: $localeCode, weekStart: $weekStart, onboardingComplete: $onboardingComplete, appLockEnabled: $appLockEnabled, biometricUnlockEnabled: $biometricUnlockEnabled)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $SettingsCopyWith<$Res>  {
   factory $SettingsCopyWith(Settings value, $Res Function(Settings) _then) = _$SettingsCopyWithImpl;
 @useResult
 $Res call({
-@HiveField(0) Map<PrayerType, TimeOfDay> prayerTimes,@HiveField(1) Map<PrayerType, int> offsets,@HiveField(2) bool notificationsEnabled,@HiveField(3) bool hapticsEnabled,@HiveField(4) bool pointsVisible,@HiveField(5) AppThemeMode themeMode,@HiveField(6) String? localeCode,@HiveField(7) int weekStart,@HiveField(8) bool onboardingComplete,@HiveField(9) bool appLockEnabled,@HiveField(10) bool biometricUnlockEnabled
+@HiveField(0) Map<PrayerType, TimeOfDay> prayerTimes,@HiveField(1) Map<PrayerType, int> offsets,@HiveField(2) bool notificationsEnabled,@HiveField(3) bool hapticsEnabled,@HiveField(5) AppThemeMode themeMode,@HiveField(6) String? localeCode,@HiveField(7) int weekStart,@HiveField(8) bool onboardingComplete,@HiveField(9) bool appLockEnabled,@HiveField(10) bool biometricUnlockEnabled
 });
 
 
@@ -62,13 +62,12 @@ class _$SettingsCopyWithImpl<$Res>
 
 /// Create a copy of Settings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? prayerTimes = null,Object? offsets = null,Object? notificationsEnabled = null,Object? hapticsEnabled = null,Object? pointsVisible = null,Object? themeMode = null,Object? localeCode = freezed,Object? weekStart = null,Object? onboardingComplete = null,Object? appLockEnabled = null,Object? biometricUnlockEnabled = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? prayerTimes = null,Object? offsets = null,Object? notificationsEnabled = null,Object? hapticsEnabled = null,Object? themeMode = null,Object? localeCode = freezed,Object? weekStart = null,Object? onboardingComplete = null,Object? appLockEnabled = null,Object? biometricUnlockEnabled = null,}) {
   return _then(_self.copyWith(
 prayerTimes: null == prayerTimes ? _self.prayerTimes : prayerTimes // ignore: cast_nullable_to_non_nullable
 as Map<PrayerType, TimeOfDay>,offsets: null == offsets ? _self.offsets : offsets // ignore: cast_nullable_to_non_nullable
 as Map<PrayerType, int>,notificationsEnabled: null == notificationsEnabled ? _self.notificationsEnabled : notificationsEnabled // ignore: cast_nullable_to_non_nullable
 as bool,hapticsEnabled: null == hapticsEnabled ? _self.hapticsEnabled : hapticsEnabled // ignore: cast_nullable_to_non_nullable
-as bool,pointsVisible: null == pointsVisible ? _self.pointsVisible : pointsVisible // ignore: cast_nullable_to_non_nullable
 as bool,themeMode: null == themeMode ? _self.themeMode : themeMode // ignore: cast_nullable_to_non_nullable
 as AppThemeMode,localeCode: freezed == localeCode ? _self.localeCode : localeCode // ignore: cast_nullable_to_non_nullable
 as String?,weekStart: null == weekStart ? _self.weekStart : weekStart // ignore: cast_nullable_to_non_nullable
@@ -160,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@HiveField(0)  Map<PrayerType, TimeOfDay> prayerTimes, @HiveField(1)  Map<PrayerType, int> offsets, @HiveField(2)  bool notificationsEnabled, @HiveField(3)  bool hapticsEnabled, @HiveField(4)  bool pointsVisible, @HiveField(5)  AppThemeMode themeMode, @HiveField(6)  String? localeCode, @HiveField(7)  int weekStart, @HiveField(8)  bool onboardingComplete, @HiveField(9)  bool appLockEnabled, @HiveField(10)  bool biometricUnlockEnabled)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@HiveField(0)  Map<PrayerType, TimeOfDay> prayerTimes, @HiveField(1)  Map<PrayerType, int> offsets, @HiveField(2)  bool notificationsEnabled, @HiveField(3)  bool hapticsEnabled, @HiveField(5)  AppThemeMode themeMode, @HiveField(6)  String? localeCode, @HiveField(7)  int weekStart, @HiveField(8)  bool onboardingComplete, @HiveField(9)  bool appLockEnabled, @HiveField(10)  bool biometricUnlockEnabled)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Settings() when $default != null:
-return $default(_that.prayerTimes,_that.offsets,_that.notificationsEnabled,_that.hapticsEnabled,_that.pointsVisible,_that.themeMode,_that.localeCode,_that.weekStart,_that.onboardingComplete,_that.appLockEnabled,_that.biometricUnlockEnabled);case _:
+return $default(_that.prayerTimes,_that.offsets,_that.notificationsEnabled,_that.hapticsEnabled,_that.themeMode,_that.localeCode,_that.weekStart,_that.onboardingComplete,_that.appLockEnabled,_that.biometricUnlockEnabled);case _:
   return orElse();
 
 }
@@ -181,10 +180,10 @@ return $default(_that.prayerTimes,_that.offsets,_that.notificationsEnabled,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@HiveField(0)  Map<PrayerType, TimeOfDay> prayerTimes, @HiveField(1)  Map<PrayerType, int> offsets, @HiveField(2)  bool notificationsEnabled, @HiveField(3)  bool hapticsEnabled, @HiveField(4)  bool pointsVisible, @HiveField(5)  AppThemeMode themeMode, @HiveField(6)  String? localeCode, @HiveField(7)  int weekStart, @HiveField(8)  bool onboardingComplete, @HiveField(9)  bool appLockEnabled, @HiveField(10)  bool biometricUnlockEnabled)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@HiveField(0)  Map<PrayerType, TimeOfDay> prayerTimes, @HiveField(1)  Map<PrayerType, int> offsets, @HiveField(2)  bool notificationsEnabled, @HiveField(3)  bool hapticsEnabled, @HiveField(5)  AppThemeMode themeMode, @HiveField(6)  String? localeCode, @HiveField(7)  int weekStart, @HiveField(8)  bool onboardingComplete, @HiveField(9)  bool appLockEnabled, @HiveField(10)  bool biometricUnlockEnabled)  $default,) {final _that = this;
 switch (_that) {
 case _Settings():
-return $default(_that.prayerTimes,_that.offsets,_that.notificationsEnabled,_that.hapticsEnabled,_that.pointsVisible,_that.themeMode,_that.localeCode,_that.weekStart,_that.onboardingComplete,_that.appLockEnabled,_that.biometricUnlockEnabled);case _:
+return $default(_that.prayerTimes,_that.offsets,_that.notificationsEnabled,_that.hapticsEnabled,_that.themeMode,_that.localeCode,_that.weekStart,_that.onboardingComplete,_that.appLockEnabled,_that.biometricUnlockEnabled);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -201,10 +200,10 @@ return $default(_that.prayerTimes,_that.offsets,_that.notificationsEnabled,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@HiveField(0)  Map<PrayerType, TimeOfDay> prayerTimes, @HiveField(1)  Map<PrayerType, int> offsets, @HiveField(2)  bool notificationsEnabled, @HiveField(3)  bool hapticsEnabled, @HiveField(4)  bool pointsVisible, @HiveField(5)  AppThemeMode themeMode, @HiveField(6)  String? localeCode, @HiveField(7)  int weekStart, @HiveField(8)  bool onboardingComplete, @HiveField(9)  bool appLockEnabled, @HiveField(10)  bool biometricUnlockEnabled)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@HiveField(0)  Map<PrayerType, TimeOfDay> prayerTimes, @HiveField(1)  Map<PrayerType, int> offsets, @HiveField(2)  bool notificationsEnabled, @HiveField(3)  bool hapticsEnabled, @HiveField(5)  AppThemeMode themeMode, @HiveField(6)  String? localeCode, @HiveField(7)  int weekStart, @HiveField(8)  bool onboardingComplete, @HiveField(9)  bool appLockEnabled, @HiveField(10)  bool biometricUnlockEnabled)?  $default,) {final _that = this;
 switch (_that) {
 case _Settings() when $default != null:
-return $default(_that.prayerTimes,_that.offsets,_that.notificationsEnabled,_that.hapticsEnabled,_that.pointsVisible,_that.themeMode,_that.localeCode,_that.weekStart,_that.onboardingComplete,_that.appLockEnabled,_that.biometricUnlockEnabled);case _:
+return $default(_that.prayerTimes,_that.offsets,_that.notificationsEnabled,_that.hapticsEnabled,_that.themeMode,_that.localeCode,_that.weekStart,_that.onboardingComplete,_that.appLockEnabled,_that.biometricUnlockEnabled);case _:
   return null;
 
 }
@@ -216,7 +215,7 @@ return $default(_that.prayerTimes,_that.offsets,_that.notificationsEnabled,_that
 
 
 class _Settings implements Settings {
-  const _Settings({@HiveField(0) required final  Map<PrayerType, TimeOfDay> prayerTimes, @HiveField(1) required final  Map<PrayerType, int> offsets, @HiveField(2) required this.notificationsEnabled, @HiveField(3) required this.hapticsEnabled, @HiveField(4) required this.pointsVisible, @HiveField(5) required this.themeMode, @HiveField(6) required this.localeCode, @HiveField(7) required this.weekStart, @HiveField(8) required this.onboardingComplete, @HiveField(9) required this.appLockEnabled, @HiveField(10) required this.biometricUnlockEnabled}): _prayerTimes = prayerTimes,_offsets = offsets;
+  const _Settings({@HiveField(0) required final  Map<PrayerType, TimeOfDay> prayerTimes, @HiveField(1) required final  Map<PrayerType, int> offsets, @HiveField(2) required this.notificationsEnabled, @HiveField(3) required this.hapticsEnabled, @HiveField(5) required this.themeMode, @HiveField(6) required this.localeCode, @HiveField(7) required this.weekStart, @HiveField(8) required this.onboardingComplete, @HiveField(9) required this.appLockEnabled, @HiveField(10) required this.biometricUnlockEnabled}): _prayerTimes = prayerTimes,_offsets = offsets;
   
 
  final  Map<PrayerType, TimeOfDay> _prayerTimes;
@@ -235,7 +234,6 @@ class _Settings implements Settings {
 
 @override@HiveField(2) final  bool notificationsEnabled;
 @override@HiveField(3) final  bool hapticsEnabled;
-@override@HiveField(4) final  bool pointsVisible;
 @override@HiveField(5) final  AppThemeMode themeMode;
 @override@HiveField(6) final  String? localeCode;
 @override@HiveField(7) final  int weekStart;
@@ -253,16 +251,16 @@ _$SettingsCopyWith<_Settings> get copyWith => __$SettingsCopyWithImpl<_Settings>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Settings&&const DeepCollectionEquality().equals(other._prayerTimes, _prayerTimes)&&const DeepCollectionEquality().equals(other._offsets, _offsets)&&(identical(other.notificationsEnabled, notificationsEnabled) || other.notificationsEnabled == notificationsEnabled)&&(identical(other.hapticsEnabled, hapticsEnabled) || other.hapticsEnabled == hapticsEnabled)&&(identical(other.pointsVisible, pointsVisible) || other.pointsVisible == pointsVisible)&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.localeCode, localeCode) || other.localeCode == localeCode)&&(identical(other.weekStart, weekStart) || other.weekStart == weekStart)&&(identical(other.onboardingComplete, onboardingComplete) || other.onboardingComplete == onboardingComplete)&&(identical(other.appLockEnabled, appLockEnabled) || other.appLockEnabled == appLockEnabled)&&(identical(other.biometricUnlockEnabled, biometricUnlockEnabled) || other.biometricUnlockEnabled == biometricUnlockEnabled));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Settings&&const DeepCollectionEquality().equals(other._prayerTimes, _prayerTimes)&&const DeepCollectionEquality().equals(other._offsets, _offsets)&&(identical(other.notificationsEnabled, notificationsEnabled) || other.notificationsEnabled == notificationsEnabled)&&(identical(other.hapticsEnabled, hapticsEnabled) || other.hapticsEnabled == hapticsEnabled)&&(identical(other.themeMode, themeMode) || other.themeMode == themeMode)&&(identical(other.localeCode, localeCode) || other.localeCode == localeCode)&&(identical(other.weekStart, weekStart) || other.weekStart == weekStart)&&(identical(other.onboardingComplete, onboardingComplete) || other.onboardingComplete == onboardingComplete)&&(identical(other.appLockEnabled, appLockEnabled) || other.appLockEnabled == appLockEnabled)&&(identical(other.biometricUnlockEnabled, biometricUnlockEnabled) || other.biometricUnlockEnabled == biometricUnlockEnabled));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_prayerTimes),const DeepCollectionEquality().hash(_offsets),notificationsEnabled,hapticsEnabled,pointsVisible,themeMode,localeCode,weekStart,onboardingComplete,appLockEnabled,biometricUnlockEnabled);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_prayerTimes),const DeepCollectionEquality().hash(_offsets),notificationsEnabled,hapticsEnabled,themeMode,localeCode,weekStart,onboardingComplete,appLockEnabled,biometricUnlockEnabled);
 
 @override
 String toString() {
-  return 'Settings(prayerTimes: $prayerTimes, offsets: $offsets, notificationsEnabled: $notificationsEnabled, hapticsEnabled: $hapticsEnabled, pointsVisible: $pointsVisible, themeMode: $themeMode, localeCode: $localeCode, weekStart: $weekStart, onboardingComplete: $onboardingComplete, appLockEnabled: $appLockEnabled, biometricUnlockEnabled: $biometricUnlockEnabled)';
+  return 'Settings(prayerTimes: $prayerTimes, offsets: $offsets, notificationsEnabled: $notificationsEnabled, hapticsEnabled: $hapticsEnabled, themeMode: $themeMode, localeCode: $localeCode, weekStart: $weekStart, onboardingComplete: $onboardingComplete, appLockEnabled: $appLockEnabled, biometricUnlockEnabled: $biometricUnlockEnabled)';
 }
 
 
@@ -273,7 +271,7 @@ abstract mixin class _$SettingsCopyWith<$Res> implements $SettingsCopyWith<$Res>
   factory _$SettingsCopyWith(_Settings value, $Res Function(_Settings) _then) = __$SettingsCopyWithImpl;
 @override @useResult
 $Res call({
-@HiveField(0) Map<PrayerType, TimeOfDay> prayerTimes,@HiveField(1) Map<PrayerType, int> offsets,@HiveField(2) bool notificationsEnabled,@HiveField(3) bool hapticsEnabled,@HiveField(4) bool pointsVisible,@HiveField(5) AppThemeMode themeMode,@HiveField(6) String? localeCode,@HiveField(7) int weekStart,@HiveField(8) bool onboardingComplete,@HiveField(9) bool appLockEnabled,@HiveField(10) bool biometricUnlockEnabled
+@HiveField(0) Map<PrayerType, TimeOfDay> prayerTimes,@HiveField(1) Map<PrayerType, int> offsets,@HiveField(2) bool notificationsEnabled,@HiveField(3) bool hapticsEnabled,@HiveField(5) AppThemeMode themeMode,@HiveField(6) String? localeCode,@HiveField(7) int weekStart,@HiveField(8) bool onboardingComplete,@HiveField(9) bool appLockEnabled,@HiveField(10) bool biometricUnlockEnabled
 });
 
 
@@ -290,13 +288,12 @@ class __$SettingsCopyWithImpl<$Res>
 
 /// Create a copy of Settings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? prayerTimes = null,Object? offsets = null,Object? notificationsEnabled = null,Object? hapticsEnabled = null,Object? pointsVisible = null,Object? themeMode = null,Object? localeCode = freezed,Object? weekStart = null,Object? onboardingComplete = null,Object? appLockEnabled = null,Object? biometricUnlockEnabled = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? prayerTimes = null,Object? offsets = null,Object? notificationsEnabled = null,Object? hapticsEnabled = null,Object? themeMode = null,Object? localeCode = freezed,Object? weekStart = null,Object? onboardingComplete = null,Object? appLockEnabled = null,Object? biometricUnlockEnabled = null,}) {
   return _then(_Settings(
 prayerTimes: null == prayerTimes ? _self._prayerTimes : prayerTimes // ignore: cast_nullable_to_non_nullable
 as Map<PrayerType, TimeOfDay>,offsets: null == offsets ? _self._offsets : offsets // ignore: cast_nullable_to_non_nullable
 as Map<PrayerType, int>,notificationsEnabled: null == notificationsEnabled ? _self.notificationsEnabled : notificationsEnabled // ignore: cast_nullable_to_non_nullable
 as bool,hapticsEnabled: null == hapticsEnabled ? _self.hapticsEnabled : hapticsEnabled // ignore: cast_nullable_to_non_nullable
-as bool,pointsVisible: null == pointsVisible ? _self.pointsVisible : pointsVisible // ignore: cast_nullable_to_non_nullable
 as bool,themeMode: null == themeMode ? _self.themeMode : themeMode // ignore: cast_nullable_to_non_nullable
 as AppThemeMode,localeCode: freezed == localeCode ? _self.localeCode : localeCode // ignore: cast_nullable_to_non_nullable
 as String?,weekStart: null == weekStart ? _self.weekStart : weekStart // ignore: cast_nullable_to_non_nullable

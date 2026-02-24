@@ -21,7 +21,6 @@ class SettingsAdapter extends TypeAdapter<Settings> {
       offsets: (fields[1] as Map).cast<PrayerType, int>(),
       notificationsEnabled: fields[2] as bool,
       hapticsEnabled: fields[3] as bool,
-      pointsVisible: fields[4] as bool,
       themeMode: fields[5] as AppThemeMode,
       localeCode: fields[6] as String?,
       weekStart: (fields[7] as num).toInt(),
@@ -34,7 +33,7 @@ class SettingsAdapter extends TypeAdapter<Settings> {
   @override
   void write(BinaryWriter writer, Settings obj) {
     writer
-      ..writeByte(11)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.prayerTimes)
       ..writeByte(1)
@@ -43,8 +42,6 @@ class SettingsAdapter extends TypeAdapter<Settings> {
       ..write(obj.notificationsEnabled)
       ..writeByte(3)
       ..write(obj.hapticsEnabled)
-      ..writeByte(4)
-      ..write(obj.pointsVisible)
       ..writeByte(5)
       ..write(obj.themeMode)
       ..writeByte(6)

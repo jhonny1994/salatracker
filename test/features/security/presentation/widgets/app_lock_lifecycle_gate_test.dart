@@ -34,14 +34,28 @@ void main() {
       ),
     );
 
-    await tester.pumpAndSettle();
-    expect(container.read(appLockControllerProvider), AppLockStatus.unlocked);
+    // Wait for async build — starts locked because appLock is enabled
+    await container.read(appLockControllerProvider.future);
+    expect(
+      container.read(appLockControllerProvider).value,
+      AppLockStatus.locked,
+    );
+
+    // Unlock the app, then verify it re-locks on resume
+    container.read(appLockControllerProvider.notifier).unlockApp();
+    expect(
+      container.read(appLockControllerProvider).value,
+      AppLockStatus.unlocked,
+    );
 
     tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.paused);
     tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
     await tester.pumpAndSettle();
 
-    expect(container.read(appLockControllerProvider), AppLockStatus.locked);
+    expect(
+      container.read(appLockControllerProvider).value,
+      AppLockStatus.locked,
+    );
   });
 
   testWidgets('does not lock when app lock is disabled', (tester) async {
@@ -56,7 +70,7 @@ void main() {
           ),
         ),
         securityRepositoryProvider.overrideWithValue(
-          _FakeSecurityRepository(hasPinValue: true),
+          _FakeSecurityRepository(hasPinValue: true, appLockEnabled: false),
         ),
       ],
     );
@@ -73,19 +87,28 @@ void main() {
       ),
     );
 
-    await tester.pumpAndSettle();
+    // Wait for async build — starts unlocked because appLock is disabled
+    await container.read(appLockControllerProvider.future);
+
     tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.paused);
     tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
     await tester.pumpAndSettle();
 
-    expect(container.read(appLockControllerProvider), AppLockStatus.unlocked);
+    expect(
+      container.read(appLockControllerProvider).value,
+      AppLockStatus.unlocked,
+    );
   });
 }
 
 class _FakeSecurityRepository implements SecurityRepository {
-  _FakeSecurityRepository({required this.hasPinValue});
+  _FakeSecurityRepository({
+    required this.hasPinValue,
+    this.appLockEnabled = true,
+  });
 
   final bool hasPinValue;
+  final bool appLockEnabled;
 
   @override
   Future<bool> authenticateWithBiometrics({required String reason}) async {
@@ -96,7 +119,7 @@ class _FakeSecurityRepository implements SecurityRepository {
   Future<bool> hasPin() async => hasPinValue;
 
   @override
-  Future<bool> isAppLockEnabled() async => true;
+  Future<bool> isAppLockEnabled() async => appLockEnabled;
 
   @override
   Future<bool> isBiometricsAvailable() async => false;

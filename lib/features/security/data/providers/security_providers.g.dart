@@ -303,14 +303,26 @@ String _$biometricsAvailableHash() =>
     r'f8b8b186bf16d811f6617711ca99977e9994d155';
 
 /// Controller for managing the application lock state.
+///
+/// On cold start, checks whether app lock is enabled and a PIN exists.
+/// If both conditions are met, the initial state is [AppLockStatus.locked],
+/// which causes the router to redirect to the lock screen immediately.
 
 @ProviderFor(AppLockController)
 final appLockControllerProvider = AppLockControllerProvider._();
 
 /// Controller for managing the application lock state.
+///
+/// On cold start, checks whether app lock is enabled and a PIN exists.
+/// If both conditions are met, the initial state is [AppLockStatus.locked],
+/// which causes the router to redirect to the lock screen immediately.
 final class AppLockControllerProvider
-    extends $NotifierProvider<AppLockController, AppLockStatus> {
+    extends $AsyncNotifierProvider<AppLockController, AppLockStatus> {
   /// Controller for managing the application lock state.
+  ///
+  /// On cold start, checks whether app lock is enabled and a PIN exists.
+  /// If both conditions are met, the initial state is [AppLockStatus.locked],
+  /// which causes the router to redirect to the lock screen immediately.
   AppLockControllerProvider._()
     : super(
         from: null,
@@ -328,31 +340,27 @@ final class AppLockControllerProvider
   @$internal
   @override
   AppLockController create() => AppLockController();
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(AppLockStatus value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<AppLockStatus>(value),
-    );
-  }
 }
 
-String _$appLockControllerHash() => r'fce10201e317dcb876689156794b0cf7522cb321';
+String _$appLockControllerHash() => r'294e37bb79aabd69301f22f599b091f638904e78';
 
 /// Controller for managing the application lock state.
+///
+/// On cold start, checks whether app lock is enabled and a PIN exists.
+/// If both conditions are met, the initial state is [AppLockStatus.locked],
+/// which causes the router to redirect to the lock screen immediately.
 
-abstract class _$AppLockController extends $Notifier<AppLockStatus> {
-  AppLockStatus build();
+abstract class _$AppLockController extends $AsyncNotifier<AppLockStatus> {
+  FutureOr<AppLockStatus> build();
   @$mustCallSuper
   @override
   void runBuild() {
-    final ref = this.ref as $Ref<AppLockStatus, AppLockStatus>;
+    final ref = this.ref as $Ref<AsyncValue<AppLockStatus>, AppLockStatus>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<AppLockStatus, AppLockStatus>,
-              AppLockStatus,
+              AnyNotifier<AsyncValue<AppLockStatus>, AppLockStatus>,
+              AsyncValue<AppLockStatus>,
               Object?,
               Object?
             >;
