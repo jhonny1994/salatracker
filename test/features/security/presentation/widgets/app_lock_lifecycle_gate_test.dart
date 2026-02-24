@@ -34,23 +34,31 @@ void main() {
       ),
     );
 
-    // Wait for async build — starts locked because appLock is enabled
+    // Wait for async build — starts locked on cold start because we
+    // provided hasPinValue: true and appLockEnabled: true.
     await container.read(appLockControllerProvider.future);
     expect(
       container.read(appLockControllerProvider).value,
       AppLockStatus.locked,
     );
 
-    // Unlock the app, then verify it re-locks on resume
-    container.read(appLockControllerProvider.notifier).unlockApp();
+    // Explicitly unlock it first to test the lifecycle gate
+    var currentTime = DateTime(2026);
+    container.read(appLockControllerProvider.notifier)
+      ..clock = (() => currentTime)
+      ..unlockApp();
     expect(
       container.read(appLockControllerProvider).value,
       AppLockStatus.unlocked,
     );
 
+    // Wait for the 2-second unlock grace period to expire
+    currentTime = currentTime.add(const Duration(seconds: 3));
+
+    // Simulate background — should lock immediately after the async check
     tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.paused);
-    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
-    await tester.pumpAndSettle();
+    // Let the event loop run and resolve `_lockIfNeeded` futures
+    await tester.pump(const Duration(milliseconds: 100));
 
     expect(
       container.read(appLockControllerProvider).value,
@@ -90,8 +98,8 @@ void main() {
     // Wait for async build — starts unlocked because appLock is disabled
     await container.read(appLockControllerProvider.future);
 
+    // Simulate background — should NOT lock
     tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.paused);
-    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
     await tester.pumpAndSettle();
 
     expect(

@@ -45,7 +45,7 @@ class TodayProgressCard extends StatelessWidget {
     };
 
     return AppSurfaceCard(
-      padding: const EdgeInsets.all(AppSpacing.xxl),
+      padding: const EdgeInsets.all(AppSpacing.xl),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -54,7 +54,7 @@ class TodayProgressCard extends StatelessWidget {
           Center(
             child: RepaintBoundary(
               child: CircularPercentIndicator(
-                radius: 80,
+                radius: 70,
                 lineWidth: 12,
                 percent: completionPercentage,
                 animation: true,

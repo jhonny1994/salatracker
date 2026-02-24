@@ -251,11 +251,25 @@ class SettingsScreen extends ConsumerWidget {
                                     context,
                                     title: l10n.settingsBiometricUnlock,
                                     value: settings.biometricUnlockEnabled,
-                                    onChanged: (value) => ref
-                                        .read(settingsProvider.notifier)
-                                        .updateBiometricUnlockEnabled(
-                                          enabled: value,
-                                        ),
+                                    onChanged: (value) async {
+                                      if (value) {
+                                        // Verify biometrics before enabling
+                                        final repo = ref.read(
+                                          securityRepositoryProvider,
+                                        );
+                                        final success = await repo
+                                            .authenticateWithBiometrics(
+                                              reason:
+                                                  l10n.securityBiometricReason,
+                                            );
+                                        if (!success) return;
+                                      }
+                                      await ref
+                                          .read(settingsProvider.notifier)
+                                          .updateBiometricUnlockEnabled(
+                                            enabled: value,
+                                          );
+                                    },
                                     l10n: l10n,
                                   )
                                 : null,
@@ -467,8 +481,8 @@ class SettingsScreen extends ConsumerWidget {
                         : theme.colorScheme.onSurfaceVariant,
                   ),
                   onTap: () {
-                    onChanged(true);
                     Navigator.of(dialogContext).pop();
+                    onChanged(true);
                   },
                 ),
                 ListTile(
@@ -482,8 +496,8 @@ class SettingsScreen extends ConsumerWidget {
                         : theme.colorScheme.onSurfaceVariant,
                   ),
                   onTap: () {
-                    onChanged(false);
                     Navigator.of(dialogContext).pop();
+                    onChanged(false);
                   },
                 ),
               ],

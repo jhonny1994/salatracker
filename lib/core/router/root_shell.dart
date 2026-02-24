@@ -27,15 +27,18 @@ class RootShell extends StatelessWidget {
         selectedIndex: navigationShell.currentIndex,
         destinations: [
           NavigationDestination(
-            icon: const Icon(Icons.today),
+            icon: const Icon(Icons.today_outlined),
+            selectedIcon: const Icon(Icons.today),
             label: S.of(context).navToday,
           ),
           NavigationDestination(
-            icon: const Icon(Icons.calendar_month),
+            icon: const Icon(Icons.calendar_month_outlined),
+            selectedIcon: const Icon(Icons.calendar_month),
             label: S.of(context).navCalendar,
           ),
           NavigationDestination(
-            icon: const Icon(Icons.settings),
+            icon: const Icon(Icons.settings_outlined),
+            selectedIcon: const Icon(Icons.settings),
             label: S.of(context).navSettings,
           ),
         ],

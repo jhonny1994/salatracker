@@ -304,25 +304,22 @@ String _$biometricsAvailableHash() =>
 
 /// Controller for managing the application lock state.
 ///
-/// On cold start, checks whether app lock is enabled and a PIN exists.
-/// If both conditions are met, the initial state is [AppLockStatus.locked],
-/// which causes the router to redirect to the lock screen immediately.
+/// Starts unlocked on cold start. The `AppLockLifecycleGate` handles
+/// locking the app when it resumes from background.
 
 @ProviderFor(AppLockController)
 final appLockControllerProvider = AppLockControllerProvider._();
 
 /// Controller for managing the application lock state.
 ///
-/// On cold start, checks whether app lock is enabled and a PIN exists.
-/// If both conditions are met, the initial state is [AppLockStatus.locked],
-/// which causes the router to redirect to the lock screen immediately.
+/// Starts unlocked on cold start. The `AppLockLifecycleGate` handles
+/// locking the app when it resumes from background.
 final class AppLockControllerProvider
     extends $AsyncNotifierProvider<AppLockController, AppLockStatus> {
   /// Controller for managing the application lock state.
   ///
-  /// On cold start, checks whether app lock is enabled and a PIN exists.
-  /// If both conditions are met, the initial state is [AppLockStatus.locked],
-  /// which causes the router to redirect to the lock screen immediately.
+  /// Starts unlocked on cold start. The `AppLockLifecycleGate` handles
+  /// locking the app when it resumes from background.
   AppLockControllerProvider._()
     : super(
         from: null,
@@ -342,13 +339,12 @@ final class AppLockControllerProvider
   AppLockController create() => AppLockController();
 }
 
-String _$appLockControllerHash() => r'294e37bb79aabd69301f22f599b091f638904e78';
+String _$appLockControllerHash() => r'4b3ddeccdf2f03a3f27661dd502161bdd7ac4d33';
 
 /// Controller for managing the application lock state.
 ///
-/// On cold start, checks whether app lock is enabled and a PIN exists.
-/// If both conditions are met, the initial state is [AppLockStatus.locked],
-/// which causes the router to redirect to the lock screen immediately.
+/// Starts unlocked on cold start. The `AppLockLifecycleGate` handles
+/// locking the app when it resumes from background.
 
 abstract class _$AppLockController extends $AsyncNotifier<AppLockStatus> {
   FutureOr<AppLockStatus> build();

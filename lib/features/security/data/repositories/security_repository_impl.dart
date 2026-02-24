@@ -144,7 +144,10 @@ class SecurityRepositoryImpl implements SecurityRepository {
     try {
       final canCheck = await _biometricAuthService.canCheckBiometrics();
       final isDeviceSupported = await _biometricAuthService.isDeviceSupported();
-      return canCheck && isDeviceSupported;
+      if (!canCheck || !isDeviceSupported) return false;
+
+      final enrolled = await _biometricAuthService.getAvailableBiometrics();
+      return enrolled.isNotEmpty;
     } on Exception catch (_) {
       return false;
     }

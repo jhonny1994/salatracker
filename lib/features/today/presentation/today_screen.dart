@@ -68,76 +68,81 @@ class _TodayScreenState extends ConsumerState<TodayScreen> {
               totalPrayers,
             );
 
-            return CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.all(AppSpacing.xl),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        const LocationContextBanner(
-                          padding: EdgeInsets.zero,
-                        ),
-                        const Gap(AppSpacing.lg),
-                        TodayProgressCard(
-                              completedCount: completedCount,
-                              totalPrayers: totalPrayers,
-                              completionPercentage: completionPercentage,
-                              points: prayerDay.points,
-                            )
-                            .animate()
-                            .fadeIn(duration: AppDurations.smooth)
-                            .slideY(
-                              begin: 0.1,
-                              end: 0,
-                              duration: AppDurations.smooth,
-                              curve: Curves.easeOut,
-                            ),
-                        const Gap(AppSpacing.lg),
-                        const TodayStreakCard(),
-                        const Gap(AppSpacing.lg),
-                        AppSectionHeader(
-                          title: l10n.navToday,
-                          subtitle: encouragementMessage,
-                        ),
-                        const Gap(AppSpacing.md),
-                      ],
+            return RefreshIndicator(
+              onRefresh: () async {
+                ref.invalidate(todayControllerProvider);
+              },
+              child: CustomScrollView(
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.all(AppSpacing.xl),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          const LocationContextBanner(
+                            padding: EdgeInsets.zero,
+                          ),
+                          const Gap(AppSpacing.lg),
+                          TodayProgressCard(
+                                completedCount: completedCount,
+                                totalPrayers: totalPrayers,
+                                completionPercentage: completionPercentage,
+                                points: prayerDay.points,
+                              )
+                              .animate()
+                              .fadeIn(duration: AppDurations.smooth)
+                              .slideY(
+                                begin: 0.1,
+                                end: 0,
+                                duration: AppDurations.smooth,
+                                curve: Curves.easeOut,
+                              ),
+                          const Gap(AppSpacing.lg),
+                          const TodayStreakCard(),
+                          const Gap(AppSpacing.lg),
+                          AppSectionHeader(
+                            title: l10n.navToday,
+                            subtitle: encouragementMessage,
+                          ),
+                          const Gap(AppSpacing.md),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                SliverPadding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.xl,
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.xl,
+                    ),
+                    sliver: SliverList.builder(
+                      itemCount: PrayerType.values.length,
+                      itemBuilder: (context, index) {
+                        final type = PrayerType.values[index];
+                        final isLogged = prayerDay.entries.any(
+                          (e) => e.type == type && e.isCompleted,
+                        );
+                        return PrayerListItem(
+                          key: ValueKey('prayer_${type.name}'),
+                          type: type,
+                          isLogged: isLogged,
+                          index: index,
+                        );
+                      },
+                    ),
                   ),
-                  sliver: SliverList.builder(
-                    itemCount: PrayerType.values.length,
-                    itemBuilder: (context, index) {
-                      final type = PrayerType.values[index];
-                      final isLogged = prayerDay.entries.any(
-                        (e) => e.type == type && e.isCompleted,
-                      );
-                      return PrayerListItem(
-                        key: ValueKey('prayer_${type.name}'),
-                        type: type,
-                        isLogged: isLogged,
-                        index: index,
-                      );
-                    },
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.all(AppSpacing.xl),
+                      child: completionPercentage == 1.0
+                          ? const TodayCelebrationCard()
+                          : const SizedBox.shrink(),
+                    ),
                   ),
-                ),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.all(AppSpacing.xl),
-                    child: completionPercentage == 1.0
-                        ? const TodayCelebrationCard()
-                        : const SizedBox.shrink(),
+                  const SliverPadding(
+                    padding: EdgeInsets.only(bottom: AppSpacing.xxl),
                   ),
-                ),
-                const SliverPadding(
-                  padding: EdgeInsets.only(bottom: AppSpacing.xxl),
-                ),
-              ],
+                ],
+              ),
             );
           },
         ),

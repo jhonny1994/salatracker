@@ -36,7 +36,7 @@ class PrayerListItem extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
-          padding: const EdgeInsets.only(bottom: AppSpacing.md),
+          padding: const EdgeInsets.only(bottom: AppSpacing.sm),
           child: _PrayerTile(
             type: type,
             isLogged: isLogged,

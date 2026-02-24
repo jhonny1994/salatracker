@@ -25,7 +25,34 @@ void main() {
 
       expect(
         container.read(appLockControllerProvider).value,
-        AppLockStatus.unlocked,
+        AppLockStatus.unlocked, // Unlocked because hasPinValue is false
+      );
+    });
+
+    test('starts locked when pin and settings exist', () async {
+      final container = ProviderContainer(
+        overrides: [
+          settingsRepositoryProvider.overrideWithValue(
+            _FakeSettingsRepository(
+              Settings.defaults().copyWith(
+                appLockEnabled: true,
+                onboardingComplete: true,
+              ),
+            ),
+          ),
+          securityRepositoryProvider.overrideWithValue(
+            _FakeSecurityRepository(hasPinValue: true),
+          ),
+        ],
+      );
+      addTearDown(container.dispose);
+
+      // Wait for async build to complete
+      await container.read(appLockControllerProvider.future);
+
+      expect(
+        container.read(appLockControllerProvider).value,
+        AppLockStatus.locked, // Locked because settings allow and pin exists
       );
     });
 
@@ -46,7 +73,9 @@ void main() {
 
       await container.read(appLockControllerProvider.future);
 
+      var currentTime = DateTime(2026);
       final notifier = container.read(appLockControllerProvider.notifier)
+        ..clock = (() => currentTime)
         ..lockApp();
       expect(
         container.read(appLockControllerProvider).value,
@@ -57,6 +86,22 @@ void main() {
       expect(
         container.read(appLockControllerProvider).value,
         AppLockStatus.unlocked,
+      );
+
+      // Attempting to lock immediately should be ignored due to grace period.
+      notifier.lockApp();
+      expect(
+        container.read(appLockControllerProvider).value,
+        AppLockStatus.unlocked,
+      );
+
+      // Wait for grace period to expire by advancing fake clock.
+      currentTime = currentTime.add(const Duration(seconds: 3));
+
+      notifier.lockApp();
+      expect(
+        container.read(appLockControllerProvider).value,
+        AppLockStatus.locked,
       );
     });
   });

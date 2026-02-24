@@ -14,7 +14,7 @@ class PointsCalculator {
     final completed = day.entries.where((entry) => entry.isCompleted).length;
     final basePoints = completed * 10;
     final dailyBonus = completed == day.entries.length && day.entries.isNotEmpty
-        ? 5
+        ? 50
         : 0;
     return basePoints + dailyBonus;
   }

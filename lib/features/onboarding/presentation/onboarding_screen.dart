@@ -38,7 +38,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
           unawaited(
             _pageController.animateToPage(
               index,
-              duration: const Duration(milliseconds: 300),
+              duration: AppDurations.smooth,
               curve: Curves.easeInOut,
             ),
           );
@@ -49,7 +49,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
 
     await _pageController.animateToPage(
       index,
-      duration: const Duration(milliseconds: 300),
+      duration: AppDurations.smooth,
       curve: Curves.easeInOut,
     );
   }

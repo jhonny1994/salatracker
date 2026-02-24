@@ -32,18 +32,13 @@ GoRouter appRouter(Ref ref) {
       final settingsAsync = ref.read(settingsProvider);
 
       // 1. Check App Lock status first
-      // Default to locked while loading (safe: prevents content flash)
-      final lockStatus = lockAsync.value ?? AppLockStatus.locked;
+      // Default to unlocked while loading (prevents lock screen flash)
+      final lockStatus = lockAsync.value ?? AppLockStatus.unlocked;
       final isLocked = lockStatus == AppLockStatus.locked;
       final onLockScreen = state.matchedLocation == '/lock';
 
       if (isLocked) {
         return onLockScreen ? null : '/lock';
-      }
-
-      if (onLockScreen && !isLocked) {
-        // If unlocked but still on lock screen, go to home
-        return '/today';
       }
 
       // 2. Check Onboarding status
@@ -58,6 +53,11 @@ GoRouter appRouter(Ref ref) {
 
       // Onboarding complete but on onboarding page: redirect to today
       if (onboardingComplete && isOnboarding) {
+        return '/today';
+      }
+
+      // Unlocked but still on lock screen: redirect to today
+      if (onLockScreen) {
         return '/today';
       }
 

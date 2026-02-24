@@ -34,7 +34,7 @@ void main() {
         points: 0,
       );
 
-      expect(calculator.forDay(day), 35);
+      expect(calculator.forDay(day), 80);
     });
 
     test('adds daily bonus when all entries are completed', () {
@@ -55,7 +55,7 @@ void main() {
         points: 0,
       );
 
-      expect(calculator.forDay(day), 55);
+      expect(calculator.forDay(day), 100);
     });
   });
 }

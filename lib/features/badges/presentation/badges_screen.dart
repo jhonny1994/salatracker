@@ -29,7 +29,7 @@ class BadgesScreen extends ConsumerWidget {
           }
 
           return ListView.separated(
-            padding: const EdgeInsets.all(AppSpacing.lg),
+            padding: const EdgeInsets.all(AppSpacing.xl),
             itemBuilder: (context, index) => BadgeTile(award: awards[index]),
             separatorBuilder: (context, index) => const Gap(AppSpacing.sm),
             itemCount: awards.length,

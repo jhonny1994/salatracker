@@ -17,9 +17,15 @@ class LocalAuthBiometricService implements BiometricAuthService {
   }
 
   @override
+  Future<List<BiometricType>> getAvailableBiometrics() {
+    return _localAuth.getAvailableBiometrics();
+  }
+
+  @override
   Future<bool> authenticate({required String localizedReason}) {
     return _localAuth.authenticate(
       localizedReason: localizedReason,
+      biometricOnly: true,
       persistAcrossBackgrounding: true,
     );
   }

@@ -100,13 +100,13 @@ class StatusChipTheme extends ThemeExtension<StatusChipTheme> {
 /// the Cairo font family, and status chip theme extension.
 class AppTheme {
   static const _fontFamily = 'Cairo';
-  static const _lightBackground = Color(0xFFECFEFF);
+  static const _lightBackground = Color(0xFFFAFAF5);
   static const _darkBackground = Color(0xFF0B2530);
   static const _lightSurface = Color(0xFFFFFFFF);
   static const _darkSurface = Color(0xFF102A36);
   static const _lightScheme = ColorScheme(
     brightness: Brightness.light,
-    primary: Color(0xFF0891B2),
+    primary: Color(0xFF0E7490),
     onPrimary: Color(0xFFFFFFFF),
     primaryContainer: Color(0xFFCFFAFE),
     onPrimaryContainer: Color(0xFF0E7490),
@@ -124,14 +124,14 @@ class AppTheme {
     onSurface: Color(0xFF164E63),
     surfaceContainerHighest: Color(0xFFE0F2FE),
     onSurfaceVariant: Color(0xFF155E75),
-    outline: Color(0xFF7DD3FC),
-    outlineVariant: Color(0xFFBAE6FD),
+    outline: Color(0xFF3589A0),
+    outlineVariant: Color(0xFF93CCDB),
     shadow: Color(0xFF000000),
     scrim: Color(0xFF000000),
     inverseSurface: Color(0xFF0B2530),
     onInverseSurface: Color(0xFFECFEFF),
     inversePrimary: Color(0xFF22D3EE),
-    surfaceTint: Color(0xFF0891B2),
+    surfaceTint: Color(0xFF0E7490),
   );
   static const _darkScheme = ColorScheme(
     brightness: Brightness.dark,
@@ -153,8 +153,8 @@ class AppTheme {
     onSurface: Color(0xFFECFEFF),
     surfaceContainerHighest: Color(0xFF123544),
     onSurfaceVariant: Color(0xFFBFE8F2),
-    outline: Color(0xFF2C6475),
-    outlineVariant: Color(0xFF1B4B5B),
+    outline: Color(0xFF548F9E),
+    outlineVariant: Color(0xFF2D5F6E),
     shadow: Color(0xFF000000),
     scrim: Color(0xFF000000),
     inverseSurface: Color(0xFFECFEFF),
@@ -207,10 +207,10 @@ class AppTheme {
           textStyle: textTheme.labelLarge,
           padding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.xl,
-            vertical: 14,
+            vertical: AppSpacing.md,
           ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(AppRadius.md),
           ),
         ),
       ),
@@ -238,6 +238,18 @@ class AppTheme {
 
   static TextTheme _textTheme(ColorScheme colorScheme) {
     return TextTheme(
+      displayLarge: TextStyle(
+        fontFamily: _fontFamily,
+        fontSize: 57,
+        fontWeight: FontWeight.w700,
+        color: colorScheme.onSurface,
+      ),
+      displayMedium: TextStyle(
+        fontFamily: _fontFamily,
+        fontSize: 45,
+        fontWeight: FontWeight.w700,
+        color: colorScheme.onSurface,
+      ),
       displaySmall: TextStyle(
         fontFamily: _fontFamily,
         fontSize: 36,
@@ -256,6 +268,12 @@ class AppTheme {
         fontWeight: FontWeight.w700,
         color: colorScheme.onSurface,
       ),
+      headlineSmall: TextStyle(
+        fontFamily: _fontFamily,
+        fontSize: 22,
+        fontWeight: FontWeight.w600,
+        color: colorScheme.onSurface,
+      ),
       titleLarge: TextStyle(
         fontFamily: _fontFamily,
         fontSize: 20,
@@ -266,6 +284,12 @@ class AppTheme {
         fontFamily: _fontFamily,
         fontSize: 18,
         fontWeight: FontWeight.w600,
+        color: colorScheme.onSurface,
+      ),
+      titleSmall: TextStyle(
+        fontFamily: _fontFamily,
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
         color: colorScheme.onSurface,
       ),
       bodyLarge: TextStyle(
@@ -282,6 +306,13 @@ class AppTheme {
         height: 1.6,
         color: colorScheme.onSurfaceVariant,
       ),
+      bodySmall: TextStyle(
+        fontFamily: _fontFamily,
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
+        height: 1.5,
+        color: colorScheme.onSurfaceVariant,
+      ),
       labelLarge: TextStyle(
         fontFamily: _fontFamily,
         fontSize: 14,
@@ -292,6 +323,12 @@ class AppTheme {
         fontFamily: _fontFamily,
         fontSize: 12,
         fontWeight: FontWeight.w600,
+        color: colorScheme.onSurfaceVariant,
+      ),
+      labelSmall: TextStyle(
+        fontFamily: _fontFamily,
+        fontSize: 11,
+        fontWeight: FontWeight.w500,
         color: colorScheme.onSurfaceVariant,
       ),
     );

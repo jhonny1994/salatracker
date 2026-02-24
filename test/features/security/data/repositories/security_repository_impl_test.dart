@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:salat_tracker/features/security/data/repositories/security_repository_impl.dart';
 import 'package:salat_tracker/features/security/data/services/services.dart';
 import 'package:salat_tracker/features/settings/settings.dart';
@@ -174,6 +175,14 @@ class _FakeBiometricAuthService implements BiometricAuthService {
   @override
   Future<bool> isDeviceSupported() async {
     return supported;
+  }
+
+  @override
+  Future<List<BiometricType>> getAvailableBiometrics() async {
+    if (canCheck) {
+      return [BiometricType.fingerprint];
+    }
+    return [];
   }
 }
 

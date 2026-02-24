@@ -36,7 +36,7 @@ class CalendarDayDetail extends ConsumerWidget {
     final points = prayerDay?.points ?? 0;
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(AppSpacing.lg),
+      padding: const EdgeInsets.all(AppSpacing.xl),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -111,9 +111,8 @@ class CalendarDayDetail extends ConsumerWidget {
                         l10n.calendarLoggedAt(entry.checkedAt!.toFormattedTime),
                       )
                     : null,
-                dense: true,
-                visualDensity: VisualDensity.compact,
                 onTap: () => _handleTap(context, ref, type, isCompleted),
+                minVerticalPadding: AppSpacing.sm,
               ),
             );
           }),

@@ -58,30 +58,68 @@ enum AppLockStatus {
 
 /// Controller for managing the application lock state.
 ///
-/// On cold start, checks whether app lock is enabled and a PIN exists.
-/// If both conditions are met, the initial state is [AppLockStatus.locked],
-/// which causes the router to redirect to the lock screen immediately.
+/// Starts unlocked on cold start. The `AppLockLifecycleGate` handles
+/// locking the app when it resumes from background.
 @Riverpod(keepAlive: true)
 class AppLockController extends _$AppLockController {
+  bool _suppressNextLock = false;
+  DateTime? _lastUnlockTime;
+
+  /// Visible for testing to mock system time for grace period checks.
+  DateTime Function() clock = DateTime.now;
+
   @override
   Future<AppLockStatus> build() async {
-    final repo = ref.read(securityRepositoryProvider);
-    final isEnabled = await repo.isAppLockEnabled();
-    final hasPin = await repo.hasPin();
+    final settings = await ref.read(settingsProvider.future);
+    if (!settings.onboardingComplete || !settings.appLockEnabled) {
+      return AppLockStatus.unlocked;
+    }
 
-    if (isEnabled && hasPin) {
+    final repository = ref.read(securityRepositoryProvider);
+    final hasPin = await repository.hasPin();
+
+    if (hasPin) {
       return AppLockStatus.locked;
     }
+
     return AppLockStatus.unlocked;
   }
 
+  /// Prevents the next [lockApp] call from taking effect.
+  ///
+  /// Used by the lock screen before triggering biometric auth, because
+  /// the system biometric dialog pauses the activity, which causes
+  /// AppLockLifecycleGate to see a false resume event.
+  void suppressNextLock() {
+    _suppressNextLock = true;
+  }
+
   /// Locks the application immediately.
+  ///
+  /// Ignores requests made within 2 seconds of the last unlock to prevent
+  /// race conditions with system biometric dialog closing.
   void lockApp() {
+    if (_suppressNextLock) {
+      _suppressNextLock = false;
+      return;
+    }
+
+    // Prevent immediate re-locking due to lifecycle events triggered by
+    // the system biometric dialog closing.
+    if (_lastUnlockTime != null) {
+      final diff = clock().difference(_lastUnlockTime!);
+      if (diff < const Duration(seconds: 2)) {
+        return;
+      }
+    }
+
     state = const AsyncData(AppLockStatus.locked);
   }
 
   /// Unlocks the application.
   void unlockApp() {
+    _suppressNextLock = false;
+    _lastUnlockTime = clock();
     state = const AsyncData(AppLockStatus.unlocked);
   }
 }

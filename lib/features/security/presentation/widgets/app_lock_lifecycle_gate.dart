@@ -18,8 +18,6 @@ class AppLockLifecycleGate extends ConsumerStatefulWidget {
 
 class _AppLockLifecycleGateState extends ConsumerState<AppLockLifecycleGate>
     with WidgetsBindingObserver {
-  bool _wasInBackground = false;
-
   @override
   void initState() {
     super.initState();
@@ -37,17 +35,11 @@ class _AppLockLifecycleGateState extends ConsumerState<AppLockLifecycleGate>
     if (state == AppLifecycleState.paused ||
         state == AppLifecycleState.inactive ||
         state == AppLifecycleState.hidden) {
-      _wasInBackground = true;
-      return;
-    }
-
-    if (state == AppLifecycleState.resumed && _wasInBackground) {
-      _wasInBackground = false;
-      unawaited(_lockIfNeededAfterResume());
+      unawaited(_lockIfNeeded());
     }
   }
 
-  Future<void> _lockIfNeededAfterResume() async {
+  Future<void> _lockIfNeeded() async {
     final settings = await ref.read(settingsProvider.future);
     if (!settings.onboardingComplete || !settings.appLockEnabled) {
       return;

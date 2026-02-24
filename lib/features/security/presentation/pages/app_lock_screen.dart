@@ -20,6 +20,7 @@ class AppLockScreen extends ConsumerStatefulWidget {
 class _AppLockScreenState extends ConsumerState<AppLockScreen> {
   bool _isError = false;
   bool _isBiometricsAvailable = false;
+  bool _isBiometricInProgress = false;
   Duration? _lockoutRemaining;
   Timer? _lockoutTimer;
 
@@ -50,7 +51,7 @@ class _AppLockScreenState extends ConsumerState<AppLockScreen> {
   }
 
   Future<void> _attemptBiometrics() async {
-    if (_lockoutRemaining != null) {
+    if (_isBiometricInProgress || _lockoutRemaining != null) {
       return;
     }
 
@@ -67,11 +68,19 @@ class _AppLockScreenState extends ConsumerState<AppLockScreen> {
     }
 
     if (await repo.isBiometricsAvailable()) {
-      final success = await repo.authenticateWithBiometrics(
-        reason: S.current.securityBiometricReason,
-      );
-      if (success && mounted) {
-        ref.read(appLockControllerProvider.notifier).unlockApp();
+      _isBiometricInProgress = true;
+      // Suppress the lifecycle gate from re-locking during the biometric
+      // dialog — Android pauses the activity when the system dialog appears.
+      ref.read(appLockControllerProvider.notifier).suppressNextLock();
+      try {
+        final success = await repo.authenticateWithBiometrics(
+          reason: S.current.securityBiometricReason,
+        );
+        if (success && mounted) {
+          ref.read(appLockControllerProvider.notifier).unlockApp();
+        }
+      } finally {
+        _isBiometricInProgress = false;
       }
     }
   }
@@ -151,7 +160,7 @@ class _AppLockScreenState extends ConsumerState<AppLockScreen> {
                   children: [
                     const Icon(
                       Icons.lock_outline_rounded,
-                      size: 64,
+                      size: AppIconSizes.hero,
                     ),
                     const Gap(AppSpacing.md),
                     Text(
