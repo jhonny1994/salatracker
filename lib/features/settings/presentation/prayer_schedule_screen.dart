@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gap/gap.dart';
 import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/features/prayer/prayer.dart';
 import 'package:salat_tracker/features/settings/settings.dart';
@@ -62,19 +61,16 @@ class PrayerScheduleScreen extends ConsumerWidget {
                   _getPrayerName(type, l10n),
                   style: theme.textTheme.titleMedium,
                 ),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
+                trailing: Wrap(
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  alignment: WrapAlignment.end,
+                  spacing: AppSpacing.sm,
                   children: [
                     if (settings.offsets[type] != 0)
-                      Padding(
-                        padding: const EdgeInsetsDirectional.only(
-                          end: AppSpacing.sm,
-                        ),
-                        child: Text(
-                          l10n.offsetMinutes(settings.offsets[type] ?? 0),
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color: theme.colorScheme.primary,
-                          ),
+                      Text(
+                        l10n.offsetMinutes(settings.offsets[type] ?? 0),
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.colorScheme.primary,
                         ),
                       ),
                     IconButton(
@@ -87,7 +83,6 @@ class PrayerScheduleScreen extends ConsumerWidget {
                         settings.offsets[type] ?? 0,
                       ),
                     ),
-                    const Gap(AppSpacing.sm),
                     AppStatusBadge(
                       label: time.format(context),
                       isPill: false,

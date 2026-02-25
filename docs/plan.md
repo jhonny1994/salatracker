@@ -25,7 +25,7 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 | **Gamification** | Progress > Streaks; reflective badges only |
 | **Theme** | Light/dark parity; no theme bias |
 | **minSdk** | Android 23 |
-| **Version** | 0.1.0+1 |
+| **Version** | 0.1.3+4 |
 
 ## Implementation Phases (Production Finalization)
 
@@ -209,6 +209,15 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 Phase 1 ─────────► Phase 2 ─────────► Phase 3 ─────────► Phase 4 ─────────► Phase 5 ─────────► Phase 6 ─────────► Phase 7 ─────────► Phase 8
 (Foundations)     (Data)             (Core UX)          (Advanced/Notif/Badges) (App Lock/Security) (Quality)       (Release)        (Go/No-Go)
 ```
+
+---
+
+## 🚀 Future Roadmap (Post v1.0)
+The following features are approved for implementation in subsequent major updates:
+
+1. **Home Screen Widgets**: Instantly view the next prayer time and your daily progress without opening the app.
+2. **Cloud Sync & Backup**: Secure, opt-in cloud synchronization (via Firebase/Supabase) to restore authentic prayer history across devices.
+3. **Qibla Compass**: A beautifully designed, minimalist Qibla direction finder.
 
 ---
 > **Next:** [tasks.md](tasks.md) for detailed checklist

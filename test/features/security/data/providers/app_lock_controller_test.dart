@@ -73,7 +73,7 @@ void main() {
 
       await container.read(appLockControllerProvider.future);
 
-      var currentTime = DateTime(2026);
+      final currentTime = DateTime(2026);
       final notifier = container.read(appLockControllerProvider.notifier)
         ..clock = (() => currentTime)
         ..lockApp();
@@ -88,16 +88,7 @@ void main() {
         AppLockStatus.unlocked,
       );
 
-      // Attempting to lock immediately should be ignored due to grace period.
-      notifier.lockApp();
-      expect(
-        container.read(appLockControllerProvider).value,
-        AppLockStatus.unlocked,
-      );
-
-      // Wait for grace period to expire by advancing fake clock.
-      currentTime = currentTime.add(const Duration(seconds: 3));
-
+      // Attempting to lock immediately should succeed now.
       notifier.lockApp();
       expect(
         container.read(appLockControllerProvider).value,

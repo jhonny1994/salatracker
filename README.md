@@ -30,6 +30,12 @@ Unlike modern habit trackers that rely on psychological anxiety or "shame langua
 * **Lock & Key:** Contains built-in App Lock (PIN and Biometric Unlock) to ensure your prayer history remains completely private, locking immediately upon device screen-off.
 * **No Telemetry:** We utilize `sentry` for strict crash reporting (if you opt-in), but all logs are completely PII-scrubbed. No behavioral tracking.
 
+## 🚀 Planned Features / Roadmap
+While the core offline tracker is complete and production-ready, we have several exciting features planned for future releases:
+* **Home Screen Widgets**: Instantly view the next prayer time and your daily progress without opening the app.
+* **Cloud Sync & Backup**: Secure, opt-in cloud synchronization (via Firebase/Supabase) to restore your authentic prayer history across devices.
+* **Qibla Compass**: A beautiful, minimalist Qibla direction finder integrated smoothly into the core application.
+
 ---
 
 ## 💻 For Developers & Contributors

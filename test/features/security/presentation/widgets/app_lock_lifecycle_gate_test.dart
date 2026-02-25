@@ -43,7 +43,7 @@ void main() {
     );
 
     // Explicitly unlock it first to test the lifecycle gate
-    var currentTime = DateTime(2026);
+    final currentTime = DateTime(2026);
     container.read(appLockControllerProvider.notifier)
       ..clock = (() => currentTime)
       ..unlockApp();
@@ -51,9 +51,6 @@ void main() {
       container.read(appLockControllerProvider).value,
       AppLockStatus.unlocked,
     );
-
-    // Wait for the 2-second unlock grace period to expire
-    currentTime = currentTime.add(const Duration(seconds: 3));
 
     // Simulate background — should lock immediately after the async check
     tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.paused);

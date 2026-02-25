@@ -252,6 +252,16 @@
 
 ---
 
+## Phase 9: Future Roadmap (v1.1+) ⬜
+
+> **Status:** Not Started
+
+- [ ] Design and implement Home Screen Widgets for iOS/Android.
+- [ ] Implement secure Cloud Sync (Firebase/Supabase) to backup and restore `Hive` data.
+- [ ] Implement Qibla Compass feature using device magnetometer and location.
+
+---
+
 ## Severity & Defect Policy
 
 - P0: crash, data loss, auth/lock bypass, severe notification malfunction. Must fix before release.

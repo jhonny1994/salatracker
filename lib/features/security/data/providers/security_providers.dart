@@ -63,7 +63,6 @@ enum AppLockStatus {
 @Riverpod(keepAlive: true)
 class AppLockController extends _$AppLockController {
   bool _suppressNextLock = false;
-  DateTime? _lastUnlockTime;
 
   /// Visible for testing to mock system time for grace period checks.
   DateTime Function() clock = DateTime.now;
@@ -104,22 +103,12 @@ class AppLockController extends _$AppLockController {
       return;
     }
 
-    // Prevent immediate re-locking due to lifecycle events triggered by
-    // the system biometric dialog closing.
-    if (_lastUnlockTime != null) {
-      final diff = clock().difference(_lastUnlockTime!);
-      if (diff < const Duration(seconds: 2)) {
-        return;
-      }
-    }
-
     state = const AsyncData(AppLockStatus.locked);
   }
 
   /// Unlocks the application.
   void unlockApp() {
     _suppressNextLock = false;
-    _lastUnlockTime = clock();
     state = const AsyncData(AppLockStatus.unlocked);
   }
 }

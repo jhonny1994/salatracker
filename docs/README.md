@@ -58,11 +58,11 @@ This directory contains enterprise-grade documentation for the Salat Tracker app
 | Phase 1 | ✅ Complete | Foundations (structure, routing, theme) |
 | Phase 2 | ✅ Complete | Data Layer (models, repositories, services) |
 | Phase 3 | ✅ Complete | Core UX (Today, Calendar, Settings) |
-| Phase 4 | 🔄 In Progress | Advanced features, notifications hardening, badges |
-| Phase 5 | 🔄 In Progress | App Lock + security hardening |
-| Phase 6 | 🔄 In Progress | Quality engineering |
-| Phase 7 | 🔄 In Progress | Release engineering and store readiness |
-| Phase 8 | ⬜ Not Started | Launch audit and go/no-go |
+| Phase 4 | ✅ Complete | Advanced features, notifications hardening, badges |
+| Phase 5 | ✅ Complete | App Lock + security hardening |
+| Phase 6 | ✅ Complete | Quality engineering |
+| Phase 7 | ✅ Complete | Release engineering and store readiness |
+| Phase 8 | ✅ Complete | Launch audit and go/no-go |
 
 ## Locked Decisions
 
@@ -81,6 +81,6 @@ These decisions are **final** and documented in [plan.md](plan.md):
 
 ## Versioning
 
-- **Docs version:** 1.4.0
-- **App version:** 0.1.0+1
-- **Last updated:** 2026-02-22
+- **Docs version:** 1.5.0
+- **App version:** 0.1.3+4
+- **Last updated:** 2026-02-25
