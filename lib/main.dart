@@ -67,6 +67,7 @@ class SalatTrackerApp extends ConsumerWidget {
       child: DynamicColorBuilder(
         builder: (lightDynamic, darkDynamic) {
           return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
             theme: AppTheme.light(dynamicScheme: lightDynamic),
             darkTheme: AppTheme.dark(dynamicScheme: darkDynamic),
             themeMode: themeMode,
