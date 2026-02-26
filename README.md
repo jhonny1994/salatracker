@@ -1,4 +1,6 @@
 <div align="center">
+  <img src="docs/assets/banner.png" alt="Salat Tracker Banner" width="100%">
+  <br><br>
   <h1>سجل الصلاة<br>Salat Tracker</h1>
   <p><strong>A calm, respectful, offline-first experience designed for consistency, reflection, and privacy.</strong></p>
   <p>
@@ -24,6 +26,36 @@ Unlike modern habit trackers that rely on psychological anxiety or "shame langua
 * **Calendar Reflection:** A comprehensive monthly overview highlighting your consistency. Supports retrospective day-editing.
 * **Smart Reminders:** Completely customizable notification offsets for each prayer, plus a supportive end-of-day reflection reminder, automatically synchronized with your local timezone coordinates.
 * **Premium UX:** Highly polished touch interactions including tactile micro-animations on cards, slick bottom navigation, and native Material 3 dialogs.
+
+## 📱 Screenshots
+
+<div align="center">
+  <table>
+    <tr>
+      <td><img src="docs/assets/screenshots/7%20today.png" height="400" alt="Today Dashboard"/></td>
+      <td><img src="docs/assets/screenshots/9%20calendar.png" height="400" alt="Calendar History"/></td>
+      <td><img src="docs/assets/screenshots/9%20settings.png" height="400" alt="Settings Screen"/></td>
+    </tr>
+    <tr>
+      <td align="center"><b>Today Dashboard</b></td>
+      <td align="center"><b>Calendar History</b></td>
+      <td align="center"><b>Settings</b></td>
+    </tr>
+  </table>
+  <br>
+  <table>
+    <tr>
+      <td><img src="docs/assets/screenshots/1%20welcome.png" height="400" alt="Serene Onboarding"/></td>
+      <td><img src="docs/assets/screenshots/11%20calendar%20arabic.png" height="400" alt="RTL Calendar"/></td>
+      <td><img src="docs/assets/screenshots/10%20today%20arabic.png" height="400" alt="RTL Dashboard"/></td>
+    </tr>
+    <tr>
+      <td align="center"><b>Serene Onboarding</b></td>
+      <td align="center"><b>Arabic (RTL) Calendar</b></td>
+      <td align="center"><b>Arabic Dashboard</b></td>
+    </tr>
+  </table>
+</div>
 
 ## 🔒 Privacy & Architecture
 * **Offline-First:** Your data is yours. The core experience operates entirely offline using internal resilient storage.
