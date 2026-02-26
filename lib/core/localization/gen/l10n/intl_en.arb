@@ -73,6 +73,8 @@
   "settingsResetPin": "Reset PIN",
   "settingsResetPinSubtitle": "Set a new app lock PIN",
   "settingsAbout": "About",
+  "settingsContactUs": "Contact Us",
+  "settingsContactUsSubtitle": "Reach out for support or feedback",
   "settingsAppVersion": "App Version",
   "settingsVersionLoading": "Loading...",
   "settingsPrivacyPolicy": "Privacy Policy",

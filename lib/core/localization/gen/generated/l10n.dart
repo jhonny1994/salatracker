@@ -384,6 +384,26 @@ class S {
     return Intl.message('حول', name: 'settingsAbout', desc: '', args: []);
   }
 
+  /// `اتصل بنا`
+  String get settingsContactUs {
+    return Intl.message(
+      'اتصل بنا',
+      name: 'settingsContactUs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تواصل معنا للحصول على الدعم أو إبداء رأيك`
+  String get settingsContactUsSubtitle {
+    return Intl.message(
+      'تواصل معنا للحصول على الدعم أو إبداء رأيك',
+      name: 'settingsContactUsSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `إصدار التطبيق`
   String get settingsAppVersion {
     return Intl.message(

@@ -101,3 +101,9 @@ For full architectural details, requirements, and design specifications, refer t
 - 🎨 [Design System](docs/design-system.md)
 - 🧠 [UX & Gamification Psychology](docs/ux-gamification-psychology.md)
 - 📜 [Engineering Rules](docs/rules.md)
+
+---
+
+## 📬 Contact & Support
+For feedback, issues, or suggestions, please contact:
+**[douadi.med.abderraouf@gmail.com](mailto:douadi.med.abderraouf@gmail.com)**

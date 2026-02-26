@@ -228,6 +228,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "settingsBiometricUnlockUnavailable": MessageLookupByLibrary.simpleMessage(
       "البصمة غير متاحة على هذا الجهاز",
     ),
+    "settingsContactUs": MessageLookupByLibrary.simpleMessage("اتصل بنا"),
+    "settingsContactUsSubtitle": MessageLookupByLibrary.simpleMessage(
+      "تواصل معنا للحصول على الدعم أو إبداء رأيك",
+    ),
     "settingsCurrentTimezone": MessageLookupByLibrary.simpleMessage(
       "المنطقة الزمنية الحالية",
     ),

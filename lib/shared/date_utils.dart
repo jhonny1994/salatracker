@@ -12,13 +12,13 @@ extension DateTimeX on DateTime {
     return year == other.year && month == other.month && day == other.day;
   }
 
-  /// Returns date in format "Month Day, Year" (e.g., "January 1, 2024")
+  /// Returns date in format "Month Day, Year" (e.g., "January 1, 2024").
   String get toFormattedDate {
     final formatted = DateFormat.yMMMMd().format(this);
     return formatted.toWesternDigits;
   }
 
-  /// Returns time in format "h:mm a" (e.g., "5:30 PM")
+  /// Returns time in format "h:mm a" (e.g., "5:30 PM").
   String get toFormattedTime {
     return DateFormat.jm().format(this);
   }

@@ -73,6 +73,8 @@
   "settingsResetPin": "إعادة تعيين رمز PIN",
   "settingsResetPinSubtitle": "تعيين رمز PIN جديد لقفل التطبيق",
   "settingsAbout": "حول",
+  "settingsContactUs": "اتصل بنا",
+  "settingsContactUsSubtitle": "تواصل معنا للحصول على الدعم أو إبداء رأيك",
   "settingsAppVersion": "إصدار التطبيق",
   "settingsVersionLoading": "جار التحميل...",
   "settingsPrivacyPolicy": "سياسة الخصوصية",

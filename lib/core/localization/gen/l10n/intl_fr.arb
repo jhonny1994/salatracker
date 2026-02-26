@@ -73,6 +73,8 @@
   "settingsResetPin": "Réinitialiser le PIN",
   "settingsResetPinSubtitle": "Définir un nouveau PIN de verrouillage",
   "settingsAbout": "À propos",
+  "settingsContactUs": "Nous contacter",
+  "settingsContactUsSubtitle": "Contactez-nous pour toute assistance",
   "settingsAppVersion": "Version de l'Application",
   "settingsVersionLoading": "Chargement...",
   "settingsPrivacyPolicy": "Politique de Confidentialité",

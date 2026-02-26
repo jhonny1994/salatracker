@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:salat_tracker/shared/design_constants.dart';
 
-/// A reusable pill-shaped badge component for indicating status, metrics,
+/// A reusable pill-shaped badge component for indicating status, metrics,.
 /// or state labels (e.g., 'Enabled', '14:30', '150 Points').
 ///
 /// Eliminates duplicate `Container` + `BoxDecoration` styling across the app.

@@ -1,104 +1,104 @@
-/// Design system constants following Material 3 guidelines and established
+/// Design system constants following Material 3 guidelines and established.
 /// mobile design patterns for high-quality visual consistency.
 library;
 
 abstract class AppSpacing {
-  /// 4px - Micro spacing
+  /// 4px - Micro spacing.
   static const double xs = 4;
 
-  /// 8px - Compact spacing
+  /// 8px - Compact spacing.
   static const double sm = 8;
 
-  /// 12px - Small spacing
+  /// 12px - Small spacing.
   static const double md = 12;
 
-  /// 16px - Base spacing unit
+  /// 16px - Base spacing unit.
   static const double lg = 16;
 
-  /// 20px - Medium spacing
+  /// 20px - Medium spacing.
   static const double xl = 20;
 
-  /// 24px - Large spacing
+  /// 24px - Large spacing.
   static const double xxl = 24;
 
-  /// 32px - Extra large spacing
+  /// 32px - Extra large spacing.
   static const double xxxl = 32;
 }
 
 abstract class AppTouchTargets {
-  /// Minimum touch target size (48px per Android Material 3)
+  /// Minimum touch target size (48px per Android Material 3).
   static const double minimum = 48;
 
-  /// Comfortable touch target for primary actions
+  /// Comfortable touch target for primary actions.
   static const double comfortable = 56;
 
-  /// Large touch target for critical actions
+  /// Large touch target for critical actions.
   static const double large = 64;
 
-  /// Checkbox/radio size (44px per iOS HIG)
+  /// Checkbox/radio size (44px per iOS HIG).
   static const double checkbox = 44;
 }
 
 abstract class AppRadius {
-  /// 4px - Minimal rounding
+  /// 4px - Minimal rounding.
   static const double xs = 4;
 
-  /// 8px - Small rounding
+  /// 8px - Small rounding.
   static const double sm = 8;
 
-  /// 12px - Medium rounding
+  /// 12px - Medium rounding.
   static const double md = 12;
 
-  /// 16px - Base card radius (Material 3)
+  /// 16px - Base card radius (Material 3).
   static const double lg = 16;
 
-  /// 20px - Large rounding (chips, badges)
+  /// 20px - Large rounding (chips, badges).
   static const double xl = 20;
 
-  /// 28px - Extra large (bottom sheets)
+  /// 28px - Extra large (bottom sheets).
   static const double xxl = 28;
 }
 
 abstract class AppDurations {
-  /// 150ms - Fast micro-animations
+  /// 150ms - Fast micro-animations.
   static const Duration fast = Duration(milliseconds: 150);
 
-  /// 200ms - Default UI transitions
+  /// 200ms - Default UI transitions.
   static const Duration normal = Duration(milliseconds: 200);
 
-  /// 300ms - Smooth transitions
+  /// 300ms - Smooth transitions.
   static const Duration smooth = Duration(milliseconds: 300);
 
-  /// 500ms - Deliberate animations
+  /// 500ms - Deliberate animations.
   static const Duration slow = Duration(milliseconds: 500);
 
-  /// 800ms - Progress indicators
+  /// 800ms - Progress indicators.
   static const Duration progress = Duration(milliseconds: 800);
 }
 
 abstract class AppIconSizes {
-  /// 16px - Small inline icons
+  /// 16px - Small inline icons.
   static const double xs = 16;
 
-  /// 18px - Compact icons
+  /// 18px - Compact icons.
   static const double sm = 18;
 
-  /// 20px - Default icon size
+  /// 20px - Default icon size.
   static const double md = 20;
 
-  /// 24px - Standard icon size (Material 3)
+  /// 24px - Standard icon size (Material 3).
   static const double lg = 24;
 
-  /// 28px - Large icons
+  /// 28px - Large icons.
   static const double xl = 28;
 
-  /// 64px - Hero icons
+  /// 64px - Hero icons.
   static const double hero = 64;
 
-  /// 100px - Display icons (onboarding, empty states)
+  /// 100px - Display icons (onboarding, empty states).
   static const double display = 100;
 
-  /// 120px - Large display icons (welcome screens)
+  /// 120px - Large display icons (welcome screens).
   static const double displayLarge = 120;
 }
 

@@ -12,8 +12,9 @@ import 'package:salat_tracker/features/settings/domain/models/app_theme_mode.dar
 import 'package:salat_tracker/features/settings/presentation/prayer_schedule_screen.dart';
 import 'package:salat_tracker/features/settings/presentation/widgets/widgets.dart';
 import 'package:salat_tracker/shared/shared.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-/// Main settings screen allowing users to configure theme, language, and
+/// Main settings screen allowing users to configure theme, language, and.
 /// application preferences.
 ///
 /// Follows the "Settings" pattern with grouped sections and platform-adaptive
@@ -357,6 +358,11 @@ class SettingsScreen extends ConsumerWidget {
                     child: Column(
                       children: [
                         _buildVersionTile(l10n),
+                        const Divider(
+                          height: 1,
+                          indent: AppTouchTargets.comfortable,
+                        ),
+                        _buildContactTile(l10n),
                       ],
                     ),
                   ),
@@ -523,6 +529,24 @@ class SettingsScreen extends ConsumerWidget {
           subtitle: subtitle,
           trailing: const SizedBox.shrink(),
         );
+      },
+    );
+  }
+
+  Widget _buildContactTile(S l10n) {
+    return SettingsTile(
+      icon: Icons.mail_outline,
+      title: l10n.settingsContactUs,
+      subtitle: l10n.settingsContactUsSubtitle,
+      onTap: () async {
+        final uri = Uri(
+          scheme: 'mailto',
+          path: AppConstants.supportEmail,
+          query: 'subject=${Uri.encodeComponent(AppConstants.feedbackSubject)}',
+        );
+        if (await canLaunchUrl(uri)) {
+          await launchUrl(uri);
+        }
       },
     );
   }

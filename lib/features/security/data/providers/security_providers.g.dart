@@ -339,7 +339,7 @@ final class AppLockControllerProvider
   AppLockController create() => AppLockController();
 }
 
-String _$appLockControllerHash() => r'4b3ddeccdf2f03a3f27661dd502161bdd7ac4d33';
+String _$appLockControllerHash() => r'74fedbbf6c47eb5e455aced075d6aa226568dcbf';
 
 /// Controller for managing the application lock state.
 ///

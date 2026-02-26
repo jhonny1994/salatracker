@@ -230,6 +230,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "settingsBiometricUnlockUnavailable": MessageLookupByLibrary.simpleMessage(
       "Biometrics unavailable on this device",
     ),
+    "settingsContactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
+    "settingsContactUsSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Reach out for support or feedback",
+    ),
     "settingsCurrentTimezone": MessageLookupByLibrary.simpleMessage(
       "Current Time Zone",
     ),

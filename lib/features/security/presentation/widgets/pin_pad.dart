@@ -6,7 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:pinput/pinput.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
-/// A secure PIN pad widget using [Pinput] for display and a
+/// A secure PIN pad widget using [Pinput] for display and a.
 /// custom numeric keypad.
 class PinPad extends StatefulWidget {
   const PinPad({
