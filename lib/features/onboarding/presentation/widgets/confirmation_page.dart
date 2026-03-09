@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:salat_tracker/core/core.dart';
-import 'package:salat_tracker/features/onboarding/data/providers/onboarding_providers.dart';
-import 'package:salat_tracker/features/onboarding/presentation/widgets/onboarding_step_scaffold.dart';
+import 'package:salat_tracker/features/onboarding/onboarding.dart';
 import 'package:salat_tracker/features/prayer/prayer.dart';
 import 'package:salat_tracker/features/settings/settings.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
 /// Confirmation page - final step before completing onboarding.
-class ConfirmationPage extends ConsumerWidget {
+class ConfirmationPage extends ConsumerStatefulWidget {
   /// Creates a [ConfirmationPage].
   const ConfirmationPage({
     required this.onComplete,
@@ -17,33 +16,62 @@ class ConfirmationPage extends ConsumerWidget {
   });
 
   /// Callback when user taps Get Started.
-  final VoidCallback onComplete;
+  final Future<void> Function() onComplete;
 
   /// Callback when user taps Back.
   final VoidCallback onBack;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConfirmationPage> createState() => _ConfirmationPageState();
+}
+
+class _ConfirmationPageState extends ConsumerState<ConfirmationPage> {
+  bool _submitting = false;
+
+  Future<void> _submit() async {
+    setState(() => _submitting = true);
+    final l10n = S.of(context);
+
+    try {
+      final prayerTimes = ref.read(onboardingPrayerTimesProvider);
+      final lateReminderTime = ref.read(onboardingLateReminderTimeProvider);
+
+      await ref
+          .read(settingsProvider.notifier)
+          .applyOnboardingConfiguration(
+            prayerTimes: prayerTimes,
+            lateReminderTime: lateReminderTime,
+          );
+      await widget.onComplete();
+    } on Object {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l10n.errorLoadingSettings)));
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _submitting = false);
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = S.of(context);
     final prayerTimes = ref.watch(onboardingPrayerTimesProvider);
+    final lateReminderTime = ref.watch(onboardingLateReminderTimeProvider);
+
     return OnboardingStepScaffold(
       icon: Icons.check_circle_outline,
       title: l10n.onboardingConfirmTitle,
       body: l10n.onboardingConfirmBody,
       primaryLabel: l10n.onboardingGetStarted,
-      onPrimary: () async {
-        for (final entry in prayerTimes.entries) {
-          await ref
-              .read(settingsProvider.notifier)
-              .updatePrayerTime(
-                type: entry.key,
-                time: entry.value,
-              );
-        }
-        onComplete();
-      },
+      onPrimary: _submitting ? null : _submit,
       backLabel: l10n.onboardingBack,
-      onBack: onBack,
+      onBack: widget.onBack,
+      isBusy: _submitting,
+      busyLabel: l10n.generalLoading,
       content: AppSurfaceCard(
         padding: const EdgeInsets.all(AppSpacing.md),
         child: ListView(
@@ -59,6 +87,15 @@ class ConfirmationPage extends ConsumerWidget {
                 trailing: Text(time.format(context)),
               );
             }),
+            const Divider(),
+            AppSectionHeader(title: l10n.settingsDailyReminders),
+            const Divider(),
+            ListTile(
+              dense: true,
+              title: Text(l10n.onboardingLateReminderTitle),
+              subtitle: Text(l10n.dailyReminderBody),
+              trailing: Text(lateReminderTime.format(context)),
+            ),
           ],
         ),
       ),

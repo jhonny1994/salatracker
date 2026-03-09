@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_ce/hive.dart';
-import 'package:salat_tracker/features/badges/domain/models/badge_type.dart';
+import 'package:salat_tracker/features/badges/badges.dart';
 
 part 'badge_award.freezed.dart';
 part 'badge_award.g.dart';

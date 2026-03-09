@@ -1,6 +1,7 @@
 {
   "@@locale": "en",
   "appTitle": "Salat Tracker",
+  "generalLoading": "Loading...",
   "generalYes": "Enabled",
   "generalNo": "Disabled",
   "navToday": "Today",
@@ -117,8 +118,38 @@
   "historyEditWarningBody": "Changing past records may affect your streak and points.",
   "actionCancel": "Cancel",
   "actionContinue": "Continue",
+  "actionRemove": "Remove",
   "settingsReminderOffset": "Reminder Offset",
   "settingsReminderOffsetSubtitle": "Adjust when you get notified",
+  "settingsReminderOffsetFor": "Reminder Offset - {prayer}",
+  "@settingsReminderOffsetFor": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsDailyReminders": "Daily Reminders",
+  "settingsDailyRemindersSubtitle": "Add late-day check-ins in your own rhythm",
+  "settingsDailyRemindersEmpty": "No daily reminders yet.",
+  "settingsAddDailyReminder": "Add Reminder",
+  "settingsReminderDuplicateTime": "You already have a reminder at this time.",
+  "settingsCurrentTimezoneValue": "Current Time Zone: {value}",
+  "@settingsCurrentTimezoneValue": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsDailyReminderLabel": "Reminder {number}",
+  "@settingsDailyReminderLabel": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
   "offsetMinutes": "{minutes} min",
   "@offsetMinutes": {
     "placeholders": {
@@ -149,6 +180,16 @@
   },
   "notificationChannelName": "Prayer Notifications",
   "notificationChannelDescription": "Notifications for prayer times",
+  "dailyReminderTitle": "Prayer Check-in",
+  "dailyReminderBody": "Have you prayed today?",
+  "dailyReminderTileSubtitle": "Have you prayed today? ({time})",
+  "@dailyReminderTileSubtitle": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "endOfDayTitle": "Daily Reflection",
   "endOfDayBody": "Did you complete all your prayers today?",
   "onboardingWelcomeTitle": "Welcome to Salat Tracker",
@@ -160,6 +201,21 @@
   "onboardingPrayerTimesBody": "Configure when each prayer time begins.",
   "onboardingNotificationsTitle": "Stay on Track",
   "onboardingNotificationsBody": "Would you like friendly reminders?",
+  "onboardingLocationPermissionDenied": "Location stays off for now. You can continue or choose Maybe Later.",
+  "onboardingNotificationsPermissionDenied": "Notifications stay off for now. You can enable them later in Settings.",
+  "onboardingLateReminderTitle": "Late-day reminder",
+  "onboardingLateReminderBody": "Choose a time for your daily check-in.",
+  "onboardingProgress": "Step {current} of {total}",
+  "@onboardingProgress": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "onboardingAppLockTitle": "Protect Your Privacy",
   "onboardingAppLockBody": "Secure your prayer log with biometrics or PIN.",
   "onboardingConfirmTitle": "You're All Set",
@@ -186,6 +242,23 @@
   "settingsBiometricUnlockUnavailable": "Biometrics unavailable on this device",
   "settingsCurrentTimezone": "Current Time Zone",
   "settingsCurrentTimezoneUnavailable": "Time zone unavailable",
+  "settingsCurrentTimezoneValue": "Current Time Zone: {value}",
+  "@settingsCurrentTimezoneValue": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsReminderOffsetFor": "Reminder Offset - {prayer}",
+  "@settingsReminderOffsetFor": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsReminderDuplicateTime": "You already have a reminder at this time.",
   "securityLockoutSeconds": "Try again in {seconds}s",
   "@securityLockoutSeconds": {
     "placeholders": {
@@ -211,5 +284,24 @@
   "badgeMonthCompleteName": "Month Complete",
   "badgeMonthCompleteDescription": "Reached 90% completion in a month.",
   "badgeSeasonChampionName": "Season Champion",
-  "badgeSeasonChampionDescription": "Reached 80% completion in 3 months."
+  "badgeSeasonChampionDescription": "Reached 80% completion in 3 months.",
+  "dailyReminderTileSubtitle": "Have you prayed today? ({time})",
+  "@dailyReminderTileSubtitle": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "onboardingProgress": "Step {current} of {total}",
+  "@onboardingProgress": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  }
 }

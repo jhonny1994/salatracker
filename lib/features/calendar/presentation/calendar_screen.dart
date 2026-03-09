@@ -33,19 +33,32 @@ class CalendarScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: calendarState.when(
-        loading: () => const Column(
+      body: AppAsyncValue(
+        value: calendarState,
+        errorTitle: l10n.errorLoadingCalendar,
+        errorMessage: l10n.calendarStreamRetry,
+        loading: (_) => const Column(
           children: [
             Gap(AppSpacing.md),
             LocationContextBanner(),
-            Expanded(child: CalendarLoadingState()),
+            Expanded(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
           ],
         ),
-        error: (error, _) => const Column(
+        error: (_, _) => Column(
           children: [
-            Gap(AppSpacing.md),
-            LocationContextBanner(),
-            Expanded(child: CalendarErrorState()),
+            const Gap(AppSpacing.md),
+            const LocationContextBanner(),
+            Expanded(
+              child: AppEmptyState(
+                icon: Icons.error_outline,
+                title: l10n.errorLoadingCalendar,
+                message: l10n.calendarStreamRetry,
+              ),
+            ),
           ],
         ),
         data: (prayerDays) => Column(

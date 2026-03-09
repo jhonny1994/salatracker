@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:salat_tracker/core/core.dart';
-import 'package:salat_tracker/features/onboarding/data/providers/onboarding_providers.dart';
-import 'package:salat_tracker/features/onboarding/presentation/widgets/onboarding_step_scaffold.dart';
+import 'package:salat_tracker/features/onboarding/onboarding.dart';
 import 'package:salat_tracker/features/prayer/prayer.dart';
 import 'package:salat_tracker/shared/shared.dart';
 

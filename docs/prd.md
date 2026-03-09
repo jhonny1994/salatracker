@@ -29,7 +29,7 @@
 - As a user, I can see streaks and points for motivation.
 - As a user, I can edit past days if I forgot to log.
 - As a user, I can view a calendar of completion status.
-- As a user, I can receive reminders and an end-of-day summary.
+- As a user, I can receive prayer reminders and configurable daily check-in reminders.
 - As a user, I can protect access using biometrics or PIN.
 
 ## Functional Requirements
@@ -41,7 +41,8 @@
 - Calendar month view with status (complete/partial/not logged)
 - History editing with streak recalculation
 - Notifications with per-prayer offsets
-- End-of-day reminder default Isha + 2 hours (editable)
+- Daily reminders list with time + enabled controls
+- Onboarding lets users pick the initial late-day reminder time
 - Notifications are opt-in during onboarding; tone is supportive, no shame language
 - App Lock enabled via onboarding, biometrics + PIN fallback
 - PIN UI uses OTP-style 6-digit cells for lock/setup/reset experiences
@@ -65,7 +66,7 @@
 
 ## Build and Runtime Configuration
 - Android minSdk: 23
-- Version: 0.1.0+1
+- Version: 0.1.4+6
 - Sentry DSN via env file using flutter_dotenv
 
 ## Non-Functional Requirements
@@ -78,8 +79,8 @@
 ## Settings
 - Prayer times per prayer
 - Reminder offsets per prayer
-- End-of-day reminder time
-- Notifications per prayer + daily summary toggle (opt-in by default)
+- Daily reminders list (add/remove, time, enable/disable)
+- Notifications per prayer + daily reminders (opt-in by default)
 - Haptics and vibration toggle
 - Points display toggle (show/hide)
 - Language selector (supportedLocales)

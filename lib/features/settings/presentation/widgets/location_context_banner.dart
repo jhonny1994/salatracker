@@ -21,7 +21,7 @@ class LocationContextBanner extends ConsumerWidget {
 
     final subtitle = locationState.when(
       data: (value) => value.displayLabel,
-      loading: () => '...',
+      loading: () => l10n.generalLoading,
       error: (_, _) => l10n.settingsCurrentTimezoneUnavailable,
     );
 
@@ -38,9 +38,9 @@ class LocationContextBanner extends ConsumerWidget {
             const Gap(AppSpacing.sm),
             Expanded(
               child: Text(
-                '${l10n.settingsCurrentTimezone}: $subtitle',
+                l10n.settingsCurrentTimezoneValue(subtitle),
                 maxLines: 2,
-                overflow: TextOverflow.visible,
+                overflow: TextOverflow.ellipsis,
                 style: theme.textTheme.bodyMedium,
               ),
             ),

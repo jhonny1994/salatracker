@@ -1,4 +1,4 @@
-import 'package:salat_tracker/features/badges/domain/models/badge_award.dart';
+import 'package:salat_tracker/features/badges/badges.dart';
 
 abstract class BadgeRepository {
   Future<List<BadgeAward>> fetchAwards();

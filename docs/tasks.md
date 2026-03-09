@@ -22,7 +22,7 @@
 | Phase 3: Core UX | 10/10 | ✅ Complete |
 | Phase 4: Advanced Features + Notifications + Badges | 27/27 | ✅ Complete |
 | Phase 5: App Lock & Security Hardening | 15/15 | ✅ Complete |
-| Phase 6: Quality Engineering | 16/16 | ✅ Complete |
+| Phase 6: Quality Engineering | 14/16 | 🔄 In Progress |
 | Phase 7: Release Engineering & Store Readiness | 12/12 | ✅ Complete |
 | Phase 8: Launch Audit & Go/No-Go | 8/8 | ✅ Complete |
 
@@ -122,7 +122,7 @@
 
 ### Notifications Reliability
 - [x] Schedule per-prayer reminders.
-- [x] End-of-day reminder (Isha + 2 hours default).
+- [x] Daily reminders list (time + enabled) with onboarding-selected initial late-day reminder.
 - [x] Reschedule on timezone/settings changes.
 - [x] Handle notification permissions (Android 13+).
 - [x] Deep-link from notification to Today screen.
@@ -173,7 +173,7 @@
 ### Validation
 - [x] Unit tests for security repository and lock policy decisions.
 - [x] Widget tests for lock screen interactions.
-- [x] Integration tests for lifecycle lock behavior.
+- [ ] Integration tests for lifecycle lock behavior.
 
 ---
 
@@ -189,8 +189,8 @@
 - [x] Widget tests: Today interactions (toggle/progress).
 - [x] Widget tests: Calendar day detail and history edits.
 - [x] Widget tests: Settings toggles and selectors.
-- [x] Widget tests: Onboarding full path (including lock setup).
-- [x] Integration smoke tests: first launch -> onboarding -> logging -> calendar -> lock -> notification deep-link.
+- [ ] Widget tests: Onboarding full path (including lock setup).
+- [ ] Integration smoke tests: first launch -> onboarding -> logging -> calendar -> lock -> notification deep-link.
 - [x] RTL layout verification tests.
 - [x] Fix forward chevron direction for settings tiles in RTL.
 - [x] EN/AR/FR localization completeness checks.

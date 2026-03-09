@@ -1,6 +1,4 @@
-import 'package:salat_tracker/features/badges/data/datasources/badge_local_data_source.dart';
-import 'package:salat_tracker/features/badges/domain/models/badge_award.dart';
-import 'package:salat_tracker/features/badges/domain/repositories/badge_repository.dart';
+import 'package:salat_tracker/features/badges/badges.dart';
 
 class BadgeRepositoryImpl implements BadgeRepository {
   BadgeRepositoryImpl(this._localDataSource);

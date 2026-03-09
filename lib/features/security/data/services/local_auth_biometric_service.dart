@@ -1,5 +1,5 @@
 import 'package:local_auth/local_auth.dart';
-import 'package:salat_tracker/features/security/data/services/biometric_auth_service.dart';
+import 'package:salat_tracker/features/security/security.dart';
 
 class LocalAuthBiometricService implements BiometricAuthService {
   LocalAuthBiometricService(this._localAuth);

@@ -1,7 +1,5 @@
-import 'package:hive_ce_flutter/hive_flutter.dart';
-import 'package:salat_tracker/core/storage/adapters/time_of_day_adapter.dart';
-import 'package:salat_tracker/features/badges/domain/models/badge_award.dart';
-import 'package:salat_tracker/features/badges/domain/models/badge_type.dart';
+import 'package:hive_ce_flutter/adapters.dart';
+import 'package:salat_tracker/features/badges/badges.dart';
 import 'package:salat_tracker/features/prayer/prayer.dart';
 import 'package:salat_tracker/features/settings/settings.dart';
 
@@ -33,8 +31,8 @@ class HiveService {
     if (!Hive.isAdapterRegistered(PrayerTypeAdapter().typeId)) {
       Hive.registerAdapter(PrayerTypeAdapter());
     }
-    if (!Hive.isAdapterRegistered(TimeOfDayAdapter().typeId)) {
-      Hive.registerAdapter(TimeOfDayAdapter());
+    if (!Hive.isAdapterRegistered(const TimeOfDayAdapter().typeId)) {
+      Hive.registerAdapter(const TimeOfDayAdapter());
     }
     if (!Hive.isAdapterRegistered(PrayerEntryAdapter().typeId)) {
       Hive.registerAdapter(PrayerEntryAdapter());
@@ -44,6 +42,9 @@ class HiveService {
     }
     if (!Hive.isAdapterRegistered(AppThemeModeAdapter().typeId)) {
       Hive.registerAdapter(AppThemeModeAdapter());
+    }
+    if (!Hive.isAdapterRegistered(DailyReminderConfigAdapter().typeId)) {
+      Hive.registerAdapter(DailyReminderConfigAdapter());
     }
     if (!Hive.isAdapterRegistered(SettingsAdapter().typeId)) {
       Hive.registerAdapter(SettingsAdapter());

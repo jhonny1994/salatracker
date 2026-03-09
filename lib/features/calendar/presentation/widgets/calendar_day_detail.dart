@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:salat_tracker/core/core.dart';
-import 'package:salat_tracker/features/calendar/application/history_controller.dart';
 import 'package:salat_tracker/features/calendar/calendar.dart';
 import 'package:salat_tracker/features/prayer/prayer.dart';
 import 'package:salat_tracker/shared/shared.dart';

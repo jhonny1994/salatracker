@@ -1,5 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:salat_tracker/features/security/data/services/secure_key_value_store.dart';
+import 'package:salat_tracker/features/security/security.dart';
 
 class FlutterSecureKeyValueStore implements SecureKeyValueStore {
   FlutterSecureKeyValueStore(this._secureStorage);

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/features/onboarding/onboarding.dart';
 import 'package:salat_tracker/features/settings/settings.dart';
 import 'package:salat_tracker/shared/shared.dart';
@@ -82,30 +83,41 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
         child: Column(
           children: [
             // Progress indicator
-            Padding(
-              padding: const EdgeInsets.all(AppSpacing.lg),
-              child: Row(
-                children: OnboardingStep.values.asMap().entries.map((entry) {
-                  final isActive = entry.key <= stepIndex;
-                  return Expanded(
-                    child: Container(
-                      height: 4,
-                      margin: EdgeInsetsDirectional.only(
-                        end: entry.key < OnboardingStep.values.length - 1
-                            ? AppSpacing.xs
-                            : 0,
+            Semantics(
+              label: S
+                  .of(
+                    context,
+                  )
+                  .onboardingProgress(
+                    stepIndex + 1,
+                    OnboardingStep.values.length,
+                  ),
+              readOnly: true,
+              child: Padding(
+                padding: const EdgeInsets.all(AppSpacing.lg),
+                child: Row(
+                  children: OnboardingStep.values.asMap().entries.map((entry) {
+                    final isActive = entry.key <= stepIndex;
+                    return Expanded(
+                      child: Container(
+                        height: 4,
+                        margin: EdgeInsetsDirectional.only(
+                          end: entry.key < OnboardingStep.values.length - 1
+                              ? AppSpacing.xs
+                              : 0,
+                        ),
+                        decoration: BoxDecoration(
+                          color: isActive
+                              ? Theme.of(context).colorScheme.primary
+                              : Theme.of(
+                                  context,
+                                ).colorScheme.surfaceContainerHighest,
+                          borderRadius: BorderRadius.circular(AppRadius.xs),
+                        ),
                       ),
-                      decoration: BoxDecoration(
-                        color: isActive
-                            ? Theme.of(context).colorScheme.primary
-                            : Theme.of(
-                                context,
-                              ).colorScheme.surfaceContainerHighest,
-                        borderRadius: BorderRadius.circular(AppRadius.xs),
-                      ),
-                    ),
-                  );
-                }).toList(),
+                    );
+                  }).toList(),
+                ),
               ),
             ),
 
@@ -124,7 +136,15 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                     onBack: () => unawaited(_goToPage(0)),
                   ),
                   PrayerTimesPage(
-                    onNext: () => unawaited(_goToPage(3)),
+                    onNext: () {
+                      final prayerTimes = ref.read(
+                        onboardingPrayerTimesProvider,
+                      );
+                      ref
+                          .read(onboardingLateReminderTimeProvider.notifier)
+                          .syncSuggestedFromPrayerTimes(prayerTimes);
+                      unawaited(_goToPage(3));
+                    },
                     onBack: () => unawaited(_goToPage(1)),
                   ),
                   NotificationsPage(

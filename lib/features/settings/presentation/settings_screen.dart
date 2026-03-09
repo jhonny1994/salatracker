@@ -3,14 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/features/badges/badges.dart';
 import 'package:salat_tracker/features/security/security.dart';
-import 'package:salat_tracker/features/settings/data/providers/settings_providers.dart';
-import 'package:salat_tracker/features/settings/domain/models/app_theme_mode.dart';
-import 'package:salat_tracker/features/settings/presentation/prayer_schedule_screen.dart';
-import 'package:salat_tracker/features/settings/presentation/widgets/widgets.dart';
+import 'package:salat_tracker/features/settings/settings.dart';
 import 'package:salat_tracker/shared/shared.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -29,9 +27,10 @@ class SettingsScreen extends ConsumerWidget {
     final biometricsAvailableAsync = ref.watch(biometricsAvailableProvider);
 
     return Scaffold(
-      body: settingsState.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, _) => SettingsErrorState(l10n: l10n),
+      body: AppAsyncValue(
+        value: settingsState,
+        errorTitle: l10n.errorLoadingSettings,
+        retry: () => ref.invalidate(settingsProvider),
         data: (settings) => CustomScrollView(
           slivers: [
             SliverAppBar.large(
@@ -143,10 +142,11 @@ class SettingsScreen extends ConsumerWidget {
                           icon: Icons.access_time_filled,
                           title: l10n.settingsPrayerSchedule,
                           subtitle: l10n.settingsPrayerScheduleSubtitle,
-                          onTap: () => Navigator.of(context).push(
-                            MaterialPageRoute<void>(
-                              builder: (_) => const PrayerScheduleScreen(),
-                            ),
+                          onTap: () => _openRoute(
+                            context,
+                            path: '/settings/prayer-schedule',
+                            fallbackBuilder: (_) =>
+                                const PrayerScheduleScreen(),
                           ),
                         ),
                         const Divider(
@@ -157,10 +157,10 @@ class SettingsScreen extends ConsumerWidget {
                           icon: Icons.emoji_events_outlined,
                           title: l10n.settingsBadges,
                           subtitle: l10n.settingsBadgesSubtitle,
-                          onTap: () => Navigator.of(context).push(
-                            MaterialPageRoute<void>(
-                              builder: (_) => const BadgesScreen(),
-                            ),
+                          onTap: () => _openRoute(
+                            context,
+                            path: '/settings/badges',
+                            fallbackBuilder: (_) => const BadgesScreen(),
                           ),
                         ),
                         const Divider(
@@ -184,6 +184,21 @@ class SettingsScreen extends ConsumerWidget {
                                 .read(settingsProvider.notifier)
                                 .toggleNotifications(enabled: value),
                             l10n: l10n,
+                          ),
+                        ),
+                        const Divider(
+                          height: 1,
+                          indent: AppTouchTargets.comfortable,
+                        ),
+                        SettingsTile(
+                          icon: Icons.nightlight_round_outlined,
+                          title: l10n.settingsDailyReminders,
+                          subtitle: l10n.settingsDailyRemindersSubtitle,
+                          onTap: () => _openRoute(
+                            context,
+                            path: '/settings/daily-reminders',
+                            fallbackBuilder: (_) =>
+                                const DailyRemindersScreen(),
                           ),
                         ),
                         const Divider(
@@ -548,6 +563,24 @@ class SettingsScreen extends ConsumerWidget {
           await launchUrl(uri);
         }
       },
+    );
+  }
+
+  void _openRoute(
+    BuildContext context, {
+    required String path,
+    required WidgetBuilder fallbackBuilder,
+  }) {
+    final router = GoRouter.maybeOf(context);
+    if (router != null) {
+      unawaited(context.push(path));
+      return;
+    }
+
+    unawaited(
+      Navigator.of(context).push<void>(
+        MaterialPageRoute<void>(builder: fallbackBuilder),
+      ),
     );
   }
 }

@@ -14,23 +14,21 @@ class TodayLoadingState extends StatelessWidget {
     return Shimmer.fromColors(
       baseColor: theme.colorScheme.surfaceContainerHighest,
       highlightColor: theme.colorScheme.surface,
-      child: const Padding(
-        padding: EdgeInsets.all(AppSpacing.xl),
-        child: Column(
-          children: [
-            _ShimmerBox(height: 280),
-            Gap(AppSpacing.xxl),
-            _ShimmerBox(height: 72),
-            Gap(AppSpacing.md),
-            _ShimmerBox(height: 72),
-            Gap(AppSpacing.md),
-            _ShimmerBox(height: 72),
-            Gap(AppSpacing.md),
-            _ShimmerBox(height: 72),
-            Gap(AppSpacing.md),
-            _ShimmerBox(height: 72),
-          ],
-        ),
+      child: ListView(
+        padding: const EdgeInsets.all(AppSpacing.xl),
+        children: const [
+          _ShimmerBox(height: 280),
+          Gap(AppSpacing.xxl),
+          _ShimmerBox(height: 72),
+          Gap(AppSpacing.md),
+          _ShimmerBox(height: 72),
+          Gap(AppSpacing.md),
+          _ShimmerBox(height: 72),
+          Gap(AppSpacing.md),
+          _ShimmerBox(height: 72),
+          Gap(AppSpacing.md),
+          _ShimmerBox(height: 72),
+        ],
       ),
     );
   }

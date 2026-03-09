@@ -36,7 +36,7 @@ class _OffsetPickerDialogState extends State<OffsetPickerDialog> {
   Widget build(BuildContext context) {
     final l10n = S.of(context);
     return AlertDialog(
-      title: Text('${l10n.settingsReminderOffset} - ${widget.title}'),
+      title: Text(l10n.settingsReminderOffsetFor(widget.title)),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

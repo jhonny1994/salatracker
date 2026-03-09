@@ -132,3 +132,63 @@ abstract class _$OnboardingPrayerTimes
     element.handleCreate(ref, build);
   }
 }
+
+/// Tracks the suggested late reminder time during onboarding.
+
+@ProviderFor(OnboardingLateReminderTime)
+final onboardingLateReminderTimeProvider =
+    OnboardingLateReminderTimeProvider._();
+
+/// Tracks the suggested late reminder time during onboarding.
+final class OnboardingLateReminderTimeProvider
+    extends $NotifierProvider<OnboardingLateReminderTime, TimeOfDay> {
+  /// Tracks the suggested late reminder time during onboarding.
+  OnboardingLateReminderTimeProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'onboardingLateReminderTimeProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$onboardingLateReminderTimeHash();
+
+  @$internal
+  @override
+  OnboardingLateReminderTime create() => OnboardingLateReminderTime();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(TimeOfDay value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<TimeOfDay>(value),
+    );
+  }
+}
+
+String _$onboardingLateReminderTimeHash() =>
+    r'd35a82de722fa75ca6b84fdd58d7282c51da673a';
+
+/// Tracks the suggested late reminder time during onboarding.
+
+abstract class _$OnboardingLateReminderTime extends $Notifier<TimeOfDay> {
+  TimeOfDay build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref = this.ref as $Ref<TimeOfDay, TimeOfDay>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<TimeOfDay, TimeOfDay>,
+              TimeOfDay,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}

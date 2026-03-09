@@ -15,7 +15,7 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 | **Architecture** | Feature-first + clean layers |
 | **State** | Riverpod 3 + Freezed 3 |
 | **Storage** | Hive CE (no encryption for v1) |
-| **Notifications** | Per-prayer offsets + end-of-day (Isha +2h) |
+| **Notifications** | Per-prayer offsets + configurable daily reminders list |
 | **Location Display** | GPS+API resolved context (`geolocator` + `timeapi.io` + `geocoding`) with cache/device/UTC fallback |
 | **App Lock** | Biometrics + PIN; trigger only after screen-off/device-lock background->resume path |
 | **Analytics** | Sentry (free tier) |
@@ -25,7 +25,7 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 | **Gamification** | Progress > Streaks; reflective badges only |
 | **Theme** | Light/dark parity; no theme bias |
 | **minSdk** | Android 23 |
-| **Version** | 0.1.3+4 |
+| **Version** | 0.1.4+6 |
 
 ## Implementation Phases (Production Finalization)
 
@@ -83,7 +83,8 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 
 #### Completed
 - [x] Schedule 5 daily reminders with per-prayer offsets
-- [x] End-of-day reminder at Isha + 2 hours (editable)
+- [x] Replace single end-of-day reminder with configurable daily reminders list
+- [x] Add onboarding late-day reminder time selection
 - [x] Handle permissions (Android 13+), timezone/settings rescheduling
 - [x] Notification tap deep-links to Today screen
 - [x] Show user-facing timezone label in Prayer Schedule (city + UTC offset when derivable)
@@ -133,7 +134,7 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 - [x] Add lockout/backoff policy for repeated invalid PIN attempts
 - [x] Add unit tests for lock behavior
 - [x] Add widget tests for lock behavior
-- [x] Add integration tests for lifecycle lock behavior
+- [ ] Add integration tests for lifecycle lock behavior
 - [x] Add settings credential reset flow
 - [x] Document best-effort iOS behavior and edge cases
 
@@ -150,7 +151,7 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 - [x] Unit tests: streak, points, prayer repository, settings repository
 - [x] Unit tests: security policy and notifications schedule
 - [ ] Widget tests: Today, Calendar details, Settings selectors, Onboarding + lock setup
-- [x] Integration smoke tests: first launch -> onboarding -> logging -> calendar -> lock -> notification deep-link
+- [ ] Integration smoke tests: first launch -> onboarding -> logging -> calendar -> lock -> notification deep-link
 - [x] RTL and localization verification (EN/AR/FR)
 - [x] Enforce analyzer/format gates in CI
 - [x] Enforce coverage threshold in CI

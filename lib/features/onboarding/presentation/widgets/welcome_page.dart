@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:salat_tracker/core/core.dart';
-import 'package:salat_tracker/features/onboarding/presentation/widgets/onboarding_step_scaffold.dart';
+import 'package:salat_tracker/features/onboarding/onboarding.dart';
 
 /// Welcome page - first step of onboarding.
 class WelcomePage extends StatelessWidget {

@@ -1,5 +1,4 @@
-import 'package:salat_tracker/features/badges/domain/models/badge_award.dart';
-import 'package:salat_tracker/features/badges/domain/models/badge_type.dart';
+import 'package:salat_tracker/features/badges/badges.dart';
 import 'package:salat_tracker/features/prayer/prayer.dart';
 import 'package:salat_tracker/shared/shared.dart';
 

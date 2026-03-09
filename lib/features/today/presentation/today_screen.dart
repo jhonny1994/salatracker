@@ -51,9 +51,10 @@ class _TodayScreenState extends ConsumerState<TodayScreen> {
 
     return Scaffold(
       body: SafeArea(
-        child: todayState.when(
-          loading: () => const TodayLoadingState(),
-          error: (error, stack) => TodayErrorState(
+        child: AppAsyncValue(
+          value: todayState,
+          loading: (_) => const TodayLoadingState(),
+          error: (_, _) => TodayErrorState(
             onRetry: () => ref.invalidate(todayControllerProvider),
           ),
           data: (prayerDay) {

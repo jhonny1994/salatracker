@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_ce/hive.dart';
@@ -25,7 +27,9 @@ abstract class Settings with _$Settings {
     @HiveField(8) required bool onboardingComplete,
     @HiveField(9) required bool appLockEnabled,
     @HiveField(10) required bool biometricUnlockEnabled,
+    @HiveField(11) List<DailyReminderConfig>? dailyReminders,
   }) = _Settings;
+  const Settings._();
 
   factory Settings.defaults() {
     // Standard defaults (can be overridden by user)
@@ -52,6 +56,51 @@ abstract class Settings with _$Settings {
       onboardingComplete: false,
       appLockEnabled: false,
       biometricUnlockEnabled: true,
+      dailyReminders: [DailyReminderConfig.defaultReminder],
     );
+  }
+
+  List<DailyReminderConfig> get effectiveDailyReminders {
+    final reminders =
+        dailyReminders ?? const [DailyReminderConfig.defaultReminder];
+    return normalizeDailyReminders(reminders);
+  }
+
+  int get nextDailyReminderId {
+    final reminders = effectiveDailyReminders;
+    if (reminders.isEmpty) {
+      return DailyReminderConfig.defaultReminderId;
+    }
+
+    var maxId = reminders.first.id;
+    for (final reminder in reminders.skip(1)) {
+      if (reminder.id > maxId) {
+        maxId = reminder.id;
+      }
+    }
+    return maxId + 1;
+  }
+
+  static List<DailyReminderConfig> normalizeDailyReminders(
+    Iterable<DailyReminderConfig> reminders,
+  ) {
+    final seenTimes = <int>{};
+    final unique = <DailyReminderConfig>[];
+
+    for (final reminder in reminders) {
+      if (seenTimes.add(reminder.totalMinutes)) {
+        unique.add(reminder);
+      }
+    }
+
+    unique.sort((a, b) {
+      final timeCompare = a.totalMinutes.compareTo(b.totalMinutes);
+      if (timeCompare != 0) {
+        return timeCompare;
+      }
+      return a.id.compareTo(b.id);
+    });
+
+    return UnmodifiableListView(unique);
   }
 }

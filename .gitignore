@@ -42,6 +42,8 @@ ios/Flutter/Flutter.podspec
 # Opencode skills
 .opencode/
 .agent/
+.agents/
+skills-lock.json
 
 # Secrets
 config.json

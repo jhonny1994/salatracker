@@ -1,5 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:salat_tracker/core/notifications/notification_service.dart';
+import 'package:salat_tracker/core/core.dart';
 
 part 'notification_provider.g.dart';
 

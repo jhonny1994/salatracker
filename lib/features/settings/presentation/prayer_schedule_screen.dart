@@ -24,9 +24,10 @@ class PrayerScheduleScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(l10n.settingsPrayerSchedule),
       ),
-      body: settingsState.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, _) => SettingsErrorState(l10n: l10n),
+      body: AppAsyncValue(
+        value: settingsState,
+        errorTitle: l10n.errorLoadingSettings,
+        retry: () => ref.invalidate(settingsProvider),
         data: (settings) {
           return ListView.separated(
             padding: const EdgeInsets.all(AppSpacing.xl),
@@ -36,7 +37,7 @@ class PrayerScheduleScreen extends ConsumerWidget {
               if (index == 0) {
                 final timezoneLabel = locationState.when(
                   data: (value) => value.displayLabel,
-                  loading: () => '...',
+                  loading: () => l10n.generalLoading,
                   error: (_, _) => l10n.settingsCurrentTimezoneUnavailable,
                 );
 

@@ -120,6 +120,8 @@ Future<String> appVersion(Ref ref) async {
 class SettingsNotifier extends _$SettingsNotifier {
   bool _didBootstrapNotifications = false;
   bool _isSchedulingNotifications = false;
+  bool _schedulePending = false;
+  Settings? _latestSchedulingRequest;
 
   @override
   Future<Settings> build() async {
@@ -150,6 +152,11 @@ class SettingsNotifier extends _$SettingsNotifier {
       final current = await future;
       final updated = current.copyWith(localeCode: code);
       await repository.saveSettings(updated);
+
+      if (updated.notificationsEnabled) {
+        await _scheduleForSettings(updated);
+      }
+
       return updated;
     });
   }
@@ -196,6 +203,105 @@ class SettingsNotifier extends _$SettingsNotifier {
       updatedOffsets[type] = offsetMinutes;
 
       final updated = current.copyWith(offsets: updatedOffsets);
+      await repository.saveSettings(updated);
+
+      if (updated.notificationsEnabled) {
+        await _scheduleForSettings(updated);
+      }
+
+      return updated;
+    });
+  }
+
+  Future<void> addDailyReminder({required TimeOfDay time}) async {
+    final repository = ref.read(settingsRepositoryProvider);
+    state = await AsyncValue.guard(() async {
+      final current = await future;
+      final updatedReminders = [
+        ...current.effectiveDailyReminders,
+        DailyReminderConfig(
+          id: current.nextDailyReminderId,
+          time: time,
+          enabled: true,
+        ),
+      ];
+
+      final updated = current.copyWith(dailyReminders: updatedReminders);
+      await repository.saveSettings(updated);
+
+      if (updated.notificationsEnabled) {
+        await _scheduleForSettings(updated);
+      }
+
+      return updated;
+    });
+  }
+
+  Future<void> updateDailyReminderTime({
+    required int reminderId,
+    required TimeOfDay time,
+  }) async {
+    final repository = ref.read(settingsRepositoryProvider);
+    state = await AsyncValue.guard(() async {
+      final current = await future;
+      final updatedReminders = Settings.normalizeDailyReminders(
+        current.effectiveDailyReminders
+            .map((reminder) {
+              if (reminder.id != reminderId) {
+                return reminder;
+              }
+              return reminder.copyWith(time: time);
+            })
+            .toList(growable: false),
+      );
+
+      final updated = current.copyWith(dailyReminders: updatedReminders);
+      await repository.saveSettings(updated);
+
+      if (updated.notificationsEnabled) {
+        await _scheduleForSettings(updated);
+      }
+
+      return updated;
+    });
+  }
+
+  Future<void> toggleDailyReminder({
+    required int reminderId,
+    required bool enabled,
+  }) async {
+    final repository = ref.read(settingsRepositoryProvider);
+    state = await AsyncValue.guard(() async {
+      final current = await future;
+      final updatedReminders = current.effectiveDailyReminders
+          .map((reminder) {
+            if (reminder.id != reminderId) {
+              return reminder;
+            }
+            return reminder.copyWith(enabled: enabled);
+          })
+          .toList(growable: false);
+
+      final updated = current.copyWith(dailyReminders: updatedReminders);
+      await repository.saveSettings(updated);
+
+      if (updated.notificationsEnabled) {
+        await _scheduleForSettings(updated);
+      }
+
+      return updated;
+    });
+  }
+
+  Future<void> removeDailyReminder({required int reminderId}) async {
+    final repository = ref.read(settingsRepositoryProvider);
+    state = await AsyncValue.guard(() async {
+      final current = await future;
+      final updatedReminders = current.effectiveDailyReminders
+          .where((reminder) => reminder.id != reminderId)
+          .toList(growable: false);
+
+      final updated = current.copyWith(dailyReminders: updatedReminders);
       await repository.saveSettings(updated);
 
       if (updated.notificationsEnabled) {
@@ -281,57 +387,102 @@ class SettingsNotifier extends _$SettingsNotifier {
     );
   }
 
+  Future<void> applyOnboardingConfiguration({
+    required Map<PrayerType, TimeOfDay> prayerTimes,
+    required TimeOfDay lateReminderTime,
+  }) async {
+    final repository = ref.read(settingsRepositoryProvider);
+    state = await AsyncValue.guard(() async {
+      final current = await future;
+      final firstReminderId = current.effectiveDailyReminders.isEmpty
+          ? DailyReminderConfig.defaultReminderId
+          : current.effectiveDailyReminders.first.id;
+      final updated = current.copyWith(
+        prayerTimes: Map<PrayerType, TimeOfDay>.from(prayerTimes),
+        dailyReminders: Settings.normalizeDailyReminders([
+          DailyReminderConfig(
+            id: firstReminderId,
+            time: lateReminderTime,
+            enabled: true,
+          ),
+        ]),
+      );
+      await repository.saveSettings(updated);
+
+      if (updated.notificationsEnabled) {
+        await _scheduleForSettings(updated);
+      }
+
+      return updated;
+    });
+  }
+
   Future<void> _scheduleForSettings(Settings currentSettings) async {
+    _latestSchedulingRequest = currentSettings;
     if (_isSchedulingNotifications) {
+      _schedulePending = true;
       return;
     }
     _isSchedulingNotifications = true;
 
-    final notificationService = ref.read(notificationServiceProvider);
-    final planner = ref.read(notificationSchedulePlannerProvider);
-    LocationContext? locationContext;
     try {
-      locationContext = await ref.read(locationContextNotifierProvider.future);
-    } on Object {
-      locationContext = null;
-    }
+      while (true) {
+        final settingsToSchedule = _latestSchedulingRequest ?? currentSettings;
+        _schedulePending = false;
 
-    try {
-      await notificationService.cancelAll();
-      await notificationService.refreshTimezone(
-        preferredTimezoneId: locationContext?.timezoneId,
-      );
-      final now = DateTime.now();
-      final schedule = planner.buildDailySchedule(
-        settings: currentSettings,
-        now: now,
-      );
+        final notificationService = ref.read(notificationServiceProvider);
+        final planner = ref.read(notificationSchedulePlannerProvider);
+        LocationContext? locationContext;
+        try {
+          locationContext = await ref.read(
+            locationContextNotifierProvider.future,
+          );
+        } on Object {
+          locationContext = null;
+        }
 
-      for (final item in schedule) {
-        final s = S.current;
-        if (item.isEndOfDay) {
-          await notificationService.schedulePrayer(
-            id: item.id,
-            title: s.endOfDayTitle,
-            body: s.endOfDayBody,
-            scheduledAt: item.scheduledAt,
-            repeatsDaily: true,
-            payload: '/today',
-          );
-        } else {
-          final prayerName = _prayerName(item.prayerType!, s);
-          await notificationService.schedulePrayer(
-            id: item.id,
-            title: s.notificationTitle(prayerName),
-            body: s.notificationBody(prayerName),
-            scheduledAt: item.scheduledAt,
-            repeatsDaily: true,
-            payload: '/today',
-          );
+        await notificationService.cancelAll();
+        await notificationService.refreshTimezone(
+          preferredTimezoneId: locationContext?.timezoneId,
+        );
+        final now = DateTime.now();
+        final schedule = planner.buildDailySchedule(
+          settings: settingsToSchedule,
+          now: now,
+        );
+
+        for (final item in schedule) {
+          final s = S.current;
+          switch (item.kind) {
+            case NotificationScheduleKind.dailyReminder:
+              await notificationService.schedulePrayer(
+                id: item.id,
+                title: s.dailyReminderTitle,
+                body: s.dailyReminderBody,
+                scheduledAt: item.scheduledAt,
+                repeatsDaily: true,
+                payload: '/today',
+              );
+            case NotificationScheduleKind.prayer:
+              final prayerName = _prayerName(item.prayerType!, s);
+              await notificationService.schedulePrayer(
+                id: item.id,
+                title: s.notificationTitle(prayerName),
+                body: s.notificationBody(prayerName),
+                scheduledAt: item.scheduledAt,
+                repeatsDaily: true,
+                payload: '/today',
+              );
+          }
+        }
+
+        if (!_schedulePending) {
+          break;
         }
       }
     } finally {
       _isSchedulingNotifications = false;
+      _latestSchedulingRequest = null;
     }
   }
 

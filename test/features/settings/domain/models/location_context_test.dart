@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:salat_tracker/features/settings/domain/models/location_context.dart';
+import 'package:salat_tracker/features/settings/settings.dart';
 
 void main() {
   group('LocationContext', () {

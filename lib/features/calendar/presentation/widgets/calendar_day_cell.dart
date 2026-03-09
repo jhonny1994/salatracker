@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/features/prayer/prayer.dart';
-import 'package:salat_tracker/shared/design_constants.dart';
+import 'package:salat_tracker/shared/shared.dart';
 
 /// A calendar cell representing a single day with prayer completion status.
 ///

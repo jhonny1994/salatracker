@@ -9,6 +9,7 @@ import 'package:salat_tracker/features/prayer/domain/models/prayer_day.dart';
 import 'package:salat_tracker/features/prayer/domain/models/prayer_entry.dart';
 import 'package:salat_tracker/features/prayer/domain/models/prayer_type.dart';
 import 'package:salat_tracker/features/settings/domain/models/app_theme_mode.dart';
+import 'package:salat_tracker/features/settings/domain/models/daily_reminder_config.dart';
 import 'package:salat_tracker/features/settings/domain/models/settings.dart';
 
 extension HiveRegistrar on HiveInterface {
@@ -16,6 +17,7 @@ extension HiveRegistrar on HiveInterface {
     registerAdapter(AppThemeModeAdapter());
     registerAdapter(BadgeAwardAdapter());
     registerAdapter(BadgeTypeAdapter());
+    registerAdapter(DailyReminderConfigAdapter());
     registerAdapter(PrayerDayAdapter());
     registerAdapter(PrayerEntryAdapter());
     registerAdapter(PrayerTypeAdapter());
@@ -28,6 +30,7 @@ extension IsolatedHiveRegistrar on IsolatedHiveInterface {
     registerAdapter(AppThemeModeAdapter());
     registerAdapter(BadgeAwardAdapter());
     registerAdapter(BadgeTypeAdapter());
+    registerAdapter(DailyReminderConfigAdapter());
     registerAdapter(PrayerDayAdapter());
     registerAdapter(PrayerEntryAdapter());
     registerAdapter(PrayerTypeAdapter());

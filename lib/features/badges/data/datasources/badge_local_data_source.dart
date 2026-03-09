@@ -1,6 +1,5 @@
 import 'package:hive_ce/hive.dart';
-import 'package:salat_tracker/features/badges/domain/models/badge_award.dart';
-import 'package:salat_tracker/features/badges/domain/models/badge_type.dart';
+import 'package:salat_tracker/features/badges/badges.dart';
 
 class BadgeLocalDataSource {
   BadgeLocalDataSource(this._box);

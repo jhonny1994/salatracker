@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:salat_tracker/core/core.dart';
-import 'package:salat_tracker/features/badges/data/providers/providers.dart';
-import 'package:salat_tracker/features/badges/presentation/widgets/widgets.dart';
+import 'package:salat_tracker/features/badges/badges.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
 class BadgesScreen extends ConsumerWidget {
@@ -18,7 +17,10 @@ class BadgesScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(l10n.badgesTitle),
       ),
-      body: awardsAsync.when(
+      body: AppAsyncValue(
+        value: awardsAsync,
+        errorTitle: l10n.errorLoadingData,
+        retry: () => ref.invalidate(badgesProvider),
         data: (awards) {
           if (awards.isEmpty) {
             return AppEmptyState(
@@ -35,11 +37,6 @@ class BadgesScreen extends ConsumerWidget {
             itemCount: awards.length,
           );
         },
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, _) => AppEmptyState(
-          icon: Icons.error_outline,
-          title: l10n.errorLoadingData,
-        ),
       ),
     );
   }

@@ -26,26 +26,37 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(time) => "سُجِّل في ${time}";
 
-  static String m3(prayer) => "حان الآن موعد صلاة ${prayer}";
+  static String m3(time) => "هل صليت اليوم؟ (${time})";
 
-  static String m4(prayer) => "وقت صلاة ${prayer}";
+  static String m4(prayer) => "حان الآن موعد صلاة ${prayer}";
 
-  static String m5(minutes) => "${minutes} دقيقة";
+  static String m5(prayer) => "وقت صلاة ${prayer}";
 
-  static String m6(seconds) => "حاول مرة أخرى بعد ${seconds} ثانية";
+  static String m6(minutes) => "${minutes} دقيقة";
 
-  static String m7(completed, total) => "${completed}/${total}";
+  static String m7(current, total) => "الخطوة ${current} من ${total}";
 
-  static String m8(count) => "${count} من 5 صلوات مسجلة";
+  static String m8(seconds) => "حاول مرة أخرى بعد ${seconds} ثانية";
 
-  static String m9(count) => "${count} نقطة";
+  static String m9(value) => "المنطقة الزمنية الحالية: ${value}";
 
-  static String m10(count) => "سلسلة التزام: ${count} أيام";
+  static String m10(number) => "التذكير ${number}";
+
+  static String m11(prayer) => "وقت التنبيه - ${prayer}";
+
+  static String m12(completed, total) => "${completed}/${total}";
+
+  static String m13(count) => "${count} من 5 صلوات مسجلة";
+
+  static String m14(count) => "${count} نقطة";
+
+  static String m15(count) => "سلسلة التزام: ${count} أيام";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "actionCancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "actionContinue": MessageLookupByLibrary.simpleMessage("استمرار"),
+    "actionRemove": MessageLookupByLibrary.simpleMessage("إزالة"),
     "appTitle": MessageLookupByLibrary.simpleMessage("سجل الصلاة"),
     "badgeFirstPrayerDescription": MessageLookupByLibrary.simpleMessage(
       "قمت بتسجيل أول صلاة لك.",
@@ -90,6 +101,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "calendarStreamRetry": MessageLookupByLibrary.simpleMessage(
       "سيتم إعادة المحاولة تلقائيًا",
     ),
+    "dailyReminderBody": MessageLookupByLibrary.simpleMessage("هل صليت اليوم؟"),
+    "dailyReminderTileSubtitle": m3,
+    "dailyReminderTitle": MessageLookupByLibrary.simpleMessage("تذكير يومي"),
     "endOfDayBody": MessageLookupByLibrary.simpleMessage(
       "هل أتممت صلواتك اليوم؟",
     ),
@@ -104,6 +118,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "فشل تحميل الإعدادات",
     ),
     "errorRetry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
+    "generalLoading": MessageLookupByLibrary.simpleMessage("جارٍ التحميل..."),
     "generalNo": MessageLookupByLibrary.simpleMessage("معطل"),
     "generalYes": MessageLookupByLibrary.simpleMessage("مفعل"),
     "historyEditWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -115,15 +130,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "navCalendar": MessageLookupByLibrary.simpleMessage("التقويم"),
     "navSettings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
     "navToday": MessageLookupByLibrary.simpleMessage("اليوم"),
-    "notificationBody": m3,
+    "notificationBody": m4,
     "notificationChannelDescription": MessageLookupByLibrary.simpleMessage(
       "إشعارات لمواقيت الصلاة",
     ),
     "notificationChannelName": MessageLookupByLibrary.simpleMessage(
       "إشعارات الصلاة",
     ),
-    "notificationTitle": m4,
-    "offsetMinutes": m5,
+    "notificationTitle": m5,
+    "offsetMinutes": m6,
     "onboardingAppLockBody": MessageLookupByLibrary.simpleMessage(
       "أمّن سجل صلاتك ببصمة أو رمز PIN.",
     ),
@@ -145,8 +160,17 @@ class MessageLookup extends MessageLookupByLibrary {
       "تفعيل الإشعارات",
     ),
     "onboardingGetStarted": MessageLookupByLibrary.simpleMessage("ابدأ الآن"),
+    "onboardingLateReminderBody": MessageLookupByLibrary.simpleMessage(
+      "اختر وقتاً لتذكيرك اليومي.",
+    ),
+    "onboardingLateReminderTitle": MessageLookupByLibrary.simpleMessage(
+      "تذكير آخر اليوم",
+    ),
     "onboardingLocationBody": MessageLookupByLibrary.simpleMessage(
       "اسمح بالوصول إلى موقعك لتحديد مدينتك ومنطقتك الزمنية بدقة لمواقيت الصلاة.",
+    ),
+    "onboardingLocationPermissionDenied": MessageLookupByLibrary.simpleMessage(
+      "سيبقى الموقع غير مفعل الآن. يمكنك المتابعة أو اختيار ربما لاحقاً.",
     ),
     "onboardingLocationTitle": MessageLookupByLibrary.simpleMessage(
       "تحديد موقعك",
@@ -156,6 +180,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "onboardingNotificationsBody": MessageLookupByLibrary.simpleMessage(
       "هل تريد تذكيرات لطيفة؟",
     ),
+    "onboardingNotificationsPermissionDenied":
+        MessageLookupByLibrary.simpleMessage(
+          "ستبقى الإشعارات غير مفعلة الآن. يمكنك تفعيلها لاحقاً من الإعدادات.",
+        ),
     "onboardingNotificationsTitle": MessageLookupByLibrary.simpleMessage(
       "ابقَ على المسار",
     ),
@@ -165,6 +193,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "onboardingPrayerTimesTitle": MessageLookupByLibrary.simpleMessage(
       "حدد مواعيد الصلاة",
     ),
+    "onboardingProgress": m7,
     "onboardingSkip": MessageLookupByLibrary.simpleMessage("تخطي"),
     "onboardingWelcomeBody": MessageLookupByLibrary.simpleMessage(
       "تتبع صلواتك اليومية مع تذكيرات لطيفة.",
@@ -194,7 +223,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "securityCurrentPinTitle": MessageLookupByLibrary.simpleMessage(
       "أدخل رمز PIN الحالي",
     ),
-    "securityLockoutSeconds": m6,
+    "securityLockoutSeconds": m8,
     "securityPinDigitsError": MessageLookupByLibrary.simpleMessage(
       "يجب أن يتكون رمز PIN من 6 أرقام",
     ),
@@ -209,6 +238,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "افتح سجل الصلاة",
     ),
     "settingsAbout": MessageLookupByLibrary.simpleMessage("حول"),
+    "settingsAddDailyReminder": MessageLookupByLibrary.simpleMessage(
+      "إضافة تذكير",
+    ),
     "settingsAppLock": MessageLookupByLibrary.simpleMessage("قفل التطبيق"),
     "settingsAppLockSubtitle": MessageLookupByLibrary.simpleMessage(
       "طلب فتح القفل بعد إطفاء الشاشة",
@@ -238,6 +270,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "settingsCurrentTimezoneUnavailable": MessageLookupByLibrary.simpleMessage(
       "المنطقة الزمنية غير متاحة",
     ),
+    "settingsCurrentTimezoneValue": m9,
+    "settingsDailyReminderLabel": m10,
+    "settingsDailyReminders": MessageLookupByLibrary.simpleMessage(
+      "التذكيرات اليومية",
+    ),
+    "settingsDailyRemindersEmpty": MessageLookupByLibrary.simpleMessage(
+      "لا توجد تذكيرات يومية بعد.",
+    ),
+    "settingsDailyRemindersSubtitle": MessageLookupByLibrary.simpleMessage(
+      "أضف تذكيرات لطيفة في وقت يناسبك",
+    ),
     "settingsHaptics": MessageLookupByLibrary.simpleMessage("التفاعل اللمسي"),
     "settingsHapticsSubtitle": MessageLookupByLibrary.simpleMessage(
       "تفعيل الاهتزاز عند التفاعل مع الأزرار",
@@ -260,9 +303,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "settingsPrivacyPolicy": MessageLookupByLibrary.simpleMessage(
       "سياسة الخصوصية",
     ),
+    "settingsReminderDuplicateTime": MessageLookupByLibrary.simpleMessage(
+      "لديك تذكير بالفعل في هذا الوقت.",
+    ),
     "settingsReminderOffset": MessageLookupByLibrary.simpleMessage(
       "وقت التنبيه",
     ),
+    "settingsReminderOffsetFor": m11,
     "settingsReminderOffsetSubtitle": MessageLookupByLibrary.simpleMessage(
       "تعديل وقت الإشعار",
     ),
@@ -289,15 +336,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "todayComplete": MessageLookupByLibrary.simpleMessage(
       "جميع الصلوات مكتملة!",
     ),
-    "todayCompletionRatio": m7,
+    "todayCompletionRatio": m12,
     "todayEncouragement": MessageLookupByLibrary.simpleMessage(
       "استمر، لقد أديت عملاً رائعاً!",
     ),
     "todayNone": MessageLookupByLibrary.simpleMessage("لم تسجل أي صلاة بعد"),
-    "todayPartial": m8,
-    "todayPoints": m9,
+    "todayPartial": m13,
+    "todayPoints": m14,
     "todayProgress": MessageLookupByLibrary.simpleMessage("تقدم اليوم"),
-    "todayStreak": m10,
+    "todayStreak": m15,
     "weekStartMonday": MessageLookupByLibrary.simpleMessage("الاثنين"),
     "weekStartSaturday": MessageLookupByLibrary.simpleMessage("السبت"),
     "weekStartSunday": MessageLookupByLibrary.simpleMessage("الأحد"),

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:salat_tracker/core/analytics/analytics_service.dart';
+import 'package:salat_tracker/core/core.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 /// Analytics implementation using Sentry.

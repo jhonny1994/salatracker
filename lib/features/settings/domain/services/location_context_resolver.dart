@@ -5,7 +5,7 @@ import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hive_ce/hive.dart';
-import 'package:salat_tracker/features/settings/domain/models/location_context.dart';
+import 'package:salat_tracker/features/settings/settings.dart';
 import 'package:timezone/data/latest_all.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
 

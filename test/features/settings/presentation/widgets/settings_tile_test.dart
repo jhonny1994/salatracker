@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:salat_tracker/features/settings/presentation/widgets/settings_tile.dart';
+import 'package:salat_tracker/features/settings/settings.dart';
 
 void main() {
   testWidgets('uses chevron_right in RTL as forward affordance', (

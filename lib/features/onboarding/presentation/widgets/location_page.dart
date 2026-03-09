@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:salat_tracker/core/core.dart';
-import 'package:salat_tracker/features/onboarding/presentation/widgets/onboarding_step_scaffold.dart';
+import 'package:salat_tracker/features/onboarding/onboarding.dart';
 
 /// Location setup page for onboarding.
 class LocationPage extends ConsumerStatefulWidget {
@@ -31,11 +31,27 @@ class _LocationPageState extends ConsumerState<LocationPage> {
   Future<void> _requestLocation() async {
     setState(() => _requesting = true);
     try {
-      await Geolocator.requestPermission();
+      final permission = await Geolocator.requestPermission();
+      if (!mounted) {
+        return;
+      }
+
+      final granted =
+          permission == LocationPermission.always ||
+          permission == LocationPermission.whileInUse;
+      if (granted) {
+        widget.onNext();
+        return;
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(S.of(context).onboardingLocationPermissionDenied),
+        ),
+      );
     } finally {
       if (mounted) {
         setState(() => _requesting = false);
-        widget.onNext();
       }
     }
   }
@@ -48,12 +64,12 @@ class _LocationPageState extends ConsumerState<LocationPage> {
       icon: Icons.location_on_outlined,
       title: l10n.onboardingLocationTitle,
       body: l10n.onboardingLocationBody,
-      primaryLabel: _requesting
-          ? l10n.settingsVersionLoading
-          : l10n.onboardingEnableLocation,
+      primaryLabel: l10n.onboardingEnableLocation,
       onPrimary: _requesting ? null : () => unawaited(_requestLocation()),
       backLabel: l10n.onboardingMaybeLater,
       onBack: widget.onNext, // "Maybe Later" also proceeds to the next step
+      isBusy: _requesting,
+      busyLabel: l10n.generalLoading,
       content: const SizedBox.shrink(),
     );
   }

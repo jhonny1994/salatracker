@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
 /// Error state for the Today screen with retry functionality.
-class TodayErrorState extends ConsumerWidget {
+class TodayErrorState extends StatelessWidget {
   /// Creates a [TodayErrorState].
   const TodayErrorState({required this.onRetry, super.key});
 
@@ -12,7 +11,7 @@ class TodayErrorState extends ConsumerWidget {
   final VoidCallback onRetry;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final l10n = S.of(context);
 

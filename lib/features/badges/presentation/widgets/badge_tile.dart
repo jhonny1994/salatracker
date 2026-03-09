@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:salat_tracker/core/core.dart';
-import 'package:salat_tracker/features/badges/domain/models/models.dart';
+import 'package:salat_tracker/features/badges/badges.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
 class BadgeTile extends StatelessWidget {

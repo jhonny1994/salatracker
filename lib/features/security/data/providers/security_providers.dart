@@ -3,10 +3,8 @@ import 'dart:async';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:salat_tracker/features/security/data/repositories/repositories.dart';
-import 'package:salat_tracker/features/security/data/services/services.dart';
-import 'package:salat_tracker/features/security/domain/domain.dart';
-import 'package:salat_tracker/features/settings/data/providers/settings_providers.dart';
+import 'package:salat_tracker/features/security/security.dart';
+import 'package:salat_tracker/features/settings/settings.dart';
 
 part 'security_providers.g.dart';
 

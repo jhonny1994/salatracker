@@ -3,8 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:salat_tracker/core/core.dart';
-import 'package:salat_tracker/core/notifications/notification_listener_widget.dart';
-import 'package:salat_tracker/core/router/root_shell.dart';
+import 'package:salat_tracker/features/badges/badges.dart';
 import 'package:salat_tracker/features/calendar/calendar.dart';
 import 'package:salat_tracker/features/onboarding/onboarding.dart';
 import 'package:salat_tracker/features/security/security.dart';
@@ -31,9 +30,16 @@ GoRouter appRouter(Ref ref) {
       final lockAsync = ref.read(appLockControllerProvider);
       final settingsAsync = ref.read(settingsProvider);
 
+      final lockLoading = lockAsync.isLoading;
+      final settingsLoading = settingsAsync.isLoading;
+      final isBoot = state.matchedLocation == '/boot';
+
+      if (lockLoading || settingsLoading) {
+        return isBoot ? null : '/boot';
+      }
+
       // 1. Check App Lock status first
-      // Default to unlocked while loading (prevents lock screen flash)
-      final lockStatus = lockAsync.value ?? AppLockStatus.unlocked;
+      final lockStatus = lockAsync.requireValue;
       final isLocked = lockStatus == AppLockStatus.locked;
       final onLockScreen = state.matchedLocation == '/lock';
 
@@ -42,8 +48,8 @@ GoRouter appRouter(Ref ref) {
       }
 
       // 2. Check Onboarding status
-      final settings = settingsAsync.asData?.value;
-      final onboardingComplete = settings?.onboardingComplete ?? false;
+      final settings = settingsAsync.requireValue;
+      final onboardingComplete = settings.onboardingComplete;
       final isOnboarding = state.matchedLocation == '/onboarding';
 
       // First launch: redirect to onboarding
@@ -64,6 +70,11 @@ GoRouter appRouter(Ref ref) {
       return null;
     },
     routes: [
+      GoRoute(
+        path: '/boot',
+        builder: (context, state) => const _RouterBootScreen(),
+      ),
+
       // Lock Screen (highest priority, outside shell)
       GoRoute(
         path: '/lock',
@@ -105,6 +116,20 @@ GoRouter appRouter(Ref ref) {
               GoRoute(
                 path: '/settings',
                 builder: (context, state) => const SettingsScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'prayer-schedule',
+                    builder: (context, state) => const PrayerScheduleScreen(),
+                  ),
+                  GoRoute(
+                    path: 'daily-reminders',
+                    builder: (context, state) => const DailyRemindersScreen(),
+                  ),
+                  GoRoute(
+                    path: 'badges',
+                    builder: (context, state) => const BadgesScreen(),
+                  ),
+                ],
               ),
             ],
           ),
@@ -120,6 +145,19 @@ GoRouter appRouter(Ref ref) {
       );
     },
   );
+}
+
+class _RouterBootScreen extends StatelessWidget {
+  const _RouterBootScreen();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
 }
 
 class _RouterRefreshNotifier extends ChangeNotifier {

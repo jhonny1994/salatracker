@@ -1,6 +1,7 @@
 {
   "@@locale": "fr",
   "appTitle": "Salat Tracker",
+  "generalLoading": "Chargement...",
   "generalYes": "Activé",
   "generalNo": "Désactivé",
   "navToday": "Aujourd'hui",
@@ -117,8 +118,38 @@
   "historyEditWarningBody": "La modification des enregistrements passés peut affecter votre série et vos points.",
   "actionCancel": "Annuler",
   "actionContinue": "Continuer",
+  "actionRemove": "Supprimer",
   "settingsReminderOffset": "Décalage du rappel",
   "settingsReminderOffsetSubtitle": "Ajuster l'heure de notification",
+  "settingsReminderOffsetFor": "Décalage du rappel - {prayer}",
+  "@settingsReminderOffsetFor": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsDailyReminders": "Rappels quotidiens",
+  "settingsDailyRemindersSubtitle": "Ajoutez des rappels doux à l'heure qui vous convient",
+  "settingsDailyRemindersEmpty": "Aucun rappel quotidien pour le moment.",
+  "settingsAddDailyReminder": "Ajouter un rappel",
+  "settingsReminderDuplicateTime": "Vous avez déjà un rappel à cette heure.",
+  "settingsCurrentTimezoneValue": "Fuseau horaire actuel : {value}",
+  "@settingsCurrentTimezoneValue": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsDailyReminderLabel": "Rappel {number}",
+  "@settingsDailyReminderLabel": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
   "offsetMinutes": "{minutes} min",
   "settingsWeekStart": "Début de la semaine",
   "weekStartSunday": "Dimanche",
@@ -128,6 +159,16 @@
   "notificationBody": "C'est l'heure de la prière de {prayer}",
   "notificationChannelName": "Notifications de prière",
   "notificationChannelDescription": "Notifications pour les horaires de prière",
+  "dailyReminderTitle": "Rappel quotidien",
+  "dailyReminderBody": "Avez-vous prié aujourd'hui ?",
+  "dailyReminderTileSubtitle": "Avez-vous prié aujourd'hui ? ({time})",
+  "@dailyReminderTileSubtitle": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "endOfDayTitle": "Réflexion quotidienne",
   "endOfDayBody": "Avez-vous terminé toutes vos prières aujourd'hui ?",
   "onboardingWelcomeTitle": "Bienvenue sur Salat Tracker",
@@ -139,6 +180,21 @@
   "onboardingPrayerTimesBody": "Configurez l'heure de début de chaque prière.",
   "onboardingNotificationsTitle": "Restez sur la Bonne Voie",
   "onboardingNotificationsBody": "Souhaitez-vous des rappels amicaux ?",
+  "onboardingLocationPermissionDenied": "La localisation reste désactivée pour le moment. Vous pouvez continuer ou choisir Plus tard.",
+  "onboardingNotificationsPermissionDenied": "Les notifications restent désactivées pour le moment. Vous pourrez les activer plus tard dans les paramètres.",
+  "onboardingLateReminderTitle": "Rappel de fin de journée",
+  "onboardingLateReminderBody": "Choisissez une heure pour votre rappel quotidien.",
+  "onboardingProgress": "Étape {current} sur {total}",
+  "@onboardingProgress": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "onboardingAppLockTitle": "Protégez Votre Vie Privée",
   "onboardingAppLockBody": "Sécurisez votre journal de prière avec biométrie ou PIN.",
   "onboardingConfirmTitle": "Vous êtes Prêt",

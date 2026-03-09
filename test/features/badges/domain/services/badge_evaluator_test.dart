@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:salat_tracker/features/badges/domain/models/badge_type.dart';
-import 'package:salat_tracker/features/badges/domain/services/badge_evaluator.dart';
+import 'package:salat_tracker/features/badges/badges.dart';
 import 'package:salat_tracker/features/prayer/prayer.dart';
 
 void main() {

@@ -1,6 +1,7 @@
 {
   "@@locale": "ar",
   "appTitle": "سجل الصلاة",
+  "generalLoading": "جارٍ التحميل...",
   "generalYes": "مفعل",
   "generalNo": "معطل",
   "navToday": "اليوم",
@@ -117,8 +118,38 @@
   "historyEditWarningBody": "تعديل سجلات الصلوات السابقة قد يؤثر على حساب السلسلة والنقاط الخاصة بك.",
   "actionCancel": "إلغاء",
   "actionContinue": "استمرار",
+  "actionRemove": "إزالة",
   "settingsReminderOffset": "وقت التنبيه",
   "settingsReminderOffsetSubtitle": "تعديل وقت الإشعار",
+  "settingsReminderOffsetFor": "وقت التنبيه - {prayer}",
+  "@settingsReminderOffsetFor": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsDailyReminders": "التذكيرات اليومية",
+  "settingsDailyRemindersSubtitle": "أضف تذكيرات لطيفة في وقت يناسبك",
+  "settingsDailyRemindersEmpty": "لا توجد تذكيرات يومية بعد.",
+  "settingsAddDailyReminder": "إضافة تذكير",
+  "settingsReminderDuplicateTime": "لديك تذكير بالفعل في هذا الوقت.",
+  "settingsCurrentTimezoneValue": "المنطقة الزمنية الحالية: {value}",
+  "@settingsCurrentTimezoneValue": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsDailyReminderLabel": "التذكير {number}",
+  "@settingsDailyReminderLabel": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
   "offsetMinutes": "{minutes} دقيقة",
   "settingsWeekStart": "بداية الأسبوع",
   "weekStartSunday": "الأحد",
@@ -128,6 +159,16 @@
   "notificationBody": "حان الآن موعد صلاة {prayer}",
   "notificationChannelName": "إشعارات الصلاة",
   "notificationChannelDescription": "إشعارات لمواقيت الصلاة",
+  "dailyReminderTitle": "تذكير يومي",
+  "dailyReminderBody": "هل صليت اليوم؟",
+  "dailyReminderTileSubtitle": "هل صليت اليوم؟ ({time})",
+  "@dailyReminderTileSubtitle": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "endOfDayTitle": "تذكير يومي",
   "endOfDayBody": "هل أتممت صلواتك اليوم؟",
   "onboardingWelcomeTitle": "مرحباً بك في سجل الصلاة",
@@ -139,6 +180,21 @@
   "onboardingPrayerTimesBody": "قم بتعيين وقت بدء كل صلاة.",
   "onboardingNotificationsTitle": "ابقَ على المسار",
   "onboardingNotificationsBody": "هل تريد تذكيرات لطيفة؟",
+  "onboardingLocationPermissionDenied": "سيبقى الموقع غير مفعل الآن. يمكنك المتابعة أو اختيار ربما لاحقاً.",
+  "onboardingNotificationsPermissionDenied": "ستبقى الإشعارات غير مفعلة الآن. يمكنك تفعيلها لاحقاً من الإعدادات.",
+  "onboardingLateReminderTitle": "تذكير آخر اليوم",
+  "onboardingLateReminderBody": "اختر وقتاً لتذكيرك اليومي.",
+  "onboardingProgress": "الخطوة {current} من {total}",
+  "@onboardingProgress": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "onboardingAppLockTitle": "احمِ خصوصيتك",
   "onboardingAppLockBody": "أمّن سجل صلاتك ببصمة أو رمز PIN.",
   "onboardingConfirmTitle": "أنت جاهز",

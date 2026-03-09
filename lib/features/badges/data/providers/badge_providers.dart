@@ -3,9 +3,7 @@ import 'dart:async';
 import 'package:hive_ce/hive.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:salat_tracker/core/core.dart';
-import 'package:salat_tracker/features/badges/data/datasources/datasources.dart';
-import 'package:salat_tracker/features/badges/data/repositories/repositories.dart';
-import 'package:salat_tracker/features/badges/domain/domain.dart';
+import 'package:salat_tracker/features/badges/badges.dart';
 import 'package:salat_tracker/features/prayer/prayer.dart';
 
 part 'badge_providers.g.dart';

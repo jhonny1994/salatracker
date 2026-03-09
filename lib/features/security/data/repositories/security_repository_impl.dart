@@ -2,9 +2,8 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:crypto/crypto.dart';
-import 'package:salat_tracker/features/security/data/services/services.dart';
-import 'package:salat_tracker/features/security/domain/repositories/security_repository.dart';
-import 'package:salat_tracker/features/settings/domain/repositories/settings_repository.dart';
+import 'package:salat_tracker/features/security/security.dart';
+import 'package:salat_tracker/features/settings/settings.dart';
 
 /// Implementation of [SecurityRepository].
 ///

@@ -56,3 +56,31 @@ class OnboardingPrayerTimes extends _$OnboardingPrayerTimes {
     state = Map.from(state)..[type] = time;
   }
 }
+
+/// Tracks the suggested late reminder time during onboarding.
+@Riverpod(keepAlive: true)
+class OnboardingLateReminderTime extends _$OnboardingLateReminderTime {
+  bool _wasManuallyEdited = false;
+
+  @override
+  TimeOfDay build() => Settings.defaults().effectiveDailyReminders.first.time;
+
+  void syncSuggestedFromPrayerTimes(Map<PrayerType, TimeOfDay> prayerTimes) {
+    if (_wasManuallyEdited) {
+      return;
+    }
+
+    final isha =
+        prayerTimes[PrayerType.isha] ?? const TimeOfDay(hour: 20, minute: 30);
+    final totalMinutes = ((isha.hour * 60) + isha.minute + 120) % (24 * 60);
+    state = TimeOfDay(
+      hour: totalMinutes ~/ 60,
+      minute: totalMinutes % 60,
+    );
+  }
+
+  void updateTime(TimeOfDay time) {
+    _wasManuallyEdited = true;
+    state = time;
+  }
+}

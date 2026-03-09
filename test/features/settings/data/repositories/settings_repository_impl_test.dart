@@ -1,8 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hive_ce/hive.dart';
-import 'package:salat_tracker/core/storage/adapters/time_of_day_adapter.dart';
+import 'package:hive_ce_flutter/adapters.dart';
 import 'package:salat_tracker/features/prayer/prayer.dart';
 import 'package:salat_tracker/features/settings/settings.dart';
 
@@ -22,8 +21,11 @@ void main() {
       if (!Hive.isAdapterRegistered(PrayerTypeAdapter().typeId)) {
         Hive.registerAdapter(PrayerTypeAdapter());
       }
-      if (!Hive.isAdapterRegistered(TimeOfDayAdapter().typeId)) {
-        Hive.registerAdapter(TimeOfDayAdapter());
+      if (!Hive.isAdapterRegistered(const TimeOfDayAdapter().typeId)) {
+        Hive.registerAdapter(const TimeOfDayAdapter());
+      }
+      if (!Hive.isAdapterRegistered(DailyReminderConfigAdapter().typeId)) {
+        Hive.registerAdapter(DailyReminderConfigAdapter());
       }
       if (!Hive.isAdapterRegistered(SettingsAdapter().typeId)) {
         Hive.registerAdapter(SettingsAdapter());

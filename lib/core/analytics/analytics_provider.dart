@@ -1,6 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:salat_tracker/core/analytics/analytics_service.dart';
-import 'package:salat_tracker/core/analytics/sentry_analytics_service.dart';
+import 'package:salat_tracker/core/core.dart';
 
 part 'analytics_provider.g.dart';
 

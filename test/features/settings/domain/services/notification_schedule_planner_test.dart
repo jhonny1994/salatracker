@@ -7,7 +7,7 @@ void main() {
   group('NotificationSchedulePlanner', () {
     const planner = NotificationSchedulePlanner();
 
-    test('returns five prayer reminders and one end-of-day reminder', () {
+    test('returns five prayer reminders and one daily reminder', () {
       final now = DateTime(2026, 2, 10, 8);
       final schedule = planner.buildDailySchedule(
         settings: Settings.defaults(),
@@ -16,21 +16,26 @@ void main() {
 
       expect(schedule.length, 6);
       expect(
-        schedule.where((item) => !item.isEndOfDay).map((item) => item.id),
+        schedule.where((item) => item.isPrayer).map((item) => item.id),
         orderedEquals([0, 1, 2, 3, 4]),
       );
-      expect(schedule.where((item) => item.isEndOfDay).single.id, 99);
+      expect(
+        schedule.where((item) => item.isDailyReminder).single.id,
+        NotificationSchedulePlanner.dailyReminderNotificationIdBase,
+      );
       expect(schedule.map((item) => item.id).toSet().length, schedule.length);
     });
 
-    test('marks end-of-day item without prayer type', () {
+    test('marks daily reminder item without prayer type', () {
       final schedule = planner.buildDailySchedule(
         settings: Settings.defaults(),
         now: DateTime(2026, 2, 10, 8),
       );
 
-      final endOfDay = schedule.singleWhere((item) => item.isEndOfDay);
-      expect(endOfDay.prayerType, isNull);
+      final dailyReminder = schedule.singleWhere(
+        (item) => item.isDailyReminder,
+      );
+      expect(dailyReminder.prayerType, isNull);
     });
 
     test('rolls passed prayer times to next day', () {
@@ -85,6 +90,61 @@ void main() {
 
       expect(dhuhr.scheduledAt.hour, 12);
       expect(dhuhr.scheduledAt.minute, 55);
+    });
+
+    test('skips disabled daily reminders', () {
+      final settings = Settings.defaults().copyWith(
+        dailyReminders: const [
+          DailyReminderConfig(
+            id: 0,
+            time: TimeOfDay(hour: 22, minute: 30),
+            enabled: false,
+          ),
+        ],
+      );
+
+      final schedule = planner.buildDailySchedule(
+        settings: settings,
+        now: DateTime(2026, 2, 10, 8),
+      );
+
+      expect(schedule.where((item) => item.isDailyReminder), isEmpty);
+      expect(schedule.where((item) => item.isPrayer), hasLength(5));
+    });
+
+    test('builds multiple daily reminders with stable ids', () {
+      final settings = Settings.defaults().copyWith(
+        dailyReminders: const [
+          DailyReminderConfig(
+            id: 4,
+            time: TimeOfDay(hour: 21, minute: 0),
+            enabled: true,
+          ),
+          DailyReminderConfig(
+            id: 9,
+            time: TimeOfDay(hour: 23, minute: 15),
+            enabled: true,
+          ),
+        ],
+      );
+
+      final schedule = planner.buildDailySchedule(
+        settings: settings,
+        now: DateTime(2026, 2, 10, 8),
+      );
+
+      final dailyReminders = schedule
+          .where((item) => item.isDailyReminder)
+          .toList();
+
+      expect(dailyReminders, hasLength(2));
+      expect(
+        dailyReminders.map((item) => item.id),
+        orderedEquals([
+          NotificationSchedulePlanner.dailyReminderNotificationIdBase + 4,
+          NotificationSchedulePlanner.dailyReminderNotificationIdBase + 9,
+        ]),
+      );
     });
   });
 }

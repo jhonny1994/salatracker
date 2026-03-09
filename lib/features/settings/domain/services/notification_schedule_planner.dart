@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:salat_tracker/features/prayer/prayer.dart';
-import 'package:salat_tracker/features/settings/domain/models/settings.dart';
-import 'package:salat_tracker/features/settings/domain/services/notification_schedule_item.dart';
+import 'package:salat_tracker/features/settings/settings.dart';
 
 class NotificationSchedulePlanner {
   const NotificationSchedulePlanner();
+
+  static const dailyReminderNotificationIdBase = 1000;
 
   List<NotificationScheduleItem> buildDailySchedule({
     required Settings settings,
@@ -29,37 +30,39 @@ class NotificationSchedulePlanner {
           : rawTime.add(const Duration(days: 1));
 
       items.add(
-        NotificationScheduleItem(
+        NotificationScheduleItem.prayer(
           id: type.index,
           prayerType: type,
           scheduledAt: scheduledAt,
-          isEndOfDay: false,
         ),
       );
     }
 
-    final ishaTime =
-        settings.prayerTimes[PrayerType.isha] ??
-        const TimeOfDay(hour: 20, minute: 30);
-    final reflectionRaw = DateTime(
-      now.year,
-      now.month,
-      now.day,
-      ishaTime.hour,
-      ishaTime.minute,
-    ).add(const Duration(hours: 2));
+    for (final reminder in settings.effectiveDailyReminders) {
+      if (!reminder.enabled) {
+        continue;
+      }
 
-    final reflectionScheduled = reflectionRaw.isAfter(now)
-        ? reflectionRaw
-        : reflectionRaw.add(const Duration(days: 1));
+      final rawTime = DateTime(
+        now.year,
+        now.month,
+        now.day,
+        reminder.time.hour,
+        reminder.time.minute,
+      );
 
-    items.add(
-      NotificationScheduleItem(
-        id: 99,
-        scheduledAt: reflectionScheduled,
-        isEndOfDay: true,
-      ),
-    );
+      final scheduledAt = rawTime.isAfter(now)
+          ? rawTime
+          : rawTime.add(const Duration(days: 1));
+
+      items.add(
+        NotificationScheduleItem.dailyReminder(
+          id: dailyReminderNotificationIdBase + reminder.id,
+          dailyReminderId: reminder.id,
+          scheduledAt: scheduledAt,
+        ),
+      );
+    }
 
     return items;
   }

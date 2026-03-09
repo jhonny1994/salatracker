@@ -27,13 +27,14 @@ class SettingsAdapter extends TypeAdapter<Settings> {
       onboardingComplete: fields[8] as bool,
       appLockEnabled: fields[9] as bool,
       biometricUnlockEnabled: fields[10] as bool,
+      dailyReminders: (fields[11] as List?)?.cast<DailyReminderConfig>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, Settings obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.prayerTimes)
       ..writeByte(1)
@@ -53,7 +54,9 @@ class SettingsAdapter extends TypeAdapter<Settings> {
       ..writeByte(9)
       ..write(obj.appLockEnabled)
       ..writeByte(10)
-      ..write(obj.biometricUnlockEnabled);
+      ..write(obj.biometricUnlockEnabled)
+      ..writeByte(11)
+      ..write(obj.dailyReminders);
   }
 
   @override

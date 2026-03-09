@@ -26,26 +26,37 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(time) => "Enregistré à ${time}";
 
-  static String m3(prayer) => "C\'est l\'heure de la prière de ${prayer}";
+  static String m3(time) => "Avez-vous prié aujourd\'hui ? (${time})";
 
-  static String m4(prayer) => "L\'heure de ${prayer}";
+  static String m4(prayer) => "C\'est l\'heure de la prière de ${prayer}";
 
-  static String m5(minutes) => "${minutes} min";
+  static String m5(prayer) => "L\'heure de ${prayer}";
 
-  static String m6(seconds) => "Réessayez dans ${seconds}s";
+  static String m6(minutes) => "${minutes} min";
 
-  static String m7(completed, total) => "${completed}/${total}";
+  static String m7(current, total) => "Étape ${current} sur ${total}";
 
-  static String m8(count) => "${count} sur 5 prières enregistrées";
+  static String m8(seconds) => "Réessayez dans ${seconds}s";
 
-  static String m9(count) => "${count} points";
+  static String m9(value) => "Fuseau horaire actuel : ${value}";
 
-  static String m10(count) => "Série de ${count} jours";
+  static String m10(number) => "Rappel ${number}";
+
+  static String m11(prayer) => "Décalage du rappel - ${prayer}";
+
+  static String m12(completed, total) => "${completed}/${total}";
+
+  static String m13(count) => "${count} sur 5 prières enregistrées";
+
+  static String m14(count) => "${count} points";
+
+  static String m15(count) => "Série de ${count} jours";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "actionCancel": MessageLookupByLibrary.simpleMessage("Annuler"),
     "actionContinue": MessageLookupByLibrary.simpleMessage("Continuer"),
+    "actionRemove": MessageLookupByLibrary.simpleMessage("Supprimer"),
     "appTitle": MessageLookupByLibrary.simpleMessage("Salat Tracker"),
     "badgeFirstPrayerDescription": MessageLookupByLibrary.simpleMessage(
       "Vous avez enregistré votre première prière.",
@@ -90,6 +101,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "calendarStreamRetry": MessageLookupByLibrary.simpleMessage(
       "Nouvelle tentative automatique",
     ),
+    "dailyReminderBody": MessageLookupByLibrary.simpleMessage(
+      "Avez-vous prié aujourd\'hui ?",
+    ),
+    "dailyReminderTileSubtitle": m3,
+    "dailyReminderTitle": MessageLookupByLibrary.simpleMessage(
+      "Rappel quotidien",
+    ),
     "endOfDayBody": MessageLookupByLibrary.simpleMessage(
       "Avez-vous terminé toutes vos prières aujourd\'hui ?",
     ),
@@ -106,6 +124,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Échec du chargement des paramètres",
     ),
     "errorRetry": MessageLookupByLibrary.simpleMessage("Réessayer"),
+    "generalLoading": MessageLookupByLibrary.simpleMessage("Chargement..."),
     "generalNo": MessageLookupByLibrary.simpleMessage("Désactivé"),
     "generalYes": MessageLookupByLibrary.simpleMessage("Activé"),
     "historyEditWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -117,15 +136,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "navCalendar": MessageLookupByLibrary.simpleMessage("Calendrier"),
     "navSettings": MessageLookupByLibrary.simpleMessage("Paramètres"),
     "navToday": MessageLookupByLibrary.simpleMessage("Aujourd\'hui"),
-    "notificationBody": m3,
+    "notificationBody": m4,
     "notificationChannelDescription": MessageLookupByLibrary.simpleMessage(
       "Notifications pour les horaires de prière",
     ),
     "notificationChannelName": MessageLookupByLibrary.simpleMessage(
       "Notifications de prière",
     ),
-    "notificationTitle": m4,
-    "offsetMinutes": m5,
+    "notificationTitle": m5,
+    "offsetMinutes": m6,
     "onboardingAppLockBody": MessageLookupByLibrary.simpleMessage(
       "Sécurisez votre journal de prière avec biométrie ou PIN.",
     ),
@@ -149,8 +168,17 @@ class MessageLookup extends MessageLookupByLibrary {
       "Activer les Notifications",
     ),
     "onboardingGetStarted": MessageLookupByLibrary.simpleMessage("Commencer"),
+    "onboardingLateReminderBody": MessageLookupByLibrary.simpleMessage(
+      "Choisissez une heure pour votre rappel quotidien.",
+    ),
+    "onboardingLateReminderTitle": MessageLookupByLibrary.simpleMessage(
+      "Rappel de fin de journée",
+    ),
     "onboardingLocationBody": MessageLookupByLibrary.simpleMessage(
       "Autorisez l\'accès à la position pour déterminer avec précision votre ville et fuseau horaire pour les horaires de prière.",
+    ),
+    "onboardingLocationPermissionDenied": MessageLookupByLibrary.simpleMessage(
+      "La localisation reste désactivée pour le moment. Vous pouvez continuer ou choisir Plus tard.",
     ),
     "onboardingLocationTitle": MessageLookupByLibrary.simpleMessage(
       "Détectez votre position",
@@ -159,6 +187,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "onboardingNext": MessageLookupByLibrary.simpleMessage("Suivant"),
     "onboardingNotificationsBody": MessageLookupByLibrary.simpleMessage(
       "Souhaitez-vous des rappels amicaux ?",
+    ),
+    "onboardingNotificationsPermissionDenied": MessageLookupByLibrary.simpleMessage(
+      "Les notifications restent désactivées pour le moment. Vous pourrez les activer plus tard dans les paramètres.",
     ),
     "onboardingNotificationsTitle": MessageLookupByLibrary.simpleMessage(
       "Restez sur la Bonne Voie",
@@ -169,6 +200,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "onboardingPrayerTimesTitle": MessageLookupByLibrary.simpleMessage(
       "Définissez vos Horaires",
     ),
+    "onboardingProgress": m7,
     "onboardingSkip": MessageLookupByLibrary.simpleMessage("Passer"),
     "onboardingWelcomeBody": MessageLookupByLibrary.simpleMessage(
       "Suivez vos prières quotidiennes avec des rappels doux.",
@@ -198,7 +230,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "securityCurrentPinTitle": MessageLookupByLibrary.simpleMessage(
       "Entrez le PIN actuel",
     ),
-    "securityLockoutSeconds": m6,
+    "securityLockoutSeconds": m8,
     "securityPinDigitsError": MessageLookupByLibrary.simpleMessage(
       "Le PIN doit contenir exactement 6 chiffres",
     ),
@@ -213,6 +245,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Déverrouiller Salat Tracker",
     ),
     "settingsAbout": MessageLookupByLibrary.simpleMessage("À propos"),
+    "settingsAddDailyReminder": MessageLookupByLibrary.simpleMessage(
+      "Ajouter un rappel",
+    ),
     "settingsAppLock": MessageLookupByLibrary.simpleMessage(
       "Verrouillage de l\'app",
     ),
@@ -246,6 +281,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "settingsCurrentTimezoneUnavailable": MessageLookupByLibrary.simpleMessage(
       "Fuseau horaire indisponible",
     ),
+    "settingsCurrentTimezoneValue": m9,
+    "settingsDailyReminderLabel": m10,
+    "settingsDailyReminders": MessageLookupByLibrary.simpleMessage(
+      "Rappels quotidiens",
+    ),
+    "settingsDailyRemindersEmpty": MessageLookupByLibrary.simpleMessage(
+      "Aucun rappel quotidien pour le moment.",
+    ),
+    "settingsDailyRemindersSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Ajoutez des rappels doux à l\'heure qui vous convient",
+    ),
     "settingsHaptics": MessageLookupByLibrary.simpleMessage("Retour Haptique"),
     "settingsHapticsSubtitle": MessageLookupByLibrary.simpleMessage(
       "Vibrer aux interactions",
@@ -270,9 +316,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "settingsPrivacyPolicy": MessageLookupByLibrary.simpleMessage(
       "Politique de Confidentialité",
     ),
+    "settingsReminderDuplicateTime": MessageLookupByLibrary.simpleMessage(
+      "Vous avez déjà un rappel à cette heure.",
+    ),
     "settingsReminderOffset": MessageLookupByLibrary.simpleMessage(
       "Décalage du rappel",
     ),
+    "settingsReminderOffsetFor": m11,
     "settingsReminderOffsetSubtitle": MessageLookupByLibrary.simpleMessage(
       "Ajuster l\'heure de notification",
     ),
@@ -305,19 +355,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "todayComplete": MessageLookupByLibrary.simpleMessage(
       "Toutes les prières complétées !",
     ),
-    "todayCompletionRatio": m7,
+    "todayCompletionRatio": m12,
     "todayEncouragement": MessageLookupByLibrary.simpleMessage(
       "Continuez, vous êtes formidable !",
     ),
     "todayNone": MessageLookupByLibrary.simpleMessage(
       "Aucune prière enregistrée",
     ),
-    "todayPartial": m8,
-    "todayPoints": m9,
+    "todayPartial": m13,
+    "todayPoints": m14,
     "todayProgress": MessageLookupByLibrary.simpleMessage(
       "Progrès d\'aujourd\'hui",
     ),
-    "todayStreak": m10,
+    "todayStreak": m15,
     "weekStartMonday": MessageLookupByLibrary.simpleMessage("Lundi"),
     "weekStartSaturday": MessageLookupByLibrary.simpleMessage("Samedi"),
     "weekStartSunday": MessageLookupByLibrary.simpleMessage("Dimanche"),

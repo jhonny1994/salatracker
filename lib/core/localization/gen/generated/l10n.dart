@@ -59,6 +59,16 @@ class S {
     return Intl.message('سجل الصلاة', name: 'appTitle', desc: '', args: []);
   }
 
+  /// `جارٍ التحميل...`
+  String get generalLoading {
+    return Intl.message(
+      'جارٍ التحميل...',
+      name: 'generalLoading',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `مفعل`
   String get generalYes {
     return Intl.message('مفعل', name: 'generalYes', desc: '', args: []);
@@ -619,6 +629,11 @@ class S {
     return Intl.message('استمرار', name: 'actionContinue', desc: '', args: []);
   }
 
+  /// `إزالة`
+  String get actionRemove {
+    return Intl.message('إزالة', name: 'actionRemove', desc: '', args: []);
+  }
+
   /// `وقت التنبيه`
   String get settingsReminderOffset {
     return Intl.message(
@@ -636,6 +651,86 @@ class S {
       name: 'settingsReminderOffsetSubtitle',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `وقت التنبيه - {prayer}`
+  String settingsReminderOffsetFor(String prayer) {
+    return Intl.message(
+      'وقت التنبيه - $prayer',
+      name: 'settingsReminderOffsetFor',
+      desc: '',
+      args: [prayer],
+    );
+  }
+
+  /// `التذكيرات اليومية`
+  String get settingsDailyReminders {
+    return Intl.message(
+      'التذكيرات اليومية',
+      name: 'settingsDailyReminders',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `أضف تذكيرات لطيفة في وقت يناسبك`
+  String get settingsDailyRemindersSubtitle {
+    return Intl.message(
+      'أضف تذكيرات لطيفة في وقت يناسبك',
+      name: 'settingsDailyRemindersSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `لا توجد تذكيرات يومية بعد.`
+  String get settingsDailyRemindersEmpty {
+    return Intl.message(
+      'لا توجد تذكيرات يومية بعد.',
+      name: 'settingsDailyRemindersEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `إضافة تذكير`
+  String get settingsAddDailyReminder {
+    return Intl.message(
+      'إضافة تذكير',
+      name: 'settingsAddDailyReminder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `لديك تذكير بالفعل في هذا الوقت.`
+  String get settingsReminderDuplicateTime {
+    return Intl.message(
+      'لديك تذكير بالفعل في هذا الوقت.',
+      name: 'settingsReminderDuplicateTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `المنطقة الزمنية الحالية: {value}`
+  String settingsCurrentTimezoneValue(String value) {
+    return Intl.message(
+      'المنطقة الزمنية الحالية: $value',
+      name: 'settingsCurrentTimezoneValue',
+      desc: '',
+      args: [value],
+    );
+  }
+
+  /// `التذكير {number}`
+  String settingsDailyReminderLabel(int number) {
+    return Intl.message(
+      'التذكير $number',
+      name: 'settingsDailyReminderLabel',
+      desc: '',
+      args: [number],
     );
   }
 
@@ -711,6 +806,36 @@ class S {
       name: 'notificationChannelDescription',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `تذكير يومي`
+  String get dailyReminderTitle {
+    return Intl.message(
+      'تذكير يومي',
+      name: 'dailyReminderTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `هل صليت اليوم؟`
+  String get dailyReminderBody {
+    return Intl.message(
+      'هل صليت اليوم؟',
+      name: 'dailyReminderBody',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `هل صليت اليوم؟ ({time})`
+  String dailyReminderTileSubtitle(String time) {
+    return Intl.message(
+      'هل صليت اليوم؟ ($time)',
+      name: 'dailyReminderTileSubtitle',
+      desc: '',
+      args: [time],
     );
   }
 
@@ -821,6 +946,56 @@ class S {
       name: 'onboardingNotificationsBody',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `سيبقى الموقع غير مفعل الآن. يمكنك المتابعة أو اختيار ربما لاحقاً.`
+  String get onboardingLocationPermissionDenied {
+    return Intl.message(
+      'سيبقى الموقع غير مفعل الآن. يمكنك المتابعة أو اختيار ربما لاحقاً.',
+      name: 'onboardingLocationPermissionDenied',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ستبقى الإشعارات غير مفعلة الآن. يمكنك تفعيلها لاحقاً من الإعدادات.`
+  String get onboardingNotificationsPermissionDenied {
+    return Intl.message(
+      'ستبقى الإشعارات غير مفعلة الآن. يمكنك تفعيلها لاحقاً من الإعدادات.',
+      name: 'onboardingNotificationsPermissionDenied',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تذكير آخر اليوم`
+  String get onboardingLateReminderTitle {
+    return Intl.message(
+      'تذكير آخر اليوم',
+      name: 'onboardingLateReminderTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `اختر وقتاً لتذكيرك اليومي.`
+  String get onboardingLateReminderBody {
+    return Intl.message(
+      'اختر وقتاً لتذكيرك اليومي.',
+      name: 'onboardingLateReminderBody',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `الخطوة {current} من {total}`
+  String onboardingProgress(int current, int total) {
+    return Intl.message(
+      'الخطوة $current من $total',
+      name: 'onboardingProgress',
+      desc: '',
+      args: [current, total],
     );
   }
 
