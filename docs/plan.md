@@ -25,7 +25,7 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 | **Gamification** | Progress > Streaks; reflective badges only |
 | **Theme** | Light/dark parity; no theme bias |
 | **minSdk** | Android 23 |
-| **Version** | 0.1.4+6 |
+| **Version** | 0.1.5+7 |
 
 ## Implementation Phases (Production Finalization)
 

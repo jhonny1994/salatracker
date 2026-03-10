@@ -83,5 +83,5 @@ These decisions are **final** and documented in [plan.md](plan.md):
 ## Versioning
 
 - **Docs version:** 1.6.0
-- **App version:** 0.1.4+6
+- **App version:** 0.1.5+7
 - **Last updated:** 2026-03-10
