@@ -21,8 +21,8 @@ void main() {
       ),
     );
 
-    // pumpAndSettle to clear flutter_animate timers
-    await tester.pumpAndSettle();
+    // Single frame pump avoids waiting on background update checks.
+    await tester.pump();
 
     expect(find.byType(MaterialApp), findsOneWidget);
   });

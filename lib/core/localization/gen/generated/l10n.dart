@@ -424,6 +424,126 @@ class S {
     );
   }
 
+  /// `تحديثات التطبيق`
+  String get settingsUpdates {
+    return Intl.message(
+      'تحديثات التطبيق',
+      name: 'settingsUpdates',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `اضغط للتحقق من التحديثات`
+  String get updateTapToCheck {
+    return Intl.message(
+      'اضغط للتحقق من التحديثات',
+      name: 'updateTapToCheck',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `أنت تستخدم أحدث إصدار`
+  String get updateUpToDate {
+    return Intl.message(
+      'أنت تستخدم أحدث إصدار',
+      name: 'updateUpToDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `يتوفر إصدار جديد`
+  String get updateAvailable {
+    return Intl.message(
+      'يتوفر إصدار جديد',
+      name: 'updateAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `مطلوب تحديث مهم قريبًا`
+  String get updateRequiredGrace {
+    return Intl.message(
+      'مطلوب تحديث مهم قريبًا',
+      name: 'updateRequiredGrace',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `التحديث مطلوب للمتابعة`
+  String get updateRequiredBlocked {
+    return Intl.message(
+      'التحديث مطلوب للمتابعة',
+      name: 'updateRequiredBlocked',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `جار تنزيل آخر تحديث...`
+  String get updateDownloading {
+    return Intl.message(
+      'جار تنزيل آخر تحديث...',
+      name: 'updateDownloading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `اكتمل التنزيل. جار فتح المثبت...`
+  String get updateReadyToInstall {
+    return Intl.message(
+      'اكتمل التنزيل. جار فتح المثبت...',
+      name: 'updateReadyToInstall',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تعذر التحقق من التحديثات الآن`
+  String get updateCheckFailed {
+    return Intl.message(
+      'تعذر التحقق من التحديثات الآن',
+      name: 'updateCheckFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `فشل تنزيل التحديث`
+  String get updateDownloadFailed {
+    return Intl.message(
+      'فشل تنزيل التحديث',
+      name: 'updateDownloadFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `فشل تشغيل المثبت`
+  String get updateInstallFailed {
+    return Intl.message(
+      'فشل تشغيل المثبت',
+      name: 'updateInstallFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `حدّث الآن`
+  String get updateActionNow {
+    return Intl.message(
+      'حدّث الآن',
+      name: 'updateActionNow',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `جار التحميل...`
   String get settingsVersionLoading {
     return Intl.message(

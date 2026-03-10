@@ -21,9 +21,28 @@ building release artifacts.
 - `.github/workflows/android-release.yml`
   - secret presence validation
   - release signing file generation
-  - signed APK + AAB build
+  - signed sideload APK + signed Play AAB build (flavor-based)
+  - APK SHA256 generation and artifact upload
   - artifact retention (30 days)
   - release tag creation
+
+## In-App Update Release Runbook
+
+1. Trigger `android-release.yml` with the release tag.
+2. Download release artifacts:
+   - `app-sideload-release.apk`
+   - `app-play-release.aab`
+   - `artifacts_apk_sha256.txt`
+3. Update `update-manifest.json`:
+   - `latest_version_code`
+   - `min_supported_version_code` (if policy changes)
+   - `recommended_version_code`
+   - `apk_url` (release APK URL)
+   - `store_url` (Play listing URL)
+   - `release_notes_url`
+   - `sha256` from `artifacts_apk_sha256.txt`
+4. Commit and push manifest update.
+5. Verify in-app Settings update tile detects the new version.
 
 ## Local Signing Setup
 

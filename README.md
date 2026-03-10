@@ -25,6 +25,7 @@ Unlike modern habit trackers that rely on psychological anxiety or "shame langua
 * **Today Dashboard:** A one-tap checklist for the five daily prayers (`Fajr`, `Dhuhr`, `Asr`, `Maghrib`, `Isha`), complete with a beautiful, animated progress ring and supportive contextual notes.
 * **Calendar Reflection:** A comprehensive monthly overview highlighting your consistency. Supports retrospective day-editing.
 * **Smart Reminders:** Completely customizable notification offsets for each prayer, plus configurable daily check-in reminders (time + enable/disable), automatically synchronized with your local timezone coordinates.
+* **In-App Updates (Settings-first):** Updates are managed from the Settings screen with channel-aware delivery (Play installs use Play update flow; GitHub/sideload installs download the latest APK, verify SHA-256 integrity, and launch the system installer).
 * **Premium UX:** Highly polished touch interactions including tactile micro-animations on cards, slick bottom navigation, and native Material 3 dialogs.
 
 ## 📱 Screenshots

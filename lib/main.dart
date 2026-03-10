@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/features/security/security.dart';
 import 'package:salat_tracker/features/settings/settings.dart';
+import 'package:salat_tracker/features/update/update.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 /// Application entry point.
@@ -62,6 +63,7 @@ class SalatTrackerApp extends ConsumerWidget {
     final localeCode = settings?.localeCode;
 
     final router = ref.watch(appRouterProvider);
+    ref.watch(updateProvider);
 
     return AppLockLifecycleGate(
       child: DynamicColorBuilder(

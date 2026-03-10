@@ -13,6 +13,7 @@ class HiveService {
   static const badgesBoxName = 'badge_awards';
   static const metaBoxName = 'meta';
   static const locationBoxName = 'location_context';
+  static const updateMetaBoxName = 'update_meta';
   static const schemaVersionKey = 'schema_version';
   static const schemaVersion = 1;
 
@@ -25,6 +26,7 @@ class HiveService {
     await Hive.openBox<PrayerDay>(prayerDaysBoxName);
     await Hive.openBox<BadgeAward>(badgesBoxName);
     await Hive.openBox<String>(locationBoxName);
+    await Hive.openBox<int>(updateMetaBoxName);
   }
 
   static void _registerAdapters() {

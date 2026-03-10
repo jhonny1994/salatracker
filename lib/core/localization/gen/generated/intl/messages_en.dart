@@ -333,6 +333,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "settingsThemeDark": MessageLookupByLibrary.simpleMessage("Dark"),
     "settingsThemeLight": MessageLookupByLibrary.simpleMessage("Light"),
     "settingsThemeSystem": MessageLookupByLibrary.simpleMessage("System"),
+    "settingsUpdates": MessageLookupByLibrary.simpleMessage("App Updates"),
     "settingsVersionLoading": MessageLookupByLibrary.simpleMessage(
       "Loading...",
     ),
@@ -351,6 +352,37 @@ class MessageLookup extends MessageLookupByLibrary {
     "todayPoints": m14,
     "todayProgress": MessageLookupByLibrary.simpleMessage("Today\'s Progress"),
     "todayStreak": m15,
+    "updateActionNow": MessageLookupByLibrary.simpleMessage("Update now"),
+    "updateAvailable": MessageLookupByLibrary.simpleMessage(
+      "A new version is available",
+    ),
+    "updateCheckFailed": MessageLookupByLibrary.simpleMessage(
+      "Unable to check updates right now",
+    ),
+    "updateDownloadFailed": MessageLookupByLibrary.simpleMessage(
+      "Failed to download update",
+    ),
+    "updateDownloading": MessageLookupByLibrary.simpleMessage(
+      "Downloading latest update...",
+    ),
+    "updateInstallFailed": MessageLookupByLibrary.simpleMessage(
+      "Failed to launch installer",
+    ),
+    "updateReadyToInstall": MessageLookupByLibrary.simpleMessage(
+      "Download complete. Opening installer...",
+    ),
+    "updateRequiredBlocked": MessageLookupByLibrary.simpleMessage(
+      "Update required to continue",
+    ),
+    "updateRequiredGrace": MessageLookupByLibrary.simpleMessage(
+      "A critical update is required soon",
+    ),
+    "updateTapToCheck": MessageLookupByLibrary.simpleMessage(
+      "Tap to check for updates",
+    ),
+    "updateUpToDate": MessageLookupByLibrary.simpleMessage(
+      "You are on the latest version",
+    ),
     "weekStartMonday": MessageLookupByLibrary.simpleMessage("Monday"),
     "weekStartSaturday": MessageLookupByLibrary.simpleMessage("Saturday"),
     "weekStartSunday": MessageLookupByLibrary.simpleMessage("Sunday"),

@@ -9,6 +9,7 @@ import 'package:salat_tracker/features/onboarding/onboarding.dart';
 import 'package:salat_tracker/features/security/security.dart';
 import 'package:salat_tracker/features/settings/settings.dart';
 import 'package:salat_tracker/features/today/today.dart';
+import 'package:salat_tracker/features/update/update.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 part 'app_router.g.dart';
@@ -29,45 +30,13 @@ GoRouter appRouter(Ref ref) {
     redirect: (context, state) {
       final lockAsync = ref.read(appLockControllerProvider);
       final settingsAsync = ref.read(settingsProvider);
-
-      final lockLoading = lockAsync.isLoading;
-      final settingsLoading = settingsAsync.isLoading;
-      final isBoot = state.matchedLocation == '/boot';
-
-      if (lockLoading || settingsLoading) {
-        return isBoot ? null : '/boot';
-      }
-
-      // 1. Check App Lock status first
-      final lockStatus = lockAsync.requireValue;
-      final isLocked = lockStatus == AppLockStatus.locked;
-      final onLockScreen = state.matchedLocation == '/lock';
-
-      if (isLocked) {
-        return onLockScreen ? null : '/lock';
-      }
-
-      // 2. Check Onboarding status
-      final settings = settingsAsync.requireValue;
-      final onboardingComplete = settings.onboardingComplete;
-      final isOnboarding = state.matchedLocation == '/onboarding';
-
-      // First launch: redirect to onboarding
-      if (!onboardingComplete && !isOnboarding) {
-        return '/onboarding';
-      }
-
-      // Onboarding complete but on onboarding page: redirect to today
-      if (onboardingComplete && isOnboarding) {
-        return '/today';
-      }
-
-      // Unlocked but still on lock screen: redirect to today
-      if (onLockScreen) {
-        return '/today';
-      }
-
-      return null;
+      final updateAsync = ref.read(updateProvider);
+      return resolveAppRedirect(
+        lockAsync: lockAsync,
+        settingsAsync: settingsAsync,
+        updateAsync: updateAsync,
+        matchedLocation: state.matchedLocation,
+      );
     },
     routes: [
       GoRoute(
@@ -85,6 +54,11 @@ GoRouter appRouter(Ref ref) {
       GoRoute(
         path: '/onboarding',
         builder: (context, state) => const OnboardingScreen(),
+      ),
+
+      GoRoute(
+        path: '/update-required',
+        builder: (context, state) => const RequiredUpdateScreen(),
       ),
 
       // Main app shell
@@ -147,6 +121,67 @@ GoRouter appRouter(Ref ref) {
   );
 }
 
+String? resolveAppRedirect({
+  required AsyncValue<AppLockStatus> lockAsync,
+  required AsyncValue<Settings> settingsAsync,
+  required AsyncValue<UpdateDecision> updateAsync,
+  required String matchedLocation,
+}) {
+  final lockLoading = lockAsync.isLoading;
+  final settingsLoading = settingsAsync.isLoading;
+  final isBoot = matchedLocation == '/boot';
+  final isUpdateRequiredRoute = matchedLocation == '/update-required';
+
+  if (lockLoading || settingsLoading) {
+    return isBoot ? null : '/boot';
+  }
+
+  // 1. Check App Lock status first
+  final lockStatus = lockAsync.requireValue;
+  final isLocked = lockStatus == AppLockStatus.locked;
+  final onLockScreen = matchedLocation == '/lock';
+
+  if (isLocked) {
+    return onLockScreen ? null : '/lock';
+  }
+
+  // 2. Check Onboarding status
+  final settings = settingsAsync.requireValue;
+  final onboardingComplete = settings.onboardingComplete;
+  final isOnboarding = matchedLocation == '/onboarding';
+
+  // 3. Hard block when required update grace expired
+  final updateStatus = updateAsync.asData?.value.status;
+  final updateBlocked = updateStatus == UpdateStatus.requiredBlocked;
+  if (updateBlocked) {
+    return isUpdateRequiredRoute ? null : '/update-required';
+  }
+
+  if (isUpdateRequiredRoute) {
+    if (!onboardingComplete) {
+      return '/onboarding';
+    }
+    return '/today';
+  }
+
+  // First launch: redirect to onboarding
+  if (!onboardingComplete && !isOnboarding) {
+    return '/onboarding';
+  }
+
+  // Onboarding complete but on onboarding page: redirect to today
+  if (onboardingComplete && isOnboarding) {
+    return '/today';
+  }
+
+  // Unlocked but still on lock screen: redirect to today
+  if (onLockScreen) {
+    return '/today';
+  }
+
+  return null;
+}
+
 class _RouterBootScreen extends StatelessWidget {
   const _RouterBootScreen();
 
@@ -171,16 +206,23 @@ class _RouterRefreshNotifier extends ChangeNotifier {
       appLockControllerProvider,
       (_, _) => notifyListeners(),
     );
+
+    _updateSub = _ref.listen<AsyncValue<UpdateDecision>>(
+      updateProvider,
+      (_, _) => notifyListeners(),
+    );
   }
 
   final Ref _ref;
   late final ProviderSubscription<AsyncValue<Settings>> _settingsSub;
   late final ProviderSubscription<AsyncValue<AppLockStatus>> _lockSub;
+  late final ProviderSubscription<AsyncValue<UpdateDecision>> _updateSub;
 
   @override
   void dispose() {
     _settingsSub.close();
     _lockSub.close();
+    _updateSub.close();
     super.dispose();
   }
 }

@@ -77,6 +77,18 @@
   "settingsContactUs": "Contact Us",
   "settingsContactUsSubtitle": "Reach out for support or feedback",
   "settingsAppVersion": "App Version",
+  "settingsUpdates": "App Updates",
+  "updateTapToCheck": "Tap to check for updates",
+  "updateUpToDate": "You are on the latest version",
+  "updateAvailable": "A new version is available",
+  "updateRequiredGrace": "A critical update is required soon",
+  "updateRequiredBlocked": "Update required to continue",
+  "updateDownloading": "Downloading latest update...",
+  "updateReadyToInstall": "Download complete. Opening installer...",
+  "updateCheckFailed": "Unable to check updates right now",
+  "updateDownloadFailed": "Failed to download update",
+  "updateInstallFailed": "Failed to launch installer",
+  "updateActionNow": "Update now",
   "settingsVersionLoading": "Loading...",
   "settingsPrivacyPolicy": "Privacy Policy",
   "settingsPrayerSchedule": "Prayer Schedule",
@@ -242,23 +254,6 @@
   "settingsBiometricUnlockUnavailable": "Biometrics unavailable on this device",
   "settingsCurrentTimezone": "Current Time Zone",
   "settingsCurrentTimezoneUnavailable": "Time zone unavailable",
-  "settingsCurrentTimezoneValue": "Current Time Zone: {value}",
-  "@settingsCurrentTimezoneValue": {
-    "placeholders": {
-      "value": {
-        "type": "String"
-      }
-    }
-  },
-  "settingsReminderOffsetFor": "Reminder Offset - {prayer}",
-  "@settingsReminderOffsetFor": {
-    "placeholders": {
-      "prayer": {
-        "type": "String"
-      }
-    }
-  },
-  "settingsReminderDuplicateTime": "You already have a reminder at this time.",
   "securityLockoutSeconds": "Try again in {seconds}s",
   "@securityLockoutSeconds": {
     "placeholders": {
@@ -284,24 +279,5 @@
   "badgeMonthCompleteName": "Month Complete",
   "badgeMonthCompleteDescription": "Reached 90% completion in a month.",
   "badgeSeasonChampionName": "Season Champion",
-  "badgeSeasonChampionDescription": "Reached 80% completion in 3 months.",
-  "dailyReminderTileSubtitle": "Have you prayed today? ({time})",
-  "@dailyReminderTileSubtitle": {
-    "placeholders": {
-      "time": {
-        "type": "String"
-      }
-    }
-  },
-  "onboardingProgress": "Step {current} of {total}",
-  "@onboardingProgress": {
-    "placeholders": {
-      "current": {
-        "type": "int"
-      },
-      "total": {
-        "type": "int"
-      }
-    }
-  }
+  "badgeSeasonChampionDescription": "Reached 80% completion in 3 months."
 }

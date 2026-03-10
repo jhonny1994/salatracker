@@ -182,6 +182,28 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 - [x] Finalize privacy policy and in-app link
 - [x] Prepare release notes and versioning process
 
+### Phase 7.5: In-App Update Management ✅
+> **Status:** Complete
+
+- [x] Add channel-aware update architecture (Play vs GitHub/sideload)
+- [x] Add Settings-only update tile with stateful UX (check, download, install, retry)
+- [x] Add GitHub manifest + latest release fallback resolution
+- [x] Add 72h grace policy for minimum-supported versions
+- [x] Add hard-block route when grace expires
+- [x] Add AR/EN/FR localization for update states and actions
+- [x] Add unit tests for update policy engine and manifest parsing
+- [x] Split Android distribution into `play` and `sideload` flavors for policy-safe permissions
+- [x] Restrict `REQUEST_INSTALL_PACKAGES` to sideload flavor only
+- [x] Add release SHA artifact generation and update-manifest synchronization runbook
+
+**Acceptance Criteria:**
+- Settings provides clear update status and actions without disturbing core screens
+- Play-installed builds use Play update flow
+- GitHub-installed builds can download latest APK and launch system installer
+- Required updates respect grace window and then enforce hard block
+- Play release artifacts are produced without sideload installer permission
+- Update manifest contract is validated (version ordering, HTTPS URLs, SHA format)
+
 **Acceptance Criteria:**
 - Release candidate build is reproducible and signed
 - Store assets and policy links are complete

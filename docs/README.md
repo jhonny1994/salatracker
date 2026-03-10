@@ -63,6 +63,7 @@ This directory contains enterprise-grade documentation for the Salat Tracker app
 | Phase 6 | ✅ Complete | Quality engineering |
 | Phase 7 | ✅ Complete | Release engineering and store readiness |
 | Phase 8 | ✅ Complete | Launch audit and go/no-go |
+| Phase 9 | ✅ Complete | In-app updates (Settings-only, grace policy) |
 
 ## Locked Decisions
 
@@ -81,6 +82,6 @@ These decisions are **final** and documented in [plan.md](plan.md):
 
 ## Versioning
 
-- **Docs version:** 1.5.0
-- **App version:** 0.1.3+4
-- **Last updated:** 2026-02-25
+- **Docs version:** 1.6.0
+- **App version:** 0.1.4+6
+- **Last updated:** 2026-03-10

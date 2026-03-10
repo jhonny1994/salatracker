@@ -10,6 +10,7 @@
 - [x] Badges are included in v1.
 - [x] App Lock policy: lock only after screen-off/device lock or equivalent background->resume path.
 - [x] Progress percentage is primary metric; streaks are secondary; points are optional.
+- [x] In-app updates are surfaced only in Settings (no cross-screen prompt disruption).
 
 ---
 
@@ -25,6 +26,7 @@
 | Phase 6: Quality Engineering | 14/16 | 🔄 In Progress |
 | Phase 7: Release Engineering & Store Readiness | 12/12 | ✅ Complete |
 | Phase 8: Launch Audit & Go/No-Go | 8/8 | ✅ Complete |
+| Phase 9: In-App Update Delivery | 10/10 | ✅ Complete |
 
 ---
 
@@ -249,6 +251,35 @@
 - [x] CI green on protected branch.
 - [x] Release candidate signed and install-verified.
 - [x] Stakeholder signoff completed.
+
+---
+
+## Phase 9: In-App Update Delivery ✅
+
+### Update Architecture
+- [x] Implement channel-aware strategy (Play install vs GitHub/sideload install).
+- [x] Add update domain models and policy engine with grace-state decisions.
+- [x] Add manifest repository with fallback to latest GitHub release metadata.
+
+### UX & Routing
+- [x] Add Settings-only update tile with dynamic status/action copy.
+- [x] Add required-update blocked route when grace expires.
+
+### Delivery Pipeline Integration
+- [x] Add update manifest file at repository root (`update-manifest.json`).
+- [x] Align APK asset name resolution with CI output (`app-release.apk`).
+- [x] Add flavor-aware release artifacts (`app-sideload-release.apk`, `app-play-release.aab`).
+- [x] Add APK SHA artifact upload in release workflow.
+
+### Validation
+- [x] Add unit tests for update policy decisions.
+- [x] Add unit tests for update manifest parsing.
+- [x] Enforce checksum validation before APK installer launch.
+- [x] Persist and honor last blocked-required state to avoid offline bypass.
+- [x] Split Android distribution flavors to keep `REQUEST_INSTALL_PACKAGES` out of Play builds.
+- [x] Add release runbook for update manifest + SHA synchronization.
+- [x] Add router guard tests for required-update route behavior.
+- [x] Add strict update-manifest contract validation test.
 
 ---
 

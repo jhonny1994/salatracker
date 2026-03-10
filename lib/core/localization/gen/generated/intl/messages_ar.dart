@@ -327,6 +327,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "settingsThemeDark": MessageLookupByLibrary.simpleMessage("داكن"),
     "settingsThemeLight": MessageLookupByLibrary.simpleMessage("فاتح"),
     "settingsThemeSystem": MessageLookupByLibrary.simpleMessage("النظام"),
+    "settingsUpdates": MessageLookupByLibrary.simpleMessage("تحديثات التطبيق"),
     "settingsVersionLoading": MessageLookupByLibrary.simpleMessage(
       "جار التحميل...",
     ),
@@ -345,6 +346,35 @@ class MessageLookup extends MessageLookupByLibrary {
     "todayPoints": m14,
     "todayProgress": MessageLookupByLibrary.simpleMessage("تقدم اليوم"),
     "todayStreak": m15,
+    "updateActionNow": MessageLookupByLibrary.simpleMessage("حدّث الآن"),
+    "updateAvailable": MessageLookupByLibrary.simpleMessage("يتوفر إصدار جديد"),
+    "updateCheckFailed": MessageLookupByLibrary.simpleMessage(
+      "تعذر التحقق من التحديثات الآن",
+    ),
+    "updateDownloadFailed": MessageLookupByLibrary.simpleMessage(
+      "فشل تنزيل التحديث",
+    ),
+    "updateDownloading": MessageLookupByLibrary.simpleMessage(
+      "جار تنزيل آخر تحديث...",
+    ),
+    "updateInstallFailed": MessageLookupByLibrary.simpleMessage(
+      "فشل تشغيل المثبت",
+    ),
+    "updateReadyToInstall": MessageLookupByLibrary.simpleMessage(
+      "اكتمل التنزيل. جار فتح المثبت...",
+    ),
+    "updateRequiredBlocked": MessageLookupByLibrary.simpleMessage(
+      "التحديث مطلوب للمتابعة",
+    ),
+    "updateRequiredGrace": MessageLookupByLibrary.simpleMessage(
+      "مطلوب تحديث مهم قريبًا",
+    ),
+    "updateTapToCheck": MessageLookupByLibrary.simpleMessage(
+      "اضغط للتحقق من التحديثات",
+    ),
+    "updateUpToDate": MessageLookupByLibrary.simpleMessage(
+      "أنت تستخدم أحدث إصدار",
+    ),
     "weekStartMonday": MessageLookupByLibrary.simpleMessage("الاثنين"),
     "weekStartSaturday": MessageLookupByLibrary.simpleMessage("السبت"),
     "weekStartSunday": MessageLookupByLibrary.simpleMessage("الأحد"),

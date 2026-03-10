@@ -9,6 +9,7 @@ import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/features/badges/badges.dart';
 import 'package:salat_tracker/features/security/security.dart';
 import 'package:salat_tracker/features/settings/settings.dart';
+import 'package:salat_tracker/features/update/update.dart';
 import 'package:salat_tracker/shared/shared.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -24,6 +25,7 @@ class SettingsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = S.of(context);
     final settingsState = ref.watch(settingsProvider);
+    final updateState = ref.watch(updateProvider);
     final biometricsAvailableAsync = ref.watch(biometricsAvailableProvider);
 
     return Scaffold(
@@ -199,6 +201,22 @@ class SettingsScreen extends ConsumerWidget {
                             path: '/settings/daily-reminders',
                             fallbackBuilder: (_) =>
                                 const DailyRemindersScreen(),
+                          ),
+                        ),
+                        const Divider(
+                          height: 1,
+                          indent: AppTouchTargets.comfortable,
+                        ),
+                        SettingsTile(
+                          icon: Icons.system_update_outlined,
+                          title: l10n.settingsUpdates,
+                          subtitle:
+                              updateState.asData?.value.message ??
+                              l10n.updateTapToCheck,
+                          onTap: () => unawaited(
+                            ref
+                                .read(updateProvider.notifier)
+                                .performPrimaryAction(),
                           ),
                         ),
                         const Divider(
