@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/features/prayer/prayer.dart';
 import 'package:salat_tracker/features/settings/settings.dart';
 
@@ -145,6 +146,29 @@ void main() {
           NotificationSchedulePlanner.dailyReminderNotificationIdBase + 9,
         ]),
       );
+    });
+
+    test('typed intent payload is generated for prayer reminder', () {
+      final now = DateTime(2026, 2, 10, 8);
+      final schedule = planner.buildDailySchedule(
+        settings: Settings.defaults(),
+        now: now,
+      );
+
+      final prayer = schedule.firstWhere((item) => item.isPrayer);
+      final prayerId = prayer.prayerType!.name;
+      final scheduledAtIso = prayer.scheduledAt.toIso8601String();
+      final intent = NotificationIntent.prayer(
+        intentId: 'prayer_${prayerId}_${prayer.id}_$scheduledAtIso',
+        prayerType: prayer.prayerType!,
+        date: prayer.scheduledAt,
+        scheduledAt: prayer.scheduledAt,
+        sourceNotificationId: prayer.id,
+      );
+
+      final parsed = NotificationIntent.fromPayload(intent.toPayload());
+      expect(parsed.type, NotificationIntentType.prayerReminder);
+      expect(parsed.prayerType, prayer.prayerType);
     });
   });
 }

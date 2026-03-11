@@ -37,18 +37,31 @@ class _NotificationListenerWidgetState
     // We defer reading the provider until after build.
     // In initState, we can read providers.
     final service = ref.read(notificationServiceProvider);
+    final coordinator = ref.read(notificationTapCoordinatorProvider);
+
+    unawaited(
+      coordinator.bootstrapLaunchIntent().then((intent) {
+        if (intent != null && mounted) {
+          _handleNavigation();
+        }
+      }),
+    );
 
     _subscription = service.onNotificationClick.listen((payload) {
       if (payload != null && mounted) {
-        _handleNavigation(payload);
+        unawaited(
+          coordinator.processPayload(payload).then((_) {
+            if (mounted) {
+              _handleNavigation();
+            }
+          }),
+        );
       }
     });
   }
 
-  void _handleNavigation(String payload) {
-    if (payload == '/today') {
-      context.go('/today');
-    }
+  void _handleNavigation() {
+    context.go('/notification/entry');
   }
 
   @override

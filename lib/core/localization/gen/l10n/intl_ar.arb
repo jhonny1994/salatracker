@@ -89,6 +89,26 @@
   "updateDownloadFailed": "فشل تنزيل التحديث",
   "updateInstallFailed": "فشل تشغيل المثبت",
   "updateActionNow": "حدّث الآن",
+  "notificationEntryTitlePrayer": "حان وقت {prayer}",
+  "@notificationEntryTitlePrayer": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationEntryTitlePrayerGeneric": "تذكير بالصلاة",
+  "notificationEntryPrayerBody": "يمكنك تسجيلها الآن أو تأجيل التذكير قليلاً.",
+  "notificationEntryTitleDaily": "متابعة يومية",
+  "notificationEntryTitleFallback": "إشعار",
+  "notificationEntryFallbackBody": "افتح اليوم للمتابعة.",
+  "notificationActionMarkDone": "تمّت الصلاة",
+  "notificationActionSnooze": "تأجيل 10 دقائق",
+  "notificationActionOpenToday": "فتح اليوم",
+  "notificationSnoozedFor10": "تم تأجيل التذكير لمدة 10 دقائق.",
+  "notificationSnoozeAlreadyActive": "لديك تأجيل نشط بالفعل لهذا التذكير.",
+  "notificationSnoozeTitle": "تم تأجيل التذكير",
+  "notificationSnoozeBody": "إليك التذكير مرة أخرى.",
   "settingsVersionLoading": "جار التحميل...",
   "settingsPrivacyPolicy": "سياسة الخصوصية",
   "settingsPrayerSchedule": "مواعيد الصلاة",
@@ -144,6 +164,7 @@
   "settingsDailyReminders": "التذكيرات اليومية",
   "settingsDailyRemindersSubtitle": "أضف تذكيرات لطيفة في وقت يناسبك",
   "settingsDailyRemindersEmpty": "لا توجد تذكيرات يومية بعد.",
+  "settingsDailyRemindersSelectionHint": "حدد التذكيرات ثم اضغط حذف من الشريط العلوي.",
   "settingsAddDailyReminder": "إضافة تذكير",
   "settingsReminderDuplicateTime": "لديك تذكير بالفعل في هذا الوقت.",
   "settingsCurrentTimezoneValue": "المنطقة الزمنية الحالية: {value}",

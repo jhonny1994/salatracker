@@ -5,6 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/features/badges/badges.dart';
 import 'package:salat_tracker/features/calendar/calendar.dart';
+import 'package:salat_tracker/features/notification_entry/notification_entry.dart';
 import 'package:salat_tracker/features/onboarding/onboarding.dart';
 import 'package:salat_tracker/features/security/security.dart';
 import 'package:salat_tracker/features/settings/settings.dart';
@@ -74,6 +75,10 @@ GoRouter appRouter(Ref ref) {
               GoRoute(
                 path: '/today',
                 builder: (context, state) => const TodayScreen(),
+              ),
+              GoRoute(
+                path: '/notification/entry',
+                builder: (context, state) => const NotificationEntryScreen(),
               ),
             ],
           ),

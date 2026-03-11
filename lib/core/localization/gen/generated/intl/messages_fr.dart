@@ -30,27 +30,29 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m4(prayer) => "C\'est l\'heure de la prière de ${prayer}";
 
-  static String m5(prayer) => "L\'heure de ${prayer}";
+  static String m5(prayer) => "C\'est l\'heure de ${prayer}";
 
-  static String m6(minutes) => "${minutes} min";
+  static String m6(prayer) => "L\'heure de ${prayer}";
 
-  static String m7(current, total) => "Étape ${current} sur ${total}";
+  static String m7(minutes) => "${minutes} min";
 
-  static String m8(seconds) => "Réessayez dans ${seconds}s";
+  static String m8(current, total) => "Étape ${current} sur ${total}";
 
-  static String m9(value) => "Fuseau horaire actuel : ${value}";
+  static String m9(seconds) => "Réessayez dans ${seconds}s";
 
-  static String m10(number) => "Rappel ${number}";
+  static String m10(value) => "Fuseau horaire actuel : ${value}";
 
-  static String m11(prayer) => "Décalage du rappel - ${prayer}";
+  static String m11(number) => "Rappel ${number}";
 
-  static String m12(completed, total) => "${completed}/${total}";
+  static String m12(prayer) => "Décalage du rappel - ${prayer}";
 
-  static String m13(count) => "${count} sur 5 prières enregistrées";
+  static String m13(completed, total) => "${completed}/${total}";
 
-  static String m14(count) => "${count} points";
+  static String m14(count) => "${count} sur 5 prières enregistrées";
 
-  static String m15(count) => "Série de ${count} jours";
+  static String m15(count) => "${count} points";
+
+  static String m16(count) => "Série de ${count} jours";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -136,6 +138,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "navCalendar": MessageLookupByLibrary.simpleMessage("Calendrier"),
     "navSettings": MessageLookupByLibrary.simpleMessage("Paramètres"),
     "navToday": MessageLookupByLibrary.simpleMessage("Aujourd\'hui"),
+    "notificationActionMarkDone": MessageLookupByLibrary.simpleMessage(
+      "Marquer comme faite",
+    ),
+    "notificationActionOpenToday": MessageLookupByLibrary.simpleMessage(
+      "Ouvrir aujourd\'hui",
+    ),
+    "notificationActionSnooze": MessageLookupByLibrary.simpleMessage(
+      "Reporter 10 min",
+    ),
     "notificationBody": m4,
     "notificationChannelDescription": MessageLookupByLibrary.simpleMessage(
       "Notifications pour les horaires de prière",
@@ -143,8 +154,36 @@ class MessageLookup extends MessageLookupByLibrary {
     "notificationChannelName": MessageLookupByLibrary.simpleMessage(
       "Notifications de prière",
     ),
-    "notificationTitle": m5,
-    "offsetMinutes": m6,
+    "notificationEntryFallbackBody": MessageLookupByLibrary.simpleMessage(
+      "Ouvrez Aujourd\'hui pour continuer.",
+    ),
+    "notificationEntryPrayerBody": MessageLookupByLibrary.simpleMessage(
+      "Vous pouvez la marquer comme faite maintenant ou reporter le rappel.",
+    ),
+    "notificationEntryTitleDaily": MessageLookupByLibrary.simpleMessage(
+      "Suivi quotidien",
+    ),
+    "notificationEntryTitleFallback": MessageLookupByLibrary.simpleMessage(
+      "Notification",
+    ),
+    "notificationEntryTitlePrayer": m5,
+    "notificationEntryTitlePrayerGeneric": MessageLookupByLibrary.simpleMessage(
+      "Rappel de prière",
+    ),
+    "notificationSnoozeAlreadyActive": MessageLookupByLibrary.simpleMessage(
+      "Un report est déjà actif pour ce rappel.",
+    ),
+    "notificationSnoozeBody": MessageLookupByLibrary.simpleMessage(
+      "Voici à nouveau votre rappel.",
+    ),
+    "notificationSnoozeTitle": MessageLookupByLibrary.simpleMessage(
+      "Rappel reporté",
+    ),
+    "notificationSnoozedFor10": MessageLookupByLibrary.simpleMessage(
+      "Rappel reporté de 10 minutes.",
+    ),
+    "notificationTitle": m6,
+    "offsetMinutes": m7,
     "onboardingAppLockBody": MessageLookupByLibrary.simpleMessage(
       "Sécurisez votre journal de prière avec biométrie ou PIN.",
     ),
@@ -200,7 +239,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "onboardingPrayerTimesTitle": MessageLookupByLibrary.simpleMessage(
       "Définissez vos Horaires",
     ),
-    "onboardingProgress": m7,
+    "onboardingProgress": m8,
     "onboardingSkip": MessageLookupByLibrary.simpleMessage("Passer"),
     "onboardingWelcomeBody": MessageLookupByLibrary.simpleMessage(
       "Suivez vos prières quotidiennes avec des rappels doux.",
@@ -230,7 +269,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "securityCurrentPinTitle": MessageLookupByLibrary.simpleMessage(
       "Entrez le PIN actuel",
     ),
-    "securityLockoutSeconds": m8,
+    "securityLockoutSeconds": m9,
     "securityPinDigitsError": MessageLookupByLibrary.simpleMessage(
       "Le PIN doit contenir exactement 6 chiffres",
     ),
@@ -281,13 +320,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "settingsCurrentTimezoneUnavailable": MessageLookupByLibrary.simpleMessage(
       "Fuseau horaire indisponible",
     ),
-    "settingsCurrentTimezoneValue": m9,
-    "settingsDailyReminderLabel": m10,
+    "settingsCurrentTimezoneValue": m10,
+    "settingsDailyReminderLabel": m11,
     "settingsDailyReminders": MessageLookupByLibrary.simpleMessage(
       "Rappels quotidiens",
     ),
     "settingsDailyRemindersEmpty": MessageLookupByLibrary.simpleMessage(
       "Aucun rappel quotidien pour le moment.",
+    ),
+    "settingsDailyRemindersSelectionHint": MessageLookupByLibrary.simpleMessage(
+      "Sélectionnez les rappels puis appuyez sur supprimer dans la barre du haut.",
     ),
     "settingsDailyRemindersSubtitle": MessageLookupByLibrary.simpleMessage(
       "Ajoutez des rappels doux à l\'heure qui vous convient",
@@ -322,7 +364,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "settingsReminderOffset": MessageLookupByLibrary.simpleMessage(
       "Décalage du rappel",
     ),
-    "settingsReminderOffsetFor": m11,
+    "settingsReminderOffsetFor": m12,
     "settingsReminderOffsetSubtitle": MessageLookupByLibrary.simpleMessage(
       "Ajuster l\'heure de notification",
     ),
@@ -358,19 +400,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "todayComplete": MessageLookupByLibrary.simpleMessage(
       "Toutes les prières complétées !",
     ),
-    "todayCompletionRatio": m12,
+    "todayCompletionRatio": m13,
     "todayEncouragement": MessageLookupByLibrary.simpleMessage(
       "Continuez, vous êtes formidable !",
     ),
     "todayNone": MessageLookupByLibrary.simpleMessage(
       "Aucune prière enregistrée",
     ),
-    "todayPartial": m13,
-    "todayPoints": m14,
+    "todayPartial": m14,
+    "todayPoints": m15,
     "todayProgress": MessageLookupByLibrary.simpleMessage(
       "Progrès d\'aujourd\'hui",
     ),
-    "todayStreak": m15,
+    "todayStreak": m16,
     "updateActionNow": MessageLookupByLibrary.simpleMessage("Mettre à jour"),
     "updateAvailable": MessageLookupByLibrary.simpleMessage(
       "Une nouvelle version est disponible",

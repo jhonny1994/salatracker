@@ -58,6 +58,19 @@ class NotificationService {
     _initialized = true;
   }
 
+  Future<String?> getLaunchPayload() async {
+    if (!_initialized) {
+      await initialize();
+    }
+
+    final launchDetails = await _plugin.getNotificationAppLaunchDetails();
+    if (launchDetails == null || !launchDetails.didNotificationLaunchApp) {
+      return null;
+    }
+
+    return launchDetails.notificationResponse?.payload;
+  }
+
   /// Requests notification permissions from the user.
   Future<bool> requestPermissions() async {
     if (Platform.isIOS) {

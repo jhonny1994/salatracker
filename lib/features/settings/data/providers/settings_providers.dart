@@ -455,23 +455,38 @@ class SettingsNotifier extends _$SettingsNotifier {
           final s = S.current;
           switch (item.kind) {
             case NotificationScheduleKind.dailyReminder:
+              final intent = NotificationIntent.dailyCheckin(
+                intentId:
+                    'daily_${item.id}_${item.scheduledAt.toIso8601String()}',
+                scheduledAt: item.scheduledAt,
+                sourceNotificationId: item.id,
+              );
               await notificationService.schedulePrayer(
                 id: item.id,
                 title: s.dailyReminderTitle,
                 body: s.dailyReminderBody,
                 scheduledAt: item.scheduledAt,
                 repeatsDaily: true,
-                payload: '/today',
+                payload: intent.toPayload(),
               );
             case NotificationScheduleKind.prayer:
               final prayerName = _prayerName(item.prayerType!, s);
+              final prayerId = item.prayerType!.name;
+              final scheduledAtIso = item.scheduledAt.toIso8601String();
+              final intent = NotificationIntent.prayer(
+                intentId: 'prayer_${prayerId}_${item.id}_$scheduledAtIso',
+                prayerType: item.prayerType!,
+                date: item.scheduledAt,
+                scheduledAt: item.scheduledAt,
+                sourceNotificationId: item.id,
+              );
               await notificationService.schedulePrayer(
                 id: item.id,
                 title: s.notificationTitle(prayerName),
                 body: s.notificationBody(prayerName),
                 scheduledAt: item.scheduledAt,
                 repeatsDaily: true,
-                payload: '/today',
+                payload: intent.toPayload(),
               );
           }
         }

@@ -37,7 +37,12 @@ void main() {
       ) async {
         final repo = _FakeSettingsRepository(Settings.defaults());
         final container = ProviderContainer(
-          overrides: [settingsRepositoryProvider.overrideWithValue(repo)],
+          overrides: [
+            settingsRepositoryProvider.overrideWithValue(repo),
+            notificationServiceProvider.overrideWithValue(
+              _FakeNotificationService(),
+            ),
+          ],
         );
         addTearDown(() {
           container.dispose();
@@ -70,6 +75,7 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(repo.settings.onboardingComplete, isTrue);
+        expect(repo.settings.notificationsEnabled, isTrue);
         expect(
           repo.settings.effectiveDailyReminders.single.time,
           const TimeOfDay(hour: 23, minute: 20),
@@ -125,6 +131,30 @@ Future<void> _pumpOnboardingScreen(
   );
 
   await tester.pumpAndSettle();
+}
+
+class _FakeNotificationService extends NotificationService {
+  @override
+  Future<void> initialize() async {}
+
+  @override
+  Future<bool> requestPermissions() async => true;
+
+  @override
+  Future<void> schedulePrayer({
+    required int id,
+    required String title,
+    required String body,
+    required DateTime scheduledAt,
+    bool repeatsDaily = false,
+    String? payload,
+  }) async {}
+
+  @override
+  Future<void> cancelAll() async {}
+
+  @override
+  Future<void> refreshTimezone({String? preferredTimezoneId}) async {}
 }
 
 Future<void> _selectTime(

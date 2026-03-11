@@ -89,6 +89,26 @@
   "updateDownloadFailed": "Failed to download update",
   "updateInstallFailed": "Failed to launch installer",
   "updateActionNow": "Update now",
+  "notificationEntryTitlePrayer": "Time for {prayer}",
+  "@notificationEntryTitlePrayer": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationEntryTitlePrayerGeneric": "Prayer reminder",
+  "notificationEntryPrayerBody": "You can mark it done now or snooze for a short while.",
+  "notificationEntryTitleDaily": "Daily check-in",
+  "notificationEntryTitleFallback": "Notification",
+  "notificationEntryFallbackBody": "Open today to continue.",
+  "notificationActionMarkDone": "Mark as done",
+  "notificationActionSnooze": "Snooze 10 min",
+  "notificationActionOpenToday": "Open today",
+  "notificationSnoozedFor10": "Reminder snoozed for 10 minutes.",
+  "notificationSnoozeAlreadyActive": "You already have an active snooze for this reminder.",
+  "notificationSnoozeTitle": "Reminder Snoozed",
+  "notificationSnoozeBody": "Here is your reminder again.",
   "settingsVersionLoading": "Loading...",
   "settingsPrivacyPolicy": "Privacy Policy",
   "settingsPrayerSchedule": "Prayer Schedule",
@@ -144,6 +164,7 @@
   "settingsDailyReminders": "Daily Reminders",
   "settingsDailyRemindersSubtitle": "Add late-day check-ins in your own rhythm",
   "settingsDailyRemindersEmpty": "No daily reminders yet.",
+  "settingsDailyRemindersSelectionHint": "Select reminders, then tap delete in the top bar.",
   "settingsAddDailyReminder": "Add Reminder",
   "settingsReminderDuplicateTime": "You already have a reminder at this time.",
   "settingsCurrentTimezoneValue": "Current Time Zone: {value}",

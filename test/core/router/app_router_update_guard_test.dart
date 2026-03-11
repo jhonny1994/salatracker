@@ -46,4 +46,23 @@ void main() {
       expect(redirect, '/onboarding');
     },
   );
+
+  test('keeps notification entry route when no blockers', () {
+    final redirect = resolveAppRedirect(
+      lockAsync: const AsyncData(AppLockStatus.unlocked),
+      settingsAsync: AsyncData(
+        Settings.defaults().copyWith(onboardingComplete: true),
+      ),
+      updateAsync: const AsyncData(
+        UpdateDecision(
+          status: UpdateStatus.upToDate,
+          action: UpdateAction.check,
+          message: 'ok',
+        ),
+      ),
+      matchedLocation: '/notification/entry',
+    );
+
+    expect(redirect, isNull);
+  });
 }

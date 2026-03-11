@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:salat_tracker/core/core.dart';
 import 'package:salat_tracker/features/settings/settings.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
@@ -12,7 +11,10 @@ class DailyReminderTile extends StatelessWidget {
     required this.label,
     required this.onTap,
     required this.onChanged,
-    required this.onRemove,
+    this.onLongPress,
+    this.selectionMode = false,
+    this.selected = false,
+    this.onSelectionChanged,
     super.key,
   });
 
@@ -20,15 +22,18 @@ class DailyReminderTile extends StatelessWidget {
   final String label;
   final VoidCallback onTap;
   final ValueChanged<bool> onChanged;
-  final VoidCallback onRemove;
+  final VoidCallback? onLongPress;
+  final bool selectionMode;
+  final bool selected;
+  final ValueChanged<bool>? onSelectionChanged;
 
   @override
   Widget build(BuildContext context) {
-    final l10n = S.of(context);
     final theme = Theme.of(context);
 
     return InkWell(
       onTap: onTap,
+      onLongPress: onLongPress,
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.md,
@@ -38,6 +43,12 @@ class DailyReminderTile extends StatelessWidget {
           children: [
             Row(
               children: [
+                if (selectionMode)
+                  Checkbox.adaptive(
+                    value: selected,
+                    onChanged: (value) =>
+                        onSelectionChanged?.call(value ?? false),
+                  ),
                 const Icon(Icons.nightlight_round_outlined),
                 const Gap(AppSpacing.sm),
                 Expanded(
@@ -46,30 +57,11 @@ class DailyReminderTile extends StatelessWidget {
                     children: [
                       Text(label, style: theme.textTheme.titleMedium),
                       const Gap(AppSpacing.xs),
-                      Text(
-                        l10n.dailyReminderTileSubtitle(
-                          reminder.time.format(context),
-                        ),
-                        style: theme.textTheme.bodyMedium,
-                      ),
+                      Text(reminder.time.format(context)),
                     ],
                   ),
                 ),
-              ],
-            ),
-            const Gap(AppSpacing.xs),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Switch.adaptive(
-                  value: reminder.enabled,
-                  onChanged: onChanged,
-                ),
-                IconButton(
-                  tooltip: l10n.actionRemove,
-                  onPressed: onRemove,
-                  icon: const Icon(Icons.delete_outline),
-                ),
+                Switch.adaptive(value: reminder.enabled, onChanged: onChanged),
               ],
             ),
           ],

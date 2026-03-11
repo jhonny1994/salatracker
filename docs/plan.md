@@ -3,7 +3,9 @@
 > **Part of:** [Documentation Ecosystem](README.md) | **Related:** [prd.md](prd.md), [tasks.md](tasks.md)
 
 ## Overview
-Offline-first Flutter app to gamify daily prayer completion with streaks, points, calendar history, and reminders. Arabic-first (RTL) with Cairo font and English fallback for all other locales. Android-first, iOS-ready.
+Offline-first Flutter app for daily prayer consistency with respectful UX,
+reminders, calendar reflection, and strong privacy defaults.
+Arabic-first (RTL) with English and French support.
 
 ## Decisions Locked
 > ⚠️ These are **final**. Do not change without explicit user approval.
@@ -25,7 +27,7 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 | **Gamification** | Progress > Streaks; reflective badges only |
 | **Theme** | Light/dark parity; no theme bias |
 | **minSdk** | Android 23 |
-| **Version** | 0.1.5+7 |
+| **Version** | 0.1.6+8 |
 
 ## Implementation Phases (Production Finalization)
 
@@ -145,13 +147,13 @@ Offline-first Flutter app to gamify daily prayer completion with streaks, points
 
 ---
 
-### Phase 6: Quality Engineering ✅
+### Phase 6: Quality Engineering 🔄
 > **Status:** Complete
 
 - [x] Unit tests: streak, points, prayer repository, settings repository
 - [x] Unit tests: security policy and notifications schedule
-- [ ] Widget tests: Today, Calendar details, Settings selectors, Onboarding + lock setup
-- [ ] Integration smoke tests: first launch -> onboarding -> logging -> calendar -> lock -> notification deep-link
+- [ ] Widget tests: full onboarding path (including lock setup)
+- [ ] Integration smoke tests: launch -> onboarding -> logging -> calendar -> lock -> notification deep-link
 - [x] RTL and localization verification (EN/AR/FR)
 - [x] Enforce analyzer/format gates in CI
 - [x] Enforce coverage threshold in CI
@@ -244,3 +246,23 @@ The following features are approved for implementation in subsequent major updat
 
 ---
 > **Next:** [tasks.md](tasks.md) for detailed checklist
+
+---
+
+### Phase 10: Notification Entry Flow and UX Consistency ✅
+> **Status:** Complete
+
+- [x] Add structured notification intent model/payload contract (versioned, fallback-safe)
+- [x] Add notification tap coordinator and pending-intent persistence
+- [x] Add universal full-screen notification entry route with type-specific variants
+- [x] Implement prayer action semantics: one-tap **Mark as done** (non-toggle)
+- [x] Add snooze guard: only one active snooze per root intent
+- [x] Fix onboarding notifications path to keep scheduling flow enabled when reminder setup detail is skipped
+- [x] Refine Daily Reminders UX: generic title, simplified tile layout, app-bar multi-delete selection mode
+- [x] Add/refresh tests for notification intents/coordinator/entry and updated onboarding/reminders flows
+
+**Acceptance Criteria:**
+- Notification tap flows are deterministic and route to the right entry/action state
+- Prayer "Mark as done" persists completion before navigation
+- Daily reminders delete flow is clear (enter selection from app-bar delete, then delete selected)
+- Onboarding path does not leave notifications unscheduled due to skipped reminder details

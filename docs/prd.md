@@ -43,6 +43,8 @@
 - Notifications with per-prayer offsets
 - Daily reminders list with time + enabled controls
 - Onboarding lets users pick the initial late-day reminder time
+- Notification taps open a dedicated type-aware full-screen in-app entry flow
+  with contextual actions (mark done, snooze, open update flow)
 - In-app update support (Settings-only):
   - Play installs use Google Play in-app updates
   - GitHub/sideload installs fetch latest release metadata and download/install APK via system installer
@@ -70,7 +72,7 @@
 
 ## Build and Runtime Configuration
 - Android minSdk: 23
-- Version: 0.1.5+7
+- Version: 0.1.6+8
 - Sentry DSN via compile-time defines (`--dart-define`)
 
 ## Non-Functional Requirements

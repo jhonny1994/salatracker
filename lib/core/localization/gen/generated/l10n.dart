@@ -544,6 +544,136 @@ class S {
     );
   }
 
+  /// `حان وقت {prayer}`
+  String notificationEntryTitlePrayer(String prayer) {
+    return Intl.message(
+      'حان وقت $prayer',
+      name: 'notificationEntryTitlePrayer',
+      desc: '',
+      args: [prayer],
+    );
+  }
+
+  /// `تذكير بالصلاة`
+  String get notificationEntryTitlePrayerGeneric {
+    return Intl.message(
+      'تذكير بالصلاة',
+      name: 'notificationEntryTitlePrayerGeneric',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `يمكنك تسجيلها الآن أو تأجيل التذكير قليلاً.`
+  String get notificationEntryPrayerBody {
+    return Intl.message(
+      'يمكنك تسجيلها الآن أو تأجيل التذكير قليلاً.',
+      name: 'notificationEntryPrayerBody',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `متابعة يومية`
+  String get notificationEntryTitleDaily {
+    return Intl.message(
+      'متابعة يومية',
+      name: 'notificationEntryTitleDaily',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `إشعار`
+  String get notificationEntryTitleFallback {
+    return Intl.message(
+      'إشعار',
+      name: 'notificationEntryTitleFallback',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `افتح اليوم للمتابعة.`
+  String get notificationEntryFallbackBody {
+    return Intl.message(
+      'افتح اليوم للمتابعة.',
+      name: 'notificationEntryFallbackBody',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تمّت الصلاة`
+  String get notificationActionMarkDone {
+    return Intl.message(
+      'تمّت الصلاة',
+      name: 'notificationActionMarkDone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تأجيل 10 دقائق`
+  String get notificationActionSnooze {
+    return Intl.message(
+      'تأجيل 10 دقائق',
+      name: 'notificationActionSnooze',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `فتح اليوم`
+  String get notificationActionOpenToday {
+    return Intl.message(
+      'فتح اليوم',
+      name: 'notificationActionOpenToday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تم تأجيل التذكير لمدة 10 دقائق.`
+  String get notificationSnoozedFor10 {
+    return Intl.message(
+      'تم تأجيل التذكير لمدة 10 دقائق.',
+      name: 'notificationSnoozedFor10',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `لديك تأجيل نشط بالفعل لهذا التذكير.`
+  String get notificationSnoozeAlreadyActive {
+    return Intl.message(
+      'لديك تأجيل نشط بالفعل لهذا التذكير.',
+      name: 'notificationSnoozeAlreadyActive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `تم تأجيل التذكير`
+  String get notificationSnoozeTitle {
+    return Intl.message(
+      'تم تأجيل التذكير',
+      name: 'notificationSnoozeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `إليك التذكير مرة أخرى.`
+  String get notificationSnoozeBody {
+    return Intl.message(
+      'إليك التذكير مرة أخرى.',
+      name: 'notificationSnoozeBody',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `جار التحميل...`
   String get settingsVersionLoading {
     return Intl.message(
@@ -809,6 +939,16 @@ class S {
     return Intl.message(
       'لا توجد تذكيرات يومية بعد.',
       name: 'settingsDailyRemindersEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `حدد التذكيرات ثم اضغط حذف من الشريط العلوي.`
+  String get settingsDailyRemindersSelectionHint {
+    return Intl.message(
+      'حدد التذكيرات ثم اضغط حذف من الشريط العلوي.',
+      name: 'settingsDailyRemindersSelectionHint',
       desc: '',
       args: [],
     );

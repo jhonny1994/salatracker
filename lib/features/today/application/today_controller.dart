@@ -92,4 +92,84 @@ class TodayController extends _$TodayController {
       );
     }
   }
+
+  Future<void> markPrayerDone(
+    PrayerType prayerType, {
+    DateTime? date,
+  }) async {
+    final repository = ref.read(prayerRepositoryProvider);
+    final pointsCalculator = ref.read(pointsCalculatorProvider);
+    final targetDate = (date ?? DateTime.now()).dateOnly;
+    final now = DateTime.now();
+
+    final isToday = targetDate == DateTime.now().dateOnly;
+    final currentState = state;
+    final currentDay = isToday && currentState is AsyncData<PrayerDay>
+        ? currentState.value
+        : await repository.fetchDay(targetDate);
+
+    final baseDay =
+        currentDay ??
+        PrayerDay.normalized(
+          date: targetDate,
+          entries: const [],
+          isComplete: false,
+          points: 0,
+        );
+
+    var loggedNow = false;
+    final updatedEntries = baseDay.entries
+        .map((entry) {
+          if (entry.type != prayerType) {
+            return entry;
+          }
+          if (!entry.isCompleted) {
+            loggedNow = true;
+          }
+          return entry.copyWith(isCompleted: true, checkedAt: now);
+        })
+        .toList(growable: true);
+
+    final hadEntry = baseDay.entries.any((entry) => entry.type == prayerType);
+    if (!hadEntry) {
+      loggedNow = true;
+      updatedEntries.add(
+        PrayerEntry(
+          type: prayerType,
+          scheduledAt: now,
+          isCompleted: true,
+          checkedAt: now,
+        ),
+      );
+    }
+
+    final isComplete =
+        updatedEntries.length == PrayerType.values.length &&
+        updatedEntries.every((entry) => entry.isCompleted);
+
+    final updatedDay = baseDay.copyWith(
+      entries: updatedEntries,
+      isComplete: isComplete,
+    );
+    final points = pointsCalculator.forDay(updatedDay);
+    final finalDay = updatedDay.copyWith(points: points);
+
+    await repository.upsertDay(finalDay);
+
+    if (isToday) {
+      state = AsyncData(finalDay);
+    }
+
+    if (loggedNow) {
+      final analytics = ref.read(analyticsProvider);
+      unawaited(
+        analytics.logEvent(
+          AnalyticsEvent.prayerLogged,
+          parameters: {
+            AnalyticsParam.prayerType: prayerType.name,
+          },
+        ),
+      );
+    }
+  }
 }
