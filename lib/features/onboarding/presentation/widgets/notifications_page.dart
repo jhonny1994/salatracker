@@ -62,6 +62,23 @@ class _NotificationsPageState extends ConsumerState<NotificationsPage> {
     }
   }
 
+  Future<void> _skipNotifications() async {
+    setState(() => _submitting = true);
+
+    try {
+      await ref
+          .read(settingsProvider.notifier)
+          .toggleNotifications(enabled: true);
+      if (mounted) {
+        widget.onNext();
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _submitting = false);
+      }
+    }
+  }
+
   Future<void> _pickLateReminderTime() async {
     final current = ref.read(onboardingLateReminderTimeProvider);
     final picked = await showTimePicker(
@@ -87,7 +104,7 @@ class _NotificationsPageState extends ConsumerState<NotificationsPage> {
       primaryLabel: l10n.onboardingEnableNotifications,
       onPrimary: _submitting ? null : _enableNotifications,
       secondaryLabel: l10n.onboardingMaybeLater,
-      onSecondary: widget.onNext,
+      onSecondary: _skipNotifications,
       backLabel: l10n.onboardingBack,
       onBack: widget.onBack,
       isBusy: _submitting,

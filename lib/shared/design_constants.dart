@@ -108,3 +108,8 @@ abstract class AppElevations {
   static const double medium = 3;
   static const double high = 6;
 }
+
+abstract class AppLayout {
+  /// Max readable content width for full-screen centered layouts.
+  static const double contentMaxWidth = 420;
+}

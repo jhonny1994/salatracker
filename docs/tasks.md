@@ -27,6 +27,7 @@
 | Phase 7: Release Engineering & Store Readiness | 12/12 | ✅ Complete |
 | Phase 8: Launch Audit & Go/No-Go | 8/8 | ✅ Complete |
 | Phase 9: In-App Update Delivery | 10/10 | ✅ Complete |
+| Phase 10: Notification Entry + UX Consistency | 8/8 | ✅ Complete |
 
 ---
 
@@ -280,6 +281,19 @@
 - [x] Add release runbook for update manifest + SHA synchronization.
 - [x] Add router guard tests for required-update route behavior.
 - [x] Add strict update-manifest contract validation test.
+
+---
+
+## Phase 10: Notification Entry + UX Consistency ✅
+
+- [x] Add typed notification intent contract and parsing fallback
+- [x] Add tap coordinator and pending-intent persistence
+- [x] Add full-screen notification entry route and type variants
+- [x] Ensure "Mark as done" persists completion before navigation
+- [x] Add snooze guard (one active snooze per intent lineage)
+- [x] Fix onboarding notification path to avoid unscheduled reminders
+- [x] Refine daily reminders UX (generic title, simplified row, app-bar multi-delete)
+- [x] Add/refresh tests for notification, onboarding, reminders, and mark-done flow
 
 ---
 

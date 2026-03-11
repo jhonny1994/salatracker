@@ -1,7 +1,7 @@
 {
-  "latest_version_code": 6,
+  "latest_version_code": 8,
   "min_supported_version_code": 1,
-  "recommended_version_code": 6,
+  "recommended_version_code": 8,
   "grace_hours": 72,
   "apk_url": "https://github.com/jhonny1994/salatracker/releases/latest/download/app-release.apk",
   "store_url": "https://play.google.com/store/apps/details?id=com.carbodex.salat_tracker",

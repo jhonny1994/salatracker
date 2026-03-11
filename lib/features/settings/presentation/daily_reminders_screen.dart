@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
@@ -6,17 +8,99 @@ import 'package:salat_tracker/features/settings/settings.dart';
 import 'package:salat_tracker/shared/shared.dart';
 
 /// Daily reminder configuration screen.
-class DailyRemindersScreen extends ConsumerWidget {
+class DailyRemindersScreen extends ConsumerStatefulWidget {
   /// Creates a [DailyRemindersScreen].
   const DailyRemindersScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<DailyRemindersScreen> createState() =>
+      _DailyRemindersScreenState();
+}
+
+class _DailyRemindersScreenState extends ConsumerState<DailyRemindersScreen> {
+  final Set<int> _selectedReminderIds = <int>{};
+  bool _isSelectionMode = false;
+
+  bool get _selectionMode => _isSelectionMode;
+
+  void _startSelectionMode() {
+    setState(() => _isSelectionMode = true);
+  }
+
+  void _toggleSelection(int reminderId, bool selected) {
+    setState(() {
+      if (selected) {
+        _selectedReminderIds.add(reminderId);
+      } else {
+        _selectedReminderIds.remove(reminderId);
+      }
+    });
+  }
+
+  void _enterSelection(int reminderId) {
+    setState(() {
+      _isSelectionMode = true;
+      _selectedReminderIds.add(reminderId);
+    });
+  }
+
+  void _clearSelection() {
+    setState(() {
+      _isSelectionMode = false;
+      _selectedReminderIds.clear();
+    });
+  }
+
+  Future<void> _deleteSelected(BuildContext context) async {
+    final idsToDelete = _selectedReminderIds.toList(growable: false);
+    for (final id in idsToDelete) {
+      await ref
+          .read(settingsProvider.notifier)
+          .removeDailyReminder(reminderId: id);
+    }
+    if (mounted) {
+      _clearSelection();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = S.of(context);
     final settingsState = ref.watch(settingsProvider);
+    final hasReminders = settingsState.maybeWhen(
+      data: (settings) => settings.effectiveDailyReminders.isNotEmpty,
+      orElse: () => false,
+    );
+    final hasSelection = _selectedReminderIds.isNotEmpty;
+    if (!hasReminders && _selectionMode) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          _clearSelection();
+        }
+      });
+    }
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.settingsDailyReminders)),
+      appBar: AppBar(
+        title: Text(l10n.settingsDailyReminders),
+        actions: [
+          if (_selectionMode || hasSelection)
+            IconButton(
+              tooltip: l10n.actionCancel,
+              onPressed: _clearSelection,
+              icon: const Icon(Icons.close),
+            ),
+          IconButton(
+            tooltip: l10n.actionRemove,
+            onPressed: !hasReminders
+                ? null
+                : (_selectionMode
+                      ? (hasSelection ? () => _deleteSelected(context) : null)
+                      : _startSelectionMode),
+            icon: const Icon(Icons.delete_outline),
+          ),
+        ],
+      ),
       body: AppAsyncValue(
         value: settingsState,
         errorTitle: l10n.errorLoadingSettings,
@@ -43,22 +127,38 @@ class DailyRemindersScreen extends ConsumerWidget {
                       for (var i = 0; i < reminders.length; i++) ...[
                         DailyReminderTile(
                           reminder: reminders[i],
-                          label: l10n.settingsDailyReminderLabel(i + 1),
-                          onTap: () => _pickReminderTime(
-                            context,
-                            ref,
-                            reminderId: reminders[i].id,
-                            current: reminders[i].time,
+                          label: l10n.dailyReminderTitle,
+                          onTap: () async {
+                            final reminderId = reminders[i].id;
+                            if (_selectionMode) {
+                              _toggleSelection(
+                                reminderId,
+                                !_selectedReminderIds.contains(reminderId),
+                              );
+                              return;
+                            }
+                            await _pickReminderTime(
+                              context,
+                              ref,
+                              reminderId: reminderId,
+                              current: reminders[i].time,
+                            );
+                          },
+                          onChanged: (enabled) => unawaited(
+                            ref
+                                .read(settingsProvider.notifier)
+                                .toggleDailyReminder(
+                                  reminderId: reminders[i].id,
+                                  enabled: enabled,
+                                ),
                           ),
-                          onChanged: (enabled) => ref
-                              .read(settingsProvider.notifier)
-                              .toggleDailyReminder(
-                                reminderId: reminders[i].id,
-                                enabled: enabled,
-                              ),
-                          onRemove: () => ref
-                              .read(settingsProvider.notifier)
-                              .removeDailyReminder(reminderId: reminders[i].id),
+                          onLongPress: () => _enterSelection(reminders[i].id),
+                          selectionMode: _selectionMode,
+                          selected: _selectedReminderIds.contains(
+                            reminders[i].id,
+                          ),
+                          onSelectionChanged: (selected) =>
+                              _toggleSelection(reminders[i].id, selected),
                         ),
                         if (i < reminders.length - 1)
                           const Divider(
@@ -67,6 +167,14 @@ class DailyRemindersScreen extends ConsumerWidget {
                           ),
                       ],
                     ],
+                  ),
+                ),
+              if (_selectionMode && _selectedReminderIds.isEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(top: AppSpacing.sm),
+                  child: AppInlineNotice(
+                    icon: Icons.info_outline,
+                    message: l10n.settingsDailyRemindersEmpty,
                   ),
                 ),
               const Gap(AppSpacing.lg),

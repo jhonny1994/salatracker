@@ -25,20 +25,22 @@ void main() {
 
       await _pumpDailyRemindersScreen(tester, repo: repo);
 
-      expect(find.text('Reminder 1'), findsOneWidget);
-      expect(find.text('Reminder 2'), findsOneWidget);
+      expect(find.byType(DailyReminderTile), findsNWidgets(2));
 
       await tester.tap(find.byType(Switch).last);
       await tester.pumpAndSettle();
 
       expect(repo.settings.effectiveDailyReminders.last.enabled, isFalse);
 
-      await tester.tap(find.byIcon(Icons.delete_outline).last);
+      await tester.longPress(find.byType(DailyReminderTile).last);
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byIcon(Icons.delete_outline));
       await tester.pumpAndSettle();
 
       expect(repo.settings.effectiveDailyReminders, hasLength(1));
       expect(repo.settings.effectiveDailyReminders.single.id, 0);
-      expect(find.text('Reminder 1'), findsOneWidget);
+      expect(find.byType(DailyReminderTile), findsOneWidget);
 
       repo.dispose();
     });
@@ -60,7 +62,7 @@ void main() {
         const TimeOfDay(hour: 23, minute: 15),
       );
 
-      await tester.tap(find.text('Reminder 2'));
+      await tester.tap(find.byType(DailyReminderTile).last);
       await tester.pumpAndSettle();
       await _selectTime(tester, hour: '21', minute: '40');
 

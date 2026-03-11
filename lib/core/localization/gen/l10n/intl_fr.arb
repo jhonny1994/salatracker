@@ -89,6 +89,26 @@
   "updateDownloadFailed": "Échec du téléchargement de la mise à jour",
   "updateInstallFailed": "Échec du lancement de l'installeur",
   "updateActionNow": "Mettre à jour",
+  "notificationEntryTitlePrayer": "C'est l'heure de {prayer}",
+  "@notificationEntryTitlePrayer": {
+    "placeholders": {
+      "prayer": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationEntryTitlePrayerGeneric": "Rappel de prière",
+  "notificationEntryPrayerBody": "Vous pouvez la marquer comme faite maintenant ou reporter le rappel.",
+  "notificationEntryTitleDaily": "Suivi quotidien",
+  "notificationEntryTitleFallback": "Notification",
+  "notificationEntryFallbackBody": "Ouvrez Aujourd'hui pour continuer.",
+  "notificationActionMarkDone": "Marquer comme faite",
+  "notificationActionSnooze": "Reporter 10 min",
+  "notificationActionOpenToday": "Ouvrir aujourd'hui",
+  "notificationSnoozedFor10": "Rappel reporté de 10 minutes.",
+  "notificationSnoozeAlreadyActive": "Un report est déjà actif pour ce rappel.",
+  "notificationSnoozeTitle": "Rappel reporté",
+  "notificationSnoozeBody": "Voici à nouveau votre rappel.",
   "settingsVersionLoading": "Chargement...",
   "settingsPrivacyPolicy": "Politique de Confidentialité",
   "settingsPrayerSchedule": "Horaires de prière",
@@ -144,6 +164,7 @@
   "settingsDailyReminders": "Rappels quotidiens",
   "settingsDailyRemindersSubtitle": "Ajoutez des rappels doux à l'heure qui vous convient",
   "settingsDailyRemindersEmpty": "Aucun rappel quotidien pour le moment.",
+  "settingsDailyRemindersSelectionHint": "Sélectionnez les rappels puis appuyez sur supprimer dans la barre du haut.",
   "settingsAddDailyReminder": "Ajouter un rappel",
   "settingsReminderDuplicateTime": "Vous avez déjà un rappel à cette heure.",
   "settingsCurrentTimezoneValue": "Fuseau horaire actuel : {value}",

@@ -77,6 +77,9 @@ class _AppLockPageState extends ConsumerState<AppLockPage> {
           await ref
               .read(settingsProvider.notifier)
               .updateBiometricUnlockEnabled(enabled: true);
+          if (!mounted) {
+            return;
+          }
         }
       }
 
