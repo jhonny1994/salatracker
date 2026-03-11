@@ -55,10 +55,6 @@ void main() {
     expect(find.text('Mark as done'), findsOneWidget);
     expect(find.text('Snooze 10 min'), findsOneWidget);
   });
-<<<<<<< HEAD
-=======
-
->>>>>>> da3b8b5b44a7d1e337a5999f8c82e72f1a73a5a7
 }
 
 Future<void> _pumpWithRouter(

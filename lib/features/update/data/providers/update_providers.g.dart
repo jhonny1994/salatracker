@@ -311,11 +311,7 @@ final class UpdateNotifierProvider
   UpdateNotifier create() => UpdateNotifier();
 }
 
-<<<<<<< HEAD
-String _$updateNotifierHash() => r'3cca7c56a81cbc7667fe325f7172f251bd7a9d46';
-=======
 String _$updateNotifierHash() => r'd403a37dbdbf7dee7cdc62fac22c548ce2e4935b';
->>>>>>> da3b8b5b44a7d1e337a5999f8c82e72f1a73a5a7
 
 abstract class _$UpdateNotifier extends $AsyncNotifier<UpdateDecision> {
   FutureOr<UpdateDecision> build();
