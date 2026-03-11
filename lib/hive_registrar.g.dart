@@ -2,7 +2,7 @@
 // Do not modify
 // Check in to version control
 
-import 'package:hive_ce/hive.dart';
+import 'package:hive_ce/hive_ce.dart';
 import 'package:salat_tracker/features/badges/domain/models/badge_award.dart';
 import 'package:salat_tracker/features/badges/domain/models/badge_type.dart';
 import 'package:salat_tracker/features/prayer/domain/models/prayer_day.dart';

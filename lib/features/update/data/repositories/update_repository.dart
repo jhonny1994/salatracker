@@ -22,6 +22,34 @@ class UpdateRepository {
 
   final http.Client _client;
 
+  Future<bool> isApkReachable(String url) async {
+    final uri = Uri.tryParse(url);
+    if (uri == null || uri.scheme != 'https') {
+      return false;
+    }
+
+    try {
+      final headResponse = await _client
+          .head(uri)
+          .timeout(const Duration(seconds: 10));
+      if (_isSuccessStatus(headResponse.statusCode)) {
+        return true;
+      }
+
+      if (_requiresGetFallback(headResponse.statusCode)) {
+        final getResponse = await _client
+            .get(uri, headers: const {'Range': 'bytes=0-0'})
+            .timeout(const Duration(seconds: 10));
+        return _isSuccessStatus(getResponse.statusCode) ||
+            getResponse.statusCode == 206;
+      }
+
+      return false;
+    } on Object {
+      return false;
+    }
+  }
+
   Future<UpdateManifest> fetchManifest() async {
     try {
       final uri = Uri.parse(AppConstants.updateManifestUrl);
@@ -133,6 +161,17 @@ class UpdateRepository {
   bool _isHttps(String url) {
     final uri = Uri.tryParse(url);
     return uri != null && uri.scheme == 'https';
+  }
+
+  bool _isSuccessStatus(int statusCode) {
+    return statusCode >= 200 && statusCode < 300;
+  }
+
+  bool _requiresGetFallback(int statusCode) {
+    return statusCode == 403 ||
+        statusCode == 405 ||
+        statusCode == 501 ||
+        statusCode == 502;
   }
 
   int _extractBuildNumber(String tag) {

@@ -127,6 +127,28 @@ class UpdateNotifier extends _$UpdateNotifier {
             sha256: manifest.sha256,
           );
 
+      if (channel != UpdateChannel.play &&
+          decision.action == UpdateAction.downloadAndInstall &&
+          decision.downloadUrl != null &&
+          decision.downloadUrl!.isNotEmpty) {
+        final reachable = await ref
+            .read(updateRepositoryProvider)
+            .isApkReachable(decision.downloadUrl!);
+        if (!reachable) {
+          state = AsyncData(
+            UpdateDecision(
+              status: UpdateStatus.error,
+              action: UpdateAction.retry,
+              message: l10n.updateCheckFailed,
+              error: UpdateError.downloadFailed,
+              storeUrl: manifest.storeUrl,
+            ),
+          );
+          await _setLastCheck(now);
+          return;
+        }
+      }
+
       if (decision.graceDeadline != null && graceDeadline == null) {
         await _writeGraceDeadline(decision.graceDeadline!);
       }
