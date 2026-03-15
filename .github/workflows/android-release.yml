@@ -126,6 +126,9 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Checkout repository files
+        uses: actions/checkout@v4
+
       - name: Download APK artifact
         uses: actions/download-artifact@v4
         with:
@@ -143,9 +146,6 @@ jobs:
         with:
           name: android-apk-sha256
           path: artifacts/sha
-
-      - name: Checkout repository files
-        uses: actions/checkout@v4
 
       - name: Generate update manifest from release artifacts
         run: |
