@@ -230,5 +230,5 @@ jobs:
             exit 0
           fi
           git add update-manifest.json
-          git commit -m "chore(release): sync update manifest for ${{ github.event.inputs.release_tag }}"
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -m "chore(release): sync update manifest for ${{ github.event.inputs.release_tag }}"
           git push
