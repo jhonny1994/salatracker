@@ -27,7 +27,7 @@ Arabic-first (RTL) with English and French support.
 | **Gamification** | Progress > Streaks; reflective badges only |
 | **Theme** | Light/dark parity; no theme bias |
 | **minSdk** | Android 23 |
-| **Version** | 0.1.7+9 |
+| **Version** | 0.1.8+10 |
 
 ## Implementation Phases (Production Finalization)
 

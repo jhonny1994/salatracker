@@ -395,7 +395,7 @@ class SettingsScreen extends ConsumerWidget {
                           height: 1,
                           indent: AppTouchTargets.comfortable,
                         ),
-                        _buildContactTile(l10n),
+                        _buildContactTile(context, l10n),
                       ],
                     ),
                   ),
@@ -566,7 +566,7 @@ class SettingsScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildContactTile(S l10n) {
+  Widget _buildContactTile(BuildContext context, S l10n) {
     return SettingsTile(
       icon: Icons.mail_outline,
       title: l10n.settingsContactUs,
@@ -577,8 +577,14 @@ class SettingsScreen extends ConsumerWidget {
           path: AppConstants.supportEmail,
           query: 'subject=${Uri.encodeComponent(AppConstants.feedbackSubject)}',
         );
-        if (await canLaunchUrl(uri)) {
-          await launchUrl(uri);
+        final launched = await launchUrl(
+          uri,
+          mode: LaunchMode.externalApplication,
+        );
+        if (!launched && context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(l10n.settingsContactUsSubtitle)),
+          );
         }
       },
     );

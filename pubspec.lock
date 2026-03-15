@@ -468,10 +468,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_timezone
-      sha256: "978192f2f9ea6d019a4de4f0211d76a9af955ca24865828fa98ca4e20cf0cb3c"
+      sha256: e8d63f50f2806a3a71a08697286a0369e1d8f0902961327810459871c0bb01c2
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.1"
+    version: "5.0.2"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -1246,10 +1246,10 @@ packages:
     dependency: transitive
     description:
       name: source_gen
-      sha256: "1d562a3c1f713904ebbed50d2760217fd8a51ca170ac4b05b0db490699dbac17"
+      sha256: adc962c96fffb2de1728ef396a995aaedcafbe635abdca13d2a987ce17e57751
       url: "https://pub.dev"
     source: hosted
-    version: "4.2.0"
+    version: "4.2.1"
   source_helper:
     dependency: transitive
     description:
@@ -1427,7 +1427,7 @@ packages:
     source: hosted
     version: "3.2.5"
   url_launcher_platform_interface:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: url_launcher_platform_interface
       sha256: "552f8a1e663569be95a8190206a38187b531910283c3e982193e4f2733f01029"

@@ -5,9 +5,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:salat_tracker/core/core.dart';
-
 import 'package:salat_tracker/features/security/security.dart';
 import 'package:salat_tracker/features/settings/settings.dart';
+import 'package:salat_tracker/shared/shared.dart';
+import 'package:url_launcher_platform_interface/link.dart';
+import 'package:url_launcher_platform_interface/url_launcher_platform_interface.dart';
 
 // ---------------------------------------------------------------------------
 // Fake SettingsRepository — in-memory implementation for testing
@@ -98,6 +100,31 @@ class _FakeNotificationService extends NotificationService {
 class _UnlockedAppLockController extends AppLockController {
   @override
   Future<AppLockStatus> build() async => AppLockStatus.unlocked;
+}
+
+class _FakeUrlLauncher extends UrlLauncherPlatform {
+  bool launched = false;
+  bool shouldSucceed = true;
+  Uri? lastUri;
+
+  @override
+  Future<bool> launch(
+    String url, {
+    required bool useSafariVC,
+    required bool useWebView,
+    required bool enableJavaScript,
+    required bool enableDomStorage,
+    required bool universalLinksOnly,
+    required Map<String, String> headers,
+    String? webOnlyWindowName,
+  }) async {
+    launched = true;
+    lastUri = Uri.parse(url);
+    return shouldSucceed;
+  }
+
+  @override
+  LinkDelegate? get linkDelegate => null;
 }
 
 // ---------------------------------------------------------------------------
@@ -242,6 +269,25 @@ void main() {
 
         final saved = await repo.fetchSettings();
         expect(saved.themeMode, AppThemeMode.light);
+
+        repo.dispose();
+      });
+    });
+
+    group('Contact Us', () {
+      testWidgets('launches support email using external application', (
+        tester,
+      ) async {
+        final launcher = _FakeUrlLauncher();
+        UrlLauncherPlatform.instance = launcher;
+
+        final repo = await _pumpSettingsScreen(tester);
+
+        await _scrollToAndTap(tester, 'Contact Us');
+
+        expect(launcher.launched, isTrue);
+        expect(launcher.lastUri?.scheme, 'mailto');
+        expect(launcher.lastUri?.path, AppConstants.supportEmail);
 
         repo.dispose();
       });

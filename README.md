@@ -89,7 +89,7 @@ If you are contributing, use the docs hub in `docs/`:
 
 ## Version
 
-- App version: `0.1.7+9`
+- App version: `0.1.8+10`
 
 ## Contact
 
