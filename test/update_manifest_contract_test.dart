@@ -38,5 +38,9 @@ void main() {
     expect(recommended >= minSupported, isTrue);
     expect(latest >= recommended, isTrue);
     expect(graceHours >= 1 && graceHours <= 168, isTrue);
+    expect(
+      (json['apk_url'] as String).endsWith('/app-sideload-release.apk'),
+      isTrue,
+    );
   });
 }

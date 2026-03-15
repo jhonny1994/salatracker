@@ -25,7 +25,7 @@ It is intentionally concise and aligned with shipping work.
 
 ## Current baseline
 
-- App version: `0.1.6+8`
+- App version: `0.1.7+9`
 - Docs baseline date: `2026-03-11`
 - Architecture: feature-first + clean layers + Riverpod
 - Platform focus: Android production, iOS-ready foundations

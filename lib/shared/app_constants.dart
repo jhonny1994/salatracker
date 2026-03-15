@@ -20,5 +20,5 @@ abstract class AppConstants {
       'https://play.google.com/store/apps/details?id=com.carbodex.salat_tracker';
 
   /// Expected APK filename produced by CI release workflow.
-  static const String releaseApkFileName = 'app-release.apk';
+  static const String releaseApkFileName = 'app-sideload-release.apk';
 }

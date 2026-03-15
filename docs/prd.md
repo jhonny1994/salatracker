@@ -72,7 +72,7 @@
 
 ## Build and Runtime Configuration
 - Android minSdk: 23
-- Version: 0.1.6+8
+- Version: 0.1.7+9
 - Sentry DSN via compile-time defines (`--dart-define`)
 
 ## Non-Functional Requirements

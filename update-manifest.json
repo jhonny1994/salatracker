@@ -3,8 +3,8 @@
   "min_supported_version_code": 1,
   "recommended_version_code": 8,
   "grace_hours": 72,
-  "apk_url": "https://github.com/jhonny1994/salatracker/releases/latest/download/app-release.apk",
+  "apk_url": "https://github.com/jhonny1994/salatracker/releases/latest/download/app-sideload-release.apk",
   "store_url": "https://play.google.com/store/apps/details?id=com.carbodex.salat_tracker",
   "release_notes_url": "https://github.com/jhonny1994/salatracker/releases/latest",
-  "sha256": "c7d990cab63a31a4109e43f6932685cde27988319f521ee9ee4eb5b7700ed286"
+  "sha256": "1d363b36a5408159c87acfd748530046700edeaf9dd198a5a4110577f6097612"
 }

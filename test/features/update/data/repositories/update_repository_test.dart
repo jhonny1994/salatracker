@@ -13,7 +13,7 @@ void main() {
       );
 
       final reachable = await repository.isApkReachable(
-        'https://example.com/app-release.apk',
+        'https://example.com/app-sideload-release.apk',
       );
 
       expect(reachable, isTrue);
@@ -34,7 +34,7 @@ void main() {
       );
 
       final reachable = await repository.isApkReachable(
-        'https://example.com/app-release.apk',
+        'https://example.com/app-sideload-release.apk',
       );
 
       expect(reachable, isTrue);
@@ -47,7 +47,7 @@ void main() {
       );
 
       final reachable = await repository.isApkReachable(
-        'https://example.com/app-release.apk',
+        'https://example.com/app-sideload-release.apk',
       );
 
       expect(reachable, isFalse);

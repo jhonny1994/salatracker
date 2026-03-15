@@ -144,6 +144,70 @@ jobs:
           name: android-apk-sha256
           path: artifacts/sha
 
+      - name: Checkout repository files
+        uses: actions/checkout@v4
+
+      - name: Generate update manifest from release artifacts
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import re
+          from pathlib import Path
+
+          pubspec = Path('pubspec.yaml').read_text(encoding='utf-8')
+          match = re.search(r'^version:\s+\d+\.\d+\.\d+\+(\d+)$', pubspec, re.MULTILINE)
+          if not match:
+              raise SystemExit('Unable to extract version code from pubspec.yaml')
+
+          path = Path('update-manifest.json')
+          manifest = json.loads(path.read_text(encoding='utf-8'))
+          version_code = int(match.group(1))
+          apk_sha = Path('artifacts/sha/artifacts_apk_sha256.txt').read_text(encoding='utf-8').strip()
+          apk_url = f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/releases/latest/download/app-sideload-release.apk"
+          release_url = f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/releases/latest"
+
+          manifest['latest_version_code'] = version_code
+          manifest['recommended_version_code'] = version_code
+          manifest['apk_url'] = apk_url
+          manifest['release_notes_url'] = release_url
+          manifest['sha256'] = apk_sha
+
+          path.write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8')
+          PY
+
+      - name: Validate generated update manifest
+        run: |
+          python - <<'PY'
+          import json
+          import re
+          from pathlib import Path
+
+          pubspec = Path('pubspec.yaml').read_text(encoding='utf-8')
+          match = re.search(r'^version:\s+\d+\.\d+\.\d+\+(\d+)$', pubspec, re.MULTILINE)
+          if not match:
+              raise SystemExit('Unable to extract version code from pubspec.yaml')
+
+          manifest = json.loads(Path('update-manifest.json').read_text(encoding='utf-8'))
+          expected_name = 'app-sideload-release.apk'
+          apk_url = manifest['apk_url']
+          sha = manifest['sha256']
+          expected_version = int(match.group(1))
+
+          if not apk_url.endswith('/' + expected_name):
+              raise SystemExit(f'update-manifest apk_url must end with {expected_name}: {apk_url}')
+
+          if len(sha) != 64:
+              raise SystemExit('update-manifest sha256 must be a 64-char hex digest')
+
+          if manifest['latest_version_code'] != expected_version:
+              raise SystemExit('update-manifest latest_version_code must match pubspec build number')
+
+          if manifest['recommended_version_code'] != expected_version:
+              raise SystemExit('update-manifest recommended_version_code must match pubspec build number')
+
+          PY
+
       - name: Create GitHub release with auto-generated notes
         uses: softprops/action-gh-release@v2
         with:
@@ -153,3 +217,18 @@ jobs:
             artifacts/apk/app-sideload-release.apk
             artifacts/aab/app-play-release.aab
             artifacts/sha/artifacts_apk_sha256.txt
+
+      - name: Verify published sideload APK URL
+        run: |
+          curl --fail --silent --show-error --location --head \
+            "https://github.com/${{ github.repository }}/releases/latest/download/app-sideload-release.apk"
+
+      - name: Commit updated manifest
+        run: |
+          if git diff --quiet -- update-manifest.json; then
+            echo "No manifest changes to commit."
+            exit 0
+          fi
+          git add update-manifest.json
+          git commit -m "chore(release): sync update manifest for ${{ github.event.inputs.release_tag }}"
+          git push

@@ -9,7 +9,7 @@ void main() {
       minSupportedVersionCode: 8,
       recommendedVersionCode: 10,
       graceHours: 72,
-      apkUrl: 'https://example.com/app-release.apk',
+      apkUrl: 'https://example.com/app-sideload-release.apk',
       storeUrl: 'https://play.google.com/store/apps/details?id=x',
       releaseNotesUrl: 'https://example.com/releases',
     );

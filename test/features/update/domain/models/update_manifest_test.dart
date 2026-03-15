@@ -10,7 +10,7 @@ void main() {
   "min_supported_version_code": 8,
   "recommended_version_code": 9,
   "grace_hours": 72,
-  "apk_url": "https://example.com/app-release.apk",
+  "apk_url": "https://example.com/app-sideload-release.apk",
   "store_url": "https://play.google.com/store/apps/details?id=x",
   "release_notes_url": "https://example.com/releases",
   "sha256": "abc"
@@ -23,7 +23,7 @@ void main() {
       expect(manifest.minSupportedVersionCode, 8);
       expect(manifest.recommendedVersionCode, 9);
       expect(manifest.graceHours, 72);
-      expect(manifest.apkUrl, 'https://example.com/app-release.apk');
+      expect(manifest.apkUrl, 'https://example.com/app-sideload-release.apk');
       expect(manifest.sha256, 'abc');
     });
 
@@ -54,7 +54,7 @@ void main() {
   "min_supported_version_code": 8,
   "recommended_version_code": 9,
   "grace_hours": 72,
-  "apk_url": "https://example.com/app-release.apk",
+  "apk_url": "https://example.com/app-sideload-release.apk",
   "store_url": "https://play.google.com/store/apps/details?id=x",
   "release_notes_url": "https://example.com/releases",
   "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"

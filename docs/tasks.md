@@ -268,9 +268,10 @@
 
 ### Delivery Pipeline Integration
 - [x] Add update manifest file at repository root (`update-manifest.json`).
-- [x] Align APK asset name resolution with CI output (`app-release.apk`).
+- [x] Align APK asset name resolution with CI output (`app-sideload-release.apk`).
 - [x] Add flavor-aware release artifacts (`app-sideload-release.apk`, `app-play-release.aab`).
 - [x] Add APK SHA artifact upload in release workflow.
+- [x] Auto-generate and validate `update-manifest.json` from CI release artifacts.
 
 ### Validation
 - [x] Add unit tests for update policy decisions.
