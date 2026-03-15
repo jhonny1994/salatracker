@@ -25,6 +25,7 @@ building release artifacts.
   - APK SHA256 generation and artifact upload
   - update manifest auto-generation from the built sideload APK
   - manifest validation against release filename/build number/SHA contract
+  - GitHub Pages deployment for `update-manifest.json`
   - artifact retention (30 days)
   - release tag creation
 
@@ -38,8 +39,10 @@ building release artifacts.
 3. The workflow auto-generates `update-manifest.json` from the built
    `app-sideload-release.apk` artifact and its computed SHA256.
 4. The workflow publishes the GitHub release, verifies the sideload download
-   URL, then commits the synchronized manifest back to `main`.
-5. Verify in-app Settings update tile detects the new version.
+   URL, then deploys the manifest to GitHub Pages.
+5. Verify the Pages manifest URL is live:
+   - `https://jhonny1994.github.io/salatracker/update-manifest.json`
+6. Verify in-app Settings update tile detects the new version.
 
 ## Local Signing Setup
 
@@ -52,3 +55,4 @@ building release artifacts.
 - Release builds use debug signing when `android/key.properties` is absent.
 - CI release workflow requires signing secrets and fails fast if missing.
 - The sideload update path must stay aligned to `app-sideload-release.apk`.
+- The live sideload manifest is served from GitHub Pages, not `raw/main`.

@@ -272,6 +272,7 @@
 - [x] Add flavor-aware release artifacts (`app-sideload-release.apk`, `app-play-release.aab`).
 - [x] Add APK SHA artifact upload in release workflow.
 - [x] Auto-generate and validate `update-manifest.json` from CI release artifacts.
+- [x] Publish sideload update manifest to GitHub Pages project site.
 
 ### Validation
 - [x] Add unit tests for update policy decisions.

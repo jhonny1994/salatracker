@@ -11,9 +11,9 @@ abstract class AppConstants {
   /// Owner/repo slug used for GitHub release and manifest checks.
   static const String githubRepoSlug = 'jhonny1994/salatracker';
 
-  /// Raw-hosted update manifest URL.
+  /// Project-hosted update manifest URL for sideload releases.
   static const String updateManifestUrl =
-      'https://raw.githubusercontent.com/jhonny1994/salatracker/main/update-manifest.json';
+      'https://jhonny1994.github.io/salatracker/update-manifest.json';
 
   /// Public Play Store listing URL.
   static const String playStoreUrl =
